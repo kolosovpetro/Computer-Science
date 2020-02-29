@@ -57,15 +57,15 @@ Notes
 *Values vs Reference type: In oder to modify reference type (e.g `class`) via method it is enought to
 
 	static void Modify(int[] a)
-        {
-            a[0] = 5;
-        }
+    {
+        a[0] = 5;
+    }
 	
 However, in case of value types (e.g `structs`) method variable should be supplies with `ref` keyword in order to modify entire variable
 
 	static void Modify(ref int a)
-        {
-            a = 5;
-        }
+    {
+        a = 5;
+    }
 
 
