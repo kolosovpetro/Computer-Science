@@ -1,12 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Text;
 
 namespace Assignments_3
 {
     public enum MainMenu
     {
-        MainMenu = 0,
         NewGame = 1,
         About = 2,
         Quit = 3,
@@ -54,10 +52,7 @@ namespace Assignments_3
 
             string[] menuItems = new string[] { "1. New Game", "2. About the author", "3. Quit" };
 
-            foreach (var item in menuItems)
-            {
-                Console.WriteLine(item);
-            }
+            foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
 
             MainMenu menuTerm = MainMenu.Unassigned;
             Console.WriteLine("Type number to go from menu: ");
@@ -69,18 +64,12 @@ namespace Assignments_3
                     case MainMenu.NewGame:
                         Console.Clear();
                         Console.WriteLine("newgame ... ");
-                        foreach (var item in menuItems)
-                        {
-                            Console.WriteLine(item);
-                        }
+                        foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
                         break;
                     case MainMenu.About:
                         Console.Clear();
                         Console.WriteLine("about author");
-                        foreach (var item in menuItems)
-                        {
-                            Console.WriteLine(item);
-                        }
+                        foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
                         break;
                     case MainMenu.Quit:
                         Console.Clear();
@@ -137,7 +126,9 @@ namespace Assignments_3
                     {
                         case MainMenu.NewGame:
                             Console.Clear();
-                            for (int i = 0; i < boardArray.Length; i++) boardArray[i] = ' ';    // fill array with ' ' for fancy spacing
+
+                            // fill array with ' ' for fancy spacing
+                            for (int i = 0; i < boardArray.Length; i++) boardArray[i] = ' ';
 
                             Console.WriteLine("Tic tac toe board: \n");
 
@@ -152,11 +143,9 @@ namespace Assignments_3
 
                                 Console.Write($"\n {currentSign}'s move >");
 
-                                while (!(int.TryParse(Console.ReadLine(), out index) && index >= 0 && index < 9
-                                    && boardArray[index] == ' '))
-                                {
+                                while (!(int.TryParse(Console.ReadLine(), out index) 
+                                    && index >= 0 && index < 9 && boardArray[index] == ' ')) 
                                     Console.WriteLine($"{currentSign}, Provide an integer number of index of board: ");
-                                }
 
                                 boardArray[index] = currentSign;
 
@@ -186,7 +175,7 @@ namespace Assignments_3
                                     break;
                                 }
 
-                                currentSign = currentSign == crossSign ? roundSign : crossSign;
+                                currentSign = currentSign == crossSign ? roundSign : crossSign;     // ternary operator example
                             }
 
                             Console.WriteLine("Game over!");
@@ -201,13 +190,16 @@ namespace Assignments_3
                             break;
                         case MainMenu.Quit:
                             Console.Clear();
-                            Console.WriteLine("Are you sure want to quit ?");
+                            Console.WriteLine("Are you sure want to quit ? y/n");
                             ans = Console.ReadLine();
+                            break;
+                        default:
+                            Console.WriteLine("Wrong input to menu. Try again.");
                             break;
                     }
                 }
 
-                if (ans == "n") break;
+                if (ans == "y") break;
             }
         }
     }
