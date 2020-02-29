@@ -6,11 +6,8 @@ namespace Assignments_3
 {
     public enum MainMenu
     {
-        [Description("1. New Game")]
         NewGame = 1,
-        [Description("2. About the author")]
         About = 2,
-        [Description("3. Quit")]
         Quit = 3,
         Unassigned = 4
     }
@@ -165,7 +162,8 @@ namespace Assignments_3
 
                             boardArray[index] = currentSign;
 
-                            bool winConditions = (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
+                            bool winConditions = 
+                                (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
                                 ||
                                 (boardArray[0] & boardArray[3] & boardArray[6] & currentSign) == currentSign
                                 ||
