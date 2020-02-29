@@ -6,6 +6,7 @@ namespace Assignments_3
 {
     public enum MainMenu
     {
+        MainMenu = 0,
         NewGame = 1,
         About = 2,
         Quit = 3,
@@ -20,6 +21,8 @@ namespace Assignments_3
 
             // Ask the user to give his first name, last name, street, house number, flat number, 
             // zip code, and city, and print it out in the following format.
+
+            string ans;     // variable used to break infinite loops
 
             Console.WriteLine("Provide user's first name: ");
             string firstName = Console.ReadLine();
@@ -85,7 +88,7 @@ namespace Assignments_3
                         while (true)
                         {
                             Console.WriteLine("Confirm quite: y");
-                            string ans = Console.ReadLine();
+                            ans = Console.ReadLine();
                             if (ans == "y") break;
                         }
                         break;
@@ -105,7 +108,7 @@ namespace Assignments_3
             {
                 Console.WriteLine($"Random number: {r.Next()}");
                 Console.WriteLine("Wish you to continue generate random numbers ? y/n");
-                string ans = Console.ReadLine();
+                ans = Console.ReadLine();
                 if (ans.ToLower() == "n") break;
             }
 
@@ -116,91 +119,95 @@ namespace Assignments_3
             // Additionally, add a mechanism which will check the score of the game after each move.
             // If one of the players won, the game should end with an appropriate message.
 
-            char[] boardArray = new char[9]; // array for storing board state
+            char[] boardArray = new char[9];    // array for storing board state
             const char crossSign = 'X';
             const char roundSign = 'O';
             char currentSign = crossSign;
             int index;
+            ans = default;                      // restore the mainloop veriable to default
 
-            foreach (var item in menuItems)
+            while (true)
             {
-                Console.WriteLine(item);
-            }
-
-            Console.Write("\nType number to go from menu > ");
-            userInput = Console.ReadLine();
-            if (Enum.TryParse(userInput, out menuTerm))
-            {
-                switch (menuTerm)
+                foreach (var item in menuItems) Console.WriteLine(item); // main menu layout
+                Console.Write("\nType number to go from menu > ");
+                userInput = Console.ReadLine();
+                if (Enum.TryParse(userInput, out menuTerm))
                 {
-                    case MainMenu.NewGame:
-                        Console.Clear();
+                    switch (menuTerm)
+                    {
+                        case MainMenu.NewGame:
+                            Console.Clear();
+                            for (int i = 0; i < boardArray.Length; i++) boardArray[i] = ' ';    // fill array with ' ' for fancy spacing
 
-                        for (int i = 0; i < boardArray.Length; i++)
-                        {
-                            boardArray[i] = ' '; // fill array with " " for fancy spacing
-                        }
+                            Console.WriteLine("Tic tac toe board: \n");
 
-                        Console.WriteLine("Tic tac toe board: \n");
-
-                        for (int i = 0; i < boardArray.Length; i++)
-                        {
-                            Console.WriteLine("Current board state: ");
-                            Console.WriteLine(" " + boardArray[0] + " | " + boardArray[1] + " | " + boardArray[2] + " ");
-                            Console.WriteLine("-----------");
-                            Console.WriteLine(" " + boardArray[3] + " | " + boardArray[4] + " | " + boardArray[5] + " ");
-                            Console.WriteLine("-----------");
-                            Console.WriteLine(" " + boardArray[6] + " | " + boardArray[7] + " | " + boardArray[8] + " ");
-
-                            Console.Write($"\n {currentSign}'s move >");
-
-                            while (!(int.TryParse(Console.ReadLine(), out index) && index >= 0 && index < 9
-                                && boardArray[index] == ' '))
+                            for (int i = 0; i < boardArray.Length; i++)
                             {
-                                Console.WriteLine($"{currentSign}, Provide an integer number of index of board: ");
+                                Console.WriteLine("Current board state: ");
+                                Console.WriteLine(" " + boardArray[0] + " | " + boardArray[1] + " | " + boardArray[2] + " ");
+                                Console.WriteLine("-----------");
+                                Console.WriteLine(" " + boardArray[3] + " | " + boardArray[4] + " | " + boardArray[5] + " ");
+                                Console.WriteLine("-----------");
+                                Console.WriteLine(" " + boardArray[6] + " | " + boardArray[7] + " | " + boardArray[8] + " ");
+
+                                Console.Write($"\n {currentSign}'s move >");
+
+                                while (!(int.TryParse(Console.ReadLine(), out index) && index >= 0 && index < 9
+                                    && boardArray[index] == ' '))
+                                {
+                                    Console.WriteLine($"{currentSign}, Provide an integer number of index of board: ");
+                                }
+
+                                boardArray[index] = currentSign;
+
+                                bool winConditions =
+                                    (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[0] & boardArray[3] & boardArray[6] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[0] & boardArray[4] & boardArray[8] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[1] & boardArray[4] & boardArray[7] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[2] & boardArray[5] & boardArray[8] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[2] & boardArray[4] & boardArray[6] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[3] & boardArray[4] & boardArray[5] & currentSign) == currentSign
+                                    ||
+                                    (boardArray[6] & boardArray[7] & boardArray[8] & currentSign) == currentSign;
+
+                                if (winConditions)
+                                {
+                                    Console.WriteLine($"Player {currentSign} won!");
+                                    Console.WriteLine("[Press Enter to return to Main menu...]");
+                                    Console.ReadKey();
+                                    Console.Clear();
+                                    break;
+                                }
+
+                                currentSign = currentSign == crossSign ? roundSign : crossSign;
                             }
 
-                            boardArray[index] = currentSign;
-
-                            bool winConditions = 
-                                (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
-                                ||
-                                (boardArray[0] & boardArray[3] & boardArray[6] & currentSign) == currentSign
-                                ||
-                                (boardArray[0] & boardArray[4] & boardArray[8] & currentSign) == currentSign
-                                ||
-                                (boardArray[1] & boardArray[4] & boardArray[7] & currentSign) == currentSign
-                                ||
-                                (boardArray[2] & boardArray[5] & boardArray[8] & currentSign) == currentSign
-                                ||
-                                (boardArray[2] & boardArray[4] & boardArray[6] & currentSign) == currentSign
-                                ||
-                                (boardArray[3] & boardArray[4] & boardArray[5] & currentSign) == currentSign
-                                ||
-                                (boardArray[6] & boardArray[7] & boardArray[8] & currentSign) == currentSign;
-
-                            if (winConditions)
-                            {
-                                Console.WriteLine($"Player {currentSign} won!");
-                                break;
-                            }
-
-                            currentSign = currentSign == crossSign ? roundSign : crossSign;
-
-
-                        }
-
-                        Console.WriteLine("Game over!");
-                        break;
-                    case MainMenu.About:
-                        Console.Clear();
-                        Console.WriteLine("Author Petro Kolosov: https://github.com/kolosovpetro");
-                        break;
-                    case MainMenu.Quit:
-                        Console.Clear();
-                        Console.WriteLine("quiting...");
-                        break;
+                            Console.WriteLine("Game over!");
+                            Console.Clear();
+                            break;
+                        case MainMenu.About:
+                            Console.Clear();
+                            Console.WriteLine("Author Petro Kolosov: https://github.com/kolosovpetro");
+                            Console.WriteLine("[Press Enter to return to Main menu...]");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case MainMenu.Quit:
+                            Console.Clear();
+                            Console.WriteLine("Are you sure want to quit ?");
+                            ans = Console.ReadLine();
+                            break;
+                    }
                 }
+
+                if (ans == "n") break;
             }
         }
     }
