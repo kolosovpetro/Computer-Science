@@ -2,10 +2,17 @@ Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 =====================================================================
 
 Solutions to assignments at
-* Introduction to computer programming https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
-* Data structures and algorithms https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
-* Object oriented programming https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-* Computational methods https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
+* Introduction to computer programming 
+
+	https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
+* Data structures and algorithms 
+
+	https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
+* Object oriented programming 
+
+	https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
+* Computational methods 
+	https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
 Introduction to computer programming
 ------------------------------------
