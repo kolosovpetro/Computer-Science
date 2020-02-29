@@ -12,6 +12,7 @@ Solutions to assignments at
 
 	https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
 * Computational methods 
+
 	https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
 Introduction to computer programming
