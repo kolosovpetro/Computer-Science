@@ -20,7 +20,7 @@ Introduction to computer programming
 
 * Assigmnments 1 (Read input from keyboard, casting variables, elementary loops)
 * Assigmnments 2 (Proper input verification, conditional statements [if, switch], ternary operator, sorting network)
-* Assigmnments 3 (Enums, foreach over enums, switch statement, stringbuilder, random)
+* Assigmnments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
 * Assigmnments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
 * Assigmnments 5 (Structural programming, reccursive factorial, math constants, tic-tac-toc class segragation, class library, infinite loop proper breaking)
 * Assignments Library (Import of created previously class library files to project and call them on behalf)
