@@ -1,4 +1,4 @@
-Learning C# (Basics + Algorithms + Design Patterns + Data Structures)
+Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 =====================================================================
 
 Solutions to assignments at
@@ -11,13 +11,13 @@ Introduction to computer programming
 ------------------------------------
 
 * Assigmnments 1 (Read input from keyboard, casting variables, elementary loops)
-* Assigmnments 2 (Throwing-Catchicng exceptions, proper input verification, ternary operator)
+* Assigmnments 2 (Proper input verification, conditional statements [if, switch], ternary operator, sorting network)
 * Assigmnments 3 (Enums, foreach over enums, switch statement, stringbuilder, random)
 * Assigmnments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
-* Assigmnments 5 (Structural programming, reccursive factorial, math constants, tic-tac-toc class segragation, class library, infinite loop proper breaking, creation of .jar libraries)
-* Assignments Library (Import of created previously .jar files to project and call them on behalf)
+* Assigmnments 5 (Structural programming, reccursive factorial, math constants, tic-tac-toc class segragation, class library, infinite loop proper breaking)
+* Assignments Library (Import of created previously class library files to project and call them on behalf)
 * Assigmnments 6 (Writing to files, reading from files, date-time, creating folders, string split, string contains)
-* Assigmnments 7 (Unit tests, documentation, custom exceptions, set float number accuracy)
+* Assigmnments 7 (NUnit tests, documentation, custom exceptions, set float number accuracy)
 
 Started 08-02-2020; Finished 12-02-2020;
 
