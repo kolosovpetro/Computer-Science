@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Builder
+{
+    class SmallHouseBuilder : IBuilder
+    {
+        protected int RoofSquare;
+        protected int WallsNumber;
+        protected int WindowsNumber;
+        protected bool IsElectricityConnected;
+        protected bool IsInternetConnected;
+        protected bool IsWaterConnected;
+        protected int DoorsNumber;
+        SmallHouse result;
+        public void BuildHouseRoof(int RoofSquare)
+        {
+            result.RoofSquare = RoofSquare;
+        }
+        public void BuildHouseWalls(int NumberOfWalls)
+        {
+            result.WallsNumber = NumberOfWalls;
+        }
+        public void BuildHouseWindows(int WindowsNumber)
+        {
+            result.WindowsNumber = WindowsNumber;
+        }
+        public void ConnectElectricity(bool IsConnected = true)
+        {
+            result.IsElectricityConnected = IsConnected;
+        }
+        public void ConnectInternet(bool IsConnected = true)
+        {
+            result.IsInternetConnected = IsConnected;
+        }
+        public void ConnectWater(bool IsConnected = true)
+        {
+            result.IsWaterConnected = IsConnected;
+        }
+        public void InstallHouseDoors(int DoorsNumber)
+        {
+            result.DoorsNumber = DoorsNumber;
+        }
+        public void Reset()
+        {
+            result = new SmallHouse();
+        }
+        public SmallHouse GetResult()
+        {
+            return result;
+        }
+    }
+}
