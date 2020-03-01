@@ -1,5 +1,6 @@
 ﻿using Assignments_5.TicTacToe;
 using System;
+using System.Collections.Generic;
 
 namespace Assignments_5
 {
@@ -61,6 +62,7 @@ namespace Assignments_5
                                     layout.WinnerMessage(ge.GetCurrentSign());
                                     Console.WriteLine("[Press Enter to return to Main menu...]");
                                     Console.ReadKey();
+                                    ge.Reset();
                                     Console.Clear();
                                     break;
                                 }
@@ -91,6 +93,41 @@ namespace Assignments_5
                 }
             }
 
+            // Modify your solution to the previous exercise so that the user can enter as many 
+            // contacts as he/she wants.
+            // Implement a constructor in the contact structure which will allow for creating a complete
+            // contact from data passed as parameters. 
+            // Next, display all the contacts from the list.
+            // Each contact should be displayed using a function implemented inside the contact structure.
+
+            Console.Clear();
+            Console.WriteLine("Welcome to contact list application.");
+            List<Contact> contacts = new List<Contact>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter first name: ");
+                string firstName = Console.ReadLine();
+                Console.WriteLine("Enter last name: ");
+                string lastName = Console.ReadLine();
+                Console.WriteLine("Enter phone number: ");
+                string phoneNumber = Console.ReadLine();
+                Console.WriteLine("Enter email: ");
+                string email = Console.ReadLine();
+
+                contacts.Add(new Contact(firstName, lastName, phoneNumber, email));
+
+                Console.WriteLine("Wish you to add another one contact ? y/n");
+                string ans = Console.ReadLine();
+                if (ans.ToLower() == "n") break;
+            }
+
+            Console.WriteLine("All contacts from list: ");
+
+            foreach (Contact item in contacts)
+            {
+                Console.WriteLine(item.FullData);
+            }
         }
 
         // Example how to modify value type properly

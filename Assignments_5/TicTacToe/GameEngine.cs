@@ -76,5 +76,13 @@ namespace Assignments_5.TicTacToe
         {
             return int.TryParse(move, out index) && index >= 0 && index < 9 && boardArray[index] == ' ';
         }
+
+        public void Reset()
+        {
+            this.boardArray = new char[9];
+            for (int i = 0; i < boardArray.Length; i++)
+                boardArray[i] = ' ';
+            this.currentSign = roundSign;
+        }
     }
 }
