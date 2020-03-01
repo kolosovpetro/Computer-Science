@@ -13,8 +13,8 @@ Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
   * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
   * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
-Introduction to Computer Programming (Basics folder)
-----------------------------------------------------
+Introduction to Computer Programming
+------------------------------------
 
 * Assignments 1 (Read input from keyboard, casting variables, elementary loops)
 * Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
@@ -88,7 +88,7 @@ Algorithms
 
 Computational Methods
 ---------------------
-* Numerical systems converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
+* Numerical Sys. converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
 * System of linear equations solver
 * Polynomial Interpolation (Vandermonde method)
 * Discrete Integration (Simpson's, Trapezoidal methods)
