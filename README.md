@@ -54,12 +54,12 @@ This folder currently consists the `Data Structures` as follows:
 * Queue
 * Stack
 * Tree
+* Weighted Graph
 
 **Future Implementations**
 
 In future, it is planned to implement the `Data Structures` as follows:
 
-* Weighted Graph (in progress)
 * Priority Queue
 * Generic List
 
