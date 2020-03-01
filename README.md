@@ -88,7 +88,7 @@ Algorithms
 
 Computational Methods
 ---------------------
-* Numerical systems converter (Pure example how to break all SOLID rules in 1 class)
+* Numerical systems converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
 * System of linear equations solver
 * Polynomial Interpolation (Vandermonde method)
 * Discrete Integration (Simpson's, Trapezoidal methods)
