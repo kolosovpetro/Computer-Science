@@ -1,17 +1,15 @@
 Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 =====================================================================
-
-Solutions to assignments at
 * Introduction to computer programming
   * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
   * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
-* Data structures and algorithms
+* Data structures and Algorithms
   * Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
   * Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
-* Object oriented programming
+* Object Oriented Programming
   * Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
   * Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-* Computational methods
+* Computational Methods
   * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
   * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
@@ -19,7 +17,7 @@ Introduction to computer programming
 ------------------------------------
 
 * Assignments 1 (Read input from keyboard, casting variables, elementary loops)
-* Assignments 2 (Proper input verification, conditional statements [if, switch], ternary operator, sorting network)
+* Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
 * Assignments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
 * Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
 * Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
@@ -34,6 +32,7 @@ Object oriented programming
 * OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
 * OOP3 (Inheritance, overriding, super, polymorphism, upcast)
 * OOP4 (Interfaces, implementations)
+* Project (Hospital manegement application, WinForms). Contains all OOP techniques + binary serialization in use
 
 Design patterns
 ---------------
@@ -79,9 +78,21 @@ Algorithms
   * Linear Searches
   * Binary Search
 * Sort Algorithms
+  * Bubble sort O(n^2)
+  * Cocktail sort (Buble 2 pass sort) O(n^2)
+  * Counting sort O(n+k), k = non negative terms count
+  * Insertion sort O(n)
+  * Merge sort O(n*log(n))
+  * Quick sort O(log(n))
+  * Selection sort O(n^2)
 
 Computational methods
 ---------------------
+* Numerical systems converter (Pure example how to break all SOLID rules in 1 class)
+* System of linear equations solver
+* Polynomial Interpolation (Vandermonde method)
+* Discrete Integration (Simpson's, Trapezoidal methods)
+* Monte Carlo Method (Estimation on the plan finishing time)
 
 
 Notes
