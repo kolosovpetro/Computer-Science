@@ -46,6 +46,9 @@
     <Compile Include="Contact.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicTacToe\GameEngine.cs" />
+    <Compile Include="TicTacToe\Layout.cs" />
+    <Compile Include="TicTacToe\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
