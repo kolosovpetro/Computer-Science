@@ -2,18 +2,18 @@ Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 =====================================================================
 
 Solutions to assignments at
-* Introduction to computer programming 
-
-	https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
-* Data structures and algorithms 
-
-	https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
-* Object oriented programming 
-
-	https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-* Computational methods 
-
-	https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
+* Introduction to computer programming
+  * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
+  * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
+* Data structures and algorithms
+  * Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
+  * Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
+* Object oriented programming
+  * Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
+  * Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
+* Computational methods
+  * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
+  * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
 Introduction to computer programming
 ------------------------------------
@@ -24,7 +24,7 @@ Introduction to computer programming
 * Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
 * Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
 * Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
-* Assignments 6 (Writing to files, reading from files, date-time, creating folders, string split, string contains)
+* Assignments 6 (Writing to files, nested loops, reading from files, date-time, creating folders, string split, string contains)
 * Assignments 7 (NUnit tests, documentation, custom exceptions, set float number accuracy)
 
 Object oriented programming
@@ -33,6 +33,7 @@ Object oriented programming
 * OOP1 (Encapsulation, getters, setters, access modifiers)
 * OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
 * OOP3 (Inheritance, overriding, super, polymorphism, upcast)
+* OOP4 (Interfaces, implementations)
 
 Design patterns
 ---------------
@@ -42,11 +43,46 @@ Design patterns
 * Structural
 * Behavioral
 
-Data structures and algorithms
-------------------------------
+Data structures
+---------------
+
+This folder currently consists the `Data Structures` as follows:
+
+* Dictionary
+* Graph
+* Heap
+* LinkedList
+* Queue
+* Stack
+* Tree
+
+**Future Implementations**
+
+In future, it is planned to implement the `Data Structures` as follows:
+
+* Weighted Graph (in progress)
+* Priority Queue
+* Generic List
+
+**What's used**
+
+* NUnit Framework
+* Generics
+* Indexers
+* IEnumerable interface implementation
+
+To verify the correctness of implementation the `NUnit` test package is used.
+
+Algorithms
+----------
+* Search Algorithms (and their benchmark measurement)
+  * Linear Searches
+  * Binary Search
+* Sort Algorithms
 
 Computational methods
 ---------------------
+
 
 Notes
 -----
