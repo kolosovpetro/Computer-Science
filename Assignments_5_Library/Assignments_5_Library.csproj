@@ -49,5 +49,27 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assignments1\Assignments1.csproj">
+      <Project>{b14d24db-9c29-4837-a403-78dc122a0dee}</Project>
+      <Name>Assignments1</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assignments2\Assignments2.csproj">
+      <Project>{1c0ddf72-13bb-4738-9463-6e41a530c853}</Project>
+      <Name>Assignments2</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assignments3\Assignments3.csproj">
+      <Project>{695cbff4-1335-4fa2-856b-5a6d135633fe}</Project>
+      <Name>Assignments3</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assignments4\Assignments4.csproj">
+      <Project>{83045304-f915-4b59-bf38-7e797c7e0594}</Project>
+      <Name>Assignments4</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assignments5\Assignments5.csproj">
+      <Project>{cdceae2e-4537-4e3a-86c8-8ad8a7bd86b3}</Project>
+      <Name>Assignments5</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
