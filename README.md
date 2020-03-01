@@ -1,9 +1,9 @@
 Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 =====================================================================
-* Introduction to computer programming
+* Introduction to Computer Programming
   * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
   * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
-* Data structures and Algorithms
+* Data Structures and Algorithms
   * Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
   * Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
 * Object Oriented Programming
@@ -13,8 +13,8 @@ Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
   * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
   * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
-Introduction to computer programming
-------------------------------------
+Introduction to Computer Programming (Basics folder)
+----------------------------------------------------
 
 * Assignments 1 (Read input from keyboard, casting variables, elementary loops)
 * Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
@@ -25,7 +25,7 @@ Introduction to computer programming
 * Assignments 6 (Writing to files, nested loops, reading from files, date-time, creating folders, string split, string contains)
 * Assignments 7 (NUnit tests, documentation, custom exceptions, set float number accuracy)
 
-Object oriented programming
+Object Oriented Programming
 ---------------------------
 
 * OOP1 (Encapsulation, getters, setters, access modifiers)
@@ -34,7 +34,7 @@ Object oriented programming
 * OOP4 (Interfaces, implementations)
 * Project (Hospital manegement application, WinForms). Contains all OOP techniques + binary serialization in use
 
-Design patterns
+Design Patterns
 ---------------
 * Creational
   * Factory Method (Extends functionality of program)
@@ -42,7 +42,7 @@ Design patterns
 * Structural
 * Behavioral
 
-Data structures
+Data Structures
 ---------------
 
 This folder currently consists the `Data Structures` as follows:
@@ -86,7 +86,7 @@ Algorithms
   * Quick sort O(log(n))
   * Selection sort O(n^2)
 
-Computational methods
+Computational Methods
 ---------------------
 * Numerical systems converter (Pure example how to break all SOLID rules in 1 class)
 * System of linear equations solver
