@@ -22,11 +22,12 @@ Introduction to Computer Programming
 * Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
 * Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
 * Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
-* Assignments 6 (Writing to files, nested loops, reading from files, date-time, creating folders, string split, string contains)
+* Assignments 6 (Writing to files, nested loops, reading from files, date-time, creating folders, value tuples)
 * Assignments 7 (NUnit tests, documentation, custom exceptions, set float number accuracy)
 
 Object Oriented Programming
 ---------------------------
+Structures, type converters, summary
 
 * OOP1 (Encapsulation, getters, setters, access modifiers)
 * OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
@@ -119,5 +120,6 @@ Notes
 		}
 	
 * In order to work with class library, all its classes must have acessor `public`. E.g `public class1 { }`.
+* Constant fields `const` are `static` and cannot be acessed using `this` reference.
 
 

@@ -69,5 +69,10 @@ namespace Assignments_6.TicTacToe
         {
             Console.WriteLine("Game over!");
         }
+
+        public void NicknameRequest(char sign)
+        {
+            Console.WriteLine($"Player {sign} enter your nickname: ");
+        }
     }
 }

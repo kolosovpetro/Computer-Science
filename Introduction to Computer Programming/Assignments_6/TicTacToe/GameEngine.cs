@@ -17,7 +17,8 @@ namespace Assignments_6.TicTacToe
         private const string statsFilePath = "../../GameStatistics/Stats.txt";
         private string crossPlayerName;
         private string roungPlayerName;
-        private bool isCrossWin;
+        public char CrossSign => crossSign;
+        public char RoundSign => roundSign;
 
         public GameEngine()
         {
@@ -26,7 +27,6 @@ namespace Assignments_6.TicTacToe
                 boardArray[i] = ' ';
             this.currentSign = roundSign;
             this.mainLoop = true;
-            this.isCrossWin = false;
         }
 
         public char GetCurrentSign()
@@ -36,7 +36,7 @@ namespace Assignments_6.TicTacToe
 
         public void PerformMove(int index)
         {
-            boardArray[index] = currentSign;
+            this.boardArray[index] = currentSign;
         }
 
         public bool WinConditions()
@@ -101,25 +101,58 @@ namespace Assignments_6.TicTacToe
             this.roungPlayerName = newName;
         }
 
-        public void setCrossWin()
-        {
-            this.isCrossWin = true;
-        }
-
         public void SaveStatistics()
         {
             using (StreamWriter sw = File.AppendText(statsFilePath))
             {
-                switch (this.isCrossWin)
+                switch (this.GetCurrentSign())
                 {
-                    case true:
-                        sw.WriteLine($"{crossPlayerName} 1 {roungPlayerName} 0");
+                    case crossSign:
+                        sw.WriteLine($"{crossPlayerName} 1");
+                        sw.WriteLine($"{roungPlayerName} 0");
                         break;
                     default:
-                        sw.WriteLine($"{crossPlayerName} 0 {roungPlayerName} 1");
+                        sw.WriteLine($"{crossPlayerName} 0");
+                        sw.WriteLine($"{roungPlayerName} 1");
                         break;
                 }
             }
+        }
+
+        public (int, int) playerStats(string playerName)
+        {
+            int gamesCount = 0, winsCount = 0;
+
+            using (StreamReader sr = new StreamReader(statsFilePath))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string curr = sr.ReadLine();
+                    string[] splited = curr.Split(' ');
+                    if (splited.Contains(playerName))
+                    {
+                        gamesCount++;
+
+                        switch (splited[1])
+                        {
+                            case "1":
+                                winsCount++;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return (gamesCount, winsCount);
+        }
+
+        public void DisplayStats(string playerName)
+        {
+            (int, int) stats = this.playerStats(playerName);
+            Console.WriteLine($"Player {playerName} has the following stats: {stats.Item1} games, " +
+                $"{stats.Item2} wins and winrate {(double)stats.Item1 / stats.Item2}");
         }
     }
 }

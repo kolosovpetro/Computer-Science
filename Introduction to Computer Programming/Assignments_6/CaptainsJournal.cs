@@ -9,17 +9,15 @@ namespace Assignments_6
 {
     class CaptainsJournal
     {
-        private readonly string filePath;
+        private string fileFolder;
         private string fileName;
-
-        public CaptainsJournal()
-        {
-            this.filePath = $"../../CaptainsJournal/{fileName}.txt";
-        }
+        private string fileFullPath;
 
         private void setFileName()
         {
-            this.fileName = $"<{DateTime.Now.Date.ToString()}>";
+            this.fileName = $"{DateTime.Now.ToString("dd/MM/yyyy")}.txt";
+            this.fileFolder = "../../CaptainsJournal";
+            this.fileFullPath = fileFolder + '/' + fileName;
         }
 
         public void WriteLog()
@@ -33,7 +31,12 @@ namespace Assignments_6
 
             Console.WriteLine("Entering Captain's journal ... ");
 
-            using (StreamWriter sw = File.AppendText(filePath + fileName))
+            if (!Directory.Exists(fileFolder))
+            {
+                Directory.CreateDirectory(fileFolder);
+            }
+
+            using (StreamWriter sw = new StreamWriter(fileFullPath))
             {
                 sw.WriteLine("Captain's Log");
                 sw.WriteLine($"Stardate{fileName}");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignments_6.TicTacToe;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace Assignments_6
             // Jean - Luc Picard
 
             CaptainsJournal cj = new CaptainsJournal();
+            Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
+            Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
             cj.WriteLog();
 
             // Add another option – Stats – to your tic-tac-toe game.
@@ -42,7 +45,75 @@ namespace Assignments_6
             // the program asks for both players’ names and prints out the total number of
             //their games and what percent of games each of them won.
 
+            Layout layout = new Layout();
+            GameEngine ge = new GameEngine();
+            int moveIndex;
 
+            while (ge.GetMainLoop())
+            {
+                layout.PrintMainMenu();
+                MainMenu menuTerm = MainMenu.Unassigned;
+                layout.ChooseMenuOption(out string opt);
+
+                if (Enum.TryParse(opt, out menuTerm))
+                {
+                    switch (menuTerm)
+                    {
+                        case MainMenu.NewGame:
+                            for (int j = 0; j < ge.GetBoardArray().Length; j++)
+                            {
+                                layout.PrintBoard(ge.GetBoardArray());
+                                layout.NicknameRequest(ge.CrossSign);
+                                ge.SetCrossPlayerName(Console.ReadLine());
+                                layout.NicknameRequest(ge.RoundSign);
+                                ge.SetRoundPlayerName(Console.ReadLine());
+                                layout.PlayerMoveMessage(ge.GetCurrentSign());
+
+                                while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
+                                {
+                                    layout.IllegalMoveNotice(ge.GetCurrentSign());
+                                }
+
+                                ge.PerformMove(moveIndex);
+
+                                if (ge.WinConditions())
+                                {
+                                    Console.Clear();
+                                    layout.PrintBoard(ge.GetBoardArray());
+                                    layout.WinnerMessage(ge.GetCurrentSign());
+                                    ge.SaveStatistics();
+                                    Console.WriteLine("[Press Enter to return to Main menu ...]");
+                                    Console.ReadKey();
+                                    ge.Reset();
+                                    Console.Clear();
+                                    break;
+                                }
+
+                                ge.SignSwitch();
+                                Console.Clear();
+                            }
+
+                            layout.GameOverMessage();
+                            Console.Clear();
+                            break;
+                        case MainMenu.About:
+                            Console.Clear();
+                            Console.WriteLine("Author Petro Kolosov: https://github.com/kolosovpetro");
+                            Console.WriteLine("[Press Enter to return to Main menu...]");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case MainMenu.Quit:
+                            Console.Clear();
+                            layout.QuiteMessage(out string q);        // question for mainloop break
+                            if (q.ToLower() == "y")
+                                ge.SetMainloop();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
     }
 }

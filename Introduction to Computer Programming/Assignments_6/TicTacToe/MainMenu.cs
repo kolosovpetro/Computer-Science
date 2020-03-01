@@ -10,7 +10,8 @@ namespace Assignments_6.TicTacToe
     {
         NewGame = 1,
         About = 2,
-        Quit = 3,
-        Unassigned = 4
+        Stats = 3,
+        Quit = 4,
+        Unassigned = 5
     }
 }
