@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Assignments_6.TicTacToe
         private const string statsFilePath = "../../GameStatistics/Stats.txt";
         private string crossPlayerName;
         private string roungPlayerName;
+        private bool isCrossWin;
 
         public GameEngine()
         {
@@ -24,6 +26,7 @@ namespace Assignments_6.TicTacToe
                 boardArray[i] = ' ';
             this.currentSign = roundSign;
             this.mainLoop = true;
+            this.isCrossWin = false;
         }
 
         public char GetCurrentSign()
@@ -86,6 +89,37 @@ namespace Assignments_6.TicTacToe
             for (int i = 0; i < boardArray.Length; i++)
                 boardArray[i] = ' ';
             this.currentSign = roundSign;
+        }
+
+        public void SetCrossPlayerName(string newName)
+        {
+            this.crossPlayerName = newName;
+        }
+
+        public void SetRoundPlayerName(string newName)
+        {
+            this.roungPlayerName = newName;
+        }
+
+        public void setCrossWin()
+        {
+            this.isCrossWin = true;
+        }
+
+        public void SaveStatistics()
+        {
+            using (StreamWriter sw = File.AppendText(statsFilePath))
+            {
+                switch (this.isCrossWin)
+                {
+                    case true:
+                        sw.WriteLine($"{crossPlayerName} 1 {roungPlayerName} 0");
+                        break;
+                    default:
+                        sw.WriteLine($"{crossPlayerName} 0 {roungPlayerName} 1");
+                        break;
+                }
+            }
         }
     }
 }
