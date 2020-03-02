@@ -32,7 +32,6 @@ Introduction to Computer Programming
 
 Object Oriented Programming
 ---------------------------
-Structures, type converters, summary
 
 * OOP1 (Encapsulation, getters, setters, access modifiers)
 * OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
@@ -40,18 +39,25 @@ Structures, type converters, summary
 * OOP4 (Interfaces, implementations)
 * Project (Hospital manegement application, WinForms). Contains all OOP techniques + binary serialization in use
 
-Design Patterns
----------------
-* Creational
-  * Factory Method (Extends functionality of program)
-  * Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
-* Structural
-* Behavioral
+Algorithms
+----------
+* Search Algorithms (and their benchmark measurement)
+  * Linear Searches
+  * Binary Search
+* Sort Algorithms
+  * Bubble sort O(n^2)
+  * Cocktail sort (Buble 2 pass sort) O(n^2)
+  * Counting sort O(n+k), k = non negative terms count
+  * Insertion sort O(n)
+  * Merge sort O(n*log(n))
+  * Quick sort O(log(n))
+  * Selection sort O(n^2)
+* Coin Change Problem (Intro to Dynamic programming)
+* RPN Calculator (postfix calculator based on stack data structure)
 
 Data Structures
 ---------------
-
-This folder currently consists the `Data Structures` as follows:
+Implemented data structures as:
 
 * Dictionary
 * Graph
@@ -71,26 +77,18 @@ In future, it is planned to implement the `Data Structures` as follows:
 
 **What's used**
 
-* NUnit Framework
+* NUnit UnitTest Framework
 * Generics
 * Indexers
 * IEnumerable interface implementation
 
-To verify the correctness of implementation the `NUnit` test package is used.
-
-Algorithms
-----------
-* Search Algorithms (and their benchmark measurement)
-  * Linear Searches
-  * Binary Search
-* Sort Algorithms
-  * Bubble sort O(n^2)
-  * Cocktail sort (Buble 2 pass sort) O(n^2)
-  * Counting sort O(n+k), k = non negative terms count
-  * Insertion sort O(n)
-  * Merge sort O(n*log(n))
-  * Quick sort O(log(n))
-  * Selection sort O(n^2)
+Design Patterns
+---------------
+* Creational
+  * Factory Method (Extends functionality of program)
+  * Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
+* Structural
+* Behavioral
 
 Computational Methods
 ---------------------
