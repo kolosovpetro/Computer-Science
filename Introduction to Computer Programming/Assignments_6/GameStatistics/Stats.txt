@@ -1,0 +1,4 @@
+Petro 0
+Andrey 1
+Vasya 0
+Katya 1

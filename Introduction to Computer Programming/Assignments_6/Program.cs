@@ -26,10 +26,10 @@ namespace Assignments_6
             // …
             // Jean - Luc Picard
 
-            CaptainsJournal cj = new CaptainsJournal();
-            Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
-            Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
-            cj.WriteLog();
+            //CaptainsJournal cj = new CaptainsJournal();
+            //Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
+            //Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
+            //cj.WriteLog();
 
             // Add another option – Stats – to your tic-tac-toe game.
             // After selecting New game both players should enter their usernames. 
@@ -60,13 +60,14 @@ namespace Assignments_6
                     switch (menuTerm)
                     {
                         case MainMenu.NewGame:
+                            layout.NicknameRequest(ge.CrossSign);
+                            ge.SetCrossPlayerName(Console.ReadLine());
+                            layout.NicknameRequest(ge.RoundSign);
+                            ge.SetRoundPlayerName(Console.ReadLine());
+
                             for (int j = 0; j < ge.GetBoardArray().Length; j++)
                             {
                                 layout.PrintBoard(ge.GetBoardArray());
-                                layout.NicknameRequest(ge.CrossSign);
-                                ge.SetCrossPlayerName(Console.ReadLine());
-                                layout.NicknameRequest(ge.RoundSign);
-                                ge.SetRoundPlayerName(Console.ReadLine());
                                 layout.PlayerMoveMessage(ge.GetCurrentSign());
 
                                 while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
@@ -99,7 +100,13 @@ namespace Assignments_6
                         case MainMenu.About:
                             Console.Clear();
                             Console.WriteLine("Author Petro Kolosov: https://github.com/kolosovpetro");
-                            Console.WriteLine("[Press Enter to return to Main menu...]");
+                            Console.WriteLine("[Press Enter to return to Main menu ...]");
+                            Console.ReadKey();
+                            Console.Clear();
+                            break;
+                        case MainMenu.Stats:
+                            Console.WriteLine("Here stats will be implemented ... ");
+                            Console.WriteLine("[Press Enter to return to Main menu ...]");
                             Console.ReadKey();
                             Console.Clear();
                             break;

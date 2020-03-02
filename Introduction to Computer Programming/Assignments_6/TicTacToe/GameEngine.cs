@@ -14,7 +14,9 @@ namespace Assignments_6.TicTacToe
         private const char roundSign = 'O';
         private char currentSign;
         private bool mainLoop;
-        private const string statsFilePath = "../../GameStatistics/Stats.txt";
+        private const string statsFileFolder = "../../GameStatistics";
+        private const string statsFileName = "Stats.txt";
+        private readonly string statsFileFullPath = statsFileFolder + '/' + statsFileName;
         private string crossPlayerName;
         private string roungPlayerName;
         public char CrossSign => crossSign;
@@ -80,7 +82,9 @@ namespace Assignments_6.TicTacToe
 
         public bool LegalMove(string move, out int index)
         {
-            return int.TryParse(move, out index) && index >= 0 && index < 9 && boardArray[index] == ' ';
+            return int.TryParse(move, out index)
+                && index >= 0 && index < 9
+                && boardArray[index] == ' ';
         }
 
         public void Reset()
@@ -103,7 +107,12 @@ namespace Assignments_6.TicTacToe
 
         public void SaveStatistics()
         {
-            using (StreamWriter sw = File.AppendText(statsFilePath))
+            if (!Directory.Exists(statsFileFolder))
+            {
+                Directory.CreateDirectory(statsFileFolder);
+            }
+
+            using (StreamWriter sw = new StreamWriter(statsFileFullPath, true))
             {
                 switch (this.GetCurrentSign())
                 {
@@ -123,7 +132,7 @@ namespace Assignments_6.TicTacToe
         {
             int gamesCount = 0, winsCount = 0;
 
-            using (StreamReader sr = new StreamReader(statsFilePath))
+            using (StreamReader sr = new StreamReader(statsFileFolder))
             {
                 while (!sr.EndOfStream)
                 {

@@ -36,7 +36,7 @@ namespace Assignments_6
                 Directory.CreateDirectory(fileFolder);
             }
 
-            using (StreamWriter sw = new StreamWriter(fileFullPath))
+            using (StreamWriter sw = new StreamWriter(fileFullPath, true))
             {
                 sw.WriteLine("Captain's Log");
                 sw.WriteLine($"Stardate{fileName}");

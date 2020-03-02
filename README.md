@@ -27,7 +27,7 @@ Introduction to Computer Programming
 * Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
 * Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
 * Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
-* Assignments 6 (Writing to files, nested loops, reading from files, date-time, creating folders, value tuples)
+* Assignments 6 (Writing to files, reading from files, nested loops, date-time, creating folders, value tuples)
 * Assignments 7 (NUnit tests, documentation, custom exceptions, set float number accuracy)
 
 Object Oriented Programming
