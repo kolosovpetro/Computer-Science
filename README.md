@@ -82,9 +82,10 @@ Design Patterns
   * Factory Method (Extends functionality of program)
   * Abstract Factory
   * Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
-  * Prototypr (Deepcopy of class)
+  * Prototype (Deepcopy of class)
 * Structural
   * Decorator (Combine required functionalities)
+  * Bridge
 * Behavioral
   * Observer (Defines interaction between two or more classes)
   * Strategy (Extends functionality of program)
