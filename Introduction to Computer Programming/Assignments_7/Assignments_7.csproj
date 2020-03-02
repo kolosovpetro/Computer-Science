@@ -67,6 +67,7 @@
     <Compile Include="TicTacToe\GameEngine.cs" />
     <Compile Include="TicTacToe\Layout.cs" />
     <Compile Include="TicTacToe\MainMenu.cs" />
+    <Compile Include="TicTacToe\TicTacToeTests.cs" />
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
