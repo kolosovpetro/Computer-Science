@@ -106,6 +106,8 @@ namespace Assignments_6
                             break;
                         case MainMenu.Stats:
                             Console.WriteLine("Here stats will be implemented ... ");
+                            Console.WriteLine("Enter the name of player you wanna see statistics of: ");
+                            ge.DisplayStats(Console.ReadLine());
                             Console.WriteLine("[Press Enter to return to Main menu ...]");
                             Console.ReadKey();
                             Console.Clear();

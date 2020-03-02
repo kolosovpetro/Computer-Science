@@ -132,7 +132,7 @@ namespace Assignments_6.TicTacToe
         {
             int gamesCount = 0, winsCount = 0;
 
-            using (StreamReader sr = new StreamReader(statsFileFolder))
+            using (StreamReader sr = new StreamReader(statsFileFullPath))
             {
                 while (!sr.EndOfStream)
                 {
@@ -160,8 +160,18 @@ namespace Assignments_6.TicTacToe
         public void DisplayStats(string playerName)
         {
             (int, int) stats = this.playerStats(playerName);
-            Console.WriteLine($"Player {playerName} has the following stats: {stats.Item1} games, " +
-                $"{stats.Item2} wins and winrate {(double)stats.Item1 / stats.Item2}");
+            switch (stats.Item1)
+            {
+                case 0:
+                    Console.WriteLine("There is no such player in database.");
+                    break;
+                default:
+                    Console.WriteLine($"Player {playerName} has the following stats: " +
+                        $"{stats.Item1} games, " +
+                $"{stats.Item2} wins " +
+                $"and winrate {(double)stats.Item2 / stats.Item1 * 100} %");
+                    break;
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Assignments_6.TicTacToe
                 "1. New Game",
                 "2. About the author",
                 "3. Statistics",
-                "3. Quit"
+                "4. Quit"
             };
         }
 
