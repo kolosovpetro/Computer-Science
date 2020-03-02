@@ -30,10 +30,10 @@ Introduction to Computer Programming
 Object Oriented Programming
 ---------------------------
 * OOP1 (Encapsulation, getters, setters, access modifiers)
-* OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
-* OOP3 (Inheritance, overriding, super, polymorphism, upcast)
+* OOP2 (Constructors, constructor flow, this reference)
+* OOP3 (Inheritance, overriding, base keyword, polymorphism, upcast)
 * OOP4 (Interfaces, implementations)
-* Project (Hospital manegement application, WinForms). Contains all OOP techniques + binary serialization in use
+* Project (Hospital management application, WinForms). Contains all OOP techniques + binary serialization in use
 
 Algorithms
 ----------
