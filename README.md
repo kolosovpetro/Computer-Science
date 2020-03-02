@@ -1,9 +1,7 @@
 Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 ==================================================================
 
-
 > *"I am not afraid of a person who knows 10000 kicks. But I am afraid of a person who knows one kick but practices it for 10000 times." - Bruce Lee*
-
 
 * Introduction to Computer Programming
   * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
@@ -20,7 +18,6 @@ Learning C# (Basics, Algorithms, Design Patterns, Data Structures)
 
 Introduction to Computer Programming
 ------------------------------------
-
 * Assignments 1 (Read input from keyboard, casting variables, elementary loops)
 * Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
 * Assignments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
@@ -32,7 +29,6 @@ Introduction to Computer Programming
 
 Object Oriented Programming
 ---------------------------
-
 * OOP1 (Encapsulation, getters, setters, access modifiers)
 * OOP2 (Constructors, constructor flow, notes on final fields, notes on static fields and methods)
 * OOP3 (Inheritance, overriding, super, polymorphism, upcast)
@@ -68,14 +64,12 @@ Implemented data structures as:
 * Tree
 * Weighted Graph
 
-**Future Implementations**
-
 In future, it is planned to implement the `Data Structures` as follows:
 
 * Priority Queue
 * Generic List
 
-**What's used**
+What's used
 
 * NUnit UnitTest Framework
 * Generics
@@ -100,7 +94,6 @@ Computational Methods
 
 Misc
 ----
-
 Other projects.
 
 * Database Control Panel. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
