@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignments_6.TicTacToe
+﻿namespace Assignments_6.TicTacToe
 {
     public enum MainMenu
     {

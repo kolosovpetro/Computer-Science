@@ -1,9 +1,5 @@
 ﻿using Assignments_6.TicTacToe;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignments_6
 {
@@ -26,10 +22,10 @@ namespace Assignments_6
             // …
             // Jean - Luc Picard
 
-            //CaptainsJournal cj = new CaptainsJournal();
-            //Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
-            //Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
-            //cj.WriteLog();
+            CaptainsJournal cj = new CaptainsJournal();
+            Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
+            Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
+            cj.WriteLog();
 
             // Add another option – Stats – to your tic-tac-toe game.
             // After selecting New game both players should enter their usernames. 
@@ -94,7 +90,8 @@ namespace Assignments_6
                                 Console.Clear();
                             }
 
-                            layout.GameOverMessage();
+                            layout.GameOverMessage();       // here is to be added stats of tie
+                                                            // but I'm too lazy to overload methods
                             Console.Clear();
                             break;
                         case MainMenu.About:
