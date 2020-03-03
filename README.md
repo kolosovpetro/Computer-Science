@@ -14,6 +14,8 @@
 - [Misc](#misc)
 - [Notes](#notes)
 
+--
+
 ## Introduction to Computer Programming
 
 - Assignments 1 (Read input from keyboard, casting variables, elementary loops)
