@@ -45,6 +45,8 @@
 
 ## Object Oriented Programming
 
+Refer to https://kolosovpetro.github.io/cs/oop/
+
 - OOP1 (Encapsulation, getters, setters, access modifiers)
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_01.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task1.pdf
@@ -60,6 +62,8 @@
 - Project (Hospital management application, WinForms). Contains all OOP techniques + binary serialization in use
 
 ## Algorithms
+
+Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
 
 * Search Algorithms (and their benchmark measurement)
   * Linear Searches
@@ -77,28 +81,26 @@
 
 ## Data Structures
 
-Implemented data structures as:
+- Implemented data structures are
+  - Dictionary
+  - Graph
+  - Heap
+  - LinkedList
+  - Queue
+  - Stack
+  - Tree
+  - Weighted Graph
 
-* Dictionary
-* Graph
-* Heap
-* LinkedList
-* Queue
-* Stack
-* Tree
-* Weighted Graph
+- To be implemented in future
+  - Priority Queue
+  - Generic List
+  - Binary Search Tree
 
-In future, it is planned to implement the `Data Structures` as follows:
-
-* Priority Queue
-* Generic List
-
-What's used
-
-* NUnit UnitTest Framework
-* Generics
-* Indexers
-* IEnumerable interface implementation
+- What's used
+  - NUnit UnitTest Framework
+  - Generics
+  - Indexers
+  - IEnumerable interface implementation
 
 ## Design Patterns
 
