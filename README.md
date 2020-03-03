@@ -52,7 +52,7 @@
 * Coin Change Problem (Intro to Dynamic programming)
 * RPN Calculator (postfix calculator based on stack data structure)
 
-##Data Structures
+## Data Structures
 
 Implemented data structures as:
 
