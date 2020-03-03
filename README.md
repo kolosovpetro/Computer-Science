@@ -1,10 +1,10 @@
-## Learning C# (Basics, Algorithms, Design Patterns, Data Structures, SOLID)
+##Learning C# (Basics, Algorithms, Design Patterns, Data Structures, SOLID)
 
 > *"I am not afraid of a person who knows 10000 kicks. But I am afraid of a person who knows one kick but practices it for 10000 times." - Bruce Lee*
 
-## Contents
+##Contents
 
-- [Introduction to Computer Programming](#intoduction-to-computer-programming)
+- [Introduction to Computer Programming](#introduction-to-computer-programming)
   * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
   * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
 - Data Structures and Algorithms
@@ -17,7 +17,7 @@
   * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
   * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
-## Introduction to Computer Programming
+##Introduction to Computer Programming
 
 * Assignments 1 (Read input from keyboard, casting variables, elementary loops)
 * Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
