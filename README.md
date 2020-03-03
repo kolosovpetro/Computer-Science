@@ -78,6 +78,8 @@ What's used
 
 Design Patterns
 ---------------
+Refer to website: https://refactoring.guru/design-patterns
+
 * Creational
   * Factory Method (Extends functionality of program)
   * Abstract Factory
