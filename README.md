@@ -89,6 +89,14 @@ Design Patterns
 * Behavioral
   * Observer (Defines interaction between two or more classes)
   * Strategy (Extends functionality of program)
+  
+SOLID
+-----
+A set of principles recommended to follow in order to maintain business applications
+
+* Single Responsibility Pronciple - `Do one thing, but do it best`
+* Open-Closed Principle - `App. should be open for extension, but closed for modification`. Usually, solved by pattern `Strategy`.
+* Liskov Substitution Principle - ``
 
 Computational Methods
 ---------------------
