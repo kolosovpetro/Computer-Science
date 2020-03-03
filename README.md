@@ -94,9 +94,9 @@ SOLID
 -----
 A set of principles recommended to follow in order to maintain business applications
 
-* Single Responsibility Pronciple - `Do one thing, but do it best`
-* Open-Closed Principle - `App. should be open for extension, but closed for modification`. Usually, solved by pattern `Strategy`.
-* Liskov Substitution Principle - ``
+* **Single Responsibility Principle** - `Do one thing, but do it best`
+* **Open-Closed Principle** - `App. should be open for extension, but closed for modification`. Usually, solved by pattern `Strategy`
+* **Liskov Substitution Principle** - `Proper abstractization, where all subclasses correctly implements methods from base class`
 
 Computational Methods
 ---------------------
