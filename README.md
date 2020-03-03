@@ -7,15 +7,19 @@
 - [Introduction to Computer Programming](#introduction-to-computer-programming)
   - Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
   - Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
+- [Object Oriented Programming](#object-oriented-programming)
+  - Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
+  - Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
 - [Data Structures](#data-structures) and [Algorithms](#algorithms)
   - Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
   - Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
-- Object Oriented Programming
-  - Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
-  - Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-- Computational Methods
+- [Design patterns](#design-patterns)
+- [SOLID](#solid)
+- [Computational Methods](#computational-methods)
   - Lectures https://kolosovpetro.github.io/computer_science/comp_methods
   - Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
+- [Misc](#misc)
+- [Notes](#notes)
 
 ## Introduction to Computer Programming
 
@@ -77,8 +81,8 @@ What's used
 * Indexers
 * IEnumerable interface implementation
 
-Design Patterns
----------------
+## Design Patterns
+
 Refer to website: https://refactoring.guru/design-patterns
 
 * Creational
@@ -93,8 +97,8 @@ Refer to website: https://refactoring.guru/design-patterns
   * Observer (Defines interaction between two or more classes)
   * Strategy (Extends functionality of program)
   
-SOLID
------
+## SOLID
+
 A set of principles recommended to follow in order to maintain business applications
 
 * **Single Responsibility Principle** - `Do one thing, but do it best`
@@ -106,23 +110,23 @@ A set of principles recommended to follow in order to maintain business applicat
   * `Abstractions should not depend on details. Details should depend on abstractions.`
 
 
-Computational Methods
----------------------
+## Computational Methods
+
 * Numerical Sys. Converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
 * System of Linear Equations Solver
 * Polynomial Interpolation (Vandermonde method)
 * Discrete Integration (Simpson's, Trapezoidal methods)
 * Monte Carlo Method (Estimation on the plan finishing time)
 
-Misc
-----
+## Misc
+
 Other projects.
 
 * **Database Control Panel**. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
 * **LINQ**. A set of custom methods in order to operate over IEnumerable collections.
 
-Notes
------
+## Notes
+
 * Values vs Reference type: In oder to modify reference type (e.g `class`) via method it is enought to
 
 		static void Modify(int[] a)
