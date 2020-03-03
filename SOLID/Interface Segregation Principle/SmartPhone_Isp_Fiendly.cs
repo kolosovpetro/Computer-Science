@@ -2,21 +2,33 @@
 
 namespace SOLID.ISP
 {
-    interface ICallable
+    /// <summary>
+    /// Separated interface providing only method Call
+    /// </summary>
+    public interface ICallable
     {
         void Call();
     }
 
-    interface ICamerable
+    /// <summary>
+    /// Separate interface providing only method MakePhoto
+    /// </summary>
+    public interface ICamerable
     {
         void MakePhoto();
     }
 
-    interface IMusicable
+    /// <summary>
+    /// Separated interface providing only method ListenMusic
+    /// </summary>
+    public interface IMusicable
     {
         void ListenMusic();
     }
 
+    /// <summary>
+    /// Class Smartphone implements all interfaces
+    /// </summary>
     public class SmartPhone : ICallable, ICamerable, IMusicable
     {
         public void Call()
@@ -35,6 +47,9 @@ namespace SOLID.ISP
         }
     }
 
+    /// <summary>
+    /// Class Phone inplements interface Callable, eg may be used for Call only
+    /// </summary>
     public class Phone : ICallable
     {
         public void Call()
