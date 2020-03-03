@@ -5,32 +5,41 @@
 ## Contents
 
 - [Introduction to Computer Programming](#introduction-to-computer-programming)
-  - Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
-  - Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
 - [Object Oriented Programming](#object-oriented-programming)
-  - Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
-  - Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-- [Data Structures](#data-structures) and [Algorithms](#algorithms)
-  - Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
-  - Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
+- [Algorithms](#algorithms)
+- [Data Structures](#data-structures)
 - [Design patterns](#design-patterns)
 - [SOLID](#solid)
 - [Computational Methods](#computational-methods)
-  - Lectures https://kolosovpetro.github.io/computer_science/comp_methods
-  - Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 - [Misc](#misc)
 - [Notes](#notes)
 
 ## Introduction to Computer Programming
 
-* Assignments 1 (Read input from keyboard, casting variables, elementary loops)
-* Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
-* Assignments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
-* Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
-* Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
-* Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
-* Assignments 6 (Writing to files, reading from files, nested loops, date-time, creating folders, value tuples)
-* Assignments 7 (NUnit tests [exception test], documentation, custom exceptions)
+- Assignments 1 (Read input from keyboard, casting variables, elementary loops)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/01Introduction.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/01Introduction_Exercises.pdf
+- Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/02Basics.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/02Basics_Exercises.pdf
+- Assignments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/03Basics.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/03Basics_Exercises.pdf
+- Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/04Arrays.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/04Arrays_Exercises.pdf
+- Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/05Functions.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/05Functions_Exercises.pdf
+- Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/05Functions.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/05Functions_Exercises.pdf
+- Assignments 6 (Writing to files, reading from files, nested loops, date-time, creating folders, value tuples)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/06Streams.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/06Streams_Exercises.pdf
+- Assignments 7 (NUnit tests [exception test], documentation, custom exceptions)
+  - Lecture: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/07Documentation.pdf
+  - Tasks: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/07Documentation_Exercises.pdf
 
 ## Object Oriented Programming
 
