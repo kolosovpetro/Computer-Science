@@ -136,5 +136,5 @@ Notes
 	
 * In order to work with class library, all its classes must have acessor `public`. E.g `public class1 { }`.
 * Constant fields `const` are `static` and cannot be acessed using `this` reference.
-
+* `Single responsibility principle` can be threaten as partial case of `Interface segragation principle`, where current class implements only one interface.
 
