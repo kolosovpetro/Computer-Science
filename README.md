@@ -4,7 +4,7 @@
 
 ## Contents
 
-- [Introduction to Computer Programming](#intoduction_to_computer_programming)
+- [Introduction to Computer Programming](#intoduction-to-computer-programming)
   * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
   * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
 - Data Structures and Algorithms
