@@ -5,17 +5,17 @@
 ## Contents
 
 - [Introduction to Computer Programming](#introduction-to-computer-programming)
-  * Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
-  * Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
-- Data Structures and Algorithms
-  * Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
-  * Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
-* Object Oriented Programming
-  * Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
-  * Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
-* Computational Methods
-  * Lectures https://kolosovpetro.github.io/computer_science/comp_methods
-  * Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
+  - Lectures: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/
+  - Practice: https://kolosovpetro.github.io/computer_science/intro_to_comp_programm/exercises/
+- [Data Structures](#data-structures) and [Algorithms](#algorithms)
+  - Lectures: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms
+  - Practice: https://kolosovpetro.github.io/computer_science/data_structures_and_algorithms/exercises/
+- Object Oriented Programming
+  - Lectures: https://kolosovpetro.github.io/computer_science/object_oriented_programming
+  - Practice: https://kolosovpetro.github.io/computer_science/object_oriented_programming/exercises/
+- Computational Methods
+  - Lectures https://kolosovpetro.github.io/computer_science/comp_methods
+  - Practice https://kolosovpetro.github.io/computer_science/comp_methods/exercises/
 
 ## Introduction to Computer Programming
 
@@ -28,16 +28,16 @@
 * Assignments 6 (Writing to files, reading from files, nested loops, date-time, creating folders, value tuples)
 * Assignments 7 (NUnit tests [exception test], documentation, custom exceptions)
 
-Object Oriented Programming
----------------------------
+## Object Oriented Programming
+
 * OOP1 (Encapsulation, getters, setters, access modifiers)
 * OOP2 (Constructors, constructor flow, this reference)
 * OOP3 (Inheritance, overriding, base keyword, polymorphism, upcast)
 * OOP4 (Interfaces, implementations)
 * Project (Hospital management application, WinForms). Contains all OOP techniques + binary serialization in use
 
-Algorithms
-----------
+## Algorithms
+
 * Search Algorithms (and their benchmark measurement)
   * Linear Searches
   * Binary Search
@@ -52,8 +52,8 @@ Algorithms
 * Coin Change Problem (Intro to Dynamic programming)
 * RPN Calculator (postfix calculator based on stack data structure)
 
-Data Structures
----------------
+##Data Structures
+
 Implemented data structures as:
 
 * Dictionary
