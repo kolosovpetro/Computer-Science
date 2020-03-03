@@ -99,14 +99,14 @@ A set of principles recommended to follow in order to maintain business applicat
 * **Liskov Substitution Principle** - `Proper abstractization, where all subclasses correctly implements methods from base class`
 * **Interface Segregation Principle** - `Clients should not be forced to depend upon interfaces that they do not use.`
 * **Dependency Inversion Principle**
-  * High-level modules should not depend on low-level modules. Both should depend on abstractions.
-  * Abstractions should not depend on details. Details should depend on abstractions.
+  * `High-level modules should not depend on low-level modules. Both should depend on abstractions.`
+  * `Abstractions should not depend on details. Details should depend on abstractions.`
 
 
 Computational Methods
 ---------------------
-* Numerical Sys. converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
-* System of linear equations solver
+* Numerical Sys. Converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
+* System of Linear Equations Solver
 * Polynomial Interpolation (Vandermonde method)
 * Discrete Integration (Simpson's, Trapezoidal methods)
 * Monte Carlo Method (Estimation on the plan finishing time)
@@ -115,8 +115,8 @@ Misc
 ----
 Other projects.
 
-* Database Control Panel. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
-* LINQ. A set of custom methods in order to operate over IEnumerable collections.
+* **Database Control Panel**. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
+* **LINQ**. A set of custom methods in order to operate over IEnumerable collections.
 
 Notes
 -----
