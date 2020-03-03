@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class Connection: IConnection
+    public class Connection : IConnection
     {
-        
+
         protected Database database;
         protected bool isOpen;
         bool disposed = false;
         protected string password;
         protected string userName;
 
-        IDatabase IConnection.Database { get;}
+        IDatabase IConnection.Database { get; }
 
         public Connection(string newUserName, string newPassword)
         {
@@ -24,7 +24,7 @@ namespace DataAccess
         }
 
         public void Close()
-        {                     
+        {
             if (isOpen == true)
             {
                 this.isOpen = false;
@@ -32,13 +32,13 @@ namespace DataAccess
             else
             {
                 throw new ConnectionClosedException("Connection was not opened");
-            }            
+            }
         }
 
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);            
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -47,7 +47,7 @@ namespace DataAccess
             {
                 return;
             }
-            if(disposing)
+            if (disposing)
             {
 
             }
@@ -55,17 +55,17 @@ namespace DataAccess
         }
 
         public string GetPassword()
-        {            
-            return this.password;            
+        {
+            return this.password;
         }
 
         public string GetUsername()
-        {            
+        {
             return this.userName;
         }
 
         public bool IsOpen()
-        {            
+        {
             if (isOpen == true)
             {
                 Console.WriteLine("Open");
@@ -75,14 +75,14 @@ namespace DataAccess
             {
                 Console.WriteLine("Closed");
                 return false;
-            }           
+            }
         }
 
         public void Open()
         {
-            
+
             int loginValue;
-            
+
             if (isOpen == true)
             {
                 throw new ConnectionAlreadyOpenedException("Connection was already opened");
@@ -97,7 +97,7 @@ namespace DataAccess
                 {
                     isOpen = true;
                 }
-            }           
+            }
 
         }
     }

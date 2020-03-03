@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccess;
-namespace Client
+
+namespace ConsoleUI
 {
     class Program
     {
