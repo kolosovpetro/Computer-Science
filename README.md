@@ -1,5 +1,5 @@
-Learning C# (Basics, Algorithms, Design Patterns, Data Structures, SOLID)
-========================================================================
+## Learning C# (Basics, Algorithms, Design Patterns, Data Structures, SOLID)
+
 
 > *"I am not afraid of a person who knows 10000 kicks. But I am afraid of a person who knows one kick but practices it for 10000 times." - Bruce Lee*
 

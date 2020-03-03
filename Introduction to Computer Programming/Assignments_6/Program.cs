@@ -22,10 +22,10 @@ namespace Assignments_6
             // …
             // Jean - Luc Picard
 
-            CaptainsJournal cj = new CaptainsJournal();
-            Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
-            Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
-            cj.WriteLog();
+            //CaptainsJournal cj = new CaptainsJournal();
+            //Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
+            //Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
+            //cj.WriteLog();
 
             // Add another option – Stats – to your tic-tac-toe game.
             // After selecting New game both players should enter their usernames. 
