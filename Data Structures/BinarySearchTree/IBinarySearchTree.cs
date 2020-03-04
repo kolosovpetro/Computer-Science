@@ -6,8 +6,8 @@
         IBinarySearchTree Left { get; }
         IBinarySearchTree Right { get; }
 
-        IBinarySearchTree Successor();
-        IBinarySearchTree Predecessor();
+        IBinarySearchTree Successor(IBinarySearchTree tree);
+        IBinarySearchTree Predecessor(IBinarySearchTree tree);
         IBinarySearchTree Root();
         void SetLeft(IBinarySearchTree newLeft);
         void SetRight(IBinarySearchTree newRight);

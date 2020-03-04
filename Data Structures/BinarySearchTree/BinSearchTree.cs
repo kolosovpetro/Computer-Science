@@ -17,11 +17,6 @@ namespace BinarySearchTree
             Right = null;
         }
 
-        public IBinarySearchTree Predecessor()
-        {
-            throw new NotImplementedException();
-        }
-
         public IBinarySearchTree Root()
         {
             return this;
@@ -35,11 +30,6 @@ namespace BinarySearchTree
         public void SetRight(IBinarySearchTree newRight)
         {
             this.Right = newRight;
-        }
-
-        public IBinarySearchTree Successor()
-        {
-            throw new NotImplementedException();
         }
 
         public void Insert(IBinarySearchTree newTree)
@@ -65,7 +55,7 @@ namespace BinarySearchTree
                     s = s.Right;
                     continue;
                 }
-                
+
                 if (s.Value <= newTree.Value && s.Right == null)
                 {
                     s.SetRight(newTree);
@@ -74,6 +64,36 @@ namespace BinarySearchTree
 
 
             }
+        }
+
+        public IBinarySearchTree Successor(IBinarySearchTree tree)
+        {
+            IBinarySearchTree s = tree;
+            int step = default;
+
+            while (true)
+            {
+                if (step % 2 == 0 && s.Right != null)
+                {
+                    s = s.Right;
+                    step++;
+                    continue;
+                }
+
+                if(step % 2 != 0 && s.Left != null)
+                {
+                    s = s.Left;
+                    step++;
+                    continue;
+                }
+
+                return s;
+            }
+        }
+
+        public IBinarySearchTree Predecessor(IBinarySearchTree tree)
+        {
+            throw new NotImplementedException();
         }
     }
 }
