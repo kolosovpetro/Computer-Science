@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinarySearchTree.cs" />
-    <Compile Include="IBSTable.cs" />
-    <Compile Include="INodeable.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="BinSearchTree.cs" />
+    <Compile Include="IBinarySearchTree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
