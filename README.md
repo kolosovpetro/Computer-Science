@@ -94,7 +94,7 @@ Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
 - To be implemented in future
   - Priority Queue
   - Generic List
-  - Binary Search Tree
+  - Binary Search Tree (just started)
 
 - What's used
   - NUnit UnitTest Framework
