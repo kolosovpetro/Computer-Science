@@ -134,6 +134,7 @@ A set of principles recommended to follow in order to maintain business applicat
 ## ADO .NET
 
 Work in PostgreSQL data base through .NET
+
 Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 
 **Notes**
@@ -141,6 +142,7 @@ Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 - Query which reterns data: `ExecuteReader()`
 - DML DDL :`ExecuteReader()`
 - SQL injection protect: `Parameters.AddWithValue("param", var);`
+- While using `Parameters` do not use place variable between `''`, eg dont do `'@var'`
 
 ## Computational Methods
 

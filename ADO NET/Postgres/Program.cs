@@ -106,6 +106,80 @@ namespace Postgres
             {
                 Console.WriteLine(ex.Message);
             }
+
+            // Also display status of those copies - are they rented and if so to who?
+
+            command = "SELECT c.copy_id, c.available, cl.first_name, cl.last_name " +
+                "FROM copies c " +
+                "JOIN rentals r ON r.copy_id = c.copy_id " +
+                "JOIN clients cl ON cl.client_id = r.client_id " +
+                "WHERE movie_id = @id";
+            c1 = new NpgsqlCommand(command, p.con);
+            c1.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                dr = c1.ExecuteReader();
+
+                if (!dr.HasRows) throw new NpgsqlException("No such movie in data base");
+
+                Console.WriteLine($"Extended Info on copies of the movie with id {id}: ");
+
+                while (dr.Read())
+                {
+                    if (dr["available"].ToString() == "True")
+                    {
+                        Console.WriteLine($"Copy id {dr["copy_id"]} is available.");
+                    }
+
+                    else
+                    {
+                        Console.WriteLine($"Copy id {dr["copy_id"]} is not available. " +
+                            $"Rented by {dr["first_name"]}, {dr["last_name"]}");
+                    }
+                }
+
+                dr.Close();
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            // Add an option for the user to create a new movie
+            Console.WriteLine("Add new movie to realtion");
+            Console.WriteLine("Enter new movie title: ");
+            string movieTitle = Console.ReadLine();
+            Console.WriteLine("Enter new movie year: ");
+            int movieYear = Inputs.ReadInt();
+            Console.WriteLine("Enter new movie age restriction: ");
+            int movieAgeRestriction = Inputs.ReadInt();
+            Console.WriteLine("Enter new movie id: ");
+            int movieId = Inputs.ReadInt();
+            Console.WriteLine("Enter new movie price: ");
+            double moviePrice = Inputs.ReadDouble();
+
+            command = "INSERT INTO movies " +
+                "(title, year, age_restriction, movie_id, price) " +
+                "VALUES " +
+                "(@movieTitle, @movieYear, @movieAgeRestriction, @movieId, @moviePrice)";
+
+            c1 = new NpgsqlCommand(command, p.con);
+            c1.Parameters.AddWithValue("@movieTitle", movieTitle);
+            c1.Parameters.AddWithValue("@movieYear", movieYear);
+            c1.Parameters.AddWithValue("@movieAgeRestriction", movieAgeRestriction);
+            c1.Parameters.AddWithValue("@movieId", movieId);
+            c1.Parameters.AddWithValue("@moviePrice", moviePrice);
+
+            try
+            {
+                dr = c1.ExecuteReader();
+                Console.WriteLine("New movie added to the relation.");
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

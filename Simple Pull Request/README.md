@@ -1,4 +1,4 @@
-## GitHub Siple Pull Request
+## GitHub Simple Pull Request
 
 * **Git, Github and Cooperation**. 
   1. Firstly, fork remote repository `github.com/username/repo` which is to be pull requested. On your github account it will be `github.com/your_id/repo`. 
