@@ -76,6 +76,36 @@ namespace Postgres
             {
                 Console.WriteLine(ex.Message);
             }
+
+            // Also display all the copies of the movie
+
+            command = "SELECT * " +
+                "FROM copies c " +
+                "JOIN rentals r ON r.copy_id = c.copy_id " +
+                "JOIN clients cl ON cl.client_id = r.client_id " +
+                "WHERE movie_id = @id AND available = true";
+            c1 = new NpgsqlCommand(command, p.con);
+            c1.Parameters.AddWithValue("@id", id);
+
+            try
+            {
+                dr = c1.ExecuteReader();
+
+                if (!dr.HasRows) throw new NpgsqlException("No such movie in data base");
+
+                Console.WriteLine($"Info on copies of the movie with id {id}: ");
+
+                while (dr.Read())
+                {
+                    Console.WriteLine($"Available copy id: {dr["copy_id"]}");
+                }
+
+                dr.Close();
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
