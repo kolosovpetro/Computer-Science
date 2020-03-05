@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Npgsql;
 
 namespace Postgres
@@ -12,6 +8,9 @@ namespace Postgres
         static void Main(string[] args)
         {
             Postgres p = new Postgres("localhost", "postgres", "postgres", "rental");
+            NpgsqlCommand c1;
+            string command;
+            NpgsqlDataReader dr;
 
             Console.WriteLine(p.IsAvailable());         // checks if db is available
 
@@ -20,13 +19,13 @@ namespace Postgres
             Console.WriteLine("Enter movie id you want to display info about > ");
             p.con.Open();
             int id = Inputs.ReadInt();
-            string command = "SELECT * FROM movies WHERE movie_id = @id";
-            NpgsqlCommand c1 = new NpgsqlCommand(command, p.con);
+            command = "SELECT * FROM movies WHERE movie_id = @id";
+            c1 = new NpgsqlCommand(command, p.con);
             c1.Parameters.AddWithValue("@id", id);
 
             try
             {
-                NpgsqlDataReader dr = c1.ExecuteReader();
+                dr = c1.ExecuteReader();
 
                 if (!dr.HasRows) throw new NpgsqlException("No such movie in data base");
 
@@ -34,8 +33,13 @@ namespace Postgres
 
                 while (dr.Read())
                 {
-                    Console.WriteLine($"Title: {dr["title"]}, year: {dr["year"]}, age restiction: {dr["age_restriction"]}, price: {dr["price"]}");
+                    Console.WriteLine($"Title: {dr["title"]}, " +
+                        $"year: {dr["year"]}, " +
+                        $"age restiction: {dr["age_restriction"]}, " +
+                        $"price: {dr["price"]}");
                 }
+
+                dr.Close();
             }
             catch (NpgsqlException ex)
             {
@@ -45,7 +49,33 @@ namespace Postgres
 
             // Also display all actors that are starring in the movie
 
+            command = "SELECT first_name, last_name " +
+                "FROM actors a " +
+                "JOIN starring s ON s.actor_id = a.actor_id " +
+                "JOIN movies m ON m.movie_id = s.movie_id " +
+                "WHERE m.movie_id = @id";
+            c1 = new NpgsqlCommand(command, p.con);
+            c1.Parameters.AddWithValue("@id", id);
 
+            try
+            {
+                dr = c1.ExecuteReader();
+
+                if (!dr.HasRows) throw new NpgsqlException("No such movie in data base");
+
+                Console.WriteLine($"Info on actors of the movie with id {id}: ");
+
+                while (dr.Read())
+                {
+                    Console.WriteLine($"First name: {dr["first_name"]}, Last name: {dr["last_name"]}");
+                }
+
+                dr.Close();
+            }
+            catch (NpgsqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
