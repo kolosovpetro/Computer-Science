@@ -133,6 +133,13 @@ A set of principles recommended to follow in order to maintain business applicat
 
 ## ADO .NET
 
+Work in PostgreSQL data base through .NET
+Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
+
+**Notes**
+- Query which reterns data: `ExecuteReader()`
+- DML DDL - `ExecuteNonQuery();`
+
 ## Computational Methods
 
 * Numerical Sys. Converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
