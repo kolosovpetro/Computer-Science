@@ -137,8 +137,10 @@ Work in PostgreSQL data base through .NET
 Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 
 **Notes**
+
 - Query which reterns data: `ExecuteReader()`
-- DML DDL - `ExecuteNonQuery();`
+- DML DDL :`ExecuteReader()`
+- SQL injection protect: `Parameters.AddWithValue("param", var);`
 
 ## Computational Methods
 
