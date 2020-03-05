@@ -10,6 +10,7 @@
 - [Data Structures](#data-structures)
 - [Design patterns](#design-patterns)
 - [SOLID](#solid)
+- [ADO .NET](#ado-.net)
 - [Computational Methods](#computational-methods)
 - [Misc](#misc)
 - [Notes](#notes)
@@ -130,6 +131,7 @@ A set of principles recommended to follow in order to maintain business applicat
   * `High-level modules should not depend on low-level modules. Both should depend on abstractions.`
   * `Abstractions should not depend on details. Details should depend on abstractions.`
 
+## ADO .NET
 
 ## Computational Methods
 
