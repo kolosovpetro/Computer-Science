@@ -10,7 +10,7 @@
 - [Data Structures](#data-structures)
 - [Design patterns](#design-patterns)
 - [SOLID](#solid)
-- [ADO .NET](#ado-.net)
+- [ADO .NET](#ado-net)
 - [Computational Methods](#computational-methods)
 - [Misc](#misc)
 - [Notes](#notes)
