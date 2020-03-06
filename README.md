@@ -11,6 +11,7 @@
 - [Design patterns](#design-patterns)
 - [SOLID](#solid)
 - [ADO .NET](#ado-net)
+- [Git Simple Pull Request](#git-simple-pull-request)
 - [Computational Methods](#computational-methods)
 - [Misc](#misc)
 - [Notes](#notes)
@@ -143,6 +144,12 @@ Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 - DML DDL :`ExecuteReader()`
 - SQL injection protect: `Parameters.AddWithValue("param", var);`
 - While using `Parameters` do not use place variable between `''`, eg dont do `'@var'`
+
+## Git Simple Pull Request
+
+Example of simple pull request and other related activities.
+
+Visit: https://github.com/kolosovpetro/Computer-Science/tree/develop/Simple%20Pull%20Request
 
 ## Computational Methods
 
