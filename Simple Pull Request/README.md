@@ -1,5 +1,19 @@
 ## GitHub Simple Pull Request
 
+* **General commands**
+  * `git init` - initializes empty local repository, switches to `master` branch. No any additional branches are created.
+  * `git checkout -b <branch_name>` - creates branch with name `<branch_name>` and switches to it.
+  * `git add .` or `git add --all` - add a file to local repo tracking.
+  * `git commit -m "message"` - commits all changes to current branch.
+  * `git push -u origin <branch_name>` - pushes branch from local repo to remote origin.
+  * `git push` - after branch is pushed, all commited changes from local can be pushed to remote without specification `-u origin <branch_name>`.
+  * `git clone` - clones entire remote repo
+  * `git fork` - copy remote (not yours) repo to your github account
+  * `git pull` - update your local repo from remote. Carefull: working tree should be clean before `pull`, since it changes files.
+  * `git fetch` - safe comparison of local and remote repositories, doesn't change the working tree of local repo.
+* **Keeping forked repo up to date**
+  * 
+
 * **Git, Github and Cooperation**. 
   1. Firstly, fork remote repository `github.com/username/repo` which is to be pull requested. On your github account it will be `github.com/your_id/repo`. 
   Use it further.
