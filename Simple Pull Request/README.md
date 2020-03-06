@@ -13,6 +13,10 @@
   * `git fetch` - safe comparison of local and remote repositories, doesn't change the working tree of local repo.
   
 * **Keeping forked repo up to date**
+  * Clone your fork `git clone git@github.com:YOUR-USERNAME/YOUR-FORKED-REPO.git`
+  * Add remote origin repository `git remote add upstream git://github.com/ORIGINAL-DEV-USERNAME/REPO-YOU-FORKED-FROM.git`
+  * Check for updates `git fetch upstream`
+  * Update if any `git pull upstream master`
 
 * **Git, Github and Cooperation**. 
   1. Firstly, fork remote repository `github.com/username/repo` which is to be pull requested. On your github account it will be `github.com/your_id/repo`. 
@@ -28,11 +32,9 @@
 		
 		`git remote add origin github.com/your_id/repo.git`
 	
-  1. Create a different branch for your upcoming updates. Switch to it. Use the following commands:
+  1. Create a different branch for your upcoming updates. Switch to it. Use the following command:
 
-		`git branch features`
-		
-		`git checkout features`
+		`git checkout -b features`
 		
   1. Perform some fixes/revisions/changes on local repository your prepaired in steps before. Maintain the changes on branch `features`.
   1. Use the command `git status` in order to display all changes you have been produced.
@@ -44,10 +46,11 @@
   
 		`git commit -m "message"`
 	
-	 In commit `message` specifify the changes you have done. Use exact descption even it is too long. Do not use messages like "some work", "some edits" etc. Example of good commit messages: https://chris.beams.io/posts/git-commit/
+	 In commit `message` specifify the changes you have done. Use exact descption even it is too long. Do not use messages like "some work", "some edits" etc.
+	 Example of good commit messages: https://chris.beams.io/posts/git-commit/
   1. Push your changes to remote origin you have added in step (3) using
   
-		`git push`
+		`git push -u origin features`
 		
   1. Click compare & pull request button on your remote repository `github.com/your_id/repo.git`.
   1. Write messages and comments there and click `Create pull request`.
