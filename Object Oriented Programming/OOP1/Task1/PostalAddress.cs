@@ -20,7 +20,9 @@ namespace Task1
             get
             {
                 //returns all information in nice, clear way
-                return this.HouseNumber + '/' + this.ApartmentNumber + "\n" +
+                return  this.Street + '/' + 
+                        this.HouseNumber + '/' + 
+                        this.ApartmentNumber + "\n" +
                         this.City + "\n" +
                         this.PostCode + "\n" +
                         this.Country;
