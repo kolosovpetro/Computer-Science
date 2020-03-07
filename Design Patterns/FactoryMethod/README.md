@@ -1,0 +1,1 @@
+Extends program functionality simply by changing an instance of Creator class.
