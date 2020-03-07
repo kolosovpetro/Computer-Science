@@ -14,6 +14,7 @@
 - [Git Simple Pull Request](#git-simple-pull-request)
 - [Computational Methods](#computational-methods)
 - [Misc](#misc)
+- [To Do List](#to-do-list)
 - [Notes](#notes)
 
 ---
