@@ -166,6 +166,13 @@ Other projects.
 * **Database Control Panel**. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
 * **LINQ**. A set of custom methods in order to operate over IEnumerable collections.
 
+## To do list
+
+- Unite all Data Structures under single library
+- Write documentation and comments for Design Patterns
+- Write various extensions for IEnumerable, structs, classes
+- 
+
 ## Notes
 
 * Values vs Reference type: In oder to modify reference type (e.g `class`) via method it is enought to
