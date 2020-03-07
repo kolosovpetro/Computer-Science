@@ -53,6 +53,29 @@ namespace LinkedListLibrary
             Assert.That(list.SearchNode("After 1").Next.Data, Is.EqualTo("After 2"));
             Assert.That(list.Last.Data, Is.EqualTo("After 2"));
         }
+        
+        [Test]
+        public void DeletaNodeTest()
+        {
+            LinkedList<string> list = new LinkedList<string>();
+            list.AddFirst("First");
+            Assert.That(list.First.Data, Is.EqualTo("First"));
+            Assert.That(list.Last.Data, Is.EqualTo("First"));
+            list.AddAfter("First", new Node<string>("After 1"));
+            Assert.That(list.First.Data, Is.EqualTo("First"));
+            Assert.That(list.Last.Data, Is.EqualTo("After 1"));
+            list.AddAfter("After 1", new Node<string>("After 2"));
+            Assert.That(list.First.Data, Is.EqualTo("First"));
+            Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
+            Assert.That(list.First.Next.Next.Data, Is.EqualTo("After 2"));
+            list.AddAfter("After 2", new Node<string>("After 3"));
+            Assert.That(list.First.Data, Is.EqualTo("First"));
+            Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
+            Assert.That(list.First.Next.Next.Data, Is.EqualTo("After 2"));
+            Assert.That(list.First.Next.Next.Next.Data, Is.EqualTo("After 3"));
+            list.DeleteNode("After 2");
+            Assert.That(list.SearchNode("After 1").Next.Data, Is.EqualTo("After 3"));
+        }
 
         [Test]
         public void RemoveFirstTest()
@@ -82,7 +105,6 @@ namespace LinkedListLibrary
             Assert.That(list.SearchNode("After 1").Next.Data, Is.EqualTo("After 2"));
             list.RemoveLast();
             Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
-            //Assert.That(list.Last.Data, Is.EqualTo("After 2"));
         }
     }
 }

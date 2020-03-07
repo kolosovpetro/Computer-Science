@@ -48,9 +48,30 @@ namespace LinkedListLibrary
             Count++;
         }
 
-        public void DeleteNode(INode<T> node)
+        public void DeleteNode(T nodeData)
         {
-            throw new NotImplementedException();
+            if (!Contains(nodeData))
+            {
+                throw new NodeNotFoundException("There is no such node in linked list.");
+            }
+
+            INode<T> s = First;
+
+            while (true)
+            {
+                if (s.Next.Data.Equals(nodeData))
+                {
+                    break;
+                }
+
+                if (!s.Next.Equals(null))
+                {
+                    s = s.Next;
+                }
+            }
+
+            INode<T> current = SearchNode(nodeData);
+            s.SetNext(current.Next);
         }
 
         public void RemoveFirst()

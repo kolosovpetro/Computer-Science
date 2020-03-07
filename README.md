@@ -92,11 +92,11 @@ Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
   - Stack
   - Tree
   - Weighted Graph
+  - Binary Search Tree (in progress. See good visualization: http://btv.melezinek.cz/binary-search-tree.html)
 
 - To be implemented in future
   - Priority Queue
   - Generic List
-  - Binary Search Tree (just started)
 
 - What's used
   - NUnit UnitTest Framework
