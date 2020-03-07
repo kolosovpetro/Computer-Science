@@ -27,7 +27,7 @@ namespace GenericList
 
         public void Add(T data)
         {
-            if(Count == 0)
+            if (Count == 0)
             {
                 Count++;
                 listBase = new T[Count];
@@ -38,18 +38,21 @@ namespace GenericList
             Count++;
             T[] temp = new T[Count];
             listBase.CopyTo(temp, 0);
-            listBase = temp;
-            listBase[Count--] = data;
+            listBase = new T[temp.Length];
+            temp.CopyTo(listBase, 0);
+            listBase[Count - 1] = data;
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Count = 0;
+            listBase = null;
         }
 
         public int IndexOf(T data)
         {
-            throw new NotImplementedException();
+            Contains(data, out int index);
+            return index;
         }
 
         public void RemoveAtIndex(int index)
@@ -60,6 +63,34 @@ namespace GenericList
         public T ElementAt(int index)
         {
             return listBase[index];
+        }
+
+        public bool Contains(T data)
+        {
+            for (int i = 0; i < listBase.Length; i++)
+            {
+                if (listBase[i].Equals(data))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
+        private bool Contains(T data, out int index)
+        {
+            for (int i = 0; i < listBase.Length; i++)
+            {
+                if (listBase[i].Equals(data))
+                {
+                    index = i;
+                    return true;
+                }
+            }
+
+            index = -1;
+            return false;
         }
     }
 }

@@ -8,5 +8,6 @@
         void RemoveAtIndex(int index);
         void Clear();
         int IndexOf(T data);
+        bool Contains(T data);
     }
 }
