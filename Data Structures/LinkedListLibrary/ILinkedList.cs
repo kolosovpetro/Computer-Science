@@ -12,5 +12,6 @@
         INode<T> SearchNode(T nodeData);
         void DeleteNode(INode<T> node);
         void AddAfter(T data, INode<T> newNode);
+        bool Contains(T data);
     }
 }

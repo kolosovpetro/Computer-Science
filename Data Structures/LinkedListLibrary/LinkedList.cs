@@ -19,9 +19,16 @@ namespace LinkedListLibrary
         public void AddAfter(T data, INode<T> newNode)
         {
             INode<T> current = SearchNode(data);
-            INode<T> nextToCurrent = current.Next;
+            INode<T> next = current.Next;
+
+            if (Last.Data.Equals(current.Data))
+            {
+                current.SetNext(newNode);
+                AddLast(newNode.Data);
+            }
+
             current.SetNext(newNode);
-            newNode.SetNext(nextToCurrent);
+            newNode.SetNext(next);
             Count++;
         }
 
@@ -48,12 +55,31 @@ namespace LinkedListLibrary
 
         public void RemoveFirst()
         {
-            First = First.Next;
+            if (!First.Equals(null))
+            {
+                First = First.Next;
+                return;
+            }
+
+            throw new NodeNotFoundException("First node is null");
         }
 
         public void RemoveLast()
         {
-            throw new NotImplementedException();
+            if (Last.Equals(null))
+            {
+                throw new NodeNotFoundException("Last node is equal null.");
+            }
+
+            var s = First;
+
+            while (!s.Next.Data.Equals(Last.Data))
+            {
+                s = s.Next;
+            }
+
+            s.SetNext(null);
+            AddLast(s.Data);
         }
 
         public INode<T> SearchNode(T nodeData)
@@ -78,7 +104,12 @@ namespace LinkedListLibrary
                 }
             }
 
-            throw new NodeNotFoundException("There is no such node in current linked list.");
+            return null;
+        }
+
+        public bool Contains(T data)
+        {
+            return SearchNode(data) != null;
         }
     }
 }

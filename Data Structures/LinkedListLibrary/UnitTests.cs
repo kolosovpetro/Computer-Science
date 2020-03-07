@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedListLibrary
 {
@@ -28,6 +23,16 @@ namespace LinkedListLibrary
         }
 
         [Test]
+        public void ContainsTest()
+        {
+            LinkedList<string> list = new LinkedList<string>();
+            list.AddFirst("First");
+            list.AddAfter("First", new Node<string>("After 1"));
+            list.AddAfter("After 1", new Node<string>("After 2"));
+            Assert.That(list.Contains("After 1"), Is.EqualTo(true));
+        }
+
+        [Test]
         public void SearchTest()
         {
             LinkedList<string> list = new LinkedList<string>();
@@ -43,9 +48,10 @@ namespace LinkedListLibrary
         {
             LinkedList<string> list = new LinkedList<string>();
             list.AddFirst("First");
-            list.AddAfter(list.First.Data, new Node<string>("After 1"));
+            list.AddAfter("First", new Node<string>("After 1"));
             list.AddAfter("After 1", new Node<string>("After 2"));
             Assert.That(list.SearchNode("After 1").Next.Data, Is.EqualTo("After 2"));
+            Assert.That(list.Last.Data, Is.EqualTo("After 2"));
         }
 
         [Test]
@@ -58,6 +64,25 @@ namespace LinkedListLibrary
             list.RemoveFirst();
             Assert.That(list.First.Data, Is.EqualTo("After 1"));
             Assert.That(list.First.Next.Data, Is.EqualTo("After 2"));
+        }
+        
+        [Test]
+        public void RemoveLastTest()
+        {
+            LinkedList<string> list = new LinkedList<string>();
+            list.AddFirst("First");
+            Assert.That(list.First.Data, Is.EqualTo("First"));
+            Assert.That(list.Last.Data, Is.EqualTo("First"));
+            list.AddAfter("First", new Node<string>("After 1"));
+            Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
+            Assert.That(list.Last.Data, Is.EqualTo("After 1"));
+            list.AddAfter("After 1", new Node<string>("After 2"));
+            Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
+            Assert.That(list.Last.Data, Is.EqualTo("After 2"));
+            Assert.That(list.SearchNode("After 1").Next.Data, Is.EqualTo("After 2"));
+            list.RemoveLast();
+            Assert.That(list.First.Next.Data, Is.EqualTo("After 1"));
+            //Assert.That(list.Last.Data, Is.EqualTo("After 2"));
         }
     }
 }
