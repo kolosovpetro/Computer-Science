@@ -16,6 +16,7 @@ namespace GenericList
         public CustomList(params T[] listBase)
         {
             this.listBase = listBase;
+            Count = listBase.Length;
         }
 
         public CustomList(int size)
@@ -26,7 +27,19 @@ namespace GenericList
 
         public void Add(T data)
         {
-            throw new NotImplementedException();
+            if(Count == 0)
+            {
+                Count++;
+                listBase = new T[Count];
+                listBase[Count - 1] = data;
+                return;
+            }
+
+            Count++;
+            T[] temp = new T[Count];
+            listBase.CopyTo(temp, 0);
+            listBase = temp;
+            listBase[Count--] = data;
         }
 
         public void Clear()
@@ -42,6 +55,11 @@ namespace GenericList
         public void RemoveAtIndex(int index)
         {
             throw new NotImplementedException();
+        }
+
+        public T ElementAt(int index)
+        {
+            return listBase[index];
         }
     }
 }
