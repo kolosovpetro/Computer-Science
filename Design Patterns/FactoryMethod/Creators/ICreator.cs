@@ -5,6 +5,7 @@
     /// </summary>
     interface ICreator
     {
+        ITransport transport { get; }
         /// <summary>
         /// Returns instance implementing interface ITransport
         /// </summary>

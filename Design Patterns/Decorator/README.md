@@ -1,0 +1,1 @@
+Write a program in order to display the words: "White", "Red", "White", "Blue" in the order how user wants. Total posible combinations: 4! = 24. Do not write 24 different classes for any case.

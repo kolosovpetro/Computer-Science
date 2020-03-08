@@ -33,56 +33,80 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuilderLibrary.BMW" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="0.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ConcreteVehicles\BMW.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuilderLibrary.ConcreteBuilders.VolveExcavatorBuilder">
-    <Position X="0.5" Y="3" Width="1.75" />
+    <Position X="2.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAEAEAAAAAAAAAACAA=</HashCode>
       <FileName>ConcreteBuilders\VolveExcavatorBuilder.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="transport" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BuilderLibrary.ConcreteVehicles.VolvoExcavator" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+    <Position X="2.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ConcreteVehicles\VolvoExcavator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuilderLibrary.ConcreteVehicles.Yamaha" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+    <Position X="4" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ConcreteVehicles\Yamaha.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BuilderLibrary.ConcreteVehicles.MercedesBenzTruck" Collapsed="true">
-    <Position X="5.75" Y="1.5" Width="1.5" />
+    <Position X="5.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ConcreteVehicles\MercedesBenzTruck.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="BuilderLibrary.ITransport" Collapsed="true">
-    <Position X="3" Y="3.5" Width="1.5" />
+  <Class Name="BuilderLibrary.ConcreteBuilders.BmwBuilder">
+    <Position X="0.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABgAAAAECAAIBAAAAAgEAAAgAAAEIAAgRAgBAQAAAAA=</HashCode>
-      <FileName>ITransport.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAEAEAAAAAAAAAACAA=</HashCode>
+      <FileName>ConcreteBuilders\BmwBuilder.cs</FileName>
     </TypeIdentifier>
-  </Interface>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuilderLibrary.ConcreteBuilders.YamahaBuilder">
+    <Position X="4" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAEAEAAAAAAAAAACAA=</HashCode>
+      <FileName>ConcreteBuilders\YamahaBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuilderLibrary.ConcreteBuilders.MercedesBenzTruckBuilder">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAEAEAAAAAAAAAACAA=</HashCode>
+      <FileName>ConcreteBuilders\MercedesBenzTruckBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="BuilderLibrary.IBuilder">
-    <Position X="5" Y="3" Width="1.5" />
+    <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAEAEAAAAAAAAAACAA=</HashCode>
       <FileName>IBuilder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="transport" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="BuilderLibrary.ITransport">
+    <Position X="7.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABgAAAAECAAIBAAAAAgEAAAgAAAEIAAgRAgBAQAAAAA=</HashCode>
+      <FileName>ITransport.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

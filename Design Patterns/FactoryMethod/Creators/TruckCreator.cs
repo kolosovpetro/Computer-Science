@@ -2,9 +2,12 @@
 {
     class TruckCreator : ICreator
     {
+        public ITransport transport { get; private set; }
+
         public ITransport CreateTransport()
         {
-            return new Truck();
+            transport = new Truck();
+            return transport;
         }
     }
 }

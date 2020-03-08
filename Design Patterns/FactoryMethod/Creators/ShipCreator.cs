@@ -4,9 +4,12 @@ namespace FactoryMethod
 {
     class ShipCreator : ICreator
     {
+        public ITransport transport { get; private set; }
+
         public ITransport CreateTransport()
         {
-            return new Ship();
+            transport = new Ship();
+            return transport;
         }
     }
 }

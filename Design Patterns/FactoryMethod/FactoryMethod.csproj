@@ -72,6 +72,7 @@
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FactoryMethodDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
