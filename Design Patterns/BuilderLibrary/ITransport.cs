@@ -3,9 +3,9 @@
     /// <summary>
     /// Common interface for all vehicles. Furthur to be implemented by abstract vihicles types.
     /// </summary>
-    interface ITransprot
+    interface ITransport
     {
-        ITransprot transport { get; }
+        ITransport transport { get; }
         string Manufacturer { get; }
         string Model { get; }
         string Engine { get; }

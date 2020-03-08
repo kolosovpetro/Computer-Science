@@ -1,8 +1,8 @@
 ﻿namespace BuilderLibrary
 {
-    abstract class Excavator : ITransprot
+    abstract class Excavator : ITransport
     {
-        public ITransprot transport { get; private set; }
+        public ITransport transport { get; private set; }
 
         public string Manufacturer { get; private set; }
 
@@ -21,8 +21,6 @@
         public double MaxSpeed { get; private set; }
 
         public virtual void Reset() { }
-
-        protected Excavator() { }
 
         public void SetCylinderNumber(int newNumber)
         {

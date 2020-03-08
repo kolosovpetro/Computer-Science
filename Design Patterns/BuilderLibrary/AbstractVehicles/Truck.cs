@@ -1,8 +1,8 @@
 ﻿namespace BuilderLibrary
 {
-    abstract class Truck : ITransprot
+    abstract class Truck : ITransport
     {
-        public ITransprot transport { get; private set; }
+        public ITransport transport { get; private set; }
 
         public string Manufacturer { get; private set; }
 

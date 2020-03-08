@@ -62,16 +62,24 @@
   <ItemGroup>
     <Compile Include="AbstractVehicles\Car.cs" />
     <Compile Include="AbstractVehicles\Excavator.cs" />
-    <Compile Include="ITransprot.cs" />
+    <Compile Include="ConcreteBuilders\BmwBuilder.cs" />
+    <Compile Include="ConcreteBuilders\MercedesBenzTruckBuilder.cs" />
+    <Compile Include="ConcreteBuilders\VolveExcavatorBuilder.cs" />
+    <Compile Include="ConcreteBuilders\YamahaBuilder.cs" />
+    <Compile Include="ConcreteVehicles\BMW.cs" />
+    <Compile Include="ConcreteVehicles\MercedesBenzTruck.cs" />
+    <Compile Include="ConcreteVehicles\VolvoExcavator.cs" />
+    <Compile Include="ConcreteVehicles\Yamaha.cs" />
+    <Compile Include="IBuilder.cs" />
+    <Compile Include="ITransport.cs" />
     <Compile Include="AbstractVehicles\Motorcycle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AbstractVehicles\Truck.cs" />
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ConcreteVehicles\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="BuilderDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
