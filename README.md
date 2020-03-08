@@ -171,6 +171,7 @@ Other projects.
 
 - Unite all Data Structures under single library
 - Write documentation and comments for Design Patterns
+- For all design patterns generate class diagrams
 - Write various extensions for IEnumerable, structs, classes
 - 
 
