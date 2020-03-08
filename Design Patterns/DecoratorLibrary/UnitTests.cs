@@ -38,5 +38,14 @@ namespace DecoratorLibrary
             IComponent c4 = new DecoratorC(c3);
             Assert.That(c4.WriteColor(), Is.EqualTo("White Red Black Blue "));
         }
+
+        [Test]
+        public void TestWhiteRedRed()
+        {
+            IComponent c1 = new Component();
+            IComponent c2 = new DecoratorA(c1);
+            IComponent c3 = new DecoratorA(c2);
+            Assert.That(c3.WriteColor(), Is.EqualTo("White Red Red "));
+        }
     }
 }
