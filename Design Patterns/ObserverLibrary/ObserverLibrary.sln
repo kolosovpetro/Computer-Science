@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObserverLibrary", "ObserverLibrary.csproj", "{950E470C-6B43-4A10-9728-40F663F5244C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{950E470C-6B43-4A10-9728-40F663F5244C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950E470C-6B43-4A10-9728-40F663F5244C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950E470C-6B43-4A10-9728-40F663F5244C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950E470C-6B43-4A10-9728-40F663F5244C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0177B97-5FE3-42AB-9193-3F861955BB48}
+	EndGlobalSection
+EndGlobal
