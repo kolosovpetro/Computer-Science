@@ -1,0 +1,19 @@
+interface FlyBehavior
+{
+     void fly();
+}
+
+interface IFlyable
+{
+    FlyBehavior flyBehavior;
+
+    void performFly()
+    {
+        flyBehavior.fly();
+    }
+}
+
+class Penguin: IFlyable
+{
+
+}
