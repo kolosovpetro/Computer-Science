@@ -63,6 +63,7 @@ Refer to https://kolosovpetro.github.io/cs/oop/
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_04.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task4.pdf
 - Project (Hospital management application, WinForms). Contains all OOP techniques + binary serialization in use
+- Aggregation vs Composition. Definitions and comparisons.
 
 ## Algorithms
 
