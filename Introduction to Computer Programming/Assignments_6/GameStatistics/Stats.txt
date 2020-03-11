@@ -4,3 +4,5 @@ Vasya 0
 Katya 1
 nguyen 1
 petro 0
+mulualem  0
+petro 1
