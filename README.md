@@ -59,6 +59,7 @@ Refer to https://kolosovpetro.github.io/cs/oop/
 - OOP3 (Inheritance, overriding, base keyword, polymorphism, upcast)
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_03.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task3.pdf
+  - Polymorphism types: Ad-Hoc (overload of methods), Parametrical (Generics), Subtype polymorphism (Upcast, downcast)
 - OOP4 (Interfaces, implementations)
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_04.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task4.pdf
