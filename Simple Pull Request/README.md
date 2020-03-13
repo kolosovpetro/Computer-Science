@@ -64,3 +64,19 @@
   1. Write messages and comments there and click `Create pull request`.
 	 
 
+## Applying gitignore and remove cached files from repo
+
+In order to add `.gitignore` to your repo and make it work, follow the steps:
+
+- Add git ignore file to track and commit all changes, eg
+
+		`git add.` + `git commit -m "gitignore added"`
+
+- Remove all files from repository using
+
+		`git rm -r --cached .`
+
+- Re-add everything and recommit
+
+		`git add .` + `git commit -m "gitignore applied"`
+
