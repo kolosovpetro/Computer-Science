@@ -173,7 +173,7 @@ namespace Postgres
 
             try
             {
-                dr = c1.ExecuteReader();
+                c1.ExecuteNonQuery();
                 Console.WriteLine("New movie added to the relation.");
             }
             catch (NpgsqlException ex)

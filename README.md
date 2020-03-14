@@ -148,13 +148,19 @@ Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 **Notes**
 
 - Query which reterns data: `ExecuteReader()`
-- DML DDL :`ExecuteReader()`
+- DML DDL :`ExecuteNonQuery()`
 - SQL injection protect: `Parameters.AddWithValue("param", var);`
 - While using `Parameters` do not use place variable between `''`, eg dont do `'@var'`
 
 ## Git Simple Pull Request
 
 Example of simple pull request and other related activities.
+
+**Contains**
+
+- Simple pull request guide
+- How to untrack files from gitignore (apply gitignore file)
+- How to keep forked repo up to date with remote
 
 Visit: https://github.com/kolosovpetro/Computer-Science/tree/develop/Simple%20Pull%20Request
 
