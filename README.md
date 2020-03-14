@@ -129,7 +129,7 @@ Refer to website: https://refactoring.guru/design-patterns
   
 ## SOLID
 
-A set of principles recommended to follow in order to maintain business applications
+A set of principles recommended to follow in order to maintain business applications. Contains examples of both convinient and unconviniet examples
 
 * **Single Responsibility Principle** - `Do one thing, but do it best`
 * **Open-Closed Principle** - `App. should be open for extension, but closed for modification`. Usually, solved by pattern `Strategy`
@@ -141,7 +141,7 @@ A set of principles recommended to follow in order to maintain business applicat
 
 ## ADO .NET
 
-Work in PostgreSQL data base through .NET
+Work in PostgreSQL data base through ADO .NET
 
 Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 
