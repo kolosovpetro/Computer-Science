@@ -58,3 +58,15 @@ byte bNumber = 10;
 int iNumber = bNumber;
 ```
 
+### Other keywords
+
+- `lock` - guarantees that only one thread may access current block of code, other threads stored in a queue. Useage of `lock` is very performance costly.
+
+```cs
+object obj = new Instance();
+
+lock
+{
+	obj.InstanceMethod();	// only one thread can access instance method
+}
+```
