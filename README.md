@@ -187,6 +187,10 @@ Other projects.
 - Write various extensions for IEnumerable, structs, classes
 - Add README files to various projects
 
+## Useful Links
+
+- Praparation to MS Exam 70-483: https://habr.com/ru/post/245067/
+
 ## Notes
 
 * Values vs Reference type: In oder to modify reference type (e.g `class`) via method it is enought to
