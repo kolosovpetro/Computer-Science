@@ -21,5 +21,5 @@
 - **Boxing-Unboxing Examples**
 	
 		int i = 123;
-		object o = i;  	   // `object` – is reference type, `int` - is value type, so here is boxing done
-		int j = (int)o;    // here we unbox `o`, eg. convert `object` (reference) to `int` (value).
+		object o = i;		// object – is reference type, int - is value type, so here is boxing done
+		int j = (int)o;		// here we unbox object o, eg. convert object (reference) to int (value).
