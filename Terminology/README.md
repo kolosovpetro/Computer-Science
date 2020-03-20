@@ -29,7 +29,7 @@ int j = (int)o;		// here we unbox object o, eg. convert object (reference) to in
 - **Operator ?** - is `ternary operator`. Short definition of switch case. Works as follows
 
 ```cs
-var t = (condition) ? condition is true : condition is false
+var t = (condition) ? condition is true : condition is false;
 
 int x = 10;
 int y = (x > 5) ? x : 10;	// assignes y = x, since x = 10 > 5.
