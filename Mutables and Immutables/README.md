@@ -13,6 +13,7 @@ j += "some additional info";		// modify j and also modify s ?
 // Guess what will be printed to console ?
 		
 Console.WriteLine(s);	// Strings are immutable
+
 // Approach like
 		
 s[2] = 'c'; 	// will cause compiler error
