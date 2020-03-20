@@ -46,6 +46,9 @@
 
         int int2 = 2147483647 + 10;		// compiler - Error
 		
-- **throw(ex) vs throw** - 
+- **throw(ex) vs throw**
+
   - `throw(ex);` - clears all exception history, showing only the line where exception thrown.
+  
   - `throw;` - keeps all exception history. More convenient to use `throw;`.
+  

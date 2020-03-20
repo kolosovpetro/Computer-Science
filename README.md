@@ -190,6 +190,8 @@ Other projects.
 ## Useful Links
 
 - Praparation to MS Exam 70-483: https://habr.com/ru/post/245067/
+- Complete `C#` guide: https://metanit.com/sharp/
+
 
 ## Notes
 
