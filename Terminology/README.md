@@ -23,3 +23,27 @@
 		int i = 123;
 		object o = i;		// object – is reference type, int - is value type, so here is boxing done
 		int j = (int)o;		// here we unbox object o, eg. convert object (reference) to int (value).
+
+- **Operator ?** - is `ternary operator`. Short definition of switch case. Works as follows
+
+		var t = (condition) ? condition is true : condition is false
+
+		int x = 10;
+		int y = (x > 5) ? x : 10;	// assignes y = x, since x = 10 > 5.
+
+- **Operator ??** - is `null-coalescing operator`. Not to be confused with ternaty operator. Works as follows
+
+		int? t = null;
+		
+		int y = x ?? -1;		// if x is null - assignes -1 to y, else assignes y = x
+		
+- **Checked-Unchecked clause** - Opens a posibility to skip compiler's errors or force check. For example
+
+		unchecked
+        {
+            int int1 = 2147483647 + 10;		// compiler - OK
+        }
+
+        int1 = 2147483647 + 10;		// compiler - Error
+		
+		
