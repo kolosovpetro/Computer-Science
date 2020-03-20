@@ -7,10 +7,10 @@ In `C#` strings are reference type, however they are immutable as well. For exam
 
 		string s = "Strings are immutuble";		// string is reference type
         string j = s;
-        j += "some additional info"; 	// modify j and also modify s ?
-
+        j += "some additional info";		// modify j and also modify s ?
+		
         // Guess what will be printed to console ?
-
+		
         Console.WriteLine(s);	// Strings are immutable
 		
 		// Approach like
@@ -19,6 +19,7 @@ In `C#` strings are reference type, however they are immutable as well. For exam
 		
 		// however the action like
 		
-		s = s.Replace('t', 'c'); 	// will work, since new instance of string is created on behalf of s, and s is replaced by new string
+		s = s.Replace('t', 'c'); 	// will work, since new instance of string is created on behalf of s, 
+									// and s is replaced by new string
 		
 In order to create `Immutable class` - assign all its members to be readonly, and proved a public getter property.
