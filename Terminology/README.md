@@ -51,7 +51,7 @@ unchecked
 	int int1 = 2147483647 + 10;		// compiler - OK
 }
 
-	int int2 = 2147483647 + 10;		// compiler - Error
+int int2 = 2147483647 + 10;		// compiler - Error
 ```
 		
 - **throw(ex) vs throw**
