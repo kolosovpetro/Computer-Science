@@ -40,6 +40,7 @@ interface InterfaceOne
 {
     void InterfaceMethod();
 }
+
 interface InterfaceTwo
 {
     void InterfaceMethod();
