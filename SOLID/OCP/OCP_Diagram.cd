@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SOLID.OCP.OCPBadPracticeCook">
+    <Position X="0.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OCP\OCPBadPracticeCook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SOLID.OCP.OCPGoodPracticeCook">
+    <Position X="3.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAQAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>OCP\OCPGoodPracticeCook.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Meal" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="SOLID.OCP.IMeal">
+    <Position X="6.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OCP\IMeal.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
