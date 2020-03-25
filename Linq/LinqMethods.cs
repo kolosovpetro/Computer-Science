@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Linq
 {
-    class LinqMethods<T> : ILinqLibrary<T>
+    public class LinqMethods<T> : ILinqLibrary<T>
     {
         public IEnumerable<T> CollectionExcept(IEnumerable<T> mainCollection, IEnumerable<T> exceptCollection)
         {
@@ -13,7 +13,7 @@ namespace Linq
 
         public IEnumerable<T> JoinCollections(IEnumerable<T> c1, IEnumerable<T> c2)
         {
-            throw new NotImplementedException();
+            return c1.Concat(c2);       // concat much simpler than this method
         }
 
         public IEnumerable<T> Parseable(IEnumerable<T> collection)
@@ -21,12 +21,12 @@ namespace Linq
             return collection.Where(g => int.TryParse(g.ToString(), out int res));
         }
 
-        public void RemoveAll(IEnumerable<T> collection, T term)
+        public IEnumerable<T> RemoveAll(IEnumerable<T> collection, T term)
         {
-            throw new NotImplementedException();
+            return collection.Where(p => !p.Equals(term));
         }
 
-        public void ReplaceAll(IEnumerable<T> collection, T oldTerm, T newTerm)
+        public IEnumerable<T> ReplaceAll(IEnumerable<T> collection, T oldTerm, T newTerm)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,7 @@ namespace Linq
             return collection.Skip(startIndex).Take(endIndex);
         }
 
-        public void Swap(IEnumerable<T> collection, int leftIndex, int rightIndex)
+        public IEnumerable<T> Swap(IEnumerable<T> collection, int leftIndex, int rightIndex)
         {
             throw new NotImplementedException();
         }
@@ -45,5 +45,7 @@ namespace Linq
         {
             return collection.Where(g => g.Equals(term)).Count();
         }
+
+        
     }
 }

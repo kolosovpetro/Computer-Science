@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Linq
@@ -36,6 +35,21 @@ namespace Linq
         {
             char[] charArr = new char[] { 'a', 'b', 'c', '2', '1', '0', 't' };
             Assert.That(charMethods.Subset(charArr, 0, 3).ToArray(), Is.EqualTo(new char[] { 'a', 'b', 'c' }));
+        }
+
+        [Test]
+        public void TestJoinCollections()
+        {
+            char[] c1 = new char[] { 'a', 'b', 'c', '2', '1', '0', 't' };
+            char[] c2 = new char[] { 'a', 'b', 'c' };
+            Assert.That(charMethods.JoinCollections(c1, c2).ToArray(), Is.EqualTo(new char[] { 'a', 'b', 'c', '2', '1', '0', 't', 'a', 'b', 'c' }));
+        }
+
+        [Test]
+        public void TestRemoveItem()
+        {
+            char[] charArr = new char[] { 'a', 'b', 'c', 'a', 'a', '0', 't' };
+            Assert.That(charMethods.RemoveAll(charArr, 'a'), Is.EqualTo(new char[] { 'b', 'c', '0', 't' }));
         }
     }
 }

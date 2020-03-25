@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Linq
 {
-    interface ILinqLibrary<T>
+    public interface ILinqLibrary<T>
     {
         // get only numbers from collection
 
@@ -22,15 +18,15 @@ namespace Linq
 
         // generic swap
 
-        void Swap(IEnumerable<T> collection, int leftIndex, int rightIndex);
+        IEnumerable<T> Swap(IEnumerable<T> collection, int leftIndex, int rightIndex);
 
         // remove all terms t from collection s
 
-        void RemoveAll(IEnumerable<T> collection, T term);
+        IEnumerable<T> RemoveAll(IEnumerable<T> collection, T term);
 
         // replace all terms t from collection s
 
-        void ReplaceAll(IEnumerable<T> collection, T oldTerm, T newTerm);
+        IEnumerable<T> ReplaceAll(IEnumerable<T> collection, T oldTerm, T newTerm);
 
         // join two collections togather
 
