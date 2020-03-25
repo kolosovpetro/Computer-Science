@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="ILinqLibrary.cs" />
     <Compile Include="LinqMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,7 +8,7 @@ namespace Linq
     {
         public IEnumerable<T> CollectionExcept(IEnumerable<T> mainCollection, IEnumerable<T> exceptCollection)
         {
-            throw new NotImplementedException();
+            return mainCollection.Except(exceptCollection);
         }
 
         public IEnumerable<T> JoinCollections(IEnumerable<T> c1, IEnumerable<T> c2)
@@ -38,7 +38,11 @@ namespace Linq
 
         public IEnumerable<T> Swap(IEnumerable<T> collection, int leftIndex, int rightIndex)
         {
-            throw new NotImplementedException();
+            T[] tempCollection = collection.ToArray();
+            T temp = tempCollection[leftIndex];
+            tempCollection[leftIndex] = tempCollection[rightIndex];
+            tempCollection[rightIndex] = temp;
+            return tempCollection;
         }
 
         public int TermCount(IEnumerable<T> collection, T term)

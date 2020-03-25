@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Linq
@@ -51,5 +52,22 @@ namespace Linq
             char[] charArr = new char[] { 'a', 'b', 'c', 'a', 'a', '0', 't' };
             Assert.That(charMethods.RemoveAll(charArr, 'a'), Is.EqualTo(new char[] { 'b', 'c', '0', 't' }));
         }
+
+        [Test]
+        public void IEnumerableReplaceTest()
+        {
+            IEnumerable<char> charArr = new char[] { 'a', 'b', 'c', 'a', 'a', '0', 't' };
+            charArr.Replace(0, 'b');
+            Assert.That(charArr, Is.EqualTo(new char[] { 'b', 'b', 'c', 'a', 'a', '0', 't' }));
+        }
+
+        [Test]
+        public void TestSwap()
+        {
+            char[] charArr = new char[] { 'a', 'b', 'c', 'a', 'a', '0', 't' };
+            IEnumerable<char> swapped = charMethods.Swap(charArr, 0, 1);
+            Assert.That(swapped, Is.EqualTo(new char[] { 'b', 'a', 'c', 'a', 'a', '0', 't' }));
+        }
+
     }
 }
