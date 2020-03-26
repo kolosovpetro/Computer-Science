@@ -9,12 +9,14 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 {
     interface ICopyListRecord
     {
+        string ConnectionString { get; }
         int MovieId { get; }
+        int TotalCopiesCount { get; }
+        int AvailableCopiesCount { get; }
         List<ICopy> Copies { get; }
 
         // setters
 
-        void SetCopies(int movieId);
         IEnumerable<ICopy> AvailableCopies();
     }
 }

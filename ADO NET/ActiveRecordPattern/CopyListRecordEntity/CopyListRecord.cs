@@ -1,26 +1,68 @@
 ﻿using ActiveRecordPattern.CopyRecordEntity;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
     class CopyListRecord : ICopyListRecord
     {
-        public int MovieId { get; private set; }
+        public string ConnectionString { get; }
+
+        public int MovieId { get; }
 
         public List<ICopy> Copies { get; private set; }
 
-        public IEnumerable<ICopy> AvailableCopies()
+        public int TotalCopiesCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return Copies.Count;
+            }
         }
 
-        public void SetCopies(int movieId)
+        public int AvailableCopiesCount
         {
-            throw new NotImplementedException();
+            get
+            {
+                return Copies.Where(p => p.Available == true).Count();
+            }
+        }
+
+        public CopyListRecord(int movieId)
+        {
+            ConnectionString = System.Configuration.ConfigurationManager
+                .ConnectionStrings["Rental"].ToString();
+            MovieId = movieId;
+            Copies = new List<ICopy>();
+            SetCopies();
+        }
+
+        public IEnumerable<ICopy> AvailableCopies()
+        {
+            return Copies.Where(p => p.Available == true);
+        }
+
+        private void SetCopies()
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM copies WHERE movie_id = @ID", conn))
+                {
+                    command.Parameters.AddWithValue("@ID", MovieId);
+
+                    NpgsqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Copies.Add(new Copy((int)reader["copy_id"], (bool)reader["available"], (int)reader["movie_id"]));
+                        // too long constructor overload, consider use of Builder pattern
+                    }
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ActiveRecordPattern.MovieRecordEntity;
+﻿using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.MovieRecordEntity;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,14 @@ namespace ActiveRecordPattern
         {
             var mov = MovieRecord.GetMovieById(10);
             Console.WriteLine(mov.ToString());
+
+            CopyListRecord copies = new CopyListRecord(10);
+
+            foreach (var item in copies.Copies)
+            {
+                Console.WriteLine(item);
+            }
+
         }
     }
 }

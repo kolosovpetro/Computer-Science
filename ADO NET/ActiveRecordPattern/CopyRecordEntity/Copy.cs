@@ -21,6 +21,11 @@ namespace ActiveRecordPattern.CopyRecordEntity
             MovieId = movieId;
         }
 
+        public override string ToString()
+        {
+            return $"Copy id: {CopyId}, Availability: {Available}, Movie Id: {MovieId}";
+        }
+
         public void ChangeCopyId(int newId)
         {
             CopyId = newId;
