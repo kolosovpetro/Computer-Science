@@ -17,6 +17,8 @@ namespace ActiveRecordPattern.MovieRecordEntity
         IConnectionString ConnectionStringSetter { get; }
 
         // setters
+
+        void SetMovieId(int newId);
         void ChangeTitle(string newTitle);
         void ChangeYear(int newYear);
         void ChangeAgeRestriction(int newRestriction);

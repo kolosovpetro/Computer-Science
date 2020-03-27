@@ -10,7 +10,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
     class MovieRecord : IMovieRecord
     {
         private ICopyListRecord CopyListRecord;
-        public static string ConnectionString { get; private set; }
+        public string ConnectionString { get; }
 
         public string Title { get; private set; }
 
@@ -32,16 +32,13 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public IConnectionString ConnectionStringSetter { get; }
 
-        public MovieRecord(string title, int year, int ageRestionction, int id, double price)
+        public MovieRecord(int id)
         {
-            Title = title;
-            Year = year;
-            AgeRestionction = ageRestionction;
             MovieId = id;
-            Price = price;
             CopyListRecord = new CopyListRecord(id);
             ConnectionStringSetter = new RentalConnectionString();
             ConnectionString = ConnectionStringSetter.ConnectionString;
+            SetMovieData();
         }
 
         public override string ToString()
@@ -51,6 +48,11 @@ namespace ActiveRecordPattern.MovieRecordEntity
                 $"restriction {AgeRestionction}+, " +
                 $"price {Price}, " +
                 $"Available {CopyListRecord.AvailableCopiesCount} / {CopyListRecord.TotalCopiesCount}";
+        }
+
+        public void SetMovieId(int newId)
+        {
+            MovieId = newId;
         }
 
         public void ChangeAgeRestriction(int newRestriction)
@@ -73,7 +75,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             Year = newYear;
         }
 
-        public static IMovieRecord GetMovieById(int id)
+        private void SetMovieData()
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -81,23 +83,24 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
                 using (var command = new NpgsqlCommand("SELECT * FROM movies WHERE movie_id = @ID", conn))
                 {
-                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@ID", MovieId);
 
                     NpgsqlDataReader reader = command.ExecuteReader();
 
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        double price = Convert.ToDouble(reader["price"]);
-
-                        // constructor below is really overloaded, consider use of pattern "Builder"
-
-                        return new MovieRecord((string)reader["title"], (int)reader["year"], (int)reader["age_restriction"], (int)reader["movie_id"], price);
+                        SetMovieId((int)reader["movie_id"]);
+                        ChangeTitle((string)reader["title"]);
+                        ChangeYear((int)reader["year"]);
+                        ChangePrice(Convert.ToDouble(reader["price"]));
+                        ChangeAgeRestriction((int)reader["age_restriction"]);
+                        return;
                     }
                 }
             }
 
-            return null;
+            throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
         public void Update()
