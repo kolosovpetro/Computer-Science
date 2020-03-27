@@ -1,4 +1,5 @@
 ﻿using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
 using System;
 
@@ -16,13 +17,24 @@ namespace ActiveRecordPattern
             //Console.WriteLine(mov);
             //MovieDbContext.Update(mov);
 
-            var CopyDbEngine = new CopyListRecordDbEngine();
-            var CopyList = (CopyListRecord)CopyDbEngine.Select(10);
+            var CopyListDbEngine = new CopyListRecordDbEngine();
+
+            var CopyList = (CopyListRecord)CopyListDbEngine.Select(11);
 
             foreach (var item in CopyList.CopiesList)
             {
                 Console.WriteLine(item);
             }
+
+            var CopyRecordDb = new CopyRecordDbEngine();
+            //CopyRecord newCopy = new CopyRecord(21, true, 11);
+            //CopyRecordDb.Insert(newCopy);
+
+            var particularCopy = (CopyRecord)CopyRecordDb.Select(11);
+            Console.WriteLine(particularCopy);
+            particularCopy.ChangeAvailable(true);
+            CopyRecordDb.Update(particularCopy);
+            Console.WriteLine(particularCopy);
         }
     }
 }
