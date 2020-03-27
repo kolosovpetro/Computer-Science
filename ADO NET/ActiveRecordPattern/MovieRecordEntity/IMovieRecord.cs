@@ -8,6 +8,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
     interface IMovieRecord
     {
         // properties
+
         string Title { get; }
         int Year { get; }
         int AgeRestionction { get; }
@@ -23,6 +24,9 @@ namespace ActiveRecordPattern.MovieRecordEntity
         void ChangeYear(int newYear);
         void ChangeAgeRestriction(int newRestriction);
         void ChangePrice(double newPrice);
+
+        // methods
+
         void Update();
     }
 }

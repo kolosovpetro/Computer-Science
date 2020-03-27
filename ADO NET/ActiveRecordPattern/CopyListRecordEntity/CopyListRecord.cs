@@ -1,4 +1,5 @@
-﻿using ActiveRecordPattern.CopyRecordEntity;
+﻿using ActiveRecordPattern.ConnectionString;
+using ActiveRecordPattern.CopyRecordEntity;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 {
     class CopyListRecord : ICopyListRecord
     {
+        public IConnectionString ConnectionStringSetter { get; }
+
         public string ConnectionString { get; }
 
         public int MovieId { get; }
@@ -32,10 +35,10 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
         public CopyListRecord(int movieId)
         {
-            ConnectionString = System.Configuration.ConfigurationManager
-                .ConnectionStrings["Rental"].ToString();
             MovieId = movieId;
             Copies = new List<ICopy>();
+            ConnectionStringSetter = new RentalConnectionString();
+            ConnectionString = ConnectionStringSetter.ConnectionString;
             SetCopies();
         }
 

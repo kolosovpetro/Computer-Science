@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ActiveRecordPattern.CopyRecordEntity
+﻿namespace ActiveRecordPattern.CopyRecordEntity
 {
     interface ICopy
     {
+        // properties
+
         int CopyId { get; }
         bool Available { get; }
         int MovieId { get; }
@@ -17,6 +13,9 @@ namespace ActiveRecordPattern.CopyRecordEntity
         void ChangeCopyId(int newId);
         void ChangeAvailable(bool newState);
         void ChangeMovieId(int newId);
+
+        // methods
+
         void Rent();
         void Update();
     }

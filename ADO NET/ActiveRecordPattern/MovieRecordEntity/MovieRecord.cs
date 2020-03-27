@@ -10,6 +10,9 @@ namespace ActiveRecordPattern.MovieRecordEntity
     class MovieRecord : IMovieRecord
     {
         private ICopyListRecord CopyListRecord;
+
+        public IConnectionString ConnectionStringSetter { get; }
+
         public string ConnectionString { get; }
 
         public string Title { get; private set; }
@@ -29,8 +32,6 @@ namespace ActiveRecordPattern.MovieRecordEntity
                 return CopyListRecord.Copies;
             }
         }
-
-        public IConnectionString ConnectionStringSetter { get; }
 
         public MovieRecord(int id)
         {
