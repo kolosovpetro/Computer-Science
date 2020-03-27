@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ActiveRecordPattern.ConnectionString;
+using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.CopyRecordEntity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
@@ -14,6 +13,8 @@ namespace ActiveRecordPattern.MovieRecordEntity
         int AgeRestionction { get; }
         int MovieId { get; }
         double Price { get; }
+        IEnumerable<ICopy> CopiesList { get; }
+        IConnectionString ConnectionStringSetter { get; }
 
         // setters
         void ChangeTitle(string newTitle);

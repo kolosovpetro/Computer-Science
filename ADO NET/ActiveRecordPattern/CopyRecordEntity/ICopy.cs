@@ -17,6 +17,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
         void ChangeCopyId(int newId);
         void ChangeAvailable(bool newState);
         void ChangeMovieId(int newId);
+        void Rent();
         void Update();
     }
 }

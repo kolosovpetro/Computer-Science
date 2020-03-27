@@ -13,15 +13,15 @@ namespace ActiveRecordPattern
     {
         static void Main(string[] args)
         {
-            var mov = MovieRecord.GetMovieById(10);
+            var mov = MovieRecord.GetMovieById(5);
             Console.WriteLine(mov.ToString());
 
-            CopyListRecord copies = new CopyListRecord(10);
+            //CopyListRecord copies = new CopyListRecord(10);
 
-            foreach (var item in copies.Copies)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in copies.Copies)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
         }
     }

@@ -1,19 +1,16 @@
-﻿using Npgsql;
+﻿using ActiveRecordPattern.ConnectionString;
+using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.CopyRecordEntity;
+using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
     class MovieRecord : IMovieRecord
     {
-        public static string ConnectionString { get; } = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();                        // breaks SRP. Move under separate entity
+        private ICopyListRecord CopyListRecord;
+        public static string ConnectionString { get; private set; }
 
         public string Title { get; private set; }
 
@@ -25,6 +22,16 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public double Price { get; private set; }
 
+        public IEnumerable<ICopy> CopiesList
+        {
+            get
+            {
+                return CopyListRecord.Copies;
+            }
+        }
+
+        public IConnectionString ConnectionStringSetter { get; }
+
         public MovieRecord(string title, int year, int ageRestionction, int id, double price)
         {
             Title = title;
@@ -32,11 +39,18 @@ namespace ActiveRecordPattern.MovieRecordEntity
             AgeRestionction = ageRestionction;
             MovieId = id;
             Price = price;
+            CopyListRecord = new CopyListRecord(id);
+            ConnectionStringSetter = new RentalConnectionString();
+            ConnectionString = ConnectionStringSetter.ConnectionString;
         }
 
         public override string ToString()
         {
-            return $"Movie title: {Title}, produced in {Year}, restriction {AgeRestionction}+, price {Price}";
+            return $"Movie title: {Title}, " +
+                $"produced in {Year}, " +
+                $"restriction {AgeRestionction}+, " +
+                $"price {Price}, " +
+                $"Available {CopyListRecord.AvailableCopiesCount} / {CopyListRecord.TotalCopiesCount}";
         }
 
         public void ChangeAgeRestriction(int newRestriction)

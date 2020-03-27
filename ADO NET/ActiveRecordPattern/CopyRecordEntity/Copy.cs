@@ -45,5 +45,10 @@ namespace ActiveRecordPattern.CopyRecordEntity
         {
             throw new NotImplementedException();
         }
+
+        public void Rent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

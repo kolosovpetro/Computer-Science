@@ -75,6 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionString\IConnectionString.cs" />
+    <Compile Include="ConnectionString\RentalConnectionString.cs" />
     <Compile Include="CopyListRecordEntity\CopyListRecord.cs" />
     <Compile Include="CopyListRecordEntity\ICopyListRecord.cs" />
     <Compile Include="CopyRecordEntity\Copy.cs" />
