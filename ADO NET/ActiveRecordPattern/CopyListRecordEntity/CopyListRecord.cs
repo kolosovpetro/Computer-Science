@@ -1,5 +1,5 @@
-﻿using ActiveRecordPattern.ConnectionString;
-using ActiveRecordPattern.CopyRecordEntity;
+﻿using ActiveRecordPattern.CopyRecordEntity;
+using ActiveRecordPattern.DBActions;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,13 @@ using System.Linq;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListRecord : ICopyListRecord
+    class CopyListRecord : ICopyListRecord, IEntity
     {
-        public IConnectionString ConnectionStringSetter { get; }
-
         public string ConnectionString { get; }
 
         public int MovieId { get; }
 
-        public List<ICopy> Copies { get; private set; }
+        public List<ICopyRecord> Copies { get; private set; }
 
         public int TotalCopiesCount
         {
@@ -33,21 +31,23 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             }
         }
 
+        public IDbEngine Db => throw new NotImplementedException();
+
         public CopyListRecord(int movieId)
         {
             MovieId = movieId;
-            Copies = new List<ICopy>();
-            ConnectionStringSetter = new RentalConnectionString();
-            ConnectionString = ConnectionStringSetter.ConnectionString;
+            Copies = new List<ICopyRecord>();
             SetCopies();
         }
 
         public override string ToString()
         {
-            return $"Movie id: {MovieId}, Total copies: {TotalCopiesCount}, Available copies: {AvailableCopiesCount}";
+            return $"Movie id: {MovieId}, " +
+                $"Total copies: {TotalCopiesCount}, " +
+                $"Available copies: {AvailableCopiesCount}";
         }
 
-        public IEnumerable<ICopy> AvailableCopies()
+        public IEnumerable<ICopyRecord> AvailableCopies()
         {
             return Copies.Where(p => p.Available == true);
         }
@@ -58,7 +58,10 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             {
                 conn.Open();
 
-                using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM copies WHERE movie_id = @ID", conn))
+                using (NpgsqlCommand command = new NpgsqlCommand(
+                    "SELECT * " +
+                    "FROM copies " +
+                    "WHERE movie_id = @ID", conn))
                 {
                     command.Parameters.AddWithValue("@ID", MovieId);
 
@@ -66,7 +69,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
                     while (reader.Read())
                     {
-                        Copies.Add(new Copy((int)reader["copy_id"], (bool)reader["available"], (int)reader["movie_id"]));
+                        Copies.Add(new CopyRecord((int)reader["copy_id"], (bool)reader["available"], (int)reader["movie_id"]));
                         // too long constructor overload, consider use of Builder pattern
                     }
                 }

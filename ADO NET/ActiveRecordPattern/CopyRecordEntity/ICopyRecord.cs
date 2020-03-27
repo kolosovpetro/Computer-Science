@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.CopyRecordEntity
 {
-    interface ICopy
+    interface ICopyRecord
     {
         // properties
 

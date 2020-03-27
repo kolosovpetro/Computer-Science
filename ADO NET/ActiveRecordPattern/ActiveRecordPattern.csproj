@@ -75,14 +75,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionString\IConnectionString.cs" />
-    <Compile Include="ConnectionString\RentalConnectionString.cs" />
     <Compile Include="CopyListRecordEntity\CopyListRecord.cs" />
+    <Compile Include="CopyListRecordEntity\CopyListRecordDbEngine.cs" />
     <Compile Include="CopyListRecordEntity\ICopyListRecord.cs" />
-    <Compile Include="CopyRecordEntity\Copy.cs" />
-    <Compile Include="CopyRecordEntity\ICopy.cs" />
+    <Compile Include="CopyRecordEntity\CopyRecord.cs" />
+    <Compile Include="CopyRecordEntity\CopyRecordDbEngine.cs" />
+    <Compile Include="CopyRecordEntity\ICopyRecord.cs" />
+    <Compile Include="DBActions\IDbEngine.cs" />
+    <Compile Include="DBActions\IEntity.cs" />
     <Compile Include="MovieRecordEntity\IMovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecord.cs" />
+    <Compile Include="MovieRecordEntity\MovieRecordDbEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,5 +93,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
