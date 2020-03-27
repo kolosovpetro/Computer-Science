@@ -1,10 +1,8 @@
 ﻿using ActiveRecordPattern.DBActions;
-using Npgsql;
-using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecord : IMovieRecord, IEntity
+    class MovieRecord : IMovieRecord, IMovieEntity
     {
         public string Title { get; private set; }
 
@@ -16,9 +14,15 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public double Price { get; private set; }
 
-        public MovieRecord()
-        {
+        public MovieRecord() { }
 
+        public MovieRecord(string title, int year, int ageRestionction, int movieId, double price)
+        {
+            Title = title;
+            Year = year;
+            AgeRestionction = ageRestionction;
+            MovieId = movieId;
+            Price = price;
         }
 
         public override string ToString()

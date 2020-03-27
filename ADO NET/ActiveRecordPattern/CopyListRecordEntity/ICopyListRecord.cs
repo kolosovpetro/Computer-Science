@@ -1,19 +1,20 @@
 ﻿using ActiveRecordPattern.CopyRecordEntity;
+using ActiveRecordPattern.DBActions;
 using System.Collections.Generic;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    interface ICopyListRecord
+    interface ICopyListRecord : IMovieEntity
     {
         // properties
 
-        int MovieId { get; }
         int TotalCopiesCount { get; }
         int AvailableCopiesCount { get; }
-        List<ICopyRecord> Copies { get; }
+        List<ICopyRecord> CopiesList { get; }
 
-        // methods
+        // setters
 
-        IEnumerable<ICopyRecord> AvailableCopies();
+        void AddCopy(ICopyRecord copy);
+
     }
 }

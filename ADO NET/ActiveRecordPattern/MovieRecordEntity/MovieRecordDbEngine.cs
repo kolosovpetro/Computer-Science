@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbEngine : IDbEngine
+    class MovieRecordDbEngine : IConnectable, ISelectable, IInsertable, IUpdateable
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             .ToString();
         }
 
-        public void Insert(IEntity entity)
+        public void Insert(IMovieEntity entity)
         {
             if (entity is MovieRecord mov)
             {
@@ -37,12 +37,15 @@ namespace ActiveRecordPattern.MovieRecordEntity
                         cmd.Parameters.AddWithValue("@movie_id", mov.MovieId);
                         cmd.Parameters.AddWithValue("@price", mov.Price);
                         cmd.ExecuteNonQuery();
+                        return;
                     }
                 }
             }
+
+            throw new Exception("Unsupported format provided");       // may be to make this exception custom
         }
 
-        public IEntity Select(int MovieId)
+        public IMovieEntity Select(int MovieId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -74,7 +77,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
-        public void Update(IEntity entity)
+        public void Update(IMovieEntity entity)
         {
             if (entity is MovieRecord mov)
             {
@@ -97,6 +100,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                         cmd.Parameters.AddWithValue("@movie_id", mov.MovieId);
                         cmd.Parameters.AddWithValue("@price", mov.Price);
                         cmd.ExecuteNonQuery();
+                        return;
                     }
                 }
             }

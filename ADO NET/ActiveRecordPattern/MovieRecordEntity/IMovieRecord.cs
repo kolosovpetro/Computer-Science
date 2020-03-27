@@ -1,7 +1,4 @@
-﻿using ActiveRecordPattern.CopyRecordEntity;
-using System.Collections.Generic;
-
-namespace ActiveRecordPattern.MovieRecordEntity
+﻿namespace ActiveRecordPattern.MovieRecordEntity
 {
     interface IMovieRecord
     {

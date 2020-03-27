@@ -79,10 +79,12 @@
     <Compile Include="CopyListRecordEntity\CopyListRecordDbEngine.cs" />
     <Compile Include="CopyListRecordEntity\ICopyListRecord.cs" />
     <Compile Include="CopyRecordEntity\CopyRecord.cs" />
-    <Compile Include="CopyRecordEntity\CopyRecordDbEngine.cs" />
     <Compile Include="CopyRecordEntity\ICopyRecord.cs" />
-    <Compile Include="DBActions\IDbEngine.cs" />
-    <Compile Include="DBActions\IEntity.cs" />
+    <Compile Include="DBActions\IConnectable.cs" />
+    <Compile Include="DBActions\IMovieEntity.cs" />
+    <Compile Include="DBActions\IInsertable.cs" />
+    <Compile Include="DBActions\ISelectable.cs" />
+    <Compile Include="DBActions\IUpdateable.cs" />
     <Compile Include="MovieRecordEntity\IMovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecordDbEngine.cs" />

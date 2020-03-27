@@ -3,7 +3,7 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyRecord : ICopyRecord, IEntity
+    class CopyRecord : ICopyRecord
     {
         public int CopyId { get; private set; }
 
@@ -11,7 +11,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
 
         public int MovieId { get; private set; }
 
-        public IDbEngine Db => throw new NotImplementedException();
+        public CopyRecord() { }
 
         public CopyRecord(int copyId, bool available, int movieId)
         {
@@ -40,19 +40,10 @@ namespace ActiveRecordPattern.CopyRecordEntity
             MovieId = newId;
         }
 
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Rent()
         {
             Available = false;
         }
 
-        public void Insert()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
