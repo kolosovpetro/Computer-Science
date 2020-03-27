@@ -42,6 +42,11 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             SetCopies();
         }
 
+        public override string ToString()
+        {
+            return $"Movie id: {MovieId}, Total copies: {TotalCopiesCount}, Available copies: {AvailableCopiesCount}";
+        }
+
         public IEnumerable<ICopy> AvailableCopies()
         {
             return Copies.Where(p => p.Available == true);

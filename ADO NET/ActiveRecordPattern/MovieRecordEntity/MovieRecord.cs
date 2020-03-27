@@ -1,16 +1,11 @@
 ﻿using ActiveRecordPattern.ConnectionString;
-using ActiveRecordPattern.CopyListRecordEntity;
-using ActiveRecordPattern.CopyRecordEntity;
 using Npgsql;
 using System;
-using System.Collections.Generic;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
     class MovieRecord : IMovieRecord
     {
-        private ICopyListRecord CopyListRecord;
-
         public IConnectionString ConnectionStringSetter { get; }
 
         public string ConnectionString { get; }
@@ -25,21 +20,23 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public double Price { get; private set; }
 
-        public IEnumerable<ICopy> CopiesList
-        {
-            get
-            {
-                return CopyListRecord.Copies;
-            }
-        }
-
         public MovieRecord(int id)
         {
             MovieId = id;
-            CopyListRecord = new CopyListRecord(id);
             ConnectionStringSetter = new RentalConnectionString();
             ConnectionString = ConnectionStringSetter.ConnectionString;
             SetMovieData();
+        }
+
+        public MovieRecord(string title, int year, int ageRestionction, int movieId, double price)
+        {
+            Title = title;
+            Year = year;
+            AgeRestionction = ageRestionction;
+            MovieId = movieId;
+            Price = price;
+            ConnectionStringSetter = new RentalConnectionString();
+            ConnectionString = ConnectionStringSetter.ConnectionString;
         }
 
         public override string ToString()
@@ -47,8 +44,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             return $"Movie title: {Title}, " +
                 $"produced in {Year}, " +
                 $"restriction {AgeRestionction}+, " +
-                $"price {Price}, " +
-                $"Available {CopyListRecord.AvailableCopiesCount} / {CopyListRecord.TotalCopiesCount}";
+                $"price {Price}";
         }
 
         public void SetMovieId(int newId)
@@ -104,9 +100,51 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
+        public void Insert()
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "INSERT INTO movies " +
+                    "(title, year, age_restriction, movie_id, price) " +
+                    "VALUES " +
+                    "(@title, @year, @age_restriction, @movie_id, @price)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", Title);
+                    cmd.Parameters.AddWithValue("@year", Year);
+                    cmd.Parameters.AddWithValue("@age_restriction", AgeRestionction);
+                    cmd.Parameters.AddWithValue("@movie_id", MovieId);
+                    cmd.Parameters.AddWithValue("@price", Price);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void Update()
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "UPDATE movies " +
+                    "SET " +
+                    "year = @year, " +
+                    "age_restriction = @age_restriction, " +
+                    "movie_id = @movie_id, " +
+                    "price = @price " +
+                    "WHERE title = @title", conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", Title);
+                    cmd.Parameters.AddWithValue("@year", Year);
+                    cmd.Parameters.AddWithValue("@age_restriction", AgeRestionction);
+                    cmd.Parameters.AddWithValue("@movie_id", MovieId);
+                    cmd.Parameters.AddWithValue("@price", Price);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

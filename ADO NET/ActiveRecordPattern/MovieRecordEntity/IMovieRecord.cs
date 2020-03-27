@@ -1,5 +1,4 @@
 ﻿using ActiveRecordPattern.ConnectionString;
-using ActiveRecordPattern.CopyListRecordEntity;
 using ActiveRecordPattern.CopyRecordEntity;
 using System.Collections.Generic;
 
@@ -14,7 +13,6 @@ namespace ActiveRecordPattern.MovieRecordEntity
         int AgeRestionction { get; }
         int MovieId { get; }
         double Price { get; }
-        IEnumerable<ICopy> CopiesList { get; }
         IConnectionString ConnectionStringSetter { get; }
 
         // setters
@@ -27,6 +25,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         // methods
 
+        void Insert();
         void Update();
     }
 }

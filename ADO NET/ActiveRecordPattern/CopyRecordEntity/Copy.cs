@@ -1,9 +1,14 @@
-﻿using System;
+﻿using ActiveRecordPattern.ConnectionString;
+using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
     class Copy : ICopy
     {
+        private IConnectionString ConnectionStringSetter;
+
+        private string ConnectionString;
+
         public int CopyId { get; private set; }
 
         public bool Available { get; private set; }
@@ -15,6 +20,8 @@ namespace ActiveRecordPattern.CopyRecordEntity
             CopyId = copyId;
             Available = available;
             MovieId = movieId;
+            ConnectionStringSetter = new RentalConnectionString();
+            ConnectionString = ConnectionStringSetter.ConnectionString;
         }
 
         public override string ToString()
@@ -43,6 +50,11 @@ namespace ActiveRecordPattern.CopyRecordEntity
         }
 
         public void Rent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert()
         {
             throw new NotImplementedException();
         }

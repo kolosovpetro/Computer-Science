@@ -17,6 +17,7 @@
         // methods
 
         void Rent();
+        void Insert();
         void Update();
     }
 }

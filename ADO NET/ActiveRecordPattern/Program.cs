@@ -9,6 +9,14 @@ namespace ActiveRecordPattern
         {
             var mov = new MovieRecord(5);
             Console.WriteLine(mov.ToString());
+            mov.ChangePrice(8);
+            mov.Update();
+            Console.WriteLine("After change: ");
+            Console.WriteLine(mov);
+
+            var newMovie = new MovieRecord(11);
+            Console.WriteLine(newMovie.ToString());
+
 
             //CopyListRecord copies = new CopyListRecord(10);
 
