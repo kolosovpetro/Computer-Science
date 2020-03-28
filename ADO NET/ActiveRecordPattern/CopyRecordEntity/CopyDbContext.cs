@@ -27,7 +27,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             }
         }
 
-        public ICopyRecord Select(int id)
+        public ICopyRecord Select(int movieId)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
@@ -38,7 +38,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
                     "FROM copies " +
                     "WHERE copy_id = @id", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", movieId);
 
                     var reader = cmd.ExecuteReader();
 

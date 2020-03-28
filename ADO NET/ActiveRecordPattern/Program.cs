@@ -2,59 +2,43 @@
 using ActiveRecordPattern.CopyListRecordEntity;
 using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
-using ActiveRecordPattern.RentalsRecordEntity;
 using System;
+using System.Collections.Generic;
 
 namespace ActiveRecordPattern
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
-            var movieDbContext = new MovieDbContext();
-            var mov = movieDbContext.Select(10);
-            Console.WriteLine(mov);
-
-            //mov.ChangePrice(20);
-            //Console.WriteLine(mov);
-            //MovieDbContext.Update(mov);
-
-            var copyListDbEngine = new CopyListDbContext();
-
-            var copyList = copyListDbEngine.Select(11);
-
-            foreach (var item in copyList.CopiesList)
-            {
-                Console.WriteLine(item);
-            }
-
-            var copyRecordDb = new CopyDbContext();
-
-            //CopyRecord newCopy = new CopyRecord(21, true, 11);
-            //CopyRecordDb.Insert(newCopy);
-
-            var particularCopy = copyRecordDb.Select(11);
-            Console.WriteLine(particularCopy);
-            particularCopy.SetAvailable(true);
-            copyRecordDb.Update(particularCopy);
-            Console.WriteLine(particularCopy);
+            // rental process, it works 
 
             var clientDbContext = new ClientDbContext();
-            var client = clientDbContext.Select(5);
+            var client = clientDbContext.Select(9);
+            Console.WriteLine("Client introduce yourself: ");
             Console.WriteLine(client);
-            client.SetFirstName("Vasya");
-            clientDbContext.Update(client);
-            var newClient = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
-            Console.WriteLine(newClient);
-            //clientDbCont.Insert(newClnt);
-            //clnt.Rent(10);
+            Console.WriteLine("Chosen movie id: 3");
 
-            var rentDbCont = new RentalsDbContext();
-            var rentals = rentDbCont.Select(clientId: 2);
+            var copyListDbContext = new CopyListDbContext();
+            Console.WriteLine("Do we have available copies ?");
+            IEnumerable<ICopyRecord> copiesAvailable = copyListDbContext.Select(3).CopiesList;
 
-            foreach (var rental in rentals)
+            foreach (var copyRecord in copiesAvailable)
             {
-                Console.WriteLine(rental);
+                Console.WriteLine(copyRecord);
+            }
+
+            Console.WriteLine("Client tries to rent movie 3");
+
+            client.Rent(3);
+
+            Console.WriteLine("Check if rental was okay ... ");
+
+            copiesAvailable = copyListDbContext.Select(3).CopiesList;
+
+            foreach (var copyRecord in copiesAvailable)
+            {
+                Console.WriteLine(copyRecord);
             }
         }
     }

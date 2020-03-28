@@ -29,7 +29,7 @@ namespace ActiveRecordPattern.RentalsRecordEntity
             }
         }
 
-        public IEnumerable<IRentalsRecord> Select(int clientId)
+        public IEnumerable<IRentalsRecord> Select(int movieId)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
@@ -40,7 +40,7 @@ namespace ActiveRecordPattern.RentalsRecordEntity
                     "FROM rentals " +
                     "WHERE client_id = @client_id", conn))
                 {
-                    cmd.Parameters.AddWithValue("@client_id", clientId);
+                    cmd.Parameters.AddWithValue("@client_id", movieId);
 
                     var reader = cmd.ExecuteReader();
 

@@ -2,6 +2,6 @@
 {
     internal interface ISelectable<T>
     {
-        T Select(int id);
+        T Select(int movieId);
     }
 }

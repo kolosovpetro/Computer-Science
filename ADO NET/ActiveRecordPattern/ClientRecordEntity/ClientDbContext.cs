@@ -28,7 +28,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             }
         }
 
-        public IClientRecord Select(int clientId)
+        public IClientRecord Select(int movieId)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
@@ -39,7 +39,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
                     "FROM clients " +
                     "WHERE client_id = @id", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", clientId);
+                    cmd.Parameters.AddWithValue("@id", movieId);
 
                     var reader = cmd.ExecuteReader();
 

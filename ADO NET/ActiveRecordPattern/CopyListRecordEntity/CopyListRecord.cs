@@ -6,7 +6,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 {
     internal class CopyListRecord : ICopyListRecord
     {
-        public IEnumerable<ICopyRecord> CopiesList { get; }
+        public IEnumerable<ICopyRecord> CopiesList { get; private set; }
 
         public int TotalCopiesCount => CopiesList.Count();
 
@@ -18,14 +18,9 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             }
         }
 
-        public CopyListRecord()
+        public void SetAllCopies(IEnumerable<ICopyRecord> newCopiesList)
         {
-            CopiesList = new List<ICopyRecord>();
-        }
-
-        public void AddCopy(ICopyRecord copy)
-        {
-            CopiesList.Append(copy);
+            CopiesList = newCopiesList;
         }
     }
 }

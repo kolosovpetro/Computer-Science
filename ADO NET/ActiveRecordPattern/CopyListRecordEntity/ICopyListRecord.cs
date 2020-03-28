@@ -13,7 +13,6 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
         // setters
 
-        void AddCopy(ICopyRecord copy);
-
+        void SetAllCopies(IEnumerable<ICopyRecord> newCopiesList);
     }
 }

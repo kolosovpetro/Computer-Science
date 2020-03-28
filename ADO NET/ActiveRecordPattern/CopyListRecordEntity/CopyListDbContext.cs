@@ -2,12 +2,13 @@
 using ActiveRecordPattern.DataBaseContexts;
 using Npgsql;
 using System;
+using System.Collections.Generic;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
     internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
     {
-        public ICopyListRecord Select(int id)
+        public ICopyListRecord Select(int movieId)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
@@ -18,25 +19,28 @@ namespace ActiveRecordPattern.CopyListRecordEntity
                     "FROM copies " +
                     "WHERE movie_id = @id", conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", movieId);
 
                     var reader = cmd.ExecuteReader();
 
-                    if (!reader.HasRows) 
+                    if (!reader.HasRows)
                         throw new Exception("No any copies in relation");
 
-                    var copyListRecord = new CopyListRecord();
+                    var newCopiesList = new List<ICopyRecord>();
 
                     while (reader.Read())
                     {
-                        var copy = new CopyRecord();
+                        CopyRecord copy = new CopyRecord();
                         copy.SetMovieId((int)reader["movie_id"]);
                         copy.SetCopyId((int)reader["copy_id"]);
                         copy.SetAvailable((bool)reader["available"]);
-                        copyListRecord.AddCopy(copy);
+                        newCopiesList.Add(copy);
                     }
 
-                    return copyListRecord;
+                    var newCopyListRecord = new CopyListRecord();
+                    newCopyListRecord.SetAllCopies(newCopiesList);
+
+                    return newCopyListRecord;
                 }
             }
         }

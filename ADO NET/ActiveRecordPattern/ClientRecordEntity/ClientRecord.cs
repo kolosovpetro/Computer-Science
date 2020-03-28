@@ -2,6 +2,7 @@
 using ActiveRecordPattern.CopyRecordEntity;
 using System;
 using System.Linq;
+using ActiveRecordPattern.RentalsRecordEntity;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
@@ -55,18 +56,25 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public void Rent(int movieId)
         {
-            var copiesList = new CopyListDbContext()
-                .Select(movieId).CopiesList;
+            ICopyListRecord copiesList = new CopyListDbContext()
+                .Select(movieId);
 
-            var copyDbCont = new CopyDbContext();
-
-            var copyRecords = copiesList.ToList();
-
-            if (copyRecords.Count == 0)
+            if (copiesList.AvailableCopiesCount == 0)
                 throw new Exception("No available copies of this movie");
 
-            copyRecords.ElementAt(0).SetAvailable(false);
-            copyDbCont.Update(copyRecords.ElementAt(0));
+            var copyDbContext = new CopyDbContext();
+
+            var availableCopy = copiesList.CopiesList.First(p => p.Available);             // store first available copy
+
+            availableCopy.SetAvailable(false);           // set to available copy state: available - false
+
+            copyDbContext.Update(availableCopy);                // update corresponding item in data base
+
+            var rentalsDbContext = new RentalsDbContext();      // context for rentals DB
+
+            var newRental = new RentalsRecord(availableCopy.CopyId, ClientId, DateTime.Now, DateTime.Now.AddDays(7));  // new rental
+
+            rentalsDbContext.Insert(newRental);                 // insert new rental to data base     
 
         }
     }
