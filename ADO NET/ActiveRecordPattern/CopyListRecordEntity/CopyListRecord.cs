@@ -6,15 +6,15 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 {
     class CopyListRecord : ICopyListRecord
     {
-        public List<CopyRecord> CopiesList { get; private set; }
-
         public int MovieId { get; }
+
+        public IEnumerable<ICopyRecord> CopiesList { get; private set; }
 
         public int TotalCopiesCount
         {
             get
             {
-                return CopiesList.Count;
+                return CopiesList.Count();
             }
         }
 
@@ -28,12 +28,12 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
         public CopyListRecord()
         {
-            CopiesList = new List<CopyRecord>();
+            CopiesList = new List<ICopyRecord>();
         }
 
-        public void AddCopy(CopyRecord copy)
+        public void AddCopy(ICopyRecord copy)
         {
-            CopiesList.Add(copy);
+            CopiesList.Append(copy);
         }
     }
 }

@@ -2,6 +2,7 @@
 using ActiveRecordPattern.CopyRecordEntity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
@@ -55,14 +56,14 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public void Rent(int movieId)
         {
-            List<CopyRecord> copiesList = new CopyListDbContext()
+            IEnumerable<ICopyRecord> copiesList = new CopyListDbContext()
                 .Select(movieId).CopiesList;
             var copyDbCont = new CopyDbContext();
 
-            if (copiesList.Count != 0)
+            if (copiesList.Count() != 0)
             {
-                copiesList[0].SetAvailable(false);
-                copyDbCont.Update(copiesList[0]);
+                copiesList.ElementAt(0).SetAvailable(false);
+                copyDbCont.Update(copiesList.ElementAt(0));
                 return;
             }
 
