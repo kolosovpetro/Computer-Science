@@ -5,7 +5,7 @@ using System;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListDbContext : IConnectable, ISelectable<CopyListRecord>
+    class CopyListDbContext : IConnectable, ISelectable<ICopyListRecord>
     {
         public string ConnectionString { get; }
 
@@ -18,7 +18,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             .ToString();
         }
 
-        public CopyListRecord Select(int id)
+        public ICopyListRecord Select(int id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {

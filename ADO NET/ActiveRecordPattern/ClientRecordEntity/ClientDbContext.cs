@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientDbContext : IConnectable, ISelectable<ClientRecord>, IUpdateable<ClientRecord>, IInsertable<ClientRecord>
+    class ClientDbContext : IConnectable, ISelectable<IClientRecord>, IUpdatable<IClientRecord>, IInsertable<IClientRecord>
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             .ToString();
         }
 
-        public void Insert(ClientRecord entity)
+        public void Insert(IClientRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -38,7 +38,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             }
         }
 
-        public ClientRecord Select(int clientId)
+        public IClientRecord Select(int clientId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -69,7 +69,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             }
         }
 
-        public void Update(ClientRecord entity)
+        public void Update(IClientRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {

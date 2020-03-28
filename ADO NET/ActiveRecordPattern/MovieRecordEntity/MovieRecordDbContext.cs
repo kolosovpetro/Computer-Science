@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbContext : IConnectable, ISelectable<MovieRecord>, IInsertable<MovieRecord>, IUpdateable<MovieRecord>
+    class MovieRecordDbContext : IConnectable, ISelectable<IMovieRecord>, IInsertable<IMovieRecord>, IUpdatable<IMovieRecord>
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             .ToString();
         }
 
-        public void Insert(MovieRecord entity)
+        public void Insert(IMovieRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -39,7 +39,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             }
         }
 
-        public MovieRecord Select(int MovieId)
+        public IMovieRecord Select(int MovieId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -71,7 +71,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
-        public void Update(MovieRecord entity)
+        public void Update(IMovieRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {

@@ -12,7 +12,7 @@ namespace ActiveRecordPattern
         static void Main(string[] args)
         {
             MovieRecordDbContext MovieDbContext = new MovieRecordDbContext();
-            MovieRecord mov = MovieDbContext.Select(10);
+            IMovieRecord mov = MovieDbContext.Select(10);
             Console.WriteLine(mov);
 
             //mov.ChangePrice(20);

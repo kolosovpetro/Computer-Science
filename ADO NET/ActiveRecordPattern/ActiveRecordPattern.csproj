@@ -88,7 +88,7 @@
     <Compile Include="DataBaseContexts\IInsertable.cs" />
     <Compile Include="DataBaseContexts\IRemovable.cs" />
     <Compile Include="DataBaseContexts\ISelectable.cs" />
-    <Compile Include="DataBaseContexts\IUpdateable.cs" />
+    <Compile Include="DataBaseContexts\IUpdatable.cs" />
     <Compile Include="MovieRecordEntity\IMovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecordDbContext.cs" />

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsDbContext : IConnectable, ISelectable<List<RentalsRecord>>, IUpdateable<RentalsRecord>, IInsertable<RentalsRecord>
+    class RentalsDbContext : IConnectable, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>, IInsertable<IRentalsRecord>
     {
         public string ConnectionString { get; }
 
@@ -18,12 +18,28 @@ namespace ActiveRecordPattern.RentalsRecordEntity
             .ToString();
         }
 
-        public void Insert(RentalsRecord entity)
+        public void Insert(IRentalsRecord entity)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "INSERT INTO rentals " +
+                    "(copy_id, client_id, date_of_rental, date_of_return) " +
+                    "VALUES " +
+                    "(@copy_id, @client_id, @date_of_rental, @date_of_return)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@copy_id", entity.CopyId);
+                    cmd.Parameters.AddWithValue("@client_id", entity.ClientId);
+                    cmd.Parameters.AddWithValue("@date_of_rental", entity.DateOfRental);
+                    cmd.Parameters.AddWithValue("@date_of_return", entity.DateOfReturn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        public List<RentalsRecord> Select(int clientId)
+        public IEnumerable<IRentalsRecord> Select(int clientId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -42,7 +58,7 @@ namespace ActiveRecordPattern.RentalsRecordEntity
                     {
                         List<RentalsRecord> rentRec = new List<RentalsRecord>();
 
-                        while(reader.Read())
+                        while (reader.Read())
                         {
                             var rent = new RentalsRecord();
                             rent.SetClientId((int)reader["client_id"]);
@@ -60,9 +76,26 @@ namespace ActiveRecordPattern.RentalsRecordEntity
             }
         }
 
-        public void Update(RentalsRecord entity)
+        public void Update(IRentalsRecord entity)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "UPDATE rentals " +
+                    "SET " +
+                    "date_of_rental = @date_of_rental, " +
+                    "date_of_return = @date_of_return " +
+                    "WHERE copy_id = @copy_id AND client_id = @client_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@date_of_rental", entity.DateOfRental);
+                    cmd.Parameters.AddWithValue("@date_of_return", entity.DateOfReturn);
+                    cmd.Parameters.AddWithValue("@copy_id", entity.CopyId);
+                    cmd.Parameters.AddWithValue("@client_id", entity.ClientId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
