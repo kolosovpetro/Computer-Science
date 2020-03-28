@@ -19,28 +19,22 @@ namespace ActiveRecordPattern.CopyRecordEntity
 
         public void Insert(T entity)
         {
-            if (entity is CopyRecord cop)
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
-                using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
-                {
-                    conn.Open();
+                conn.Open();
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(
-                        "INSERT INTO copies " +
-                        "(copy_id, available, movie_id)" +
-                        "VALUES " +
-                        "(@copy_id, @available, @movie_id)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@copy_id", cop.CopyId);
-                        cmd.Parameters.AddWithValue("@available", cop.Available);
-                        cmd.Parameters.AddWithValue("@movie_id", cop.MovieId);
-                        cmd.ExecuteNonQuery();
-                        return;
-                    }
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "INSERT INTO copies " +
+                    "(copy_id, available, movie_id)" +
+                    "VALUES " +
+                    "(@copy_id, @available, @movie_id)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@copy_id", entity.CopyId);
+                    cmd.Parameters.AddWithValue("@available", entity.Available);
+                    cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            throw new Exception("Unsupported object provided");
         }
 
         public T Select(int id)
@@ -75,27 +69,21 @@ namespace ActiveRecordPattern.CopyRecordEntity
 
         public void Update(T entity)
         {
-            if (entity is CopyRecord cop)
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
-                using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
-                {
-                    conn.Open();
+                conn.Open();
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(
-                        "UPDATE copies " +
-                        "SET " +
-                        "available = @available " +
-                        "WHERE movie_id = @movie_id", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@available", cop.Available);
-                        cmd.Parameters.AddWithValue("@movie_id", cop.MovieId);
-                        cmd.ExecuteNonQuery();
-                        return;
-                    }
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "UPDATE copies " +
+                    "SET " +
+                    "available = @available " +
+                    "WHERE movie_id = @movie_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@available", entity.Available);
+                    cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            throw new Exception("Unsupported object provided");
         }
     }
 }

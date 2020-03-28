@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbContext<T> : IConnectable, ISelectable<T>, IInsertable<T>, IUpdateable<T> where T: MovieRecord
+    class MovieRecordDbContext<T> : IConnectable, ISelectable<T>, IInsertable<T>, IUpdateable<T> where T : MovieRecord
     {
         public string ConnectionString { get; }
 
@@ -19,30 +19,24 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public void Insert(T entity)
         {
-            if (entity is MovieRecord mov)
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
-                using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
-                {
-                    conn.Open();
+                conn.Open();
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(
-                        "INSERT INTO movies " +
-                        "(title, year, age_restriction, movie_id, price) " +
-                        "VALUES " +
-                        "(@title, @year, @age_restriction, @movie_id, @price)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@title", mov.Title);
-                        cmd.Parameters.AddWithValue("@year", mov.Year);
-                        cmd.Parameters.AddWithValue("@age_restriction", mov.AgeRestionction);
-                        cmd.Parameters.AddWithValue("@movie_id", mov.MovieId);
-                        cmd.Parameters.AddWithValue("@price", mov.Price);
-                        cmd.ExecuteNonQuery();
-                        return;
-                    }
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "INSERT INTO movies " +
+                    "(title, year, age_restriction, movie_id, price) " +
+                    "VALUES " +
+                    "(@title, @year, @age_restriction, @movie_id, @price)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", entity.Title);
+                    cmd.Parameters.AddWithValue("@year", entity.Year);
+                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestionction);
+                    cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
+                    cmd.Parameters.AddWithValue("@price", entity.Price);
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            throw new Exception("Unsupported format provided");       // may be to make this exception custom
         }
 
         public T Select(int MovieId)
@@ -79,33 +73,27 @@ namespace ActiveRecordPattern.MovieRecordEntity
 
         public void Update(T entity)
         {
-            if (entity is MovieRecord mov)
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
-                using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
-                {
-                    conn.Open();
+                conn.Open();
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(
-                        "UPDATE movies " +
-                        "SET " +
-                        "year = @year, " +
-                        "age_restriction = @age_restriction, " +
-                        "movie_id = @movie_id, " +
-                        "price = @price " +
-                        "WHERE title = @title", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@title", mov.Title);
-                        cmd.Parameters.AddWithValue("@year", mov.Year);
-                        cmd.Parameters.AddWithValue("@age_restriction", mov.AgeRestionction);
-                        cmd.Parameters.AddWithValue("@movie_id", mov.MovieId);
-                        cmd.Parameters.AddWithValue("@price", mov.Price);
-                        cmd.ExecuteNonQuery();
-                        return;
-                    }
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "UPDATE movies " +
+                    "SET " +
+                    "year = @year, " +
+                    "age_restriction = @age_restriction, " +
+                    "movie_id = @movie_id, " +
+                    "price = @price " +
+                    "WHERE title = @title", conn))
+                {
+                    cmd.Parameters.AddWithValue("@title", entity.Title);
+                    cmd.Parameters.AddWithValue("@year", entity.Year);
+                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestionction);
+                    cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
+                    cmd.Parameters.AddWithValue("@price", entity.Price);
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            throw new Exception("Unsupported format provided");       // may be to make this exception custom
         }
     }
 }
