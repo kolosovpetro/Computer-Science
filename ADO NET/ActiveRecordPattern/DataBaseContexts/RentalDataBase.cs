@@ -6,7 +6,7 @@
 
         protected RentalDataBase()
         {
-            ConnectionString = ConnectionString = System
+            ConnectionString = System
             .Configuration
             .ConfigurationManager
             .ConnectionStrings["Rental"]

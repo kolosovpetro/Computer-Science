@@ -1,8 +1,18 @@
 ## ADO .NET
 
-Work in PostgreSQL data base through ADO .NET
+PostrgreSQL, ADO .NET, Entity Framework
 
-Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
+### Active Record Pattern
+
+An approach to fight against Active record's SOLID violations. Solution is to create `Object` - data base relation's row, `Database context` which implements Select, Insert, Update actions to Db. To implement Selection factory pattern is used. All functionalities of DB context are segregated on generic interfaces. Generics are used in order to avoid use of Marker Interface anti-pattern which leads to excessive castings of out objects. 
+
+### Database Control Panel
+
+Winform application in order to import select's result inside `GridRow`.
+
+### Postgres 
+
+Solutions to https://kolosovpetro.github.io/cs/data_bases_2/Exercise_01_Npgsql.pdf
 
 **Notes**
 
