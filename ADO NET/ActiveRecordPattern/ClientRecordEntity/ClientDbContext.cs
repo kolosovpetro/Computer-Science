@@ -53,26 +53,43 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
                     NpgsqlDataReader reader = cmd.ExecuteReader();
 
-                    switch (reader.HasRows)
+                    if (reader.HasRows)
                     {
-                        case true:
-                            var clnt = new ClientRecord();
-                            reader.Read();
-                            clnt.SetClientId((int)reader["client_id"]);
-                            clnt.SetFirstName((string)reader["first_name"]);
-                            clnt.SetLastName((string)reader["last_name"]);
-                            clnt.SetBirthday(Convert.ToDateTime(reader["birthday"]));
-                            return clnt;
-                        default:
-                            throw new Exception("No such user in relation");
+                        var clnt = new ClientRecord();
+                        reader.Read();
+                        clnt.SetClientId((int)reader["client_id"]);
+                        clnt.SetFirstName((string)reader["first_name"]);
+                        clnt.SetLastName((string)reader["last_name"]);
+                        clnt.SetBirthday(Convert.ToDateTime(reader["birthday"]));
+                        return clnt;
                     }
                 }
+
+                throw new Exception("No such client in relation");
             }
         }
 
         public void Update(ClientRecord entity)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "UPDATE clients " +
+                    "SET " +
+                    "first_name = @first_name, " +
+                    "last_name = @last_name, " +
+                    "birthday = @birthday " +
+                    "WHERE client_id = @id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@first_name", entity.FirstName);
+                    cmd.Parameters.AddWithValue("@last_name", entity.LastName);
+                    cmd.Parameters.AddWithValue("@birthday", entity.Birthday);
+                    cmd.Parameters.AddWithValue("@id", entity.ClientId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

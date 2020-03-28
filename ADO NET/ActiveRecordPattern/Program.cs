@@ -42,6 +42,8 @@ namespace ActiveRecordPattern
             var clientDbCont = new ClientDbContext();
             var clnt = clientDbCont.Select(5);
             Console.WriteLine(clnt);
+            clnt.SetFirstName("Vasya");
+            clientDbCont.Update(clnt);
             var newClnt = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
             Console.WriteLine(newClnt);
             //clientDbCont.Insert(newClnt);
