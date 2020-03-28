@@ -54,6 +54,7 @@ namespace Queue
             var tempQueue = new T[Capacity];
             Array.Copy(QueueBase, 1, tempQueue, 0, Count - 1);
             QueueBase = tempQueue;
+            Count--;
         }
 
         public IEnumerator<T> GetEnumerator()
