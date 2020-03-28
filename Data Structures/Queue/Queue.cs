@@ -1,101 +1,75 @@
-﻿using Queue.Auxiliaries;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Queue.Interfaces;
 
 namespace Queue
 {
-    class Queue<T> : IQueue<T>, IEnumerable<T>
+    internal class Queue<T> : IQueue<T>, IEnumerable<T> where T : class
     {
-        public int Size { get; private set; }
-        public List<T> QueueBase { get; private set; }
-        public Queue(int newSize)
+        public int Capacity => QueueBase.Length;
+
+        public int Count { get; private set; }
+
+        public T[] QueueBase { get; private set; }
+
+        public Queue(int newCapacity)
         {
-            Size = newSize;
-            QueueBase = new List<T>();
+            QueueBase = new T[newCapacity];
+            Count = 0;
         }
+
         public bool IsEmpty()
         {
-            if (QueueBase == null)
-                return true;
-            return false;
+            return Count == 0;
         }
+
         public bool IsFull()
         {
-            if (this.QueueBase.Count >= Size)
-                return true;
-            return false;
+            return Count == Capacity;
         }
+
         public T Peek()
         {
-            try
-            {
-                int Last = QueueBase.Count - 1;
-                return QueueBase[Last];
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return default;
-            }
+            if (IsEmpty())
+                throw new Exception("Queue is empty.");
+
+            return QueueBase[0];
         }
-        public void Enqueue(T Data)
+
+        public void Enqueue(T data)
         {
-            if (IsFull()) Dequeue();
+            if (IsFull())
+                throw new Exception("Queue is full.");
 
-            if (IsEmpty()) QueueBase.Add(Data);
-
-            if (!IsFull() && !IsEmpty())
-            {
-                int t = 1;
-                int Last = QueueBase.Count;
-                QueueBase.Add(Data);
-
-                while (true)
-                {
-                    try
-                    {
-                        Swap<T>.GenericSwap(QueueBase, Last - t - 1, Last - t);
-                        t++;
-                    }
-                    catch (Exception)
-                    {
-                        break;
-                    }
-                }
-            }
-
+            QueueBase[Count] = data;
+            Count++;
         }
+
         public void Dequeue()
         {
-            try
-            {
-                int Last = QueueBase.Count - 1;
-                QueueBase.RemoveAt(Last);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return;
-            }
+            if (IsEmpty())
+                throw new Exception("Queue is empty.");
+
+            var tempQueue = new T[Capacity];
+            Array.Copy(QueueBase, 1, tempQueue, 0, Count - 1);
+            QueueBase = tempQueue;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return QueueBase.GetEnumerator();
+            return (IEnumerator<T>)QueueBase.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         public T this[int index]
         {
-            get
-            {
-                return QueueBase[index];
-            }
+            get => QueueBase[index];
+            set => QueueBase[index] = value;
         }
     }
 }
