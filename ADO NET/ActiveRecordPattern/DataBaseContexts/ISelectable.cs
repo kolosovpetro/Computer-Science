@@ -1,7 +1,7 @@
-﻿namespace ActiveRecordPattern.DBActions
+﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface ISelectable
+    interface ISelectable<T>
     {
-        IMovieEntity Select(int id);
+        T Select(int id);
     }
 }

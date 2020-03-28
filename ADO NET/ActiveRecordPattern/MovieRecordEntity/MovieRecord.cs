@@ -1,8 +1,6 @@
-﻿using ActiveRecordPattern.DBActions;
-
-namespace ActiveRecordPattern.MovieRecordEntity
+﻿namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecord : IMovieRecord, IMovieEntity
+    class MovieRecord : IMovieRecord
     {
         public string Title { get; private set; }
 

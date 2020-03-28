@@ -1,4 +1,4 @@
-﻿namespace ActiveRecordPattern.DBActions
+﻿namespace ActiveRecordPattern.DataBaseContexts
 {
     interface IConnectable
     {

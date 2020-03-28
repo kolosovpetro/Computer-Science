@@ -1,7 +1,7 @@
-﻿namespace ActiveRecordPattern.DBActions
+﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface IUpdateable
+    interface IUpdateable<T>
     {
-        void Update(IMovieEntity entity);
+        void Update(T entity);
     }
 }

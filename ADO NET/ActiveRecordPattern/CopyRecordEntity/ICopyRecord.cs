@@ -1,11 +1,10 @@
-﻿using ActiveRecordPattern.DBActions;
-
-namespace ActiveRecordPattern.CopyRecordEntity
+﻿namespace ActiveRecordPattern.CopyRecordEntity
 {
-    interface ICopyRecord : IMovieEntity
+    interface ICopyRecord
     {
         // properties
 
+        int MovieId { get; }
         int CopyId { get; }
         bool Available { get; }
 
@@ -14,7 +13,6 @@ namespace ActiveRecordPattern.CopyRecordEntity
         void ChangeCopyId(int newId);
         void ChangeAvailable(bool newState);
         void ChangeMovieId(int newId);
-
 
     }
 }

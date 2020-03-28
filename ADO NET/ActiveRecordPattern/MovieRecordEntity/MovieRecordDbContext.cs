@@ -1,14 +1,14 @@
-﻿using ActiveRecordPattern.DBActions;
+﻿using ActiveRecordPattern.DataBaseContexts;
 using Npgsql;
 using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbEngine : IConnectable, ISelectable, IInsertable, IUpdateable
+    class MovieRecordDbContext<T> : IConnectable, ISelectable<T>, IInsertable<T>, IUpdateable<T> where T: MovieRecord
     {
         public string ConnectionString { get; }
 
-        public MovieRecordDbEngine()
+        public MovieRecordDbContext()
         {
             ConnectionString = System
             .Configuration
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             .ToString();
         }
 
-        public void Insert(IMovieEntity entity)
+        public void Insert(T entity)
         {
             if (entity is MovieRecord mov)
             {
@@ -45,7 +45,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("Unsupported format provided");       // may be to make this exception custom
         }
 
-        public IMovieEntity Select(int MovieId)
+        public T Select(int MovieId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -69,7 +69,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                         mov.ChangeYear((int)reader["year"]);
                         mov.ChangePrice(Convert.ToDouble(reader["price"]));
                         mov.ChangeAgeRestriction((int)reader["age_restriction"]);
-                        return mov;
+                        return (T)mov;
                     }
                 }
             }
@@ -77,7 +77,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
-        public void Update(IMovieEntity entity)
+        public void Update(T entity)
         {
             if (entity is MovieRecord mov)
             {

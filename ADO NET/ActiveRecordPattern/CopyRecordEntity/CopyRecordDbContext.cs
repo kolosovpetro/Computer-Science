@@ -1,14 +1,14 @@
-﻿using ActiveRecordPattern.DBActions;
+﻿using ActiveRecordPattern.DataBaseContexts;
 using Npgsql;
 using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyRecordDbEngine : IConnectable, ISelectable, IUpdateable, IInsertable
+    class CopyRecordDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : CopyRecord
     {
         public string ConnectionString { get; }
 
-        public CopyRecordDbEngine()
+        public CopyRecordDbContext()
         {
             ConnectionString = System
             .Configuration
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             .ToString();
         }
 
-        public void Insert(IMovieEntity entity)
+        public void Insert(T entity)
         {
             if (entity is CopyRecord cop)
             {
@@ -43,7 +43,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             throw new Exception("Unsupported object provided");
         }
 
-        public IMovieEntity Select(int id)
+        public T Select(int id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -65,7 +65,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
                         newCopy.ChangeMovieId((int)reader["movie_id"]);
                         newCopy.ChangeCopyId((int)reader["copy_id"]);
                         newCopy.ChangeAvailable((bool)reader["available"]);
-                        return newCopy;
+                        return (T)newCopy;
                     }
                 }
             }
@@ -73,7 +73,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             throw new Exception("No such item in relation");
         }
 
-        public void Update(IMovieEntity entity)
+        public void Update(T entity)
         {
             if (entity is CopyRecord cop)
             {

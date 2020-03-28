@@ -1,7 +1,4 @@
-﻿using ActiveRecordPattern.DBActions;
-using System;
-
-namespace ActiveRecordPattern.CopyRecordEntity
+﻿namespace ActiveRecordPattern.CopyRecordEntity
 {
     class CopyRecord : ICopyRecord
     {

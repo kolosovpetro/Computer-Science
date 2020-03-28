@@ -1,15 +1,15 @@
 ﻿using ActiveRecordPattern.CopyRecordEntity;
-using ActiveRecordPattern.DBActions;
+using ActiveRecordPattern.DataBaseContexts;
 using Npgsql;
 using System;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListRecordDbEngine : IConnectable, ISelectable
+    class CopyListRecordDbContext<T> : IConnectable, ISelectable<T> where T : CopyListRecord
     {
         public string ConnectionString { get; }
 
-        public CopyListRecordDbEngine()
+        public CopyListRecordDbContext()
         {
             ConnectionString = System
             .Configuration
@@ -18,7 +18,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             .ToString();
         }
 
-        public IMovieEntity Select(int id)
+        public T Select(int id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -35,7 +35,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
                     if (reader.HasRows)
                     {
-                        var copyListRecord = new CopyListRecord();
+                        CopyListRecord copyListRecord = new CopyListRecord();
 
                         while (reader.Read())
                         {
@@ -46,7 +46,7 @@ namespace ActiveRecordPattern.CopyListRecordEntity
                             copyListRecord.AddCopy(copy);
                         }
 
-                        return copyListRecord;
+                        return (T)copyListRecord;
                     }
                 }
             }

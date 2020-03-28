@@ -1,7 +1,7 @@
-﻿namespace ActiveRecordPattern.DBActions
+﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface IInsertable
+    interface IInsertable<T>
     {
-        void Insert(IMovieEntity entity);
+        void Insert(T entity);
     }
 }
