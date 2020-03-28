@@ -1,6 +1,4 @@
-﻿using ActiveRecordPattern.CopyListRecordEntity;
-using ActiveRecordPattern.CopyRecordEntity;
-using System;
+﻿using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {

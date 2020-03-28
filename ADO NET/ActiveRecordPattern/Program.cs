@@ -4,6 +4,7 @@ using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
 using ActiveRecordPattern.RentalsRecordEntity;
 using System;
+using System.Collections.Generic;
 
 namespace ActiveRecordPattern
 {
@@ -49,10 +50,10 @@ namespace ActiveRecordPattern
             //clientDbCont.Insert(newClnt);
             //clnt.Rent(10);
 
-            var rentDbCont = new RentalsDbContext();
-            var rentals = rentDbCont.Select(2);
+            RentalsDbContext rentDbCont = new RentalsDbContext();
+            IEnumerable<IRentalsRecord> rentals = rentDbCont.Select(clientId: 2);
 
-            foreach (var item in rentals)
+            foreach (IRentalsRecord item in rentals)
             {
                 Console.WriteLine(item);
             }

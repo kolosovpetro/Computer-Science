@@ -4,7 +4,8 @@ using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientDbContext : IConnectable, ISelectable<IClientRecord>, IUpdatable<IClientRecord>, IInsertable<IClientRecord>
+    class ClientDbContext : IConnectable, ISelectable<IClientRecord>, IUpdatable<IClientRecord>, 
+        IInsertable<IClientRecord>
     {
         public string ConnectionString { get; }
 
@@ -55,13 +56,13 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
                     if (reader.HasRows)
                     {
-                        var clnt = new ClientRecord();
+                        IClientRecord client = new ClientRecord();
                         reader.Read();
-                        clnt.SetClientId((int)reader["client_id"]);
-                        clnt.SetFirstName((string)reader["first_name"]);
-                        clnt.SetLastName((string)reader["last_name"]);
-                        clnt.SetBirthday(Convert.ToDateTime(reader["birthday"]));
-                        return clnt;
+                        client.SetClientId((int)reader["client_id"]);
+                        client.SetFirstName((string)reader["first_name"]);
+                        client.SetLastName((string)reader["last_name"]);
+                        client.SetBirthday(Convert.ToDateTime(reader["birthday"]));
+                        return client;
                     }
                 }
 

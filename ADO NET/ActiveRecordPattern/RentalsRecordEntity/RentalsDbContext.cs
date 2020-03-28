@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsDbContext : IConnectable, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>, IInsertable<IRentalsRecord>
+    class RentalsDbContext : IConnectable, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>, 
+        IInsertable<IRentalsRecord>
     {
         public string ConnectionString { get; }
 
@@ -60,7 +61,7 @@ namespace ActiveRecordPattern.RentalsRecordEntity
 
                         while (reader.Read())
                         {
-                            var rent = new RentalsRecord();
+                            RentalsRecord rent = new RentalsRecord();
                             rent.SetClientId((int)reader["client_id"]);
                             rent.SetCopyId((int)reader["copy_id"]);
                             rent.SetDateOfRental(Convert.ToDateTime(reader["date_of_rental"]));

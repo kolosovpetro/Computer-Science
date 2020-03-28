@@ -4,7 +4,8 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyDbContext : IConnectable, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>, IInsertable<ICopyRecord>
+    class CopyDbContext : IConnectable, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>, 
+        IInsertable<ICopyRecord>
     {
         public string ConnectionString { get; }
 
@@ -54,7 +55,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
 
                     if (reader.HasRows)
                     {
-                        CopyRecord newCopy = new CopyRecord();
+                        ICopyRecord newCopy = new CopyRecord();
                         reader.Read();
                         newCopy.SetMovieId((int)reader["movie_id"]);
                         newCopy.SetCopyId((int)reader["copy_id"]);

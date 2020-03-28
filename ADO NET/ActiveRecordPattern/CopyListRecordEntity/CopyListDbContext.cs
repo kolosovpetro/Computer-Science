@@ -35,11 +35,11 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 
                     if (reader.HasRows)
                     {
-                        CopyListRecord copyListRecord = new CopyListRecord();
+                        ICopyListRecord copyListRecord = new CopyListRecord();
 
                         while (reader.Read())
                         {
-                            var copy = new CopyRecord();
+                            CopyRecord copy = new CopyRecord();
                             copy.SetMovieId((int)reader["movie_id"]);
                             copy.SetCopyId((int)reader["copy_id"]);
                             copy.SetAvailable((bool)reader["available"]);

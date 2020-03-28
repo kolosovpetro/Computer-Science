@@ -4,7 +4,8 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbContext : IConnectable, ISelectable<IMovieRecord>, IInsertable<IMovieRecord>, IUpdatable<IMovieRecord>
+    class MovieRecordDbContext : IConnectable, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>, 
+        IInsertable<IMovieRecord>
     {
         public string ConnectionString { get; }
 
@@ -57,7 +58,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        MovieRecord mov = new MovieRecord();
+                        IMovieRecord mov = new MovieRecord();
                         mov.SetMovieId((int)reader["movie_id"]);
                         mov.ChangeTitle((string)reader["title"]);
                         mov.ChangeYear((int)reader["year"]);
