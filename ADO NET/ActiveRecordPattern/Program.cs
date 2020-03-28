@@ -2,6 +2,7 @@
 using ActiveRecordPattern.CopyListRecordEntity;
 using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
+using ActiveRecordPattern.RentalsRecordEntity;
 using System;
 
 namespace ActiveRecordPattern
@@ -10,7 +11,7 @@ namespace ActiveRecordPattern
     {
         static void Main(string[] args)
         {
-            MovieRecordDbContext<MovieRecord> MovieDbContext = new MovieRecordDbContext<MovieRecord>();
+            MovieRecordDbContext MovieDbContext = new MovieRecordDbContext();
             MovieRecord mov = MovieDbContext.Select(10);
             Console.WriteLine(mov);
 
@@ -18,7 +19,7 @@ namespace ActiveRecordPattern
             //Console.WriteLine(mov);
             //MovieDbContext.Update(mov);
 
-            var CopyListDbEngine = new CopyListDbContext<CopyListRecord>();
+            var CopyListDbEngine = new CopyListDbContext();
 
             var CopyList = CopyListDbEngine.Select(11);
 
@@ -27,7 +28,7 @@ namespace ActiveRecordPattern
                 Console.WriteLine(item);
             }
 
-            var CopyRecordDb = new CopyDbContext<CopyRecord>();
+            var CopyRecordDb = new CopyDbContext();
 
             //CopyRecord newCopy = new CopyRecord(21, true, 11);
             //CopyRecordDb.Insert(newCopy);
@@ -38,13 +39,21 @@ namespace ActiveRecordPattern
             CopyRecordDb.Update(particularCopy);
             Console.WriteLine(particularCopy);
 
-            var clientDbCont = new ClientDbContext<ClientRecord>();
+            var clientDbCont = new ClientDbContext();
             var clnt = clientDbCont.Select(5);
             Console.WriteLine(clnt);
             var newClnt = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
             Console.WriteLine(newClnt);
             //clientDbCont.Insert(newClnt);
-            clnt.Rent(10);
+            //clnt.Rent(10);
+
+            var rentDbCont = new RentalsDbContext();
+            var rentals = rentDbCont.Select(2);
+
+            foreach (var item in rentals)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

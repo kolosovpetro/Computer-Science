@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : CopyRecord
+    class CopyDbContext : IConnectable, ISelectable<CopyRecord>, IUpdateable<CopyRecord>, IInsertable<CopyRecord>
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             .ToString();
         }
 
-        public void Insert(T entity)
+        public void Insert(CopyRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -37,7 +37,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             }
         }
 
-        public T Select(int id)
+        public CopyRecord Select(int id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -59,7 +59,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
                         newCopy.SetMovieId((int)reader["movie_id"]);
                         newCopy.SetCopyId((int)reader["copy_id"]);
                         newCopy.SetAvailable((bool)reader["available"]);
-                        return (T)newCopy;
+                        return newCopy;
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace ActiveRecordPattern.CopyRecordEntity
             throw new Exception("No such item in relation");
         }
 
-        public void Update(T entity)
+        public void Update(CopyRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {

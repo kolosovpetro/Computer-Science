@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbContext<T> : IConnectable, ISelectable<T>, IInsertable<T>, IUpdateable<T> where T : MovieRecord
+    class MovieRecordDbContext : IConnectable, ISelectable<MovieRecord>, IInsertable<MovieRecord>, IUpdateable<MovieRecord>
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             .ToString();
         }
 
-        public void Insert(T entity)
+        public void Insert(MovieRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -39,7 +39,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             }
         }
 
-        public T Select(int MovieId)
+        public MovieRecord Select(int MovieId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -63,7 +63,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                         mov.ChangeYear((int)reader["year"]);
                         mov.ChangePrice(Convert.ToDouble(reader["price"]));
                         mov.ChangeAgeRestriction((int)reader["age_restriction"]);
-                        return (T)mov;
+                        return mov;
                     }
                 }
             }
@@ -71,7 +71,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
             throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
-        public void Update(T entity)
+        public void Update(MovieRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {

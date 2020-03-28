@@ -4,7 +4,7 @@ using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : ClientRecord
+    class ClientDbContext : IConnectable, ISelectable<ClientRecord>, IUpdateable<ClientRecord>, IInsertable<ClientRecord>
     {
         public string ConnectionString { get; }
 
@@ -17,7 +17,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             .ToString();
         }
 
-        public void Insert(T entity)
+        public void Insert(ClientRecord entity)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -38,7 +38,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             }
         }
 
-        public T Select(int clientId)
+        public ClientRecord Select(int clientId)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
             {
@@ -62,7 +62,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
                             clnt.SetFirstName((string)reader["first_name"]);
                             clnt.SetLastName((string)reader["last_name"]);
                             clnt.SetBirthday(Convert.ToDateTime(reader["birthday"]));
-                            return (T)clnt;
+                            return clnt;
                         default:
                             throw new Exception("No such user in relation");
                     }
@@ -70,7 +70,7 @@ namespace ActiveRecordPattern.ClientRecordEntity
             }
         }
 
-        public void Update(T entity)
+        public void Update(ClientRecord entity)
         {
             throw new NotImplementedException();
         }

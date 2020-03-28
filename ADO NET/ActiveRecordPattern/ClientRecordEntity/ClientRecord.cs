@@ -55,9 +55,9 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public void Rent(int movieId)
         {
-            List<CopyRecord> copiesList = new CopyListDbContext<CopyListRecord>()
+            List<CopyRecord> copiesList = new CopyListDbContext()
                 .Select(movieId).CopiesList;
-            var copyDbCont = new CopyDbContext<CopyRecord>();
+            var copyDbCont = new CopyDbContext();
 
             if (copiesList.Count != 0)
             {

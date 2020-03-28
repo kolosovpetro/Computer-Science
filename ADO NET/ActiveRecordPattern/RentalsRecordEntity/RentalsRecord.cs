@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
@@ -24,6 +20,14 @@ namespace ActiveRecordPattern.RentalsRecordEntity
             ClientId = clientId;
             DateOfRental = dateOfRental;
             DateOfReturn = dateOfReturn;
+        }
+
+        public override string ToString()
+        {
+            return $"Copy id: {CopyId}, " +
+                $"Client id: {ClientId}, " +
+                $"Date Of Rental: {DateOfRental}, " +
+                $"Date of Return: {DateOfReturn}";
         }
 
         public void SetClientId(int newId)

@@ -1,27 +1,66 @@
 ﻿using ActiveRecordPattern.DataBaseContexts;
+using Npgsql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : RentalsRecord
+    class RentalsDbContext : IConnectable, ISelectable<List<RentalsRecord>>, IUpdateable<RentalsRecord>, IInsertable<RentalsRecord>
     {
-        public string ConnectionString => throw new NotImplementedException();
+        public string ConnectionString { get; }
 
-        public void Insert(T entity)
+        public RentalsDbContext()
+        {
+            ConnectionString = System
+            .Configuration
+            .ConfigurationManager
+            .ConnectionStrings["Rental"]
+            .ToString();
+        }
+
+        public void Insert(RentalsRecord entity)
         {
             throw new NotImplementedException();
         }
 
-        public T Select(int id)
+        public List<RentalsRecord> Select(int clientId)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                    "SELECT * " +
+                    "FROM rentals " +
+                    "WHERE client_id = @client_id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@client_id", clientId);
+
+                    NpgsqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        List<RentalsRecord> rentRec = new List<RentalsRecord>();
+
+                        while(reader.Read())
+                        {
+                            var rent = new RentalsRecord();
+                            rent.SetClientId((int)reader["client_id"]);
+                            rent.SetCopyId((int)reader["copy_id"]);
+                            rent.SetDateOfRental(Convert.ToDateTime(reader["date_of_rental"]));
+                            rent.SetDateOfReturn(Convert.ToDateTime(reader["date_of_return"]));
+                            rentRec.Add(rent);
+                        }
+
+                        return rentRec;
+                    }
+
+                    throw new Exception("No such rental in relation");
+                }
+            }
         }
 
-        public void Update(T entity)
+        public void Update(RentalsRecord entity)
         {
             throw new NotImplementedException();
         }
