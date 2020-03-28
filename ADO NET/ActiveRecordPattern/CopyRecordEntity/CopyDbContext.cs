@@ -4,11 +4,11 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyRecordDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : CopyRecord
+    class CopyDbContext<T> : IConnectable, ISelectable<T>, IUpdateable<T>, IInsertable<T> where T : CopyRecord
     {
         public string ConnectionString { get; }
 
-        public CopyRecordDbContext()
+        public CopyDbContext()
         {
             ConnectionString = System
             .Configuration

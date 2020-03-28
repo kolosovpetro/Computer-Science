@@ -5,11 +5,11 @@ using System;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListRecordDbContext<T> : IConnectable, ISelectable<T> where T : CopyListRecord
+    class CopyListDbContext<T> : IConnectable, ISelectable<T> where T : CopyListRecord
     {
         public string ConnectionString { get; }
 
-        public CopyListRecordDbContext()
+        public CopyListDbContext()
         {
             ConnectionString = System
             .Configuration

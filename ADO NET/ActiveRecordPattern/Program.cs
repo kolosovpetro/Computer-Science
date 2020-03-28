@@ -1,4 +1,5 @@
-﻿using ActiveRecordPattern.CopyListRecordEntity;
+﻿using ActiveRecordPattern.ClientRecordEntity;
+using ActiveRecordPattern.CopyListRecordEntity;
 using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
 using System;
@@ -17,7 +18,7 @@ namespace ActiveRecordPattern
             //Console.WriteLine(mov);
             //MovieDbContext.Update(mov);
 
-            var CopyListDbEngine = new CopyListRecordDbContext<CopyListRecord>();
+            var CopyListDbEngine = new CopyListDbContext<CopyListRecord>();
 
             var CopyList = CopyListDbEngine.Select(11);
 
@@ -26,7 +27,7 @@ namespace ActiveRecordPattern
                 Console.WriteLine(item);
             }
 
-            var CopyRecordDb = new CopyRecordDbContext<CopyRecord>();
+            var CopyRecordDb = new CopyDbContext<CopyRecord>();
 
             //CopyRecord newCopy = new CopyRecord(21, true, 11);
             //CopyRecordDb.Insert(newCopy);
@@ -36,6 +37,13 @@ namespace ActiveRecordPattern
             particularCopy.ChangeAvailable(true);
             CopyRecordDb.Update(particularCopy);
             Console.WriteLine(particularCopy);
+
+            var clientDbCont = new ClientDbContext<ClientRecord>();
+            var clnt = clientDbCont.Select(5);
+            Console.WriteLine(clnt);
+            var newClnt = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
+            Console.WriteLine(newClnt);
+            clientDbCont.Insert(newClnt);
         }
     }
 }

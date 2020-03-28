@@ -75,11 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientRecordEntity\ClientRecord.cs" />
+    <Compile Include="ClientRecordEntity\ClientDbContext.cs" />
+    <Compile Include="ClientRecordEntity\IClientRecord.cs" />
     <Compile Include="CopyListRecordEntity\CopyListRecord.cs" />
-    <Compile Include="CopyListRecordEntity\CopyListRecordDbContext.cs" />
+    <Compile Include="CopyListRecordEntity\CopyListDbContext.cs" />
     <Compile Include="CopyListRecordEntity\ICopyListRecord.cs" />
     <Compile Include="CopyRecordEntity\CopyRecord.cs" />
-    <Compile Include="CopyRecordEntity\CopyRecordDbContext.cs" />
+    <Compile Include="CopyRecordEntity\CopyDbContext.cs" />
     <Compile Include="CopyRecordEntity\ICopyRecord.cs" />
     <Compile Include="DataBaseContexts\IConnectable.cs" />
     <Compile Include="DataBaseContexts\IInsertable.cs" />
