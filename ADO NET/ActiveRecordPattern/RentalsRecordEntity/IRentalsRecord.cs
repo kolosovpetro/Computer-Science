@@ -2,7 +2,7 @@
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    interface IRentalsRecord
+    internal interface IRentalsRecord
     {
         // properties
 

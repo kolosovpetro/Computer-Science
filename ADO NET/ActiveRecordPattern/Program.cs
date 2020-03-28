@@ -4,58 +4,57 @@ using ActiveRecordPattern.CopyRecordEntity;
 using ActiveRecordPattern.MovieRecordEntity;
 using ActiveRecordPattern.RentalsRecordEntity;
 using System;
-using System.Collections.Generic;
 
 namespace ActiveRecordPattern
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            MovieDbContext MovieDbContext = new MovieDbContext();
-            IMovieRecord mov = MovieDbContext.Select(10);
+            var movieDbContext = new MovieDbContext();
+            var mov = movieDbContext.Select(10);
             Console.WriteLine(mov);
 
             //mov.ChangePrice(20);
             //Console.WriteLine(mov);
             //MovieDbContext.Update(mov);
 
-            var CopyListDbEngine = new CopyListDbContext();
+            var copyListDbEngine = new CopyListDbContext();
 
-            var CopyList = CopyListDbEngine.Select(11);
+            var copyList = copyListDbEngine.Select(11);
 
-            foreach (var item in CopyList.CopiesList)
+            foreach (var item in copyList.CopiesList)
             {
                 Console.WriteLine(item);
             }
 
-            var CopyRecordDb = new CopyDbContext();
+            var copyRecordDb = new CopyDbContext();
 
             //CopyRecord newCopy = new CopyRecord(21, true, 11);
             //CopyRecordDb.Insert(newCopy);
 
-            var particularCopy = CopyRecordDb.Select(11);
+            var particularCopy = copyRecordDb.Select(11);
             Console.WriteLine(particularCopy);
             particularCopy.SetAvailable(true);
-            CopyRecordDb.Update(particularCopy);
+            copyRecordDb.Update(particularCopy);
             Console.WriteLine(particularCopy);
 
-            var clientDbCont = new ClientDbContext();
-            var clnt = clientDbCont.Select(5);
-            Console.WriteLine(clnt);
-            clnt.SetFirstName("Vasya");
-            clientDbCont.Update(clnt);
-            var newClnt = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
-            Console.WriteLine(newClnt);
+            var clientDbContext = new ClientDbContext();
+            var client = clientDbContext.Select(5);
+            Console.WriteLine(client);
+            client.SetFirstName("Vasya");
+            clientDbContext.Update(client);
+            var newClient = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
+            Console.WriteLine(newClient);
             //clientDbCont.Insert(newClnt);
             //clnt.Rent(10);
 
-            RentalsDbContext rentDbCont = new RentalsDbContext();
-            IEnumerable<IRentalsRecord> rentals = rentDbCont.Select(clientId: 2);
+            var rentDbCont = new RentalsDbContext();
+            var rentals = rentDbCont.Select(clientId: 2);
 
-            foreach (IRentalsRecord item in rentals)
+            foreach (var rental in rentals)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(rental);
             }
         }
     }

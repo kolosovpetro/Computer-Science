@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface IUpdatable<T>
+    internal interface IUpdatable<T>
     {
         void Update(T entity);
     }

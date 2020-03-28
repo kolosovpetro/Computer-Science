@@ -1,12 +1,12 @@
 ﻿namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecord : IMovieRecord
+    internal class MovieRecord : IMovieRecord
     {
         public string Title { get; private set; }
 
         public int Year { get; private set; }
 
-        public int AgeRestionction { get; private set; }
+        public int AgeRestriction { get; private set; }
 
         public int MovieId { get; private set; }
 
@@ -14,11 +14,11 @@
 
         public MovieRecord() { }
 
-        public MovieRecord(string title, int year, int ageRestionction, int movieId, double price)
+        public MovieRecord(string title, int year, int ageRestriction, int movieId, double price)
         {
             Title = title;
             Year = year;
-            AgeRestionction = ageRestionction;
+            AgeRestriction = ageRestriction;
             MovieId = movieId;
             Price = price;
         }
@@ -27,7 +27,7 @@
         {
             return $"Movie title: {Title}, " +
                 $"produced in {Year}, " +
-                $"restriction {AgeRestionction}+, " +
+                $"restriction {AgeRestriction}+, " +
                 $"price {Price}";
         }
 
@@ -38,7 +38,7 @@
 
         public void ChangeAgeRestriction(int newRestriction)
         {
-            AgeRestionction = newRestriction;
+            AgeRestriction = newRestriction;
         }
 
         public void ChangePrice(double newPrice)

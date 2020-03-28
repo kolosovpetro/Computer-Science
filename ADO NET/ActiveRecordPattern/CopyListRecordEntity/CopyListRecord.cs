@@ -4,25 +4,17 @@ using System.Linq;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListRecord : ICopyListRecord
+    internal class CopyListRecord : ICopyListRecord
     {
-        public int MovieId { get; }
+        public IEnumerable<ICopyRecord> CopiesList { get; }
 
-        public IEnumerable<ICopyRecord> CopiesList { get; private set; }
-
-        public int TotalCopiesCount
-        {
-            get
-            {
-                return CopiesList.Count();
-            }
-        }
+        public int TotalCopiesCount => CopiesList.Count();
 
         public int AvailableCopiesCount
         {
             get
             {
-                return CopiesList.Where(p => p.Available == true).Count();
+                return CopiesList.Count(p => p.Available);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyRecord : ICopyRecord
+    internal class CopyRecord : ICopyRecord
     {
         public int CopyId { get; private set; }
 

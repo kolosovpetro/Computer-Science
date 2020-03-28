@@ -4,18 +4,16 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
+    internal class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
         IInsertable<IMovieRecord>
     {
-        public MovieDbContext() : base() { }
-
         public void Insert(IMovieRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "INSERT INTO movies " +
                     "(title, year, age_restriction, movie_id, price) " +
                     "VALUES " +
@@ -23,7 +21,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                 {
                     cmd.Parameters.AddWithValue("@title", entity.Title);
                     cmd.Parameters.AddWithValue("@year", entity.Year);
-                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestionction);
+                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestriction);
                     cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
                     cmd.Parameters.AddWithValue("@price", entity.Price);
                     cmd.ExecuteNonQuery();
@@ -31,9 +29,9 @@ namespace ActiveRecordPattern.MovieRecordEntity
             }
         }
 
-        public IMovieRecord Select(int MovieId)
+        public IMovieRecord Select(int movieId)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
@@ -42,34 +40,32 @@ namespace ActiveRecordPattern.MovieRecordEntity
                     "FROM movies " +
                     "WHERE movie_id = @ID", conn))
                 {
-                    command.Parameters.AddWithValue("@ID", MovieId);
+                    command.Parameters.AddWithValue("@ID", movieId);
 
-                    NpgsqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        reader.Read();
-                        IMovieRecord mov = new MovieRecord();
-                        mov.SetMovieId((int)reader["movie_id"]);
-                        mov.ChangeTitle((string)reader["title"]);
-                        mov.ChangeYear((int)reader["year"]);
-                        mov.ChangePrice(Convert.ToDouble(reader["price"]));
-                        mov.ChangeAgeRestriction((int)reader["age_restriction"]);
-                        return mov;
-                    }
+                    if (!reader.HasRows)
+                        throw new Exception("No such movie in database");
+
+                    reader.Read();
+                    IMovieRecord mov = new MovieRecord();
+                    mov.SetMovieId((int)reader["movie_id"]);
+                    mov.ChangeTitle((string)reader["title"]);
+                    mov.ChangeYear((int)reader["year"]);
+                    mov.ChangePrice(Convert.ToDouble(reader["price"]));
+                    mov.ChangeAgeRestriction((int)reader["age_restriction"]);
+                    return mov;
                 }
             }
-
-            throw new Exception("No such movie in database");       // may be to make this exception custom
         }
 
         public void Update(IMovieRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "UPDATE movies " +
                     "SET " +
                     "year = @year, " +
@@ -80,7 +76,7 @@ namespace ActiveRecordPattern.MovieRecordEntity
                 {
                     cmd.Parameters.AddWithValue("@title", entity.Title);
                     cmd.Parameters.AddWithValue("@year", entity.Year);
-                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestionction);
+                    cmd.Parameters.AddWithValue("@age_restriction", entity.AgeRestriction);
                     cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
                     cmd.Parameters.AddWithValue("@price", entity.Price);
                     cmd.ExecuteNonQuery();

@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface ISelectable<T>
+    internal interface ISelectable<T>
     {
         T Select(int id);
     }

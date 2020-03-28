@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    interface ICopyListRecord
+    internal interface ICopyListRecord
     {
         // properties
-        int MovieId { get; }
+
         int TotalCopiesCount { get; }
         int AvailableCopiesCount { get; }
         IEnumerable<ICopyRecord> CopiesList { get; }

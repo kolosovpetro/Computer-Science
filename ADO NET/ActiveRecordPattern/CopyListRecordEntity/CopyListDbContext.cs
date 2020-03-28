@@ -5,44 +5,40 @@ using System;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
+    internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
     {
-        public CopyListDbContext() : base() { }
-
         public ICopyListRecord Select(int id)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "SELECT * " +
                     "FROM copies " +
                     "WHERE movie_id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows)
+                    if (!reader.HasRows) 
+                        throw new Exception("No any copies in relation");
+
+                    var copyListRecord = new CopyListRecord();
+
+                    while (reader.Read())
                     {
-                        ICopyListRecord copyListRecord = new CopyListRecord();
-
-                        while (reader.Read())
-                        {
-                            CopyRecord copy = new CopyRecord();
-                            copy.SetMovieId((int)reader["movie_id"]);
-                            copy.SetCopyId((int)reader["copy_id"]);
-                            copy.SetAvailable((bool)reader["available"]);
-                            copyListRecord.AddCopy(copy);
-                        }
-
-                        return copyListRecord;
+                        var copy = new CopyRecord();
+                        copy.SetMovieId((int)reader["movie_id"]);
+                        copy.SetCopyId((int)reader["copy_id"]);
+                        copy.SetAvailable((bool)reader["available"]);
+                        copyListRecord.AddCopy(copy);
                     }
+
+                    return copyListRecord;
                 }
             }
-
-            throw new Exception("No any copies in relation");
         }
     }
 }

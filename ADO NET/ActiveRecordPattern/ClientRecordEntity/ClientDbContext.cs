@@ -4,18 +4,16 @@ using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
+    internal class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
         IInsertable<IClientRecord>
     {
-        public ClientDbContext() : base() { }
-
         public void Insert(IClientRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "INSERT INTO clients " +
                     "(client_id, first_name, last_name, birthday) " +
                     "VALUES " +
@@ -32,42 +30,40 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public IClientRecord Select(int clientId)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "SELECT * " +
                     "FROM clients " +
                     "WHERE client_id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", clientId);
 
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        IClientRecord client = new ClientRecord();
-                        reader.Read();
-                        client.SetClientId((int)reader["client_id"]);
-                        client.SetFirstName((string)reader["first_name"]);
-                        client.SetLastName((string)reader["last_name"]);
-                        client.SetBirthday(Convert.ToDateTime(reader["birthday"]));
-                        return client;
-                    }
+                    if (!reader.HasRows)
+                        throw new Exception("No such client in relation");
+
+                    IClientRecord client = new ClientRecord();
+                    reader.Read();
+                    client.SetClientId((int)reader["client_id"]);
+                    client.SetFirstName((string)reader["first_name"]);
+                    client.SetLastName((string)reader["last_name"]);
+                    client.SetBirthday(Convert.ToDateTime(reader["birthday"]));
+                    return client;
                 }
-
-                throw new Exception("No such client in relation");
             }
         }
 
         public void Update(IClientRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "UPDATE clients " +
                     "SET " +
                     "first_name = @first_name, " +

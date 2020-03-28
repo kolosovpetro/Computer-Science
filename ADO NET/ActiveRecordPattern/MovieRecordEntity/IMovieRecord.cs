@@ -1,13 +1,13 @@
 ﻿namespace ActiveRecordPattern.MovieRecordEntity
 {
-    interface IMovieRecord
+    internal interface IMovieRecord
     {
         // properties
 
         int MovieId { get; }
         string Title { get; }
         int Year { get; }
-        int AgeRestionction { get; }
+        int AgeRestriction { get; }
         double Price { get; }
 
         // setters

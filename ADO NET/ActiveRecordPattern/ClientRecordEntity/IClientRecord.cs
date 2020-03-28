@@ -2,7 +2,7 @@
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    interface IClientRecord
+    internal interface IClientRecord
     {
         // properties
 

@@ -2,7 +2,7 @@
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsRecord : IRentalsRecord
+    internal class RentalsRecord : IRentalsRecord
     {
         public int CopyId { get; private set; }
 
@@ -14,7 +14,7 @@ namespace ActiveRecordPattern.RentalsRecordEntity
 
         public RentalsRecord() { }
 
-        public RentalsRecord(int copyId, int clientId, DateTime dateOfRental, DateTime dateOfReturn)
+        public RentalsRecord(int copyId, int clientId, DateTime dateOfRental, DateTime? dateOfReturn)
         {
             CopyId = copyId;
             ClientId = clientId;

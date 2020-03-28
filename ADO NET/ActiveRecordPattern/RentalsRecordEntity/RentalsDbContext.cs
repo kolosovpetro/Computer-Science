@@ -5,18 +5,16 @@ using System.Collections.Generic;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
+    internal class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>
     {
-        public RentalsDbContext() : base() { }
-
         public void Insert(IRentalsRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "INSERT INTO rentals " +
                     "(copy_id, client_id, date_of_rental, date_of_return) " +
                     "VALUES " +
@@ -33,48 +31,46 @@ namespace ActiveRecordPattern.RentalsRecordEntity
 
         public IEnumerable<IRentalsRecord> Select(int clientId)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "SELECT * " +
                     "FROM rentals " +
                     "WHERE client_id = @client_id", conn))
                 {
                     cmd.Parameters.AddWithValue("@client_id", clientId);
 
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows)
+                    if (!reader.HasRows) 
+                        throw new Exception("No such rental in relation");
+
+                    var rentList = new List<RentalsRecord>();
+
+                    while (reader.Read())
                     {
-                        List<RentalsRecord> rentRec = new List<RentalsRecord>();
-
-                        while (reader.Read())
-                        {
-                            RentalsRecord rent = new RentalsRecord();
-                            rent.SetClientId((int)reader["client_id"]);
-                            rent.SetCopyId((int)reader["copy_id"]);
-                            rent.SetDateOfRental(Convert.ToDateTime(reader["date_of_rental"]));
-                            rent.SetDateOfReturn(Convert.ToDateTime(reader["date_of_return"]));
-                            rentRec.Add(rent);
-                        }
-
-                        return rentRec;
+                        var rent = new RentalsRecord();
+                        rent.SetClientId((int)reader["client_id"]);
+                        rent.SetCopyId((int)reader["copy_id"]);
+                        rent.SetDateOfRental(Convert.ToDateTime(reader["date_of_rental"]));
+                        rent.SetDateOfReturn(Convert.ToDateTime(reader["date_of_return"]));
+                        rentList.Add(rent);
                     }
 
-                    throw new Exception("No such rental in relation");
+                    return rentList;
                 }
             }
         }
 
         public void Update(IRentalsRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "UPDATE rentals " +
                     "SET " +
                     "date_of_rental = @date_of_rental, " +

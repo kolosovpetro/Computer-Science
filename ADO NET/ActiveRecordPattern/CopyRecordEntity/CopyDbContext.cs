@@ -4,18 +4,16 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
+    internal class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
         IInsertable<ICopyRecord>
     {
-        public CopyDbContext() : base() { }
-
         public void Insert(ICopyRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "INSERT INTO copies " +
                     "(copy_id, available, movie_id)" +
                     "VALUES " +
@@ -31,41 +29,39 @@ namespace ActiveRecordPattern.CopyRecordEntity
 
         public ICopyRecord Select(int id)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "SELECT * " +
                     "FROM copies " +
                     "WHERE copy_id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
 
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        ICopyRecord newCopy = new CopyRecord();
-                        reader.Read();
-                        newCopy.SetMovieId((int)reader["movie_id"]);
-                        newCopy.SetCopyId((int)reader["copy_id"]);
-                        newCopy.SetAvailable((bool)reader["available"]);
-                        return newCopy;
-                    }
+                    if (!reader.HasRows)
+                        throw new Exception("No such item in relation");
+
+                    ICopyRecord newCopy = new CopyRecord();
+                    reader.Read();
+                    newCopy.SetMovieId((int) reader["movie_id"]);
+                    newCopy.SetCopyId((int) reader["copy_id"]);
+                    newCopy.SetAvailable((bool) reader["available"]);
+                    return newCopy;
                 }
             }
-
-            throw new Exception("No such item in relation");
         }
 
         public void Update(ICopyRecord entity)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(
+                using (var cmd = new NpgsqlCommand(
                     "UPDATE copies " +
                     "SET " +
                     "available = @available " +

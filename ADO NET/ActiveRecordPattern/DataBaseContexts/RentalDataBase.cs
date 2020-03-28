@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    abstract class RentalDataBase
+    internal abstract class RentalDataBase
     {
         protected string ConnectionString { get; }
 

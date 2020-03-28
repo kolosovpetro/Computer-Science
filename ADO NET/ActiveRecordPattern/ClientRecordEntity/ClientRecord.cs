@@ -1,12 +1,11 @@
 ﻿using ActiveRecordPattern.CopyListRecordEntity;
 using ActiveRecordPattern.CopyRecordEntity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientRecord : IClientRecord
+    internal class ClientRecord : IClientRecord
     {
         public int ClientId { get; private set; }
 
@@ -56,18 +55,19 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public void Rent(int movieId)
         {
-            IEnumerable<ICopyRecord> copiesList = new CopyListDbContext()
+            var copiesList = new CopyListDbContext()
                 .Select(movieId).CopiesList;
+
             var copyDbCont = new CopyDbContext();
 
-            if (copiesList.Count() != 0)
-            {
-                copiesList.ElementAt(0).SetAvailable(false);
-                copyDbCont.Update(copiesList.ElementAt(0));
-                return;
-            }
+            var copyRecords = copiesList.ToList();
 
-            throw new Exception("No available copies of this movie");
+            if (copyRecords.Count == 0)
+                throw new Exception("No available copies of this movie");
+
+            copyRecords.ElementAt(0).SetAvailable(false);
+            copyDbCont.Update(copyRecords.ElementAt(0));
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ActiveRecordPattern.DataBaseContexts
 {
-    interface IInsertable<T>
+    internal interface IInsertable<T>
     {
         void Insert(T entity);
     }
