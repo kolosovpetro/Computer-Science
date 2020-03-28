@@ -6,6 +6,8 @@ namespace ActiveRecordPattern.CopyListRecordEntity
 {
     class CopyListRecord : ICopyListRecord
     {
+        public List<CopyRecord> CopiesList { get; private set; }
+
         public int MovieId { get; }
 
         public int TotalCopiesCount
@@ -24,14 +26,12 @@ namespace ActiveRecordPattern.CopyListRecordEntity
             }
         }
 
-        public List<ICopyRecord> CopiesList { get; private set; }
-
         public CopyListRecord()
         {
-            CopiesList = new List<ICopyRecord>();
+            CopiesList = new List<CopyRecord>();
         }
 
-        public void AddCopy(ICopyRecord copy)
+        public void AddCopy(CopyRecord copy)
         {
             CopiesList.Add(copy);
         }

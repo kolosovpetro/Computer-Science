@@ -9,11 +9,11 @@ namespace ActiveRecordPattern.CopyListRecordEntity
         int MovieId { get; }
         int TotalCopiesCount { get; }
         int AvailableCopiesCount { get; }
-        List<ICopyRecord> CopiesList { get; }
+        List<CopyRecord> CopiesList { get; }
 
         // setters
 
-        void AddCopy(ICopyRecord copy);
+        void AddCopy(CopyRecord copy);
 
     }
 }

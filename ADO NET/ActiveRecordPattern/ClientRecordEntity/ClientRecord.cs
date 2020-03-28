@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.CopyRecordEntity;
+using System;
+using System.Collections.Generic;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
@@ -24,7 +27,10 @@ namespace ActiveRecordPattern.ClientRecordEntity
 
         public override string ToString()
         {
-            return $"Client id: {ClientId}, Firstname: {FirstName}, Lastname: {LastName}, Birthday: {Birthday}";
+            return $"Client id: {ClientId}, " +
+                $"Firstname: {FirstName}, " +
+                $"Lastname: {LastName}, " +
+                $"Birthday: {Birthday}";
         }
 
         public void SetBirthday(DateTime newBirthday)
@@ -45,6 +51,22 @@ namespace ActiveRecordPattern.ClientRecordEntity
         public void SetLastName(string newLastName)
         {
             LastName = newLastName;
+        }
+
+        public void Rent(int movieId)
+        {
+            List<CopyRecord> copiesList = new CopyListDbContext<CopyListRecord>()
+                .Select(movieId).CopiesList;
+            var copyDbCont = new CopyDbContext<CopyRecord>();
+
+            if (copiesList.Count != 0)
+            {
+                copiesList[0].SetAvailable(false);
+                copyDbCont.Update(copiesList[0]);
+                return;
+            }
+
+            throw new Exception("No available copies of this movie");
         }
     }
 }

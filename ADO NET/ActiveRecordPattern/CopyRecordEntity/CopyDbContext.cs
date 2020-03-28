@@ -56,9 +56,9 @@ namespace ActiveRecordPattern.CopyRecordEntity
                     {
                         CopyRecord newCopy = new CopyRecord();
                         reader.Read();
-                        newCopy.ChangeMovieId((int)reader["movie_id"]);
-                        newCopy.ChangeCopyId((int)reader["copy_id"]);
-                        newCopy.ChangeAvailable((bool)reader["available"]);
+                        newCopy.SetMovieId((int)reader["movie_id"]);
+                        newCopy.SetCopyId((int)reader["copy_id"]);
+                        newCopy.SetAvailable((bool)reader["available"]);
                         return (T)newCopy;
                     }
                 }
@@ -77,10 +77,10 @@ namespace ActiveRecordPattern.CopyRecordEntity
                     "UPDATE copies " +
                     "SET " +
                     "available = @available " +
-                    "WHERE movie_id = @movie_id", conn))
+                    "WHERE copy_id = @copy_id", conn))
                 {
                     cmd.Parameters.AddWithValue("@available", entity.Available);
-                    cmd.Parameters.AddWithValue("@movie_id", entity.MovieId);
+                    cmd.Parameters.AddWithValue("@copy_id", entity.CopyId);
                     cmd.ExecuteNonQuery();
                 }
             }

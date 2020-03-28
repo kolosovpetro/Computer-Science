@@ -40,9 +40,9 @@ namespace ActiveRecordPattern.CopyListRecordEntity
                         while (reader.Read())
                         {
                             var copy = new CopyRecord();
-                            copy.ChangeMovieId((int)reader["movie_id"]);
-                            copy.ChangeCopyId((int)reader["copy_id"]);
-                            copy.ChangeAvailable((bool)reader["available"]);
+                            copy.SetMovieId((int)reader["movie_id"]);
+                            copy.SetCopyId((int)reader["copy_id"]);
+                            copy.SetAvailable((bool)reader["available"]);
                             copyListRecord.AddCopy(copy);
                         }
 

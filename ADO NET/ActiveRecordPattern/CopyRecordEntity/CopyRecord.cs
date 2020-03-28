@@ -22,25 +22,19 @@
             return $"Copy id: {CopyId}, Availability: {Available}, Movie Id: {MovieId}";
         }
 
-        public void ChangeCopyId(int newId)
+        public void SetCopyId(int newId)
         {
             CopyId = newId;
         }
 
-        public void ChangeAvailable(bool newState)
+        public void SetAvailable(bool newState)
         {
             Available = newState;
         }
 
-        public void ChangeMovieId(int newId)
+        public void SetMovieId(int newId)
         {
             MovieId = newId;
         }
-
-        public void Rent()
-        {
-            Available = false;
-        }
-
     }
 }

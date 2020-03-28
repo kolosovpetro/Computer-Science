@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ActiveRecordPattern.CopyListRecordEntity;
+using ActiveRecordPattern.CopyRecordEntity;
+using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
@@ -17,5 +19,6 @@ namespace ActiveRecordPattern.ClientRecordEntity
         void SetFirstName(string newFirstName);
         void SetLastName(string newLastName);
         void SetBirthday(DateTime newBirthday);
+        void Rent(int movieId);
     }
 }

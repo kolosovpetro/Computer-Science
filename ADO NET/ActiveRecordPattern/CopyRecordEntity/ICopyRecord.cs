@@ -10,9 +10,9 @@
 
         // setters
 
-        void ChangeCopyId(int newId);
-        void ChangeAvailable(bool newState);
-        void ChangeMovieId(int newId);
+        void SetCopyId(int newId);
+        void SetAvailable(bool newState);
+        void SetMovieId(int newId);
 
     }
 }

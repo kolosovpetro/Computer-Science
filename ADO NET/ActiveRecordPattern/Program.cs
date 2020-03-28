@@ -34,7 +34,7 @@ namespace ActiveRecordPattern
 
             var particularCopy = CopyRecordDb.Select(11);
             Console.WriteLine(particularCopy);
-            particularCopy.ChangeAvailable(true);
+            particularCopy.SetAvailable(true);
             CopyRecordDb.Update(particularCopy);
             Console.WriteLine(particularCopy);
 
@@ -43,7 +43,8 @@ namespace ActiveRecordPattern
             Console.WriteLine(clnt);
             var newClnt = new ClientRecord(9, "Aska", "Tao", new DateTime(1980, 3, 5));
             Console.WriteLine(newClnt);
-            clientDbCont.Insert(newClnt);
+            //clientDbCont.Insert(newClnt);
+            clnt.Rent(10);
         }
     }
 }
