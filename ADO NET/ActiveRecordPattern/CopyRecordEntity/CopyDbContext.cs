@@ -4,19 +4,10 @@ using System;
 
 namespace ActiveRecordPattern.CopyRecordEntity
 {
-    class CopyDbContext : IConnectable, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>, 
+    class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
         IInsertable<ICopyRecord>
     {
-        public string ConnectionString { get; }
-
-        public CopyDbContext()
-        {
-            ConnectionString = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();
-        }
+        public CopyDbContext() : base() { }
 
         public void Insert(ICopyRecord entity)
         {

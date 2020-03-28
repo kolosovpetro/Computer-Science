@@ -84,14 +84,14 @@
     <Compile Include="CopyRecordEntity\CopyRecord.cs" />
     <Compile Include="CopyRecordEntity\CopyDbContext.cs" />
     <Compile Include="CopyRecordEntity\ICopyRecord.cs" />
-    <Compile Include="DataBaseContexts\IConnectable.cs" />
     <Compile Include="DataBaseContexts\IInsertable.cs" />
     <Compile Include="DataBaseContexts\IRemovable.cs" />
     <Compile Include="DataBaseContexts\ISelectable.cs" />
     <Compile Include="DataBaseContexts\IUpdatable.cs" />
+    <Compile Include="DataBaseContexts\RentalDataBase.cs" />
     <Compile Include="MovieRecordEntity\IMovieRecord.cs" />
     <Compile Include="MovieRecordEntity\MovieRecord.cs" />
-    <Compile Include="MovieRecordEntity\MovieRecordDbContext.cs" />
+    <Compile Include="MovieRecordEntity\MovieDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentalsRecordEntity\IRentalsRecord.cs" />

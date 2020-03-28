@@ -5,18 +5,9 @@ using System;
 
 namespace ActiveRecordPattern.CopyListRecordEntity
 {
-    class CopyListDbContext : IConnectable, ISelectable<ICopyListRecord>
+    class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
     {
-        public string ConnectionString { get; }
-
-        public CopyListDbContext()
-        {
-            ConnectionString = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();
-        }
+        public CopyListDbContext() : base() { }
 
         public ICopyListRecord Select(int id)
         {

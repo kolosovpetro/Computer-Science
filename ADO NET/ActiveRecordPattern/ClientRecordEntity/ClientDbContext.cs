@@ -4,19 +4,10 @@ using System;
 
 namespace ActiveRecordPattern.ClientRecordEntity
 {
-    class ClientDbContext : IConnectable, ISelectable<IClientRecord>, IUpdatable<IClientRecord>, 
+    class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
         IInsertable<IClientRecord>
     {
-        public string ConnectionString { get; }
-
-        public ClientDbContext()
-        {
-            ConnectionString = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();
-        }
+        public ClientDbContext() : base() { }
 
         public void Insert(IClientRecord entity)
         {

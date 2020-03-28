@@ -4,19 +4,10 @@ using System;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {
-    class MovieRecordDbContext : IConnectable, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>, 
+    class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
         IInsertable<IMovieRecord>
     {
-        public string ConnectionString { get; }
-
-        public MovieRecordDbContext()
-        {
-            ConnectionString = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();
-        }
+        public MovieDbContext() : base() { }
 
         public void Insert(IMovieRecord entity)
         {

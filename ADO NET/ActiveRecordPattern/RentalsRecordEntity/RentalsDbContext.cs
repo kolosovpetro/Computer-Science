@@ -5,19 +5,10 @@ using System.Collections.Generic;
 
 namespace ActiveRecordPattern.RentalsRecordEntity
 {
-    class RentalsDbContext : IConnectable, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>, 
+    class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>
     {
-        public string ConnectionString { get; }
-
-        public RentalsDbContext()
-        {
-            ConnectionString = System
-            .Configuration
-            .ConfigurationManager
-            .ConnectionStrings["Rental"]
-            .ToString();
-        }
+        public RentalsDbContext() : base() { }
 
         public void Insert(IRentalsRecord entity)
         {
