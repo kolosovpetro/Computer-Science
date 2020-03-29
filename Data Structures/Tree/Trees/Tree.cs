@@ -60,7 +60,7 @@ namespace Trees.Trees
 
         public bool IsEmpty()
         {
-            return Size < 0;
+            return Size == 0;
         }
 
         public T ParentOf(T Child)
