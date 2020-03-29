@@ -1,26 +1,28 @@
-﻿namespace LinearEquationsSolver
+﻿using System;
+
+namespace LinearEquationsSolver
 {
-    class NumericalMethods
+    internal class NumericalMethods
     {
-        public double[][] ForwardElimination(double[][] AugmentedMatrix)
+        public double[][] ForwardElimination(double[][] augmentedMatrix)
         {
-            int N0 = AugmentedMatrix.Length;
-            int N1 = AugmentedMatrix[0].Length;
+            int n0 = augmentedMatrix.Length;
+            int n1 = augmentedMatrix[0].Length;
 
-            for (int k = 0; k < N0; k++)
+            for (int k = 0; k < n0; k++)
             {
-                for (int i = k + 1; i < N1 - 1; i++)
+                for (int i = k + 1; i < n1 - 1; i++)
                 {
-                    double factor = AugmentedMatrix[i][k] / AugmentedMatrix[k][k];
+                    double factor = augmentedMatrix[i][k] / augmentedMatrix[k][k];
 
-                    for (int j = k; j < N1; j++)
+                    for (int j = k; j < n1; j++)
                     {
-                        AugmentedMatrix[i][j] -= factor * AugmentedMatrix[k][j];
+                        augmentedMatrix[i][j] -= factor * augmentedMatrix[k][j];
                     }
                 }
             }
 
-            return AugmentedMatrix;
+            return augmentedMatrix;
         }
         public double[] SolveLinearEquations(double[][] rows)
         {
@@ -28,7 +30,7 @@
 
             for (int i = 0; i < rows.Length - 1; i++)
             {
-                if (rows[i][i] == 0 && !Pivot(rows, i, i)) return null;
+                if (Math.Abs(rows[i][i]) < 0 && !Pivot(rows, i, i)) return null;
 
                 // Forward Elimination
                 for (int j = i; j < rows.Length; j++)
@@ -38,7 +40,7 @@
                     for (int x = 0; x < length; x++)
                     {
                         d[x] = rows[j][x];
-                        if (rows[j][i] != 0) 
+                        if (Math.Abs(rows[j][i]) < 0)
                             d[x] = d[x] / rows[j][i];
                     }
 
@@ -52,7 +54,8 @@
                     for (int g = 0; g < length; g++)
                     {
                         f[g] = rows[y][g];
-                        if (rows[y][i] != 0)
+
+                        if (Math.Abs(rows[y][i]) > 0)
                         {
                             f[g] = f[g] - rows[i][g];
                         }
@@ -69,10 +72,9 @@
             bool swapped = false;
             for (int z = rows.Length - 1; z > row; z--)
             {
-                if (rows[z][row] != 0)
+                if (Math.Abs(rows[z][row]) > 0)
                 {
-                    double[] temp = new double[rows[0].Length];
-                    temp = rows[z];
+                    var temp = rows[z];
                     rows[z] = rows[column];
                     rows[column] = temp;
                     swapped = true;
@@ -83,12 +85,11 @@
         }
         public double[] BackwardSubstitution(double[][] rows)
         {
-            double val = 0;
             int length = rows[0].Length;
             double[] result = new double[rows.Length];
             for (int i = rows.Length - 1; i >= 0; i--)
             {
-                val = rows[i][length - 1];
+                var val = rows[i][length - 1];
                 for (int x = length - 2; x > i - 1; x--)
                 {
                     val -= rows[i][x] * result[x];

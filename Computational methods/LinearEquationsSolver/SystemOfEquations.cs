@@ -4,27 +4,27 @@ using System.Linq;
 
 namespace LinearEquationsSolver
 {
-    class SystemOfEquations
+    internal class SystemOfEquations
     {
-        private List<Equation> SystemOfEquat = new List<Equation>();
-        private NumericalMethods nm = new NumericalMethods();
-        private double[][] AugmentedMatrix;
-        private double[] Solutions;
-        private double[][] EliminatedMatrix;
+        private readonly List<Equation> _systemOfEquations = new List<Equation>();
+        private readonly NumericalMethods _nm = new NumericalMethods();
+        private double[][] _augmentedMatrix;
+        private double[] _solutions;
+        private double[][] _eliminatedMatrix;
 
         private double[][] AugMatrix()
         {
-            int arraySize = SystemOfEquat.Count();
+            int arraySize = _systemOfEquations.Count();
             double[][] array = new double[arraySize][];
 
             for (int i = 0; i < array.Length; i++)
             {
-                string[] ListTerm = SystemOfEquat[i].GetAugMatrixRow;
-                double[] arrayTerm = new double[ListTerm.Length];
+                string[] listTerm = _systemOfEquations[i].GetAugMatrixRow;
+                double[] arrayTerm = new double[listTerm.Length];
 
                 for (int t = 0; t < arrayTerm.Length; t++)
                 {
-                    arrayTerm[t] = double.Parse(ListTerm[t]);
+                    arrayTerm[t] = double.Parse(listTerm[t]);
                 }
 
                 array[i] = arrayTerm;
@@ -32,79 +32,90 @@ namespace LinearEquationsSolver
 
             return array;
         }
+
         private void SetSolutions()
         {
             SetAugMatrix();
-            this.Solutions = nm.SolveLinearEquations(this.AugmentedMatrix);
+            _solutions = _nm.SolveLinearEquations(this._augmentedMatrix);
         }
+
         private void SetAugMatrix()
         {
-            this.AugmentedMatrix = AugMatrix();
+            _augmentedMatrix = AugMatrix();
         }
+
         public double[][] GetAugMatrix
         {
             get
             {
                 SetAugMatrix();
-                return this.AugmentedMatrix;
+                return _augmentedMatrix;
             }
         }
-        public double[][] GetElimMatrix
+
+        public double[][] GetEliminatedMatrix
         {
             get
             {
-                SetElimMatrix();
-                return this.EliminatedMatrix;
+                SetEliminatedMatrix();
+                return _eliminatedMatrix;
             }
         }
+
         public double[] GetSolutions
         {
             get
             {
                 SetSolutions();
-                return this.Solutions;
+                return _solutions;
             }
         }
+
         public void AddEquation(Equation eq)
         {
-            SystemOfEquat.Add(eq);
+            _systemOfEquations.Add(eq);
         }
+
         public void PrintSystem()
         {
-            foreach (Equation item in SystemOfEquat)
+            foreach (var item in _systemOfEquations)
             {
                 Console.WriteLine(item.GetEquationForm);
             }
         }
+
         public void PrintAugMatrix()
         {
             SetAugMatrix();
-            for (int i = 0; i < AugmentedMatrix.Length; i++)
+            foreach (var item in _augmentedMatrix)
             {
-                Auxiliary.printArray(AugmentedMatrix[i]);
+                Auxiliary.printArray(item);
                 Console.WriteLine();
             }
         }
+
         public void PrintSolutions()
         {
             SetSolutions();
 
-            for (int i = 0; i < Solutions.Length; i++)
+            for (int i = 0; i < _solutions.Length; i++)
             {
-                Console.WriteLine($"x{i + 1} = {Solutions[i]}");
+                Console.WriteLine($"x{i + 1} = {_solutions[i]}");
             }
         }
-        private void SetElimMatrix()
+
+        private void SetEliminatedMatrix()
         {
             SetAugMatrix();
-            this.EliminatedMatrix = nm.ForwardElimination(this.AugmentedMatrix);
+            _eliminatedMatrix = _nm.ForwardElimination(_augmentedMatrix);
         }
-        public void PrintElimMatrix()
+
+        public void PrintEliminatedMatrix()
         {
-            SetElimMatrix();
-            for (int i = 0; i < EliminatedMatrix.Length; i++)
+            SetEliminatedMatrix();
+            foreach (var item in _eliminatedMatrix)
             {
-                Auxiliary.printArray(EliminatedMatrix[i]);
+                Auxiliary.printArray(item);
                 Console.WriteLine();
             }
         }

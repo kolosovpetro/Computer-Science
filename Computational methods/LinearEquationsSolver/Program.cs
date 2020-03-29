@@ -2,41 +2,44 @@
 
 namespace LinearEquationsSolver
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             while (true)
             {
-                SystemOfEquations SystemOfLinEquations = new SystemOfEquations();
+                var systemOfLinEquations = new SystemOfEquations();
 
                 Console.WriteLine("Welcome to linear equation solver. ");
                 Console.WriteLine("To get equation, type an integer coefficients in line, separated by space.");
                 Console.WriteLine("When system is ready, enter END to bash.");
-                int step = 0;
+
+                var step = 0;
 
                 while (true)
                 {
                     Console.Write($"Eq #{step} > ");
                     string entry = Console.ReadLine();
-                    if (entry.ToLower() == "end")
+
+                    if (entry != null && entry.ToLower() == "end")
                     {
                         break;
                     }
-                    SystemOfLinEquations.AddEquation(new Equation(entry));
+
+                    systemOfLinEquations.AddEquation(new Equation(entry));
                     step++;
                 }
 
                 try
                 {
                     Console.WriteLine("We have now the system: ");
-                    SystemOfLinEquations.PrintSystem();
+                    systemOfLinEquations.PrintSystem();
                     Console.WriteLine("The Augmented matrix is: ");
-                    SystemOfLinEquations.PrintAugMatrix();
-                    Console.WriteLine("Forward Elimintation is: ");
-                    SystemOfLinEquations.PrintElimMatrix();
+                    systemOfLinEquations.PrintAugMatrix();
+                    Console.WriteLine("Forward Elimination is: ");
+                    systemOfLinEquations.PrintEliminatedMatrix();
                     Console.WriteLine("And solutions are: ");
-                    SystemOfLinEquations.PrintSolutions();
+                    systemOfLinEquations.PrintSolutions();
                 }
 
                 catch (Exception ex)
@@ -48,18 +51,17 @@ namespace LinearEquationsSolver
                 Console.WriteLine("If you want to solve other system - press any key");
                     Console.WriteLine("If you want to quite - press X");
                 
-                string ExitOrNot = Console.ReadLine();
-                if (ExitOrNot.ToLower() == "x")
+                string exitOrNot = Console.ReadLine();
+
+                if (exitOrNot != null && exitOrNot.ToLower() == "x")
                 {
                     break;
                 }
+
                 Console.Clear();
             }
 
         }
-
-
-
     }
 }
 

@@ -3,25 +3,26 @@ using System.Linq;
 
 namespace LinearEquationsSolver
 {
-    class Equation
+    internal class Equation
     {
-        private string[] AugMatrixRow;
-        private string EquationForm;
+        public string[] GetAugMatrixRow { get; }
 
-        public Equation(string NewAugMatrixRow)
+        public string GetEquationForm { get; }
+
+        public Equation(string newAugMatrixRow)
         {
-            this.AugMatrixRow = SetAugMatrixRow(NewAugMatrixRow);
-            this.EquationForm = SetEquationForm(AugMatrixRow);
+            GetAugMatrixRow = SetAugMatrixRow(newAugMatrixRow);
+            GetEquationForm = SetEquationForm(GetAugMatrixRow);
         }
-        private string[] SetAugMatrixRow(string Input)
+        private string[] SetAugMatrixRow(string input)
         {
-            for (int i = 0; i < Input.Length; i++)
+            foreach (var item in input)
             {
-                if (!double.TryParse(Input[i].ToString(), out double s) && Input[i] != ' ' && Input[i] != '-')
+                if (!double.TryParse(item.ToString(), out _) && item != ' ' && item != '-')
                     throw new Exception("Wrong character detected");
             }
 
-            string[] arrayWithNulls = Input.Split(' ');
+            var arrayWithNulls = input.Split(' ');
 
             for (int i = 0; i < arrayWithNulls.Length; i++)
             {
@@ -30,7 +31,7 @@ namespace LinearEquationsSolver
 
             int size = arrayWithNulls.Count(s => s != " ");
 
-            string[] arrayNoNulls = new string[size];
+            var arrayNoNulls = new string[size];
 
             for (int i = 0; i < size; i++)
             {
@@ -42,32 +43,31 @@ namespace LinearEquationsSolver
 
             return arrayNoNulls;
         }
-        public static string SetEquationForm(string[] Entry)
+
+        public static string SetEquationForm(string[] entry)
         {
             int index = 1;
             string equation = null;
 
-            for (int i = 0; i < Entry.Length; i++)
+            for (int i = 0; i < entry.Length; i++)
             {
                 if (i == 0)
                 {
-                    equation += $"{Entry[i]}*x{index}";
+                    equation += $"{entry[i]}*x{index}";
                     index++;
                 }
 
-                else if (i == Entry.Length - 1)
-                    equation += $" = {Entry[i]}";
+                else if (i == entry.Length - 1)
+                    equation += $" = {entry[i]}";
 
                 else
                 {
-                    equation += $" + {Entry[i]}*x{index}";
+                    equation += $" + {entry[i]}*x{index}";
                     index++;
                 }
             }
 
             return equation;
         }
-        public string[] GetAugMatrixRow { get { return this.AugMatrixRow; } }
-        public string GetEquationForm { get { return this.EquationForm; } }
     }
 }

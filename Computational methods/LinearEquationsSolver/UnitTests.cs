@@ -3,7 +3,7 @@
 namespace LinearEquationsSolver
 {
     [TestFixture]
-    class Testing
+    internal class UnitTests
     {
         [Test]
         public void TestOfSetEquationForm()
@@ -20,7 +20,7 @@ namespace LinearEquationsSolver
             s1.AddEquation(eq1);
             Equation eq2 = new Equation("4 5 6");
             s1.AddEquation(eq2);
-            double[][] test = s1.GetElimMatrix;
+            double[][] test = s1.GetEliminatedMatrix;
             Assert.That(test[1], Is.EqualTo(new double[] { 0, -3, -6 }));
             Assert.That(test[0], Is.EqualTo(new double[] { 1, 2, 3 }));
         }
