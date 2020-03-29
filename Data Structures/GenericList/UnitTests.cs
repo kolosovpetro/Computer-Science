@@ -4,12 +4,12 @@ using System;
 namespace GenericList
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void InitializationTest()
         {
-            CustomList<string> list = new CustomList<string>("Cat", "Dog", "Frog");
+            var list = new CustomList<string>("Cat", "Dog", "Frog");
             Assert.That(list.Count, Is.EqualTo(3));
             list.Add("Lion");
             Assert.That(list.Count, Is.EqualTo(4));
@@ -29,7 +29,7 @@ namespace GenericList
         [Test]
         public void ClearTest()
         {
-            CustomList<string> list = new CustomList<string>("Cat", "Dog", "Frog");
+            var list = new CustomList<string>("Cat", "Dog", "Frog");
             Assert.That(list.Count, Is.EqualTo(3));
             list.Add("Lion");
             Assert.That(list.Count, Is.EqualTo(4));
@@ -54,7 +54,7 @@ namespace GenericList
         [Test]
         public void AddTest()
         {
-            CustomList<string> list = new CustomList<string>();
+            var list = new CustomList<string>();
             list.Add("First item");
             Assert.That(list.Count, Is.EqualTo(1));
             Assert.That(list.ElementAt(0), Is.EqualTo("First item"));
@@ -66,7 +66,7 @@ namespace GenericList
         [Test]
         public void ContainsTest()
         {
-            CustomList<string> list = new CustomList<string>("Cat", "Dog", "Frog");
+            var list = new CustomList<string>("Cat", "Dog", "Frog");
             list.Add("Lion");
             list.Add("Tiger");
             Assert.That(list.Contains("Tiger"), Is.EqualTo(true));
@@ -76,7 +76,7 @@ namespace GenericList
         [Test]
         public void IndexOfTest()
         {
-            CustomList<string> list = new CustomList<string>("Cat", "Dog", "Frog");
+            var list = new CustomList<string>("Cat", "Dog", "Frog");
             list.Add("Lion");
             list.Add("Tiger");
             Assert.That(list.IndexOf("Tiger"), Is.EqualTo(4));

@@ -1,6 +1,6 @@
 ﻿namespace GenericList
 {
-    interface ICustomList<T>
+    internal interface ICustomList<T>
     {
         int Count { get; }
         void Add(T data);

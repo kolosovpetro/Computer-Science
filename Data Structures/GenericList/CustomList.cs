@@ -2,11 +2,11 @@
 
 namespace GenericList
 {
-    class CustomList<T> : ICustomList<T>
+    internal class CustomList<T> : ICustomList<T>
     {
-        private T[] listBase;
+        private T[] _listBase;
         public int Count { get; private set; }
-        public int Capacity { get; private set; }
+        public int Capacity { get; }
 
         public CustomList()
         {
@@ -15,13 +15,13 @@ namespace GenericList
 
         public CustomList(params T[] listBase)
         {
-            this.listBase = listBase;
+            _listBase = listBase;
             Count = listBase.Length;
         }
 
         public CustomList(int size)
         {
-            listBase = new T[size];
+            _listBase = new T[size];
             Capacity = size;
         }
 
@@ -30,23 +30,23 @@ namespace GenericList
             if (Count == 0)
             {
                 Count++;
-                listBase = new T[Count];
-                listBase[Count - 1] = data;
+                _listBase = new T[Count];
+                _listBase[Count - 1] = data;
                 return;
             }
 
             Count++;
             T[] temp = new T[Count];
-            listBase.CopyTo(temp, 0);
-            listBase = new T[temp.Length];
-            temp.CopyTo(listBase, 0);
-            listBase[Count - 1] = data;
+            _listBase.CopyTo(temp, 0);
+            _listBase = new T[temp.Length];
+            temp.CopyTo(_listBase, 0);
+            _listBase[Count - 1] = data;
         }
 
         public void Clear()
         {
             Count = 0;
-            listBase = null;
+            _listBase = null;
         }
 
         public int IndexOf(T data)
@@ -62,14 +62,14 @@ namespace GenericList
 
         public T ElementAt(int index)
         {
-            return listBase[index];
+            return _listBase[index];
         }
 
         public bool Contains(T data)
         {
-            for (int i = 0; i < listBase.Length; i++)
+            for (int i = 0; i < _listBase.Length; i++)
             {
-                if (listBase[i].Equals(data))
+                if (_listBase[i].Equals(data))
                 {
                     return true;
                 }
@@ -80,9 +80,9 @@ namespace GenericList
         
         private bool Contains(T data, out int index)
         {
-            for (int i = 0; i < listBase.Length; i++)
+            for (int i = 0; i < _listBase.Length; i++)
             {
-                if (listBase[i].Equals(data))
+                if (_listBase[i].Equals(data))
                 {
                     index = i;
                     return true;
