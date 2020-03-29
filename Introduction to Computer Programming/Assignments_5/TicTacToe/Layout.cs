@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignments_5.TicTacToe
 {
-    class Layout
+    internal class Layout
     {
-        private readonly string[] menuItems;
+        private readonly string[] _menuItems;
 
         public Layout()
         {
-            this.menuItems = new string[]
+            _menuItems = new[]
             {
                 "1. New Game",
                 "2. About the author",
@@ -22,7 +18,7 @@ namespace Assignments_5.TicTacToe
 
         public void PrintMainMenu()
         {
-            foreach (string item in menuItems)
+            foreach (string item in _menuItems)
             {
                 Console.WriteLine(item);
             }
