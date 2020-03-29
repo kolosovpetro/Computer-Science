@@ -1,8 +1,8 @@
-﻿namespace NumericalIntegration
+﻿namespace NumericalIntegration.Interfaces
 {
-    interface IDiscreteIntegrable
+    internal interface IDiscreteIntegrable
     {
-        double TrapezoidalMethod(int Precision);
-        double SimpsonMethod(int Precision);
+        double TrapezoidalMethod(int precision);
+        double SimpsonMethod(int precision);
     }
 }

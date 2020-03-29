@@ -1,63 +1,71 @@
 ﻿using System;
 using System.Linq;
+using NumericalIntegration.Interfaces;
+using NumericalIntegration.RPN;
 
 namespace NumericalIntegration
 {
-    class Function : IPolynomialable
+    class Function : IPolynomial
     {
-        public double[] Coefficients { get; private set; }
-        public string PrintForm { get; private set; }
+        public double[] Coefficients { get; }
+        public string PrintForm { get; }
 
         public Function()
         {
 
         }
 
-        public Function(string Coefficients)
+        public Function(string coefficients)
         {
-            this.Coefficients = GetCoefficients(Coefficients);
-            this.PrintForm = NewPrintForm();
+            Coefficients = GetCoefficients(coefficients);
+            PrintForm = NewPrintForm();
         }
-        public double[] GetCoefficients(string Input)
+
+        public double[] GetCoefficients(string input)
         {
-            string[] tokens = Input.Split(' ');
+            string[] tokens = input.Split(' ');
 
             if (tokens.Contains(" "))
-                throw new FormatException();
+                throw new FormatException("Wrong input format.");
 
-            double[] Coeffs = new double[tokens.Length];
+            double[] coefficients = new double[tokens.Length];
 
-            for (int i = 0; i < Coeffs.Length; i++)
-                Coeffs[i] = double.Parse(tokens[i]);
+            for (int i = 0; i < coefficients.Length; i++)
+                coefficients[i] = double.Parse(tokens[i]);
 
-            return Coeffs;
+            return coefficients;
         }
-        public double ValueInPoint(double Variable)
+
+        public double ValueInPoint(double variable)
         {
-            int size = this.Coefficients.Length;
-            double newValue = 0;
+            int size = Coefficients.Length;
+
+            double newValue = default;
 
             for (int i = 0; i < size; i++)
-                newValue += Coefficients[i] * Math.Pow(Variable, size - 1 - i);
+                newValue += Coefficients[i] * Math.Pow(variable, size - 1 - i);
 
             return newValue;
         }
-        public double ValueInPoint(string Infix, double Variable)
+
+        public double ValueInPoint(string infix, double variable)
         {
-            string postfix = RPNCalculator.InfixToPostfix(Infix, Variable);
-            double result = RPNCalculator.PostfixEvaluator(postfix);
+            string postfix = RpnCalculator.InfixToPostfix(infix, variable);
+            double result = RpnCalculator.PostfixEvaluator(postfix);
             return result;
         }
-        private string NewPrintForm(string Variable = "x")
+        private string NewPrintForm(string variable = "x")
         {
-            int size = this.Coefficients.Length;
-            string PolynomialForm = $"f({Variable}) = {Coefficients[0]}{Variable}^{size - 1}";
+            int length = Coefficients.Length;
 
-            for (int i = 1; i < size - 1; i++)
-                PolynomialForm += $" + {Coefficients[i]}{Variable}^{size - 1 - i}";
+            string polynomialForm = $"f({variable}) = {Coefficients[0]}{variable}^{length - 1}";
 
-            PolynomialForm += $" + {Coefficients[size - 1]}";
-            return PolynomialForm;
+            for (int i = 1; i < length - 1; i++)
+                polynomialForm += $" + {Coefficients[i]}{variable}^{length - 1 - i}";
+
+            polynomialForm += $" + {Coefficients[length - 1]}";
+
+            return polynomialForm;
         }
     }
 }

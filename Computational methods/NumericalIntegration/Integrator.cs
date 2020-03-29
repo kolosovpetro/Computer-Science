@@ -1,82 +1,93 @@
-﻿namespace NumericalIntegration
+﻿using NumericalIntegration.Exceptions;
+using NumericalIntegration.Interfaces;
+
+namespace NumericalIntegration
 {
-    class Integrator : IDiscreteIntegrable
+    internal class Integrator : IDiscreteIntegrable
     {
-        public double Min { get; private set; }
-        public double Max { get; private set; }
-        public Function Function { get; private set; }
+        public double Min { get; }
+        public double Max { get; }
+        public Function Function { get; }
+
         public Integrator(double newMin, double newMax, Function newFunction)
         {
             if (newMin > newMax)
                 throw new WrongIntegralBoundsException("Upper bound cannot be lesser than lower.");
-            this.Min = newMin;
-            this.Max = newMax;
-            this.Function = newFunction;
+            Min = newMin;
+            Max = newMax;
+            Function = newFunction;
         }
+
         public Integrator(double newMin, double newMax)
         {
             if (newMin > newMax)
                 throw new WrongIntegralBoundsException("Upper bound cannot be lesser than lower.");
-            this.Min = newMin;
-            this.Max = newMax;
-            this.Function = new Function();
-        }
-        public double TrapezoidalMethod(int Precision)
-        {
-            double h = (Max - Min) / Precision;
-            double Int = (h / 2) * Function.ValueInPoint(Min) + (h / 2) * Function.ValueInPoint(Max);
-
-            double Sum = 0;
-            for (int i = 1; i < Precision - 1; i++)
-                Sum += Function.ValueInPoint(X(i, h)) * h;
-
-            Int += Sum;
-            return Int;
-        }
-        public double TrapezoidalMethod(string Infix, int Precision)
-        {
-            double h = (Max - Min) / Precision;
-            double Int = (h / 2) * Function.ValueInPoint(Infix, Min) + (h / 2) * Function.ValueInPoint(Infix, Max);
-
-            double Sum = 0;
-            for (int i = 1; i < Precision - 1; i++)
-                Sum += Function.ValueInPoint(Infix, X(i, h)) * h;
-
-            Int += Sum;
-            return Int;
+            Min = newMin;
+            Max = newMax;
+            Function = new Function();
         }
 
-        public double SimpsonMethod(int Precision)
+        public double TrapezoidalMethod(int precision)
         {
-            double h = (Max - Min) / Precision;
-            double Integral = h / 3 * (Function.ValueInPoint(Min) + Function.ValueInPoint(Max));
+            double h = (Max - Min) / precision;
+            double integral = h / 2 * Function.ValueInPoint(Min) + h / 2 * Function.ValueInPoint(Max);
 
-            for (int i = 1; i < Precision; i++)
+            double sum = default;
+
+            for (int i = 1; i < precision - 1; i++)
+                sum += Function.ValueInPoint(X(i, h)) * h;
+
+            integral += sum;
+            return integral;
+        }
+
+        public double TrapezoidalMethod(string infix, int precision)
+        {
+            double h = (Max - Min) / precision;
+            double integral = (h / 2) * Function.ValueInPoint(infix, Min) + (h / 2) * Function.ValueInPoint(infix, Max);
+
+            double sum = default;
+
+            for (int i = 1; i < precision - 1; i++)
+                sum += Function.ValueInPoint(infix, X(i, h)) * h;
+
+            integral += sum;
+            return integral;
+        }
+
+        public double SimpsonMethod(int precision)
+        {
+            double h = (Max - Min) / precision;
+            double integral = h / 3 * (Function.ValueInPoint(Min) + Function.ValueInPoint(Max));
+
+            for (int i = 1; i < precision; i++)
             {
                 if (i % 2 != 0)
-                    Integral += h / 3 * 4 * Function.ValueInPoint(X(i, h));
+                    integral += h / 3 * 4 * Function.ValueInPoint(X(i, h));
 
                 if (i % 2 == 0)
-                    Integral += h / 3 * 2 * Function.ValueInPoint(X(i, h));
+                    integral += h / 3 * 2 * Function.ValueInPoint(X(i, h));
             }
 
-            return Integral;
+            return integral;
         }
-        public double SimpsonMethod(string Infix, int Precision)
-        {
-            double h = (Max - Min) / Precision;
-            double Integral = h / 3 * (Function.ValueInPoint(Infix, Min) + Function.ValueInPoint(Infix, Max));
 
-            for (int i = 1; i < Precision; i++)
+        public double SimpsonMethod(string infix, int precision)
+        {
+            double h = (Max - Min) / precision;
+
+            double integral = h / 3 * (Function.ValueInPoint(infix, Min) + Function.ValueInPoint(infix, Max));
+
+            for (int i = 1; i < precision; i++)
             {
                 if (i % 2 != 0)
-                    Integral += h / 3 * 4 * Function.ValueInPoint(Infix, X(i, h));
+                    integral += h / 3 * 4 * Function.ValueInPoint(infix, X(i, h));
 
                 if (i % 2 == 0)
-                    Integral += h / 3 * 2 * Function.ValueInPoint(Infix, X(i, h));
+                    integral += h / 3 * 2 * Function.ValueInPoint(infix, X(i, h));
             }
 
-            return Integral;
+            return integral;
         }
 
         private double X(double i, double h)

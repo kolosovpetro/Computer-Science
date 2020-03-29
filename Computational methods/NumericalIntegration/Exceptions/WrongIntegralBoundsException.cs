@@ -1,15 +1,10 @@
 ﻿using System;
 
-namespace NumericalIntegration
+namespace NumericalIntegration.Exceptions
 {
-    class WrongIntegralBoundsException : Exception
+    internal class WrongIntegralBoundsException : Exception
     {
-        public WrongIntegralBoundsException()
-        {
-
-        }
-
-        public WrongIntegralBoundsException(string Message) : base(Message)
+        public WrongIntegralBoundsException(string message) : base(message)
         {
 
         }
