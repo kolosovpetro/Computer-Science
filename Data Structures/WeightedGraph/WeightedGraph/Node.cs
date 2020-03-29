@@ -3,21 +3,21 @@ using WeightedGraphNodes.Interfaces;
 
 namespace WeightedGraphNodes.WeightedGraph
 {
-    class Node<T> : INode<T>
+    internal class Node<T> : INode<T>
     {
-        public T Data { get; private set; }
+        public T Data { get; }
 
-        public List<INode<T>> Next { get; private set; }
+        public List<INode<T>> Next { get; }
 
-        public Node(T newData)
+        public Node(T data)
         {
-            Data = newData;
+            Data = data;
             Next = new List<INode<T>>();
         }
 
-        public void AddNext(INode<T> newNext)
+        public void AddNext(INode<T> next)
         {
-            Next.Add(newNext);
+            Next.Add(next);
         }
     }
 }

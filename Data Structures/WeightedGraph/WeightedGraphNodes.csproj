@@ -62,9 +62,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\EdgeAlreadyExistException.cs" />
-    <Compile Include="Exceptions\EdgeNotExistException.cs" />
-    <Compile Include="Exceptions\NodeAlreadyExistException.cs" />
     <Compile Include="Exceptions\NodeNotExistException.cs" />
     <Compile Include="GraphSearching\GraphSearch.cs" />
     <Compile Include="Interfaces\IEdge.cs" />

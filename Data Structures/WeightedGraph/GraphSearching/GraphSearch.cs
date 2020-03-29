@@ -1,33 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WeightedGraphNodes.Interfaces;
+﻿using WeightedGraphNodes.Interfaces;
 
 namespace WeightedGraphNodes.GraphSearching
 {
-    class GraphSearch<T>
+    internal class GraphSearch<T>
     {
-        public IGraph<T> Graph { get; private set; }
+        public IGraph<T> Graph { get; }
 
-        public GraphSearch(IGraph<T> newGraph)
+        public GraphSearch(IGraph<T> graph)
         {
-            Graph = newGraph;
+            Graph = graph;
         }
 
-        public bool DoSearch(T SearchData)
+        public bool Search(T searchData)
         {
-            for (int i = 0; i < Graph.Nodes.Count; i++)
+            foreach (var node in Graph.Nodes)
             {
-                //if (Graph.Nodes[i].Data.Equals(SearchData))
-                //{
-                //    return true;
-                //}
 
-                for (int j = 0; j < Graph.Nodes[i].Next.Count; j++)
+                foreach (var next in node.Next)
                 {
-                    if (Graph.Nodes[i].Next[j].Data.Equals(SearchData))
+                    if (next.Data.Equals(searchData))
                     {
                         return true;
                     }

@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WeightedGraphNodes.GraphSearching;
 using WeightedGraphNodes.Interfaces;
 using WeightedGraphNodes.WeightedGraph;
@@ -11,7 +6,7 @@ using WeightedGraphNodes.WeightedGraph;
 namespace WeightedGraphNodes.UnitTests
 {
     [TestFixture]
-    class GraphSearchTests
+    internal class GraphSearchTests
     {
         [Test]
         public void TestDoSearch()
@@ -30,8 +25,8 @@ namespace WeightedGraphNodes.UnitTests
             g1.AddEdge('A', 'E', 40);
 
             GraphSearch<char> s1 = new GraphSearch<char>(g1);
-            Assert.That(s1.DoSearch('E'), Is.EqualTo(true));
-            Assert.That(s1.DoSearch('F'), Is.EqualTo(false)); // this test to be false, since any Edge leads to Node F
+            Assert.That(s1.Search('E'), Is.EqualTo(true));
+            Assert.That(s1.Search('F'), Is.EqualTo(false)); // this test to be false, since any Edge leads to Node F
         }
     }
 }

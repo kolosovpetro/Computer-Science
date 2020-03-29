@@ -5,23 +5,24 @@ using WeightedGraphNodes.WeightedGraph;
 namespace WeightedGraphNodes.UnitTests
 {
     [TestFixture]
-    class NodeTests
+    internal class NodeTests
     {
-        INode<char> TestNode;
+        private INode<char> _testNode;
 
         [Test]
         public void TestInitialization()
         {
-            TestNode = new Node<char>('A');
-            Assert.That(TestNode.Data, Is.EqualTo('A'));
+            _testNode = new Node<char>('A');
+            Assert.That(_testNode.Data, Is.EqualTo('A'));
         }
+
         [Test]
         public void TestSetNext()
         {
-            TestNode = new Node<char>('A');
-            INode<char> NextNode = new Node<char>('B');
-            TestNode.AddNext(NextNode);
-            Assert.That(TestNode.Next[0].Data, Is.EqualTo('B'));
+            _testNode = new Node<char>('A');
+            INode<char> nextNode = new Node<char>('B');
+            _testNode.AddNext(nextNode);
+            Assert.That(_testNode.Next[0].Data, Is.EqualTo('B'));
         }
     }
 }

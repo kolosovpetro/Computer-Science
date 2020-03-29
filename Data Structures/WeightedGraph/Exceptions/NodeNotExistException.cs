@@ -2,14 +2,9 @@
 
 namespace WeightedGraphNodes.Exceptions
 {
-    class NodeNotExistException : Exception
+    internal class NodeNotExistException : Exception
     {
-        public NodeNotExistException()
-        {
-
-        }
-
-        public NodeNotExistException(string Message) : base(Message)
+        public NodeNotExistException(string message) : base(message)
         {
 
         }

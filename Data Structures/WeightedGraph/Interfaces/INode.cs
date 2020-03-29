@@ -2,10 +2,10 @@
 
 namespace WeightedGraphNodes.Interfaces
 {
-    interface INode<T>
+    internal interface INode<T>
     {
         T Data { get; }
         List<INode<T>> Next { get; }
-        void AddNext(INode<T> newNext);
+        void AddNext(INode<T> next);
     }
 }

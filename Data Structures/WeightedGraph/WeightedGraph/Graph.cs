@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using WeightedGraphNodes.Exceptions;
 using WeightedGraphNodes.Interfaces;
 
 namespace WeightedGraphNodes.WeightedGraph
 {
-    class Graph<T> : IGraph<T>
+    internal class Graph<T> : IGraph<T>
     {
-        public List<INode<T>> Nodes { get; private set; }
+        public List<INode<T>> Nodes { get; }
 
-        public List<IEdge<T>> Edges { get; private set; }
+        public List<IEdge<T>> Edges { get; }
 
         public int Count { get; private set; }
 
@@ -18,76 +18,72 @@ namespace WeightedGraphNodes.WeightedGraph
             Edges = new List<IEdge<T>>();
         }
 
-        public void AddEdge(T ParentNodeData, T ChildNodeData, double Weight)
+        public void AddEdge(T parentNodeData, T childNodeData, double weight)
         {
-            if (ContainsNode(ParentNodeData, out int ParentIndex) && ContainsNode(ChildNodeData, out int ChildIndex))
-            {
-                IEdge<T> NewEdge = new Edge<T>(Nodes[ParentIndex], Nodes[ChildIndex], Weight);
-                Edges.Add(NewEdge);
-                return;
-            }
+            if (!ContainsNode(parentNodeData, out int parentIndex) || !ContainsNode(childNodeData, out int childIndex))
+                throw new NodeNotExistException("There are one or more nodes missing in graph.");
 
-            throw new Exception(); // here to be custom exception
+            var newEdge = new Edge<T>(Nodes[parentIndex], Nodes[childIndex], weight);
+            Edges.Add(newEdge);
         }
 
         public void AddNode(T newNodeData)
         {
 
-            INode<T> NewNode = new Node<T>(newNodeData);
-            Nodes.Add(NewNode);
+            INode<T> newNode = new Node<T>(newNodeData);
+            Nodes.Add(newNode);
             Count++;
         }
 
-        public bool AreConnected(T ParentNodeData, T ChildNodeData)
+        public bool AreConnected(T parentNodeData, T childNodeData)
         {
-            if (ContainsNode(ParentNodeData, out int ParentIndex) && ContainsNode(ChildNodeData, out int ChildIndex))
+            if (ContainsNode(parentNodeData, out int parentIndex) 
+                && ContainsNode(childNodeData, out int childIndex))
             {
-                return Nodes[ParentIndex].Next.Contains(Nodes[ChildIndex]);
+                return Nodes[parentIndex].Next.Contains(Nodes[childIndex]);
             }
 
             return false;
         }
 
-        public bool AreConnected(T ParentNodeData, T ChildNodeData, out int EdgeIndex)
+        public bool AreConnected(T parentNodeData, T childNodeData, out int edgeIndex)
         {
-            EdgeIndex = -1;
+            edgeIndex = -1;
 
             for (int i = 0; i < Edges.Count; i++)
             {
-                if (Edges[i].Parent.Equals(ParentNodeData) && Edges[i].Child.Equals(ChildNodeData))
-                {
-                    EdgeIndex = i;
-                    return true;
-                }
+                if (!Edges[i].Parent.Equals(parentNodeData) || !Edges[i].Child.Equals(childNodeData)) 
+                    continue;
+
+                edgeIndex = i;
+                return true;
             }
 
             return false;
         }
 
-        public bool ContainsNode(T NodeData)
+        public bool ContainsNode(T nodeData)
         {
             for (int i = 0; i < Count; i++)
             {
-                if (Nodes[i].Data.Equals(NodeData))
-                {
-                    return true;
-                }
+                if (!Nodes[i].Data.Equals(nodeData)) 
+                    continue;
+
+                return true;
             }
 
             return false;
         }
 
-        public bool ContainsNode(T NodeData, out int NodeIndex)
+        public bool ContainsNode(T nodeData, out int nodeIndex)
         {
-            NodeIndex = -1;
+            nodeIndex = -1;
 
             for (int i = 0; i < Count; i++)
             {
-                if (Nodes[i].Data.Equals(NodeData))
-                {
-                    NodeIndex = i;
-                    return true;
-                }
+                if (!Nodes[i].Data.Equals(nodeData)) continue;
+                nodeIndex = i;
+                return true;
             }
 
             return false;
@@ -95,23 +91,21 @@ namespace WeightedGraphNodes.WeightedGraph
 
         public bool IsEmpty()
         {
-            if (Count == 0)
-                return true;
-            return false;
+            return Count == 0;
         }
 
-        public void RemoveNode(T NodeData)
+        public void RemoveNode(T nodeData)
         {
-            if (ContainsNode(NodeData, out int NodeIndex))
+            if (ContainsNode(nodeData, out int nodeIndex))
             {
-                Nodes.RemoveAt(NodeIndex);
+                Nodes.RemoveAt(nodeIndex);
                 Count--;
 
                 for (int i = 0; i < Count; i++)   // remove all links from other nodes to the removed one
                 {
                     for (int j = 0; i < Nodes[i].Next.Count; i++)
                     {
-                        if (Nodes[i].Next[j].Data.Equals(NodeData))
+                        if (Nodes[i].Next[j].Data.Equals(nodeData))
                         {
                             Nodes[i].Next.RemoveAt(j);
                         }
@@ -120,21 +114,22 @@ namespace WeightedGraphNodes.WeightedGraph
 
                 for (int i = 0; i < Edges.Count; i++)  // remove all edges that refers to removed one node
                 {
-                    if (Edges[i].Parent.Equals(NodeData) || Edges[i].Child.Equals(NodeData))
+                    if (Edges[i].Parent.Equals(nodeData) || Edges[i].Child.Equals(nodeData))
                     {
                         Edges.RemoveAt(i);
                     }
                 }
             }
 
-            else throw new Exception(); // here to be custom exception
+            else throw new NodeNotExistException("No such node in a graph.");
         }
 
-        public bool ContainsEdge(T FatherNodeData, T ChildNodeData)
+        public bool ContainsEdge(T parentNodeData, T childNodeData)
         {
-            foreach (IEdge<T> Edge in Edges)
+            foreach (var edge in Edges)
             {
-                if (Edge.Parent.Data.Equals(FatherNodeData) && Edge.Child.Data.Equals(ChildNodeData))
+                if (edge.Parent.Data.Equals(parentNodeData) 
+                    && edge.Child.Data.Equals(childNodeData))
                 {
                     return true;
                 }

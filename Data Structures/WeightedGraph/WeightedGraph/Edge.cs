@@ -2,20 +2,20 @@
 
 namespace WeightedGraphNodes.WeightedGraph
 {
-    class Edge<T> : IEdge<T>
+    internal class Edge<T> : IEdge<T>
     {
-        public INode<T> Parent { get; private set; }
+        public INode<T> Parent { get; }
 
-        public INode<T> Child { get; private set; }
+        public INode<T> Child { get; }
 
-        public double Weight { get; private set; }
+        public double Weight { get; }
 
-        public Edge(INode<T> newParent, INode<T> newChild, double newWeight)
+        public Edge(INode<T> parent, INode<T> child, double weight)
         {
-            Parent = newParent;
-            Child = newChild;
+            Parent = parent;
+            Child = child;
             Parent.AddNext(Child);
-            Weight = newWeight;
+            Weight = weight;
         }
     }
 }
