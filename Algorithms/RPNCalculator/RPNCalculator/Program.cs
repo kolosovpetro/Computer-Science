@@ -2,9 +2,9 @@
 
 namespace RPNCalculator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             /*Console.WriteLine("Hello, this is RPN calculator");
             string expression = "2 3 5 + *";
@@ -16,174 +16,165 @@ namespace RPNCalculator
             */
 
             Console.WriteLine("And now to transforming infix to postfix");
-            string infix = "2 * 3 ^ 4";
-            string expectedPostfix = "2 3 +";
+            const string infix = "2 * 3 ^ 4";
+            const string expectedPostfix = "2 3 +";
             string postfix = InfixToPostfix(infix);
-            double outputpostfix = PostfixEvaluator(postfix);
+            double postfixOutput = PostfixEvaluator(postfix);
+
             Console.WriteLine("Infix: {0}", infix);
             Console.WriteLine("Expected postfix: {0}", expectedPostfix);
             Console.WriteLine("Postfix: {0}", postfix);
-            Console.WriteLine("Output: {0}", outputpostfix);
+            Console.WriteLine("Output: {0}", postfixOutput);
 
         }
-        static string InfixToPostfix(string infix)
+
+        private static string InfixToPostfix(string infix)
         {
             string output = "";
-            Stack<string> Operators = new Stack<string>();
+
+            Stack<string> operators = new Stack<string>();
+
             foreach (var item in infix.Split(' '))
             {
-                if (double.TryParse(item, out double op))
+                if (double.TryParse(item, out _))
                 {
                     output += item + " ";
                 }
+
                 else if (item == "(")
                 {
-                    Operators.Push(item);
+                    operators.Push(item);
                 }
+
                 else if (item == ")")
                 {
-                    while (Operators.Peek() != "(")
+                    while (operators.Peek() != "(")
                     {
-                        output += Operators.Pop() + " ";
-                    }
-                    //This is to remove opening bracket from the stack
-                    Operators.Pop();
-                }
-                else
-                {
-                    while (!Operators.IsEmpty() && (Precedence(Operators.Peek()) > Precedence(item) || Precedence(Operators.Peek()) == Precedence(item) && Associativity(item) == "left"))
-                    {
-                        output += Operators.Pop() + " ";
+                        output += operators.Pop() + " ";
                     }
 
-                    Operators.Push(item);
+                    //This is to remove opening bracket from the stack
+
+                    operators.Pop();
+                }
+
+                else
+                {
+                    while (!operators.IsEmpty() && (Precedence(operators.Peek()) > Precedence(item) || Precedence(operators.Peek()) == Precedence(item) && Associativity(item) == "left"))
+                    {
+                        output += operators.Pop() + " ";
+                    }
+
+                    operators.Push(item);
                 }
             }
-            while (!Operators.IsEmpty())
+
+            while (!operators.IsEmpty())
             {
-                output += Operators.Pop() + " ";
+                output += operators.Pop() + " ";
             }
+
             output = output.TrimEnd(' ');
             return output;
         }
-        static double PostfixEvaluator(string expression)
+
+        private static double PostfixEvaluator(string expression)
         {
-            Stack<double> OperandStack = new Stack<double>();
+            Stack<double> operandStack = new Stack<double>();
+
             foreach (var item in expression.Split(' '))
             {
                 if (double.TryParse(item, out double operand))
                 {
-                    OperandStack.Push(operand);
+                    operandStack.Push(operand);
                 }
+
                 else
                 {
-                    double op2 = OperandStack.Pop();
-                    double op1 = OperandStack.Pop();
+                    double op2 = operandStack.Pop();
+                    double op1 = operandStack.Pop();
                     double output = Evaluate(op1, op2, item);
-                    OperandStack.Push(output);
+                    operandStack.Push(output);
                 }
             }
-            return OperandStack.Pop();
 
+            return operandStack.Pop();
         }
-        public static double Evaluate(double op1, double op2, string oper)
+
+        public static double Evaluate(double op1, double op2, string operation)
         {
-            if (oper == "+")
+            switch (operation)
             {
-                return op1 + op2;
+                case "+":
+                    return op1 + op2;
+                case "-":
+                    return op1 - op2;
+                case "*":
+                    return op1 * op2;
+                case "/":
+                    return op1 / op2;
+                case "^":
+                    return Math.Pow(op1, op2);
+                default:
+                    return 0;
             }
-            else if (oper == "-")
-            {
-                return op1 - op2;
-            }
-            else if (oper == "*")
-            {
-                return op1 * op2;
-            }
-            else if (oper == "/")
-            {
-                return op1 / op2;
-            }
-            else if (oper=="^")
-            {
-                return Math.Pow(op1, op2);
-            }
-            else
-            {
-                return 0;
-
-            }
-        
         }
+
         public static string Associativity(string op)
         {
-            if(op=="^")
-            {
-                return "right";
-            }
-            else
-            {
-                return "left";
-            }
+            return op == "^" ? "right" : "left";
         }
+
         public static int Precedence(string op)
         {
-            if (op == "^")
+            switch (op)
             {
-                return 4;
+                case "^":
+                    return 4;
+                case "/":
+                case "*":
+                    return 3;
+                case "+":
+                case "-":
+                    return 2;
+                default:
+                    return -1;
             }
-
-            else if (op == "/" || op == "*")
-            {
-                return 3;
-            }
-            else if (op == "+" || op == "-")
-            {
-                return 2;
-            }
-            return -1;
         }
     }
 
 
     public class Stack<T>
     {
-        int count;
-        T[] elements;
+        private int _count;
+        private readonly T[] _elements;
 
         public Stack()
         {
-            count = 0;
-            elements = new T[10];
+            _count = 0;
+            _elements = new T[10];
         }
 
         public void Push(T value)
         {
-            elements[count] = value;
-            count++;
+            _elements[_count] = value;
+            _count++;
         }
 
         public T Peek()
         {
-            return elements[count - 1];
+            return _elements[_count - 1];
         }
 
         public T Pop()
         {
-            count--;
-            return elements[count];
+            _count--;
+            return _elements[_count];
         }
 
         public bool IsEmpty()
         {
-            if (count == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return _count == 0;
         }
     }
 }
