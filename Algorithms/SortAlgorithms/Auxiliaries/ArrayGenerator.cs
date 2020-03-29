@@ -40,6 +40,7 @@ namespace SortAlgorithms.Auxiliaries
 
             return temp;
         }
+
         public static int [] AShapeArray(int Size)
         {
             var temp = SortedAscArray(Size);
