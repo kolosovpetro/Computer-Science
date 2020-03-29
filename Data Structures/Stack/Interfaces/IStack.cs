@@ -1,14 +1,16 @@
-﻿namespace Stack
+﻿namespace Stack.Interfaces
 {
-    interface IStack<T>
+    internal interface IStack<T>
     {
+        int Capacity { get; }
+        int Count { get; }
         bool IsEmpty();
         bool IsFull();
-        void Push(T Data);
+        void Push(T data);
         T Peek();
         void Pop();
         void Clear();
-        bool Contains(T Data);
+        bool Contains(T data);
         void TrimExcess();
     }
 }

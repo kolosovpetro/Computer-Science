@@ -2,13 +2,8 @@
 
 namespace Stack.Exceptions
 {
-    class StackIsEmptyException : Exception
+    internal class StackIsEmptyException : Exception
     {
-        public StackIsEmptyException()
-        {
-
-        }
-
         public StackIsEmptyException(string message) : base(message)
         {
 

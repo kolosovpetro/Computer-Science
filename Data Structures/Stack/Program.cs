@@ -14,10 +14,7 @@ namespace Stack
             s1.Push("entry 1");
             s1.Push("entry 2");
             s1.Push("entry 3");
-            foreach (var item in s1)
-            {
-                Console.WriteLine(item + " ");
-            }
+
 
             Console.WriteLine(s1[0]);
             Console.WriteLine(s1[1]);

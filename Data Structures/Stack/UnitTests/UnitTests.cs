@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using Stack.Exceptions;
 
-namespace Stack
+namespace Stack.UnitTests
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void TestOfIsEmpty()
@@ -43,15 +43,15 @@ namespace Stack
         [Test]
         public void TestOfStackIsFullException()
         {
-            Stack<string> MyStack = new Stack<string>(1);
-            MyStack.Push("entry 1");
-            Assert.Throws<StackIsFullException>(() => MyStack.Push("entry 2"));
+            Stack<string> myStack = new Stack<string>(1);
+            myStack.Push("entry 1");
+            Assert.Throws<StackIsFullException>(() => myStack.Push("entry 2"));
         }
         [Test]
         public void TestOfStackIsEmptyException()
         {
-            Stack<string> MyStack = new Stack<string>(0);
-            Assert.Throws<StackIsEmptyException>(() => MyStack.Peek());
+            Stack<string> myStack = new Stack<string>(0);
+            Assert.Throws<StackIsEmptyException>(() => myStack.Peek());
         }
         [Test]
         public void TestOfClear()
