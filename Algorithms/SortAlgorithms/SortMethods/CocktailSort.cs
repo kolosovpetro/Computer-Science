@@ -4,29 +4,31 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms.SortMethods
 {
-    class CocktailSort : AbstractSort
+    internal class CocktailSort : AbstractSort
     {
         public CocktailSort(IEnumerable<int> Collection) : base(Collection) { }
         public CocktailSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+
         public override void GetSortedArray()
         {
             SortedArray = DoCocktailSort(InitArray);
         }
+
         private int[] DoCocktailSort(int[] Array)
         {
-            bool Swapped = true;
             int Start = 0;
             int End = Array.Length - 1;
-            while (Swapped)
+
+            while (true)
             {
-                Swapped = false;
+
+                var Swapped = false;
+
                 for (int i = Start; i < End; i++)
                 {
-                    if (Array[i] > Array[i + 1])
-                    {
-                        Swap.DoSwap(ref Array[i], ref Array[i + 1]);
-                        Swapped = true;
-                    }
+                    if (Array[i] <= Array[i + 1]) continue;
+                    Swap.DoSwap(ref Array[i], ref Array[i + 1]);
+                    Swapped = true;
                 }
 
                 if (!Swapped)

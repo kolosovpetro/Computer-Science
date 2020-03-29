@@ -2,15 +2,16 @@
 
 namespace SortAlgorithms.Arrays
 {
-    class VShapeArray : AbstractArray
+    internal class VShapeArray : AbstractArray
     {
         public VShapeArray(int newSize) : base(newSize)
         {
-            this.ArrayType = "VShape Array";
+            ArrayType = "VShape Array";
         }
+
         public override void SetArray()
         {
-            this.Array = ArrayGenerator.VShapeArray(this.Size);
+            Array = ArrayGenerator.VShapeArray(Size);
         }
     }
 }

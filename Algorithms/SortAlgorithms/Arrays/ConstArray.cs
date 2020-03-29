@@ -2,15 +2,15 @@
 
 namespace SortAlgorithms.Arrays
 {
-    class ConstArray : AbstractArray
+    internal class ConstArray : AbstractArray
     {
         public ConstArray(int newSize) : base(newSize)
         {
-            this.ArrayType = "Constant Array";
+            ArrayType = "Constant Array";
         }
         public override void SetArray()
         {
-            this.Array = ArrayGenerator.ConstArray(this.Size);
+            Array = ArrayGenerator.ConstArray(Size);
         }
     }
 }

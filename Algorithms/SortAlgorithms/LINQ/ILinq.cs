@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace LINQPractice.LINQ
+namespace SortAlgorithms.LINQ
 {
-    interface ILinq<T>
+    internal interface ILinq<T>
     {
         IEnumerable<T> NumbersFromCollection(IEnumerable<T> Collection);
         IEnumerable<T> CollectionSubset(IEnumerable<T> Collection, int StartIndex, int EndIndex);

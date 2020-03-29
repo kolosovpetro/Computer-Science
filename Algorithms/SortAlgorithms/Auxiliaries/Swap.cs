@@ -1,6 +1,6 @@
 ﻿namespace SortAlgorithms.Auxiliaries
 {
-    class Swap
+    internal class Swap
     {
         public static void DoSwap(ref int A, ref int B)
         {

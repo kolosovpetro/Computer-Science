@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace SortAlgorithms.Auxiliaries
 {
-    static class ArrayGenerator
+    internal static class ArrayGenerator
     {
         public static int [] RandomArray(int Size)
         {

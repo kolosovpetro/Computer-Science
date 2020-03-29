@@ -7,17 +7,17 @@ using System.IO;
 
 namespace SortAlgorithms.SortMethods
 {
-    abstract class AbstractSort : ISort, IDataLogger
+    internal abstract class AbstractSort : ISort, IDataLogger
     {
-        public int[] InitArray { get; private set; }
+        public int[] InitArray { get; }
         public int[] SortedArray { get; protected set; }
         protected string LogFilesPath { get; }
         public string Message { get; protected set; }
         public TimeSpan SortExecTime { get; protected set; }
-        public string ArrayType { get; private set; }
-        public AbstractArray AbsArray { get; private set; }
+        public string ArrayType { get; }
+        public AbstractArray AbsArray { get; }
 
-        public AbstractSort(IEnumerable<int> Collection)
+        protected AbstractSort(IEnumerable<int> Collection)
         {
             InitArray = (int[])Collection;
             LogFilesPath = "../../Benchmarks/";
@@ -25,7 +25,7 @@ namespace SortAlgorithms.SortMethods
             Message = $"{GetType().Name}, Array Size: {InitArray.Length}, Sorted for {SortExecTime}";
         }
 
-        public AbstractSort(AbstractArray newAbsArray)
+        protected AbstractSort(AbstractArray newAbsArray)
         {
             AbsArray = newAbsArray;
             InitArray = newAbsArray.GetArray();
@@ -34,15 +34,13 @@ namespace SortAlgorithms.SortMethods
             SetSortExecTime();
             Message = $"{GetType().Name}, Array Type: {ArrayType}, Array Size: {newAbsArray.Size}, Sorted for {SortExecTime}";
         }
-        public virtual void GetSortedArray()
-        {
-            return;
-        }
+
+        public abstract void GetSortedArray();
 
         private void SetSortExecTime()
         {
-            Action a = () => GetSortedArray();
-            this.SortExecTime = Measurements.Measure(a);
+            void Action() => GetSortedArray();
+            SortExecTime = Measurements.Measure(Action);
         }
 
         public virtual void GetBenchmark()
@@ -51,11 +49,12 @@ namespace SortAlgorithms.SortMethods
             string ReportPath = LogFilesPath + "Report.txt";
             string DataPath = LogFilesPath + "Data.txt";
 
-            using (StreamWriter sw = new StreamWriter(ReportPath, append: true))
+            using (var sw = new StreamWriter(ReportPath, append: true))
             {
                 sw.WriteLine(Message);
             }
-            using (StreamWriter sw = new StreamWriter(DataPath, append: true))
+
+            using (var sw = new StreamWriter(DataPath, append: true))
             {
                 sw.WriteLine(SortExecTime);
             }

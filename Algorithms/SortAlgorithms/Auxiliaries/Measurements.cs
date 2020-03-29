@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SortAlgorithms.Auxiliaries
 {
-    class Measurements
+    internal class Measurements
     {
         public static TimeSpan Measure(Action method)
         {

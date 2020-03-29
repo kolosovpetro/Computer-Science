@@ -3,12 +3,13 @@ using SortAlgorithms.Auxiliaries;
 
 namespace SortAlgorithms.Arrays
 {
-    abstract class AbstractArray : IAbstractArray
+    internal abstract class AbstractArray : IAbstractArray
     {
         public int[] Array { get; protected set; }
         public string ArrayType { get; protected set; }
-        public int Size { get; private set; }
-        public AbstractArray(int newSize)
+        public int Size { get; }
+
+        protected AbstractArray(int newSize)
         {
             Size = newSize;
             SetArray();

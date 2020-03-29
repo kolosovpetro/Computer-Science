@@ -1,6 +1,6 @@
 ﻿namespace SortAlgorithms.Interfaces
 {
-    interface IAbstractArray
+    internal interface IAbstractArray
     {
         void SetArray();
         int[] GetArray();

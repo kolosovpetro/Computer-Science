@@ -4,31 +4,34 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms.SortMethods
 {
-    class MergeSort : AbstractSort
+    internal class MergeSort : AbstractSort
     {
-        public MergeSort(IEnumerable<int> Collection) : base(Collection) { }
         public MergeSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+
         public override void GetSortedArray()
         {
             SortedArray = DoMergeSort(InitArray);
         }
+
         private int[] DoMergeSort(int[] Array)
         {
             if (Array.Length <= 1)
                 return Array;
 
-            List<int> SortedArray = Array.ToList();
+            List<int> List = Array.ToList();
             List<int> Left = new List<int>();
             List<int> Right = new List<int>();
 
-            int Middle = SortedArray.Count / 2;
-            for (int i = 0; i < Middle; i++)
-                Left.Add(SortedArray[i]);
-            for (int i = Middle; i < SortedArray.Count; i++)
-                Right.Add(SortedArray[i]);
+            int Middle = List.Count / 2;
 
-            Left = this.DoMergeSort(Left.ToArray()).ToList();
-            Right = this.DoMergeSort(Right.ToArray()).ToList();
+            for (int i = 0; i < Middle; i++)
+                Left.Add(List[i]);
+
+            for (int i = Middle; i < List.Count; i++)
+                Right.Add(List[i]);
+
+            Left = DoMergeSort(Left.ToArray()).ToList();
+            Right = DoMergeSort(Right.ToArray()).ToList();
             return Merge(Left, Right).ToArray();
         }
 
@@ -51,17 +54,20 @@ namespace SortAlgorithms.SortMethods
                         Right.Remove(Right.First());
                     }
                 }
+
                 else if (Left.Count > 0)
                 {
                     Result.Add(Left.First());
                     Left.Remove(Left.First());
                 }
+
                 else if (Right.Count > 0)
                 {
                     Result.Add(Right.First());
                     Right.Remove(Right.First());
                 }
             }
+
             return Result;
         }
     }

@@ -4,14 +4,16 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms.SortMethods
 {
-    class BubbleSort : AbstractSort
+    internal class BubbleSort : AbstractSort
     {
         public BubbleSort(IEnumerable<int> Collection) : base(Collection) { }
         public BubbleSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+
         public override void GetSortedArray()
         {
             SortedArray = DoBubbleSort(InitArray);
         }
+
         private int[] DoBubbleSort(int[] Array)
         {
             for (int i = 1; i < Array.Length; i++)
@@ -24,6 +26,7 @@ namespace SortAlgorithms.SortMethods
                     }
                 }
             }
+
             return Array;
         }
     }

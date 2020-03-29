@@ -2,15 +2,15 @@
 
 namespace SortAlgorithms.Arrays
 {
-    class AShapeArray : AbstractArray
+    internal class AShapeArray : AbstractArray
     {
         public AShapeArray(int newSize) : base(newSize)
         {
-            this.ArrayType = "AShape Array";
+            ArrayType = "AShape Array";
         }
         public override void SetArray()
         {
-            this.Array = ArrayGenerator.AShapeArray(this.Size);
+            Array = ArrayGenerator.AShapeArray(Size);
         }
     }
 }

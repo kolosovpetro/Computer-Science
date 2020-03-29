@@ -5,9 +5,9 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             int Size = 200;
 
@@ -27,9 +27,8 @@ namespace SortAlgorithms
                 AbsArrays.Add(a5);
                 AbsArrays.Add(a6);
 
-                for (int j = 0; j < AbsArrays.Count; j++)
+                foreach (var CurrentArray in AbsArrays)
                 {
-                    AbstractArray CurrentArray = AbsArrays[j];
                     List<AbstractSort> AbsSortList = new List<AbstractSort>();
                     BubbleSort bs = new BubbleSort(CurrentArray);
                     CocktailSort cs = new CocktailSort(CurrentArray);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LINQPractice.LINQ
+namespace SortAlgorithms.LINQ
 {
     class Linq<T> : ILinq<T>
     {

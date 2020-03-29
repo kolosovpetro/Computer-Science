@@ -4,14 +4,16 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms.SortMethods
 {
-    class InsertionSort : AbstractSort
+    internal class InsertionSort : AbstractSort
     {
         public InsertionSort(IEnumerable<int> Collection) : base(Collection) { }
         public InsertionSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+
         public override void GetSortedArray()
         {
             SortedArray = DoInsertionSort(InitArray);
         }
+
         private int[] DoInsertionSort(int[] Array)
         {
             for (int i = 1; i < Array.Length; i++)
@@ -23,6 +25,7 @@ namespace SortAlgorithms.SortMethods
                     j--;
                 }
             }
+
             return Array;
         }
     }

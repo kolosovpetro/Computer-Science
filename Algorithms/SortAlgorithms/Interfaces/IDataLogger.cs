@@ -1,6 +1,6 @@
 ﻿namespace SortAlgorithms.Interfaces
 {
-    interface IDataLogger
+    internal interface IDataLogger
     {
         void GetBenchmark();
     }

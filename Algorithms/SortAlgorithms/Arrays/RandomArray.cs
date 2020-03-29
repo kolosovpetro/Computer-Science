@@ -1,10 +1,10 @@
 ﻿namespace SortAlgorithms.Arrays
 {
-    class RandomArray : AbstractArray
+    internal class RandomArray : AbstractArray
     {
         public RandomArray(int newSize) : base(newSize)
         {
-            this.ArrayType = "Random Array";
+            ArrayType = "Random Array";
         }
     }
 }
