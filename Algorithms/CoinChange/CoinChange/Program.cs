@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace CoinChange
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            int[] Coins = { 1, 3, 4 };
-            int change = 6;
+            int[] coins = { 1, 3, 4 };
+            const int change = 6;
             Console.WriteLine("Hello, this is coin change calculator");
-            Console.WriteLine("Available coins: {0}", string.Join(", ", Coins));
+            Console.WriteLine("Available coins: {0}", string.Join(", ", coins));
             Console.WriteLine("Change to be made: {0}", change);
-            makeChangeGreedy(Coins, change);
-            makeChangeDynamic(Coins, change);
+            MakeChangeGreedy(coins, change);
+            MakeChangeDynamic(coins, change);
         }
 
-        public static void makeChangeGreedy(int[] coinsTemp, int change)
+        public static void MakeChangeGreedy(int[] coinsTemp, int change)
         {
             int[] coins = new int[coinsTemp.Length];
 
@@ -24,74 +24,74 @@ namespace CoinChange
             Array.Sort(coins);
             Array.Reverse(coins);
 
-            List<string> change_list = new List<string>();
+            List<string> changeList = new List<string>();
 
             foreach (int coin in coins)
             {
-                int how_many = change / coin;
+                int howMany = change / coin;
 
-                if (how_many > 0)
+                if (howMany > 0)
                 {
-                    change_list.Add(how_many + "x" + coin);
+                    changeList.Add(howMany + "x" + coin);
                 }
 
                 change = change % coin;
             }
 
-            Console.WriteLine(string.Join(", ", change_list.ToArray()));
+            Console.WriteLine(string.Join(", ", changeList.ToArray()));
         }
 
-        public static void makeChangeDynamic(int[] arrCoins, int value)
+        public static void MakeChangeDynamic(int[] arrCoins, int value)
         {
-            int[] coins = new int[arrCoins.Length];             // array of coins, empty
-            Array.Copy(arrCoins, coins, arrCoins.Length);       // copy of coins array
-            Array.Sort(coins);                                  // array sorted in order to be ok loops
+            int[] coins = new int[arrCoins.Length];
+            Array.Copy(arrCoins, coins, arrCoins.Length);
+            Array.Sort(coins);
 
-            int[] minCoins = new int[value + 1];               // array of size value + 1, contains min changes;
-            int[] firstCoinIndex = new int[value + 1];         // ??????????????
+            int[] minCoins = new int[value + 1];
+            int[] firstCoinIndex = new int[value + 1];
 
-            for (int currChange = 0; currChange < value + 1; currChange++)
+            for (int currentChange = 0; currentChange < value + 1; currentChange++)
             {
-                int coinCount = currChange;
+                int coinCount = currentChange;
                 int newCoinIndex = 0;
 
                 for (int coinIndex = 0; coinIndex < coins.Length; coinIndex++)
                 {
                     int coin = coins[coinIndex];
 
-                    if (coin > currChange) continue;
+                    if (coin > currentChange) continue;
 
-                    if (1 + minCoins[currChange - coin] < coinCount)
+                    if (1 + minCoins[currentChange - coin] < coinCount)
                     {
-                        coinCount = 1 + minCoins[currChange - coin];
+                        coinCount = 1 + minCoins[currentChange - coin];
                         newCoinIndex = coinIndex;
                     }
                 }
 
-                minCoins[currChange] = coinCount;
-                firstCoinIndex[currChange] = newCoinIndex;
+                minCoins[currentChange] = coinCount;
+                firstCoinIndex[currentChange] = newCoinIndex;
             }
 
-            int currChange2 = value;
-            int[] coincount = new int[arrCoins.Length];
-            List<string> change_list = new List<string>();
+            int currentChange2 = value;
+            int[] coinArr = new int[arrCoins.Length];
+            List<string> changeList = new List<string>();
 
-            while (currChange2>0)
+            while (currentChange2 > 0)
             {
-                int coin = coins[firstCoinIndex[currChange2]];
-                coincount[firstCoinIndex[currChange2]]++;
-                currChange2 -= coin;
+                int coin = coins[firstCoinIndex[currentChange2]];
+                coinArr[firstCoinIndex[currentChange2]]++;
+                currentChange2 -= coin;
             }
 
-            for (int i = 0; i < coincount.Length; i++)
+            for (int i = 0; i < coinArr.Length; i++)
             {
-                if (coincount[i]>0)
+                if (coinArr[i] > 0)
                 {
-                    change_list.Add(coincount[i] + "x" + coins[i]);
+                    changeList.Add(coinArr[i] + "x" + coins[i]);
                 }
             }
 
-            Console.WriteLine(string.Join(", ", change_list.ToArray()));
+            Console.WriteLine(string.Join(", ", changeList.ToArray()));
         }
     }
 }
