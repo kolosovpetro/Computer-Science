@@ -3,7 +3,7 @@
 namespace LinkedListLibrary
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void AddFirstTest()
@@ -55,7 +55,7 @@ namespace LinkedListLibrary
         }
         
         [Test]
-        public void DeletaNodeTest()
+        public void DeleteNodeTest()
         {
             LinkedList<string> list = new LinkedList<string>();
             list.AddFirst("First");

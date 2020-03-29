@@ -1,6 +1,6 @@
 ﻿namespace LinkedListLibrary
 {
-    interface INode<T>
+    internal interface INode<T>
     {
         T Data { get; }
         INode<T> Next { get; }

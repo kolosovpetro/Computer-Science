@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace LinkedListLibrary
+﻿namespace LinkedListLibrary
 {
-    class LinkedList<T> : ILinkedList<T>
+    internal class LinkedList<T> : ILinkedList<T>
     {
         public INode<T> First { get; private set; }
 
@@ -34,7 +32,7 @@ namespace LinkedListLibrary
 
         public void AddFirst(T newFirstData)
         {
-            Node<T> newNode = new Node<T>(newFirstData);
+            var newNode = new Node<T>(newFirstData);
             newNode.SetNext(newNode);
             First = newNode;
             AddLast(newNode.Data);
@@ -43,7 +41,7 @@ namespace LinkedListLibrary
 
         public void AddLast(T newLastData)
         {
-            Node<T> newNode = new Node<T>(newLastData);
+            var newNode = new Node<T>(newLastData);
             Last = newNode;
             Count++;
         }
@@ -51,23 +49,15 @@ namespace LinkedListLibrary
         public void DeleteNode(T nodeData)
         {
             if (!Contains(nodeData))
-            {
                 throw new NodeNotFoundException("There is no such node in linked list.");
-            }
 
             INode<T> s = First;
 
             while (true)
             {
-                if (s.Next.Data.Equals(nodeData))
-                {
-                    break;
-                }
+                if (s.Next.Data.Equals(nodeData)) break;
 
-                if (!s.Next.Equals(null))
-                {
-                    s = s.Next;
-                }
+                if (!s.Next.Equals(null)) s = s.Next;
             }
 
             INode<T> current = SearchNode(nodeData);
@@ -76,23 +66,18 @@ namespace LinkedListLibrary
 
         public void RemoveFirst()
         {
-            if (!First.Equals(null))
-            {
-                First = First.Next;
-                return;
-            }
+            if (First.Equals(null))
+                throw new NodeNotFoundException("First node is null");
 
-            throw new NodeNotFoundException("First node is null");
+            First = First.Next;
         }
 
         public void RemoveLast()
         {
             if (Last.Equals(null))
-            {
                 throw new NodeNotFoundException("Last node is equal null.");
-            }
 
-            var s = First;
+            INode<T> s = First;
 
             while (!s.Next.Data.Equals(Last.Data))
             {
@@ -109,20 +94,11 @@ namespace LinkedListLibrary
 
             while (true)
             {
-                if (s.Data.Equals(nodeData))
-                {
-                    return s;
-                }
+                if (s.Data.Equals(nodeData)) return s;
 
-                if (s.Next.Equals(null))
-                {
-                    break;
-                }
+                if (s.Next.Equals(null)) break;
 
-                else
-                {
-                    s = s.Next;
-                }
+                s = s.Next;
             }
 
             return null;

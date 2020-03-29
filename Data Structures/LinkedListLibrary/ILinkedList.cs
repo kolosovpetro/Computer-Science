@@ -1,6 +1,6 @@
 ﻿namespace LinkedListLibrary
 {
-    interface ILinkedList<T>
+    internal interface ILinkedList<T>
     {
         INode<T> First { get; }
         INode<T> Last { get; }
