@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Trees.Auxiliaries;
+using Trees.Interfaces;
 
-namespace Trees
+namespace Trees.Trees
 {
-    class Tree<T> : ITree<T>
+    internal class Tree<T> : ITree<T>
     {
         public List<Node<T>> TreeBase { get; protected set; }
-        public Iterator<T> Iterator { get; private set; }
+        public Iterator<T> Iterator { get; }
         public int Size { get; protected set; }
 
-        // initialization of Dataless Tree with given structure
+        // initialization of empty Tree with given structure
         // it can be filled after initialization of an object
-        public Tree(params int[] TreeParents)
+
+        public Tree(params int[] treeParents)
         {
-            Size = TreeParents.Length;
+            Size = treeParents.Length;
             TreeBase = new List<Node<T>>();
 
             for (int i = 0; i < Size; i++)
@@ -25,17 +23,19 @@ namespace Trees
 
             for (int j = 0; j < Size; j++)
             {
-                int ParentIndex = TreeParents[j];
-                TreeBase[j].SetParantIndex(ParentIndex);
+                int parentIndex = treeParents[j];
+
+                TreeBase[j].SetParentIndex(parentIndex);
             }
 
             Iterator = new Iterator<T>(this);
         }
 
         // initialization of Data Filled Tree with given structure
-        public Tree(T[] TreeData, int[] TreeParents)
+
+        public Tree(T[] treeData, int[] treeParents)
         {
-            Size = TreeParents.Length;
+            Size = treeParents.Length;
             TreeBase = new List<Node<T>>();
 
             for (int i = 0; i < Size; i++)
@@ -43,10 +43,11 @@ namespace Trees
 
             for (int j = 0; j < Size; j++)
             {
-                T Data = TreeData[j];
-                int ParentIndex = TreeParents[j];
-                TreeBase[j].SetData(Data);
-                TreeBase[j].SetParantIndex(ParentIndex);
+                T data = treeData[j];
+                int parentIndex = treeParents[j];
+
+                TreeBase[j].SetData(data);
+                TreeBase[j].SetParentIndex(parentIndex);
             }
 
             Iterator = new Iterator<T>(this);
@@ -56,62 +57,67 @@ namespace Trees
         {
             return TreeBase[0].Data;
         }
+
         public bool IsEmpty()
         {
-            if (Size < 0)
-                return true;
-            return false;
+            return Size < 0;
         }
+
         public T ParentOf(T Child)
         {
-            if (Iterator.TreeConsist(Child, out Node<T> NodeOfChild))
+            if (Iterator.TreeConsist(Child, out Node<T> nodeOfChild))
             {
-                int ParentIndex = NodeOfChild.ParentIndex;
-                return TreeBase[ParentIndex].Data;
+                int parentIndex = nodeOfChild.ParentIndex;
+                return TreeBase[parentIndex].Data;
             }
 
             return default;
         }
+
         public List<T> Children(T FatherData)
         {
-            List<T> ChildrenList = new List<T>();
+            List<T> childrenList = new List<T>();
 
-            if (IsInternal(FatherData) && Iterator.TreeConsist(FatherData, out Node<T> Father))
+            if (IsInternal(FatherData) && Iterator.TreeConsist(FatherData, out Node<T> parent))
             {
-                int FatherIndex = TreeBase.IndexOf(Father);
+                int parentIndex = TreeBase.IndexOf(parent);
 
-                foreach (Node<T> node in TreeBase)
+                foreach (var node in TreeBase)
                 {
-                    if (node.ParentIndex == FatherIndex)
+                    if (node.ParentIndex == parentIndex)
                     {
-                        ChildrenList.Add(node.Data);
+                        childrenList.Add(node.Data);
                     }
                 }
             }
 
-            return ChildrenList;
+            return childrenList;
         }
+
         public void SetData(int NodeIndex, T Data)
         {
             TreeBase[NodeIndex].SetData(Data);
         }
+
         public T GetNodeByIndex(int NodeIndex)
         {
             return TreeBase[NodeIndex].Data;
         }
+
         public bool IsInternal(T NodeData)
         {
             return !IsExternal(NodeData);
         }
+
         public bool IsExternal(T NodeData)
         {
-            if (Iterator.TreeConsist(NodeData, out Node<T> Node))
+            if (Iterator.TreeConsist(NodeData, out Node<T> newNode))
             {
-                int IndexOfNode = TreeBase.IndexOf(Node);
+                int indexOfNode = TreeBase.IndexOf(newNode);
 
                 foreach (Node<T> node in TreeBase)
                 {
-                    if (node.ParentIndex == IndexOfNode)
+                    if (node.ParentIndex == indexOfNode)
                         return false;
                 }
             }

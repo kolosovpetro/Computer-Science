@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Trees.Trees;
 
 namespace Trees.Auxiliaries
 {
-    class Iterator<T>
+    internal class Iterator<T>
     {
-        public Tree<T> Tree { get; private set; }
+        public Tree<T> Tree { get; }
 
-        public Iterator(Tree<T> newTree)
+        public Iterator(Tree<T> tree)
         {
-            Tree = newTree;
+            Tree = tree;
         }
 
         public bool TreeConsist(T Data)
         {
-            foreach (Node<T> Node in Tree.TreeBase)
+            foreach (var Node in Tree.TreeBase)
             {
                 if (Node.Data.Equals(Data))
                     return true;
@@ -27,7 +23,7 @@ namespace Trees.Auxiliaries
         }
         public bool TreeConsist(T Data, out Node<T> Searched)
         {
-            foreach (Node<T> Node in Tree.TreeBase)
+            foreach (var Node in Tree.TreeBase)
             {
                 if (Node.Data.Equals(Data))
                 {

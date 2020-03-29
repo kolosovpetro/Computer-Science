@@ -1,6 +1,6 @@
 ﻿namespace Trees.Interfaces
 {
-    interface IBinaryTree<T>
+    internal interface IBinaryTree<T>
     {
         T LeftChildOf(T FatherData);
         T RightChildOf(T FatherData);

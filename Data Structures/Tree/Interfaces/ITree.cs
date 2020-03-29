@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Trees
+namespace Trees.Interfaces
 {
-    interface ITree<T>
+    internal interface ITree<T>
     {
         T Root();
         void SetData(int NodeIndex, T Data);

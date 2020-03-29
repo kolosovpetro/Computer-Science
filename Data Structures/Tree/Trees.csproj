@@ -63,10 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliaries\Iterator.cs" />
-    <Compile Include="Exceptions\BinaryTreeCreationException.cs" />
+    <Compile Include="Exceptions\BinaryTreeInitializationException.cs" />
     <Compile Include="Interfaces\IBinaryTree.cs" />
-    <Compile Include="LINQ\ILinq.cs" />
-    <Compile Include="LINQ\Linq.cs" />
     <Compile Include="Trees\Node.cs" />
     <Compile Include="Trees\BinaryTree.cs" />
     <Compile Include="Trees\Tree.cs" />

@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Trees
+﻿namespace Trees.Trees
 {
-    class Node<T>
+    internal class Node<T>
     {
         public T Data { get; private set; }
         public int ParentIndex { get; private set; }
         public int Weight { get; private set; }
 
-        public void SetParantIndex(int newIndex)
+        public void SetParentIndex(int index)
         {
-            this.ParentIndex = newIndex;
+            ParentIndex = index;
         }
 
-        public void SetData(T newData)
+        public void SetData(T data)
         {
-            this.Data = newData;
+            Data = data;
         }
 
-        public void SetWeight(int newWeight)
+        public void SetWeight(int weight)
         {
-            this.Weight = newWeight;
+            Weight = weight;
         }
     }
 }

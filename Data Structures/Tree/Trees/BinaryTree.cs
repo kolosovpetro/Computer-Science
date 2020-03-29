@@ -1,36 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Trees.Interfaces;
 using Trees.Exceptions;
 
 namespace Trees.Trees
 {
-    class BinaryTree<T> : Tree<T>, IBinaryTree<T>
+    internal class BinaryTree<T> : Tree<T>, IBinaryTree<T>
     {
-        public BinaryTree(params int[] TreeParents) : base(TreeParents)
+        public BinaryTree(T[] TreeData, int[] TreeParents) : base(TreeData, TreeParents)
         {
-            var Groups = TreeParents.GroupBy(p => p);
-            foreach (var item in Groups)
+            var groups = TreeParents.GroupBy(p => p);
+
+            foreach (var item in groups)
             {
                 if (item.Count() > 2 && item.Key != 0)
                 {
-                    throw new BinaryTreeCreationException("Each node has to have atmost 2 children.");
+                    throw new BinaryTreeInitializationException("Each node has to have most 2 children.");
                 }
             }
         }
 
-        public BinaryTree(T[] TreeData, int[] TreeParents) : base(TreeData, TreeParents)
-        {
-            var Groups = TreeParents.GroupBy(p => p);
-            foreach (var item in Groups)
-            {
-                if (item.Count() > 2 && item.Key != 0)
-                {
-                    throw new BinaryTreeCreationException("Each node has to have atmost 2 children.");
-                }
-            }
-        }
         public bool HasLeft(T FatherData)
         {
             return Children(FatherData).Count > 0;
@@ -43,36 +31,36 @@ namespace Trees.Trees
 
         public T LeftChildOf(T FatherData)
         {
-            T LeftChild;
+            T leftChild;
 
             if (IsRoot(FatherData))
             {
-                LeftChild = HasLeft(FatherData) ? Children(FatherData)[1] : default;
+                leftChild = HasLeft(FatherData) ? Children(FatherData)[1] : default;
             }
 
             else
             {
-                LeftChild = HasLeft(FatherData) ? Children(FatherData)[0] : default;
+                leftChild = HasLeft(FatherData) ? Children(FatherData)[0] : default;
             }
 
-            return LeftChild;
+            return leftChild;
         }
 
         public T RightChildOf(T FatherData)
         {
-            T RightChild;
+            T rightChild;
 
             if (IsRoot(FatherData))
             {
-                RightChild = HasRight(FatherData) ? Children(FatherData)[2] : default;
+                rightChild = HasRight(FatherData) ? Children(FatherData)[2] : default;
             }
 
             else
             {
-                RightChild = HasRight(FatherData) ? Children(FatherData)[1] : default;
+                rightChild = HasRight(FatherData) ? Children(FatherData)[1] : default;
             }
 
-            return RightChild;
+            return rightChild;
         }
 
         public bool IsRoot(T NodeData)
