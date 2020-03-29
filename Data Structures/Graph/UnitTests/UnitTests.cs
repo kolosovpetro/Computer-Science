@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Graph.Exceptions;
+using Graph.Graph;
+using NUnit.Framework;
 
 namespace Graph
 {

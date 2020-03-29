@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Graph
+namespace Graph.Interfaces
 {
-    interface IVertex<T>
+    internal interface IVertex<in T>
     {
-        void AddConnection(int VertexIndex);
-        void RemoveConnection(int VetexIndex);
-        void SetVertexData(T Data);
+        void AddConnection(int vertexIndex);
+        void RemoveConnection(int vertexIndex);
+        void SetVertexData(T data);
         void SetVertexWeight(double newWeight);
         List<bool> GetVertexConnections();
         void IncrementEdges();

@@ -1,9 +1,12 @@
 ﻿using System;
+using Graph.Exceptions;
+using Graph.Graph;
+
 namespace Graph
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             Graph<char> g1 = new Graph<char>();
             g1.AddVertex('N', 20);
@@ -12,6 +15,7 @@ namespace Graph
             g1.AddVertex('F', 50);
             g1.AddVertex('D', 60);
             Console.WriteLine(g1.Contains('N'));
+
             try
             {
                 g1.AddEdge('N', 'B');

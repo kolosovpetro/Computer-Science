@@ -1,15 +1,10 @@
 ﻿using System;
 
-namespace Graph
+namespace Graph.Exceptions
 {
-    class VertexConnectionException : Exception
+    internal class VertexConnectionException : Exception
     {
-        public VertexConnectionException()
-        {
-
-        }
-
-        public VertexConnectionException(string Message) : base(Message)
+        public VertexConnectionException(string message) : base(message)
         {
 
         }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Graph.Exceptions;
+using Graph.Interfaces;
 
-namespace Graph
+namespace Graph.Graph
 {
-    class Graph<T> : IGraph<T>
+    internal class Graph<T> : IGraph<T>
     {
-        public List<Vertex<T>> GraphBase { get; private set; }
+        public List<Vertex<T>> GraphBase { get; }
         public int Count { get; private set; }
 
         public Graph()
@@ -13,94 +15,90 @@ namespace Graph
             GraphBase = new List<Vertex<T>>();
         }
 
-        public void AddVertex(T VertexData, double VertexWeight)
+        public void AddVertex(T vertexData, double vertexWeight)
         {
-            Vertex<T> NewVertex = new Vertex<T>(VertexData, VertexWeight);
-            GraphBase.Add(NewVertex);
+            Vertex<T> newVertex = new Vertex<T>(vertexData, vertexWeight);
+            GraphBase.Add(newVertex);
 
-            for (int i = 0; i < GraphBase.Count; i++)
+            foreach (Vertex<T> vertex in GraphBase)
             {
-                GraphBase[i].IncrementEdges();
+                vertex.IncrementEdges();
             }
 
             Count++;
         }
 
-        public int VertexIndex(T VertexData)
+        public int VertexIndex(T vertexData)
         {
-            Contains(VertexData, out int Index);
-            return Index;
+            Contains(vertexData, out int index);
+            return index;
         }
 
-        public void AddEdge(T VertexData1, T VertexData2)
+        public void AddEdge(T vertexData1, T vertexData2)
         {
-            int Index1 = VertexIndex(VertexData1);
-            int Index2 = VertexIndex(VertexData2);
-            GraphBase[Index1].AddConnection(Index2);
+            int index1 = VertexIndex(vertexData1);
+            int index2 = VertexIndex(vertexData2);
+            GraphBase[index1].AddConnection(index2);
 
         }
 
-        public bool AreConnected(T VertexData1, T VertexData2)
+        public bool AreConnected(T vertexData1, T vertexData2)
         {
-            if (Contains(VertexData1, out int Index1) && Contains(VertexData2, out int Index2))
+            if (Contains(vertexData1, out int index1) && Contains(vertexData2, out int index2))
             {
-                return GraphBase[Index1].Edges[Index2];
+                return GraphBase[index1].Edges[index2];
             }
 
             return false;
         }
 
-        public void RemoveEdge(T VertexData1, T VertexData2)
+        public void RemoveEdge(T vertexData1, T vertexData2)
         {
-            int Index1 = VertexIndex(VertexData1);
-            int Index2 = VertexIndex(VertexData2);
-            GraphBase[Index1].RemoveConnection(Index2);
+            int index1 = VertexIndex(vertexData1);
+            int index2 = VertexIndex(vertexData2);
+            GraphBase[index1].RemoveConnection(index2);
         }
 
-        public bool Contains(T VertexData)
+        public bool Contains(T vertexData)
         {
-            foreach (Vertex<T> Vertex in GraphBase)
+            foreach (Vertex<T> vertex in GraphBase)
             {
-                if (Vertex.Data.Equals(VertexData))
-                {
-                    return true;
-                }
+                if (!vertex.Data.Equals(vertexData)) continue;
+                return true;
             }
 
             return false;
         }
 
-        public bool Contains(T VertexData, out int Index)
+        public bool Contains(T vertexData, out int index)
         {
-            Index = -1;
+            index = -1;
 
             for (int i = 0; i < GraphBase.Count; i++)
             {
-                if (GraphBase[i].Data.Equals(VertexData))
-                {
-                    Index = i;
-                    return true;
-                }
+                if (!GraphBase[i].Data.Equals(vertexData)) continue;
+                index = i;
+                return true;
             }
 
             return false;
         }
 
-        public Vertex<T> VertexAt(int Index)
+        public Vertex<T> VertexAt(int index)
         {
-            if (Index < Count && Index >= 0)
+            if (index < Count && index != 0)
             {
-                return GraphBase[Index];
+                return GraphBase[index];
             }
 
-            throw new Exception(); // here to be custom exception
+            throw new Exception("No such vertex in a graph."); // here to be custom exception
         }
 
-        public void RemoveVertex(T VertexData)
+        public void RemoveVertex(T vertexData)
         {
-            if (Contains(VertexData, out int Index))
+            if (Contains(vertexData, out int index))
             {
-                GraphBase.RemoveAt(Index);
+                GraphBase.RemoveAt(index);
             }
 
             throw new VertexConnectionException("Vertex is not exist or already removed.");
@@ -108,9 +106,7 @@ namespace Graph
 
         public bool IsEmpty()
         {
-            if (Count == 0)
-                return true;
-            return false;
+            return Count == 0;
         }
     }
 }

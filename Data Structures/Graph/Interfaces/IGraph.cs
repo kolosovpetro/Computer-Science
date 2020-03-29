@@ -1,15 +1,17 @@
-﻿namespace Graph
+﻿using Graph.Graph;
+
+namespace Graph.Interfaces
 {
-    interface IGraph<T>
+    internal interface IGraph<T>
     {
-        void AddVertex(T VertexData, double VertexWeight);
-        void RemoveVertex(T VertexData);
-        int VertexIndex(T VertexData);
-        void AddEdge(T VertexData1, T VertexData2);
-        bool AreConnected(T VertexData1, T VertexData2);
-        void RemoveEdge(T VertexData1, T VertexData2);
-        bool Contains(T VertexData);
-        Vertex<T> VertexAt(int Index);
+        void AddVertex(T vertexData, double vertexWeight);
+        void RemoveVertex(T vertexData);
+        int VertexIndex(T vertexData);
+        void AddEdge(T vertexData1, T vertexData2);
+        bool AreConnected(T vertexData1, T vertexData2);
+        void RemoveEdge(T vertexData1, T vertexData2);
+        bool Contains(T vertexData);
+        Vertex<T> VertexAt(int index);
         bool IsEmpty();
     }
 }
