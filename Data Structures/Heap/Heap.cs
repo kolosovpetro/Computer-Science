@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Heaps.Auxiliaries;
+using Heaps.Interfaces;
 
 namespace Heaps
 {
-    class Heap : IHeap
+    internal class Heap : IHeap
     {
         public List<int> HeapBase { get; }
         public List<int> HeapParents { get; }
-        public int Size { get; private set; }
+        public int Size { get; }
 
         public Heap(params int[] newHeapBase)
         {
@@ -27,15 +28,20 @@ namespace Heaps
                 HeapParents.Add(GenerateParentIndex(j));
             }
         }
+
         private int GenerateParentIndex(int n)
         {
-            if (n == 0) return 0;
-            else return (n - 1) / 2;
+            if (n == 0) 
+                return 0;
+
+            return (n - 1) / 2;
         }
+
         public int Root()
         {
             return HeapBase[0];
         }
+
         public int GetNode(int NodeIndex)
         {
             try
@@ -47,18 +53,20 @@ namespace Heaps
                 return 0;
             }
         }
+
         public int GetParentOf(int ChildIndex)
         {
             try
             {
-                int ParentIndex = (ChildIndex - 1) / 2;
-                return HeapBase[ParentIndex];
+                int parentIndex = (ChildIndex - 1) / 2;
+                return HeapBase[parentIndex];
             }
             catch (IndexOutOfRangeException)
             {
                 return 0;
             }
         }
+
         public int GetLeftChildOf(int ParentIndex)
         {
             try
@@ -70,6 +78,7 @@ namespace Heaps
                 return 0;
             }
         }
+
         public int GetRightChildOf(int Parent)
         {
             try
@@ -81,54 +90,53 @@ namespace Heaps
                 return 0;
             }
         }
+
         public void SiftUp(int Index)
         {
             if (Index == 0) return;
 
-            int ParentIndex = Index / 2;
+            int parentIndex = Index / 2;
 
-            if (HeapBase[Index] > HeapBase[ParentIndex])
+            if (HeapBase[Index] > HeapBase[parentIndex])
             {
-                Swap.CollectionSwap(HeapBase, ParentIndex, Index);
-                SiftUp(ParentIndex);
+                Swap.CollectionSwap(HeapBase, parentIndex, Index);
+                SiftUp(parentIndex);
             }
         }
 
         public int Pop()
         {
-            int Result = Root();
-            int LastIndex = HeapBase.Count - 1;
-            HeapBase[0] = HeapBase[LastIndex];
-            HeapBase.RemoveAt(LastIndex);
+            int result = Root();
+            int lastIndex = HeapBase.Count - 1;
+            HeapBase[0] = HeapBase[lastIndex];
+            HeapBase.RemoveAt(lastIndex);
             SiftDown(0);
-            return Result;
+            return result;
         }
+
         public void SiftDown(int Index)
         {
-            int MaxIndex;
-            int LeftChildIndex = GetLeftChildIndex(Index);
-            int RightChildIndex = GetRightChildIndex(Index);
+            int leftChildIndex = GetLeftChildIndex(Index);
+            int rightChildIndex = GetRightChildIndex(Index);
 
-            if (LeftChildIndex == -1 && RightChildIndex == -1)
+            if (leftChildIndex == -1 && rightChildIndex == -1)
                 return;
 
-            if (LeftChildIndex < HeapBase.Count)
-                MaxIndex = LeftChildIndex;
+            var maxIndex = leftChildIndex < HeapBase.Count ? leftChildIndex : rightChildIndex;
 
-            else
-                MaxIndex = RightChildIndex;
-
-            if (HeapBase[Index] < HeapBase[MaxIndex])
+            if (HeapBase[Index] < HeapBase[maxIndex])
             {
-                Swap.CollectionSwap(HeapBase, Index, MaxIndex);
-                SiftDown(MaxIndex);
+                Swap.CollectionSwap(HeapBase, Index, maxIndex);
+                SiftDown(maxIndex);
             }
         }
+
         public int GetLeftChildIndex(int ParentIndex)
         {
             int t = GetLeftChildOf(ParentIndex);
             return HeapBase.IndexOf(t);
         }
+
         public int GetRightChildIndex(int ParentIndex)
         {
 
@@ -139,15 +147,14 @@ namespace Heaps
         public List<int> HeapSort()
         {
             List<int> temp = HeapBase;
-            List<int> Sorted = new List<int>();
+            List<int> sorted = new List<int>();
 
             while (true)
             {
                 try
                 {
-                    int Size = temp.Count;
                     Heap h1 = new Heap(temp.ToArray());
-                    Sorted.Add(h1.Pop());
+                    sorted.Add(h1.Pop());
                     temp = h1.HeapBase;
                 }
                 catch (Exception)
@@ -156,7 +163,7 @@ namespace Heaps
                 }
             }
 
-            return Sorted;
+            return sorted;
         }
     }
 }

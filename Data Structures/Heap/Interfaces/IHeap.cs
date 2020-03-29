@@ -1,6 +1,6 @@
-﻿namespace Heaps
+﻿namespace Heaps.Interfaces
 {
-    interface IHeap
+    internal interface IHeap
     {
         int Root();
         int GetNode(int index);
