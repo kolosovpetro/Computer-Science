@@ -2,34 +2,25 @@
 
 namespace SearchAlgorithms.Auxiliaries
 {
-    static class ArrayGenerator
+    internal static class ArrayGenerator
     {
-        public static int [] RandomArray(int Size)
+        public static int [] RandomArray(int length)
         {
             Random rand = new Random();
-            int[] RandomArray = new int[Size];
 
-            for (int i = 0; i < Size; i++)
-                RandomArray[i] = rand.Next(Size);
+            int[] randomArray = new int[length];
 
-            return RandomArray;
+            for (int i = 0; i < length; i++)
+                randomArray[i] = rand.Next(length);
+
+            return randomArray;
         }
 
-        public static int [] SortedAscArray(int Size)
+        public static int [] SortedAscArray(int length)
         {
-            var temp = RandomArray(Size);
+            var temp = RandomArray(length);
             Array.Sort(temp);
             return temp;
         }
-
-        public static int [] SortedDscArray(int Size)
-        {
-            var temp = RandomArray(Size);
-            Array.Sort(temp);
-            Array.Reverse(temp);
-            return temp;
-        }
-
-
     }
 }

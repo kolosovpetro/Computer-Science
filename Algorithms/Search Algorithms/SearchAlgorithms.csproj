@@ -65,15 +65,15 @@
     <Compile Include="Auxiliaries\ArrayGenerator.cs" />
     <Compile Include="Auxiliaries\Measurements.cs" />
     <Compile Include="Searcher.cs" />
-    <Compile Include="SearchMethods\BinarySearch.cs" />
-    <Compile Include="SearchMethods\ImprovedLinearSearch.cs" />
+    <Compile Include="SearchMethods\BinarySearchMethod.cs" />
+    <Compile Include="SearchMethods\ImprovedLinearSearchMethod.cs" />
     <Compile Include="Interfaces\IDataLogger.cs" />
     <Compile Include="Interfaces\ISearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchMethods\ImprovedLinearSearchWithSentinel.cs" />
+    <Compile Include="SearchMethods\ImprovedLinearSearchWithSentinelMethod.cs" />
     <Compile Include="SearchMethods\AbstractSearch.cs" />
-    <Compile Include="SearchMethods\SimpleLinearSearch.cs" />
+    <Compile Include="SearchMethods\SimpleLinearSearchMethod.cs" />
     <Compile Include="UnitTests\UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>

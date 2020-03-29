@@ -5,39 +5,41 @@ using SearchAlgorithms.Interfaces;
 
 namespace SearchAlgorithms.SearchMethods
 {
-    abstract class AbstractSearch : ISearch, IDataLogger
+    internal abstract class AbstractSearch : ISearch, IDataLogger
     {
-        protected int SearchValue { get; private set; }
-        protected int[] Array { get; private set; }
-        protected string LogFilesPath { get; private set; }
+        protected int SearchValue { get; }
+        protected int[] Array { get; }
+        protected string LogFilesPath { get; }
         public TimeSpan SearchExecTime { get; protected set; }
         public string Message { get; protected set; }
 
-        public AbstractSearch(IEnumerable<int> newCollection, int newSearchValue)
+        protected AbstractSearch(IEnumerable<int> collection, int searchValue)
         {
-            SearchValue = newSearchValue;
-            Array = (int[])newCollection;
+            SearchValue = searchValue;
+            Array = (int[])collection;
             LogFilesPath = $"../../Benchmarks/{GetType().Name}/";
             SetExecTime();
-            Message = $"{GetType().Name}, Array Size: {Array.Length}, Search val: {SearchValue}, Result: {DoSearch()}, Exec time: {SearchExecTime}";
+            Message = $"{GetType().Name}, " +
+                      $"Array Size: {Array.Length}, " +
+                      $"Search val: {SearchValue}, " +
+                      $"Result: {DoSearch()}, " +
+                      $"Exec time: {SearchExecTime}";
         }
 
-        public virtual bool DoSearch()
-        {
-            return false;
-        }
+        public abstract bool DoSearch();
 
         public virtual void GetBenchmark()
         {
             Directory.CreateDirectory(LogFilesPath);
-            string ReportPath = LogFilesPath + $"{GetType().Name}Report.txt";
-            string DataPath = LogFilesPath + $"{GetType().Name}Data.txt";
+            string reportPath = LogFilesPath + $"{GetType().Name}Report.txt";
+            string dataPath = LogFilesPath + $"{GetType().Name}Data.txt";
 
-            using (StreamWriter sw = new StreamWriter(ReportPath, append: true))
+            using (var sw = new StreamWriter(reportPath, append: true))
             {
                 sw.WriteLine(Message);
             }
-            using (StreamWriter sw = new StreamWriter(DataPath, append: true))
+
+            using (var sw = new StreamWriter(dataPath, append: true))
             {
                 sw.WriteLine(SearchExecTime);
             }
@@ -45,8 +47,8 @@ namespace SearchAlgorithms.SearchMethods
 
         private void SetExecTime()
         {
-            Action a = () => DoSearch();
-            SearchExecTime = Auxiliaries.Measurements.Measure(a);
+            void Action() => DoSearch();
+            SearchExecTime = Auxiliaries.Measurements.Measure(Action);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace SearchAlgorithms.Interfaces
 {
-    interface ISearch
+    internal interface ISearch
     {
         bool DoSearch();
     }

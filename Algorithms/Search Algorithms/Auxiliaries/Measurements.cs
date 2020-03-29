@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace SearchAlgorithms.Auxiliaries
 {
-    class Measurements
+    internal class Measurements
     {
         public static TimeSpan Measure(Action method)
         {

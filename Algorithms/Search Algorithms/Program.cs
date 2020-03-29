@@ -5,35 +5,37 @@ using SearchAlgorithms.SearchMethods;
 
 namespace SearchAlgorithms
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            int Size = 5000;
+            const int size = 5000;
+
             Random rand = new Random();
 
             for (int i = 1; i <= 40; i++)
             {
-                Searcher s = new Searcher();
-                int SearchValue = rand.Next(Size * i);
-                int[] RandomArray = ArrayGenerator.RandomArray(Size * i);
-                int[] SortedArray = ArrayGenerator.SortedAscArray(Size * i);
-                List<AbstractSearch> SearchMethods = new List<AbstractSearch>();
-                SimpleLinearSearch sls = new SimpleLinearSearch(RandomArray, SearchValue);
-                ImprovedLimearSearch ils = new ImprovedLimearSearch(RandomArray, SearchValue);
-                BinarySearch bs = new BinarySearch(SortedArray, SearchValue);
-                ImprovedLinearSearchWithSentinel ilss = new ImprovedLinearSearchWithSentinel(RandomArray, SearchValue);
-                SearchMethods.Add(sls);
-                SearchMethods.Add(ils);
-                SearchMethods.Add(bs);
-                SearchMethods.Add(ilss);
+                var searcher = new Searcher();
+                int searchValue = rand.Next(size * i);
+                int[] randomArray = ArrayGenerator.RandomArray(size * i);
+                int[] sortedArray = ArrayGenerator.SortedAscArray(size * i);
+                var searchMethods = new List<AbstractSearch>();
+                var simpleLinearSearch = new SimpleLinearSearchMethod(randomArray, searchValue);
+                var improvedLinearSearch = new ImprovedLinearSearchMethod(randomArray, searchValue);
+                var binarySearch = new BinarySearchMethod(sortedArray, searchValue);
+                var improvedLinearSearchWithSentinel = new ImprovedLinearSearchWithSentinelMethod(randomArray, searchValue);
 
-                foreach (AbstractSearch AbsSearch in SearchMethods)
+                searchMethods.Add(simpleLinearSearch);
+                searchMethods.Add(improvedLinearSearch);
+                searchMethods.Add(binarySearch);
+                searchMethods.Add(improvedLinearSearchWithSentinel);
+
+                foreach (var search in searchMethods)
                 {
-                    s.SetSearch(AbsSearch);
-                    s.SetDataLogger(AbsSearch);
-                    s.DoSearchAndBenchmark();
-                    Console.WriteLine(AbsSearch.Message);
+                    searcher.SetSearch(search);
+                    searcher.SetDataLogger(search);
+                    searcher.SearchAndBenchmark();
+                    Console.WriteLine(search.Message);
                 }
             }
 

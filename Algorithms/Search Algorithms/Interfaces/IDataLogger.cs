@@ -1,6 +1,6 @@
 ﻿namespace SearchAlgorithms.Interfaces
 {
-    interface IDataLogger
+    internal interface IDataLogger
     {
         void GetBenchmark();
     }

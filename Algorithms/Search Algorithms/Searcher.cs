@@ -3,25 +3,25 @@ using SearchAlgorithms.SearchMethods;
 
 namespace SearchAlgorithms
 {
-    class Searcher
+    internal class Searcher
     {
-        AbstractSearch AbsSearch;
-        IDataLogger Logger;
+        private AbstractSearch _search;
+        private IDataLogger _logger;
 
-        public void SetSearch(AbstractSearch newAbsSearch)
+        public void SetSearch(AbstractSearch search)
         {
-            AbsSearch = newAbsSearch;
+            _search = search;
         }
 
-        public void SetDataLogger(IDataLogger newLogger)
+        public void SetDataLogger(IDataLogger logger)
         {
-            Logger = newLogger;
+            _logger = logger;
         }
 
-        public void DoSearchAndBenchmark()
+        public void SearchAndBenchmark()
         {
-            AbsSearch.DoSearch();
-            Logger.GetBenchmark();
+            _search.DoSearch();
+            _logger.GetBenchmark();
         }
     }
 }
