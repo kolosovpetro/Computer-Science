@@ -8,8 +8,8 @@ This repository is created for study purposes. To learn `Data Stractures` better
 * Graph
 * Heap
 * LinkedList
-* Queue
-* Stack
+* Queue (LIFO structure)
+* Stack (FIFO structure)
 * Tree
 
 To verify the correctness of implementation the `NUnit` test package is used.
