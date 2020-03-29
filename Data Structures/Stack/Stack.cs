@@ -46,6 +46,7 @@ namespace Stack
 
             return StackBase[Count - 1];
         }
+
         public void Pop()
         {
             if (IsEmpty())
