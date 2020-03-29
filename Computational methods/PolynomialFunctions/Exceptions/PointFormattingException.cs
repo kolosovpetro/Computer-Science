@@ -1,15 +1,10 @@
 ﻿using System;
 
-namespace PolynomialFunctions
+namespace PolynomialFunctions.Exceptions
 {
-    class PointFormattingException : Exception
+    internal class PointFormattingException : Exception
     {
-        public PointFormattingException()
-        {
-
-        }
-
-        public PointFormattingException(string Message) : base(Message)
+        public PointFormattingException(string message) : base(message)
         {
 
         }

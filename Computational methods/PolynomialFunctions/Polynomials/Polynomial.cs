@@ -1,36 +1,43 @@
 ﻿using System;
+using PolynomialFunctions.Exceptions;
+using PolynomialFunctions.Interfaces;
 
-namespace PolynomialFunctions
+namespace PolynomialFunctions.Polynomials
 {
-    class Polynomial : IFormable, IValuable, IDerivativable, IRootable
+    internal class Polynomial : IPolynomialFormat, IValuable, IDerivative, IRoot
     {
-        public double[] Coefficients { get; private set; }
-        public string Derivative { get { return this.GetDerivative(); } }
-        public string Display { get { return this.PolynomDisplayForm(); } }
-        public Polynomial(params double[] newCoefficients)
-        {
-            this.Coefficients = newCoefficients;
-        }
-        public string PolynomDisplayForm(string Variable = "x")
-        {
-            int Size = this.Coefficients.Length;
-            string PolynomialForm = $"f({Variable}) = {Coefficients[0]}*{Variable}^{Size - 1}";
+        public double[] Coefficients { get; }
+        public string Derivative => GetDerivative();
+        public string Display => DisplayPolynomialForm();
 
-            for (int i = 1; i < Size; i++)
-                PolynomialForm += $" + {Coefficients[i]}*{Variable}^{Size - 1 - i}";
+        public Polynomial(params double[] coefficients)
+        {
+            Coefficients = coefficients;
+        }
+
+        public string DisplayPolynomialForm(string variable = "x")
+        {
+            int length = Coefficients.Length;
+
+            string PolynomialForm = $"f({variable}) = {Coefficients[0]}*{variable}^{length - 1}";
+
+            for (int i = 1; i < length; i++)
+                PolynomialForm += $" + {Coefficients[i]}*{variable}^{length - 1 - i}";
 
             return PolynomialForm;
         }
-        public double ValueInPoint(double Point)
+
+        public double ValueInPoint(double point)
         {
             double Result = default;
             int Size = Coefficients.Length;
 
             for (int i = 0; i < Size; i++)
-                Result += Coefficients[i] * Math.Pow(Point, Size - 1 - i);
+                Result += Coefficients[i] * Math.Pow(point, Size - 1 - i);
 
             return Result;
         }
+
         public double[] ValuesSet()
         {
             double[] PolynomialValues = new double[3];
@@ -39,7 +46,8 @@ namespace PolynomialFunctions
             PolynomialValues[2] = ValueInPoint(1);
             return PolynomialValues;
         }
-        public string DisplayPoynomialValues()
+
+        public string DisplayPolynomialValues()
         {
             string Values = default;
 
@@ -51,18 +59,19 @@ namespace PolynomialFunctions
             return Values;
         }
 
-        public string GetDerivative(string Variable = "x")
+        public string GetDerivative(string variable = "x")
         {
-            int Size = this.Coefficients.Length;
-            string Derivative = $"f({Variable}) = {(Size - 1) * Coefficients[0]}*{Variable}^{Size - 2}";
+            int length = Coefficients.Length;
 
-            for (int i = 1; i < Size - 1; i++)
-                Derivative += $" + {(Size - 1 - i) * Coefficients[i]}*{Variable}^{Size - 2 - i}";
+            string derivative = $"f({variable}) = {(length - 1) * Coefficients[0]}*{variable}^{length - 2}";
 
-            return Derivative;
+            for (int i = 1; i < length - 1; i++)
+                derivative += $" + {(length - 1 - i) * Coefficients[i]}*{variable}^{length - 2 - i}";
+
+            return derivative;
         }
 
-        public double DerivativeValue(double Point)
+        public double DerivativeValue(double point)
         {
             if (Coefficients == null || Coefficients.Length == 0) 
                 throw new Exception("Unable to calculate");
@@ -73,7 +82,7 @@ namespace PolynomialFunctions
             {
 
                 if (i != Coefficients.Length - 2)
-                    result += (Coefficients.Length - 1 - i) * Coefficients[i] * (Math.Pow(Point, Coefficients.Length - 2 - i));
+                    result += (Coefficients.Length - 1 - i) * Coefficients[i] * (Math.Pow(point, Coefficients.Length - 2 - i));
                 else
                     result += (Coefficients.Length - 1 - i) * Coefficients[i];
             }
@@ -84,7 +93,6 @@ namespace PolynomialFunctions
 
         public double GuessRoot(double initialGuess)
         {
-            // works for testcase: (2, 5), (3, 4), (7, 1) and root = 5;
 
             for (int i = 0; i < 150; i++)
             {
@@ -92,7 +100,7 @@ namespace PolynomialFunctions
                 initialGuess = initialGuess - ValueInPoint(initialGuess) / DerivativeValue(initialGuess);
                 double ApproxError = (initialGuess - newX) / initialGuess * 100;
 
-                if (ApproxError == 0)
+                if (Math.Abs(ApproxError) < 0.1)
                     return newX;
             }
 

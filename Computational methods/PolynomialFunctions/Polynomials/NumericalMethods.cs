@@ -1,6 +1,6 @@
-﻿namespace PolynomialFunctions
+﻿namespace PolynomialFunctions.Polynomials
 {
-    class NumericalMethods
+    internal class NumericalMethods
     {
         public static double[] SolveLinearEquations(double[][] rows)
         {
@@ -44,6 +44,7 @@
 
             return BackwardSubstitution(rows);
         }
+
         public static bool Pivot(double[][] rows, int row, int column)
         {
             bool swapped = false;
@@ -61,14 +62,14 @@
 
             return swapped;
         }
+
         public static double[] BackwardSubstitution(double[][] rows)
         {
-            double val = 0;
             int length = rows[0].Length;
             double[] result = new double[rows.Length];
             for (int i = rows.Length - 1; i >= 0; i--)
             {
-                val = rows[i][length - 1];
+                var val = rows[i][length - 1];
                 for (int x = length - 2; x > i - 1; x--)
                 {
                     val -= rows[i][x] * result[x];
@@ -82,6 +83,7 @@
             }
             return result;
         }
+
         public static bool IsValidResult(double result)
         {
             return !(double.IsNaN(result) || double.IsInfinity(result));

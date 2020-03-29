@@ -1,13 +1,13 @@
-﻿namespace PolynomialFunctions
+﻿namespace PolynomialFunctions.Polynomials
 {
-    class Point
+    internal class Point
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public int X { get; }
+        public int Y { get; }
         public Point(int newX, int newY)
         {
-            this.X = newX;
-            this.Y = newY;
+            X = newX;
+            Y = newY;
         }
     }
 }

@@ -1,15 +1,10 @@
 ﻿using System;
 
-namespace PolynomialFunctions
+namespace PolynomialFunctions.Exceptions
 {
-    class RootNotFoundException : Exception
+    internal class RootNotFoundException : Exception
     {
-        public RootNotFoundException()
-        {
-
-        }
-
-        public RootNotFoundException(string Message) : base(Message)
+        public RootNotFoundException(string message) : base(message)
         {
 
         }

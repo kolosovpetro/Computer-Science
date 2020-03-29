@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
+using PolynomialFunctions.Polynomials;
 
-namespace PolynomialFunctions
+namespace PolynomialFunctions.UnitTests
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void TestOfOrder()
@@ -17,21 +18,24 @@ namespace PolynomialFunctions
             Matrix.AddPoint(p3);
             Assert.That(Matrix.Order, Is.EqualTo(2));
         }
+
         [Test]
         public void TestOfGetPolynomialForm()
         {
             Polynomial p1 = new Polynomial(1, 2, 3, 4);
-            string PolynomialForm = p1.PolynomDisplayForm("a");
+            string PolynomialForm = p1.DisplayPolynomialForm("a");
             Assert.That(PolynomialForm, Is.EqualTo("f(a) = 1*a^3 + 2*a^2 + 3*a^1 + 4*a^0"));
         }
+
         [Test]
-        public void TestOfPoynomialValue()
+        public void TestOfPolynomialValue()
         {
             Polynomial p1 = new Polynomial(1, 2, 3, 4);
             Assert.That(p1.ValueInPoint(1), Is.EqualTo(10));
         }
+
         [Test]
-        public void TestOfGetAugVanderMatrix()
+        public void TestOfGetAugmentedMatrix()
         {
             VandermondeMatrix Matrix = new VandermondeMatrix();
             Point p1 = new Point(2, 5);
@@ -40,8 +44,9 @@ namespace PolynomialFunctions
             Matrix.AddPoint(p1);
             Matrix.AddPoint(p2);
             Matrix.AddPoint(p3);
-            Assert.That(Matrix.AugVanderMarix, Is.EqualTo(new double[][] { new double[] { 4, 2, 1, 5 }, new double[] { 9, 3, 1, 6 }, new double[] { 49, 7, 1, 4 } }));
+            Assert.That(Matrix.AugmentedMatrix, Is.EqualTo(new[] { new double[] { 4, 2, 1, 5 }, new double[] { 9, 3, 1, 6 }, new double[] { 49, 7, 1, 4 } }));
         }
+
         [Test]
         public void TestOfGetDerivative()
         {

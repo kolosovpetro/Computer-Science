@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using PolynomialFunctions.Exceptions;
+using PolynomialFunctions.Polynomials;
 
 namespace PolynomialFunctions
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             Point p;
             VandermondeMatrix vm = new VandermondeMatrix();
@@ -20,16 +22,20 @@ namespace PolynomialFunctions
                 {
                     string Point = Console.ReadLine();
 
-                    if (Point.ToLower() == "end")
+                    if (Point != null && Point.ToLower() == "end")
                         break;
 
-                    var Values = Point.Split(' ');
-                    if (Values.Contains(" ") || Values.Length != 2)
-                        throw new PointFormattingException("Point coordinates must be two integers separated by space.");
-                    int X = int.Parse(Values[0]);
-                    int Y = int.Parse(Values[1]);
-                    p = new Point(X, Y);
-                    vm.AddPoint(p);
+                    if (Point != null)
+                    {
+                        var Values = Point.Split(' ');
+                        if (Values.Contains(" ") || Values.Length != 2)
+                            throw new PointFormattingException("Point coordinates must be two integers separated by space.");
+                        int X = int.Parse(Values[0]);
+                        int Y = int.Parse(Values[1]);
+                        p = new Point(X, Y);
+                        vm.AddPoint(p);
+                    }
+
                     Step++;
                 }
                 catch (Exception ex)
@@ -40,12 +46,12 @@ namespace PolynomialFunctions
 
             vm.PrintOrder();
 
-            double[] solutions = NumericalMethods.SolveLinearEquations(vm.AugVanderMarix);
+            double[] solutions = NumericalMethods.SolveLinearEquations(vm.AugmentedMatrix);
             Polynomial pm1 = new Polynomial(solutions);
             Console.WriteLine("Resulting polynomial is: ");
             Console.WriteLine(pm1.Display);
             Console.WriteLine("The values are: ");
-            Console.WriteLine(pm1.DisplayPoynomialValues());
+            Console.WriteLine(pm1.DisplayPolynomialValues());
             Console.WriteLine("Derivative is: ");
             Console.WriteLine(pm1.Derivative);
             Console.WriteLine("Guess the root (int) : ");

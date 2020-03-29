@@ -1,8 +1,8 @@
-﻿namespace PolynomialFunctions
+﻿namespace PolynomialFunctions.Interfaces
 {
-    interface IValuable
+    internal interface IValuable
     {
         double[] ValuesSet();
-        string DisplayPoynomialValues();
+        string DisplayPolynomialValues();
     }
 }
