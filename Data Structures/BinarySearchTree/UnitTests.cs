@@ -1,19 +1,14 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinarySearchTree
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void InsertTest()
         {
-            BinSearchTree bst = new BinSearchTree(20);
+            var bst = new BinSearchTree(20);
             bst.Insert(new BinSearchTree(10));
             bst.Insert(new BinSearchTree(30));
             bst.Insert(new BinSearchTree(40));
@@ -26,7 +21,7 @@ namespace BinarySearchTree
         [Test]
         public void SuccessorTest()
         {
-            BinSearchTree bst = new BinSearchTree(20);
+            var bst = new BinSearchTree(20);
             bst.Insert(new BinSearchTree(10));
             bst.Insert(new BinSearchTree(30));
             bst.Insert(new BinSearchTree(25));

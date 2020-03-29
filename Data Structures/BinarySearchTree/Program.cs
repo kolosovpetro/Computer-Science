@@ -2,9 +2,9 @@
 
 namespace BinarySearchTree
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             BinSearchTree bst = new BinSearchTree(20);
             bst.Insert(new BinSearchTree(10));

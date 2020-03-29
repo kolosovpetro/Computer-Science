@@ -2,7 +2,7 @@
 
 namespace BinarySearchTree
 {
-    class BinSearchTree : IBinarySearchTree
+    internal class BinSearchTree : IBinarySearchTree
     {
         public int Value { get; }
 
@@ -24,12 +24,12 @@ namespace BinarySearchTree
 
         public void SetLeft(IBinarySearchTree newLeft)
         {
-            this.Left = newLeft;
+            Left = newLeft;
         }
 
         public void SetRight(IBinarySearchTree newRight)
         {
-            this.Right = newRight;
+            Right = newRight;
         }
 
         public void Insert(IBinarySearchTree newTree)

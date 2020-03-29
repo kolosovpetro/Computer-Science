@@ -1,6 +1,6 @@
 ﻿namespace BinarySearchTree
 {
-    interface IBinarySearchTree
+    internal interface IBinarySearchTree
     {
         int Value { get; }
         IBinarySearchTree Left { get; }
