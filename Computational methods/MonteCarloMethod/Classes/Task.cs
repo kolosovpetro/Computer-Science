@@ -3,31 +3,31 @@ using System.Linq;
 
 namespace MonteCarloMethod.Classes
 {
-    class Task
+    internal class Task
     {
-        private char Separator { get { return ' '; } }
-        private LINQ<string> StringProcess { get; set; }
+        private static char Separator => ' ';
+        private Linq<string> StringProcess { get; }
         public double[] Estimations { get; private set; }
 
-        public Task(string Input)
+        public Task(string input)
         {
-            StringProcess = new LINQ<string>();
-            ParseData(Input);
+            StringProcess = new Linq<string>();
+            ParseData(input);
         }
 
-        private void ParseData(string Input)
+        private void ParseData(string input)
         {
-            string[] NewValues = StringProcess.NumbersFromCollection(Input.Split(Separator)).ToArray();
+            string[] NewValues = StringProcess.NumbersFromCollection(input.Split(Separator)).ToArray();
 
             if (NewValues.Length == 0)
                 throw new IncorrectTaskFormat("Incorrect formatting. Correct is: 10 20 30 ...");
 
-            this.Estimations = new double[NewValues.Length];
+            Estimations = new double[NewValues.Length];
 
-            for (int i = 0; i < NewValues.Length; i++)
+            for (int I = 0; I < NewValues.Length; I++)
             {
-                Estimations[i] = int.Parse(NewValues[i]);
-                if (i > 0 && Estimations[i] < Estimations[i - 1])
+                Estimations[I] = int.Parse(NewValues[I]);
+                if (I > 0 && Estimations[I] < Estimations[I - 1])
                     throw new InvalidScenarioValueException("Next Estimation cannot be worst than Previous.");
             }
         }

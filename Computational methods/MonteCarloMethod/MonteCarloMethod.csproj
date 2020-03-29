@@ -69,7 +69,6 @@
     <Compile Include="Exceptions\IncorrectTaskFormat.cs" />
     <Compile Include="Exceptions\InvalidScenarioValueException.cs" />
     <Compile Include="Exceptions\InvalidTaskCaseException.cs" />
-    <Compile Include="Exceptions\InvalidTaskNumberException.cs" />
     <Compile Include="Interfaces\ILINQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

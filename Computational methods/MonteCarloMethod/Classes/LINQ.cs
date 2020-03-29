@@ -5,100 +5,102 @@ using System.Linq;
 
 namespace MonteCarloMethod.Classes
 {
-    class LINQ<T> : ILINQ<T>
+    internal class Linq<T> : ILinq<T>
     {
-        public void PrintCollection(IEnumerable<T> enumer, bool inline = false)
+        public void PrintCollection(IEnumerable<T> enumerable, bool inline = false)
         {
             if (inline == false)
             {
-                foreach (T item in enumer)
-                    Console.Write(item + ", ");
+                foreach (var Item in enumerable)
+                    Console.Write(Item + ", ");
             }
+
             else
             {
-                foreach (T item in enumer)
-                    Console.WriteLine(item + ", ");
+                foreach (var Item in enumerable)
+                    Console.WriteLine(Item + ", ");
             }
 
         }
-        public void PrintCollection(IEnumerable<dynamic> enumer, bool inline = false)
+        public void PrintCollection(IEnumerable<dynamic> enumerable, bool inline = false)
         {
             if (inline == false)
             {
-                foreach (dynamic item in enumer)
-                    Console.Write(item + ", ");
+                foreach (dynamic Item in enumerable)
+                    Console.Write(Item + ", ");
             }
+
             else
             {
-                foreach (dynamic item in enumer)
-                    Console.WriteLine(item + ", ");
+                foreach (dynamic Item in enumerable)
+                    Console.WriteLine(Item + ", ");
             }
 
         }
-        public IEnumerable<T> NumbersFromCollection(IEnumerable<T> Collection)
+        public IEnumerable<T> NumbersFromCollection(IEnumerable<T> collection)
         {
-            IEnumerable<T> Numbers = Collection.Where(s => double.TryParse(s.ToString(), out double t));
+            var Numbers = collection.Where(s => double.TryParse(s.ToString(), out _));
             return Numbers;
         }
-        public IEnumerable<T> EvenNumbersFromCollection(IEnumerable<T> Collection)
+        public IEnumerable<T> EvenNumbersFromCollection(IEnumerable<T> collection)
         {
-            IEnumerable<T> temp = Collection.Where(p => double.TryParse(p.ToString(), out double d) && int.Parse(p.ToString()) % 2 == 0);
-            return temp;
-        }
-        public IEnumerable<T> OddNumbersFromCollection(IEnumerable<T> Collection)
-        {
-            IEnumerable<T> Temp = Collection.Where(p => double.TryParse(p.ToString(), out double d) && int.Parse(p.ToString()) % 2 == 1);
+            var Temp = collection.Where(p => double.TryParse(p.ToString(), out _) && int.Parse(p.ToString()) % 2 == 0);
             return Temp;
         }
-        public IEnumerable<dynamic> CountDuplicates(IEnumerable<int> Collection)
+        public IEnumerable<T> OddNumbersFromCollection(IEnumerable<T> collection)
         {
-            IEnumerable<dynamic> Duplicates = Collection.GroupBy(p => p).Select(g => new { Value = g.Key, Duplicates = g.Count() }).ToArray();
+            var Temp = collection.Where(p => double.TryParse(p.ToString(), out _) && int.Parse(p.ToString()) % 2 == 1);
+            return Temp;
+        }
+        public IEnumerable<dynamic> CountDuplicates(IEnumerable<int> collection)
+        {
+            IEnumerable<dynamic> Duplicates = collection.GroupBy(p => p).Select(g => new { Value = g.Key, Duplicates = g.Count() }).ToArray();
             return Duplicates;
         }
-        public IEnumerable<dynamic> CountLettersInWord(string Word)
+        public IEnumerable<dynamic> CountLettersInWord(string word)
         {
-            char[] tokens = Word.ToCharArray();
-            IEnumerable<dynamic> LettersCount = tokens.GroupBy(token => token).Select(group => new { Letter = group.Key, InWord = group.Count() });
+            var Tokens = word.ToCharArray();
+            var LettersCount = Tokens.GroupBy(token => token).Select(group => new { Letter = group.Key, InWord = group.Count() });
             return LettersCount;
         }
-        public IEnumerable<T> CollectionSubset(IEnumerable<T> Collection, int StartIndex, int EndIndex)
+        public IEnumerable<T> CollectionSubset(IEnumerable<T> collection, int startIndex, int endIndex)
         {
-            IEnumerable<T> Subset = Collection.Skip(StartIndex).Take(EndIndex);
+            var Subset = collection.Skip(startIndex).Take(endIndex);
             return Subset;
         }
-        public IEnumerable<string> SubsetThatConsist(IEnumerable<string> Collection, string Item)
+        public IEnumerable<string> SubsetThatConsist(IEnumerable<string> collection, string item)
         {
-            var Matches = Collection.Where(g => g.Contains(Item));
+            var Matches = collection.Where(g => g.Contains(item));
             return Matches;
         }
-        public bool BinarySearch(IEnumerable<int> Collecation, int Value)
+        public bool BinarySearch(IEnumerable<int> collection, int value)
         {
-            List<int> List = Collecation.ToList();
-            int step = List.Count() / 2;
+            var List = collection.ToList();
+            int Step = List.Count() / 2;
 
-            while (step != 0)
+            while (Step != 0)
             {
-                step = List.Count() / 2;
+                Step = List.Count() / 2;
 
-                if (List[step] == Value)
+                if (List[Step] == value)
                     return true;
 
-                else if (List[step] > Value)
-                    List = List.Take(step).ToList();
+                if (List[Step] > value)
+                    List = List.Take(Step).ToList();
 
-                else if (List[step] < Value)
-                    List = List.Skip(step).Take(List.Count()).ToList();
+                else if (List[Step] < value)
+                    List = List.Skip(Step).Take(List.Count()).ToList();
             }
 
             return false;
         }
 
-        public void GenericSwap(IEnumerable<T> Collection, int LeftIndex, int RightIndex)
+        public void GenericSwap(IEnumerable<T> collection, int leftIndex, int rightIndex)
         {
-            List<T> newCollection = Collection.ToList();
-            T Temp = newCollection[LeftIndex];
-            newCollection[LeftIndex] = newCollection[RightIndex];
-            newCollection[RightIndex] = Temp;
+            var NewCollection = collection.ToList();
+            T Temp = NewCollection[leftIndex];
+            NewCollection[leftIndex] = NewCollection[rightIndex];
+            NewCollection[rightIndex] = Temp;
         }
     }
 }

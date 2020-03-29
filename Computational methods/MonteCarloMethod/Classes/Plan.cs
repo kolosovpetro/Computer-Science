@@ -4,32 +4,32 @@ using System.Collections.Generic;
 
 namespace MonteCarloMethod.Classes
 {
-    class Plan
+    internal class Plan
     {
-        private Random Rand;
-        private List<Task> NewPlan;
+        private readonly Random _rand;
+        private readonly List<Task> _newPlan;
         public int Count { get; private set; }
         public int Size { get; private set; }
 
         public Plan()
         {
-            this.Rand = new Random();
-            this.NewPlan = new List<Task>();
+            _rand = new Random();
+            _newPlan = new List<Task>();
         }
 
-        public void AddTask(Task Task)
+        public void AddTask(Task task)
         {
-            if (this.Count > 0 && Task.Estimations.Length != this.Size)
+            if (Count > 0 && task.Estimations.Length != Size)
             {
                 throw new InvalidTaskCaseException("Next task estimations size must be same as in previous task.");
             }
 
-            this.NewPlan.Add(Task);
-            this.Count++;
+            _newPlan.Add(task);
+            Count++;
 
             if (Count == 1)
             {
-                this.Size = Task.Estimations.Length;
+                Size = task.Estimations.Length;
             }
 
         }
@@ -38,10 +38,10 @@ namespace MonteCarloMethod.Classes
         {
             double Value = default;
 
-            for (int i = 0; i < this.Count; i++)
+            for (int I = 0; I < this.Count; I++)
             {
-                int CaseIndex = Rand.Next(0, Size);
-                Value += NewPlan[i].Estimations[CaseIndex];
+                int CaseIndex = _rand.Next(0, Size);
+                Value += _newPlan[I].Estimations[CaseIndex];
             }
 
             return Value;
@@ -49,7 +49,7 @@ namespace MonteCarloMethod.Classes
 
         public void CheckSize()
         {
-            if (Size > NewPlan.Count)
+            if (Size > _newPlan.Count)
                 throw new InvalidTaskCaseException("Number of Tasks should be the same as task estimations size.");
         }
     }

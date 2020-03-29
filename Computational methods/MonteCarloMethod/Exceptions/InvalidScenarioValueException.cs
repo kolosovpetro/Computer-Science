@@ -2,14 +2,9 @@
 
 namespace MonteCarloMethod.Exceptions
 {
-    class InvalidScenarioValueException : Exception
+    internal class InvalidScenarioValueException : Exception
     {
-        public InvalidScenarioValueException()
-        {
-
-        }
-
-        public InvalidScenarioValueException(string Message) : base(Message)
+        public InvalidScenarioValueException(string message) : base(message)
         {
 
         }

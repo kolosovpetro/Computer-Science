@@ -2,14 +2,9 @@
 
 namespace MonteCarloMethod.Exceptions
 {
-    class InvalidTaskCaseException : Exception
+    internal class InvalidTaskCaseException : Exception
     {
-        public InvalidTaskCaseException()
-        {
-
-        }
-
-        public InvalidTaskCaseException(string Message) : base(Message)
+        public InvalidTaskCaseException(string message) : base(message)
         {
 
         }

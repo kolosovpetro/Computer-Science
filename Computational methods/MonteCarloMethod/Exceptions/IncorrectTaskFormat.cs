@@ -2,14 +2,9 @@
 
 namespace MonteCarloMethod.Exceptions
 {
-    class IncorrectTaskFormat : Exception
+    internal class IncorrectTaskFormat : Exception
     {
-        public IncorrectTaskFormat()
-        {
-
-        }
-
-        public IncorrectTaskFormat(string Message) : base(Message)
+        public IncorrectTaskFormat(string message) : base(message)
         {
 
         }

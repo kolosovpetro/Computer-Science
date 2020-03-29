@@ -1,12 +1,11 @@
 ﻿using MonteCarloMethod.Classes;
 using System;
-using System.Collections.Generic;
 
 namespace MonteCarloMethod
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             Plan Tasks = new Plan();
             int TaskNumber = default;
@@ -21,7 +20,7 @@ namespace MonteCarloMethod
                     Console.Write($"Task {TaskNumber} > ");
                     string Input = Console.ReadLine();
 
-                    if (Input.ToLower() == "end")
+                    if (Input != null && Input.ToLower() == "end")
                     {
                         Tasks.CheckSize();
                         break;
@@ -30,38 +29,30 @@ namespace MonteCarloMethod
                     Tasks.AddTask(new Task(Input));
                     TaskNumber++;
                 }
-                catch (Exception ex)
+                catch (Exception Ex)
                 {
-                    Console.WriteLine(ex.Message + " Try again");
+                    Console.WriteLine(Ex.Message + " Try again");
                 }
             }
 
-            Bucket b = new Bucket(Tasks);
+            Bucket Bucket = new Bucket(Tasks);
 
-            Console.WriteLine($"\nAfter probing {b.Size} random plans, the results are: ");
-            Console.WriteLine($"Minimum: {b.Min}");
-            Console.WriteLine($"Average: {b.Avg}");
-            Console.WriteLine($"Maximum: {b.Max}");
+            Console.WriteLine($"\nAfter probing {Bucket.Size} random plans, the results are: ");
+            Console.WriteLine($"Minimum: {Bucket.Min}");
+            Console.WriteLine($"Average: {Bucket.Avg}");
+            Console.WriteLine($"Maximum: {Bucket.Max}");
 
             Console.WriteLine("\nProbability of finishing plan in: ");
-            foreach (KeyValuePair<double, double> prob in b.Probabilities)
+            foreach (var Prob in Bucket.Probabilities)
             {
-                Console.WriteLine($"{prob.Key} days: {prob.Value} %");
+                Console.WriteLine($"{Prob.Key} days: {Prob.Value} %");
             }
 
             Console.WriteLine("\nAccumulated probability to finish plan before or in time: ");
 
-            foreach (KeyValuePair<double, double> prob in b.AccumProbabilities)
+            foreach (var Prob in Bucket.AccumulatedProbabilities)
             {
-                Console.WriteLine($"{prob.Key} days: {prob.Value} %");
-            }
-
-            for (int i = 0; i < b.AccumProbabilities.Count; i++)
-            {
-                if (i == 0)
-                {
-
-                }
+                Console.WriteLine($"{Prob.Key} days: {Prob.Value} %");
             }
         }
     }

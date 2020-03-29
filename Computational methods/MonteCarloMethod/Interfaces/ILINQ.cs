@@ -2,13 +2,13 @@
 
 namespace MonteCarloMethod.Interfaces
 {
-    interface ILINQ<T>
+    internal interface ILinq<T>
     {
-        void PrintCollection(IEnumerable<T> Collection, bool Inline = false);
-        void PrintCollection(IEnumerable<dynamic> Collection, bool Inline = false);
-        IEnumerable<T> NumbersFromCollection(IEnumerable<T> Collection);
-        IEnumerable<T> CollectionSubset(IEnumerable<T> Collection, int StartIndex, int EndIndex);
-        IEnumerable<string> SubsetThatConsist(IEnumerable<string> Collection, string Item);
-        void GenericSwap(IEnumerable<T> Collection, int LeftIndex, int RightIndex);
+        void PrintCollection(IEnumerable<T> enumerable, bool inline = false);
+        void PrintCollection(IEnumerable<dynamic> enumerable, bool inline = false);
+        IEnumerable<T> NumbersFromCollection(IEnumerable<T> collection);
+        IEnumerable<T> CollectionSubset(IEnumerable<T> collection, int startIndex, int endIndex);
+        IEnumerable<string> SubsetThatConsist(IEnumerable<string> collection, string item);
+        void GenericSwap(IEnumerable<T> collection, int leftIndex, int rightIndex);
     }
 }
