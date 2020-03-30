@@ -2,7 +2,7 @@
 
 namespace SOLID.DIP
 {
-    class ConsolePrinter : IPrintable
+    internal class ConsolePrinter : IPrintable
     {
         public void Print()
         {

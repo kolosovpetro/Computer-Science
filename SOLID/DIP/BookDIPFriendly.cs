@@ -1,6 +1,6 @@
 ﻿namespace SOLID.DIP
 {
-    class BookDIPFriendly
+    class BookDipFriendly
     {
         public string Contents { get; set; }
         public IPrintable Printer { get; set; }      // here abstract entity of Printable

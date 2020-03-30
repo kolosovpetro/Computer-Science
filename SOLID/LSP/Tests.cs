@@ -3,7 +3,7 @@
 namespace SOLID.LSP
 {
     [TestFixture]
-    class Tests
+    internal class Tests
     {
         [Test]
         public void TestRectangle()
@@ -13,7 +13,7 @@ namespace SOLID.LSP
             rect.Width = 10;
             Assert.That(rect.GetArea(), Is.Not.EqualTo(50));    // test passes since rect.GetArea() = 100
             
-            // and such class hierrarchy like rectangle -> square violates LSP;
+            // and such class hierarchy like rectangle -> square violates LSP;
         }
 
         [Test]

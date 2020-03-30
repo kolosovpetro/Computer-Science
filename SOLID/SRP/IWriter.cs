@@ -1,6 +1,6 @@
 ﻿namespace SOLID.SRP
 {
-    interface IWriter
+    internal interface IWriter
     {
         void WriteReport(string newText);
     }

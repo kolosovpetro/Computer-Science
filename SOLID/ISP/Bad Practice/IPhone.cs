@@ -1,6 +1,6 @@
 ﻿namespace SOLID.ISP.Bad_Practice
 {
-    interface IPhone
+    internal interface IPhone
     {
         void Call();
         void TakePhoto();

@@ -1,13 +1,10 @@
 ﻿namespace SOLID.LSP
 {
-    class Square : Rectangle
+    internal class Square : Rectangle
     {
-        public override int Width
+        public override double Width
         {
-            get
-            {
-                return base.Width;
-            }
+            get => base.Width;
 
             set
             {
@@ -16,12 +13,9 @@
             }
         }
 
-        public override int Height
+        public override double Height
         {
-            get
-            {
-                return base.Height;
-            }
+            get => base.Height;
 
             set
             {

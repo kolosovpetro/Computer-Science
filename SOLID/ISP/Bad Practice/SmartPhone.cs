@@ -2,7 +2,7 @@
 
 namespace SOLID.ISP.Bad_Practice
 {
-    class SmartPhone : IPhone
+    internal class SmartPhone : IPhone
     {
         public void BrowseInternet()
         {

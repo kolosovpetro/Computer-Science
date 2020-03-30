@@ -1,6 +1,6 @@
 ﻿namespace SOLID.OCP
 {
-    interface IMeal
+    internal interface IMeal
     {
         void Cook();
     }

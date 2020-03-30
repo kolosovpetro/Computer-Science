@@ -1,6 +1,6 @@
 ﻿namespace SOLID.SRP
 {
-    interface IEditor
+    internal interface IEditor
     {
         void EditReport();
     }

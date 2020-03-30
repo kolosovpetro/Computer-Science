@@ -1,6 +1,6 @@
 ﻿namespace SOLID.ISP.Good_Practice
 {
-    interface ICamera
+    internal interface ICamera
     {
         void TakePhoto();
     }

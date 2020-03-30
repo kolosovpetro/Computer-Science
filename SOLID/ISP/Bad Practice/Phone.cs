@@ -2,11 +2,11 @@
 
 namespace SOLID.ISP.Bad_Practice
 {
-    class Phone : IPhone
+    internal class Phone : IPhone
     {
         public void BrowseInternet()
         {
-            throw new NotImplementedException();        // here is unsuspported feature
+            throw new NotImplementedException();        // here is unsupported feature
         }
 
         public void Call()
@@ -16,15 +16,15 @@ namespace SOLID.ISP.Bad_Practice
 
         public void MakeVideo()
         {
-            throw new NotImplementedException();        // here is unsuspported feature
+            throw new NotImplementedException();        // here is unsupported feature
         }
 
         public void TakePhoto()
         {
-            throw new NotImplementedException();        // here is unsuspported feature
+            throw new NotImplementedException();        // here is unsupported feature
         }
 
-        // here class depends on the functionalities it doesn't use, in order not to repeat code
+        // here class depends on the functionality it doesn't use, in order not to repeat code
         // let's follow Interface Segregation Principle
     }
 }

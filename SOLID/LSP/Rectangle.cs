@@ -1,11 +1,11 @@
 ﻿namespace SOLID.LSP
 {
-    class Rectangle
+    internal class Rectangle : IPolygon
     {
-        public virtual int Width { get; set; }
-        public virtual int Height { get; set; }
+        public virtual double Width { get; set; }
+        public virtual double Height { get; set; }
 
-        public int GetArea()
+        public double GetArea()
         {
             return Width * Height;
         }

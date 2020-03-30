@@ -1,6 +1,6 @@
 ﻿namespace SOLID.SRP
 {
-    interface ISaver
+    internal interface ISaver
     {
         void SaveReport();
     }

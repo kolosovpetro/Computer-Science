@@ -1,6 +1,6 @@
 ﻿namespace SOLID.ISP.Good_Practice
 {
-    class SmartPhoneISPFriendly : ICallable, ICamera, IRecordable, ISerfable
+    class SmartPhoneIspFriendly : ICallable, ICamera, IRecordable, ISerfable
     {
         public void Call()
         {

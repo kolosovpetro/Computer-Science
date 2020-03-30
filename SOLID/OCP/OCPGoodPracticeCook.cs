@@ -1,11 +1,11 @@
 ﻿namespace SOLID.OCP
 {
-    class OCPGoodPracticeCook
+    class OcpGoodPracticeCook
     {
         public string Name { get; set; }
         public IMeal Meal { get; set; }
 
-        public OCPGoodPracticeCook(string name)
+        public OcpGoodPracticeCook(string name)
         {
             Name = name;
         }

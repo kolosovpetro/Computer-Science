@@ -1,6 +1,6 @@
 ﻿namespace SOLID.SRP
 {
-    interface IPrinter
+    internal interface IPrinter
     {
         void PrintReport();
     }

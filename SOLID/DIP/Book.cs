@@ -1,6 +1,6 @@
 ﻿namespace SOLID.DIP
 {
-    class Book
+    internal class Book
     {
         public string Contents { get; set; }
         public ConsolePrinter ConsolePrinter { get; set; }      // here concrete class of printer, which limits print only to console

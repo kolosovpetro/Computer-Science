@@ -1,6 +1,6 @@
 ﻿namespace SOLID.LSP
 {
-    interface IPolygon : IShape
+    internal interface IPolygon
     {
         double GetArea();
     }

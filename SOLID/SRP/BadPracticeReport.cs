@@ -3,7 +3,7 @@
 namespace SOLID.SRP
 {
     // class in context of usual report, provided by worker
-    class BadPracticeReport
+    internal class BadPracticeReport
     {
         public string ReportData { get; set; }      // entire contents of report
 

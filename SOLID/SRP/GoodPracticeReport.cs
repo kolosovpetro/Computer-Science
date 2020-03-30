@@ -1,9 +1,12 @@
-﻿using System;
-
-namespace SOLID.SRP
+﻿namespace SOLID.SRP
 {
-    class GoodPracticeReport
+    internal class GoodPracticeReport
     {
+        public GoodPracticeReport(string reportData)
+        {
+            ReportData = reportData;
+        }
+
         public IWriter Writer { get; set; }
         public IEditor Editor { get; set; }
         public ISaver Saver { get; set; }
@@ -30,8 +33,8 @@ namespace SOLID.SRP
             Editor.EditReport();
         }
 
-        // Now, every reponsibility is stored under interface and current class doesn't have any info on it.
-        // Here is only reposponsibility - is to work over reports, however, any details on the tools like
+        // Now, every responsibility is stored under interface and current class doesn't have any info on it.
+        // Here is only responsibility - is to work over reports, however, any details on the tools like
         // Printers, Writers, Savers, etc
     }
 }

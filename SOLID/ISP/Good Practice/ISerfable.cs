@@ -1,6 +1,6 @@
 ﻿namespace SOLID.ISP.Good_Practice
 {
-    interface ISerfable
+    internal interface ISerfable
     {
         void SerfInternet();
     }

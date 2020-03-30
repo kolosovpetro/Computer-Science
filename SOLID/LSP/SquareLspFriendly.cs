@@ -1,17 +1,17 @@
 ﻿namespace SOLID.LSP
 {
-    class SquareLspFriendly : IPolygon
+    internal class SquareLspFriendly : IPolygon
     {
-        public double Lenght { get; set; }
+        public double Length { get; set; }
 
-        public SquareLspFriendly(double lenght)
+        public SquareLspFriendly(double length)
         {
-            Lenght = lenght;
+            Length = length;
         }
 
         public double GetArea()
         {
-            return Lenght * Lenght;
+            return Length * Length;
         }
     }
 }

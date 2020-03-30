@@ -5,10 +5,10 @@ namespace SOLID.OCP
     // Open-Closed Principle - program should be open for extensions, but closed for modification.
     // To follow OCP we can simply use design pattern "Strategy", 
 
-    class OCPBadPracticeCook
+    class OcpBadPracticeCook
     {
         public string Name { get; set; }
-        public OCPBadPracticeCook(string name)
+        public OcpBadPracticeCook(string name)
         {
             this.Name = name;
         }
@@ -22,8 +22,8 @@ namespace SOLID.OCP
             Console.WriteLine("Картофельное пюре готово");
         }
 
-        // What is we want cook to prepair something different?
-        // in odrer to extend functionality of such class, we have to write + million new methods
-        // which leads to sphagetti code
+        // What is we want cook to prepare something different?
+        // in order to extend functionality of such class, we have to write + million new methods
+        // which leads to spaghetti code
     }
 }

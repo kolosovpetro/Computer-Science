@@ -1,6 +1,6 @@
 ﻿namespace SOLID.LSP
 {
-    class RectangleLspFriendly : IPolygon
+    internal class RectangleLspFriendly : IPolygon
     {
         public double Width { get; set; }
         public double Height { get; set; }

@@ -84,6 +84,7 @@
     <Compile Include="OCP\OCPBadPracticeCook.cs" />
     <Compile Include="OCP\IMeal.cs" />
     <Compile Include="OCP\OCPGoodPracticeCook.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SRP\BadPracticeReport.cs" />
     <Compile Include="SRP\GoodPracticeReport.cs" />

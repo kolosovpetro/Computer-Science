@@ -2,7 +2,7 @@
 
 namespace SOLID.ISP.Good_Practice
 {
-    class PhoneISPFriendly : ICallable, ICamera
+    class PhoneIspFriendly : ICallable, ICamera
     {
         public void Call()
         {

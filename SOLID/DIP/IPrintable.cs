@@ -1,6 +1,6 @@
 ﻿namespace SOLID.DIP
 {
-    interface IPrintable
+    internal interface IPrintable
     {
         void Print();
     }

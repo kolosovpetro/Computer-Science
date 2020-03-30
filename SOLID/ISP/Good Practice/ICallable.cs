@@ -1,6 +1,6 @@
 ﻿namespace SOLID.ISP.Good_Practice
 {
-    interface ICallable
+    internal interface ICallable
     {
         void Call();
     }
