@@ -6,3 +6,9 @@ nguyen 1
 petro 0
 mulualem  0
 petro 1
+Petro 0
+Sashka 1
+Petro 1
+Ilya 0
+Petro 0
+Arslanbek 1

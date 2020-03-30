@@ -3,9 +3,9 @@ using System;
 
 namespace Assignments_6
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             // Jean-Luc Picard’s journal. Write a program which reads lines of text written by the user 
             // in the console and writes them into Captain’s journal. 
@@ -16,16 +16,16 @@ namespace Assignments_6
             //<current-date>.txt 
             // with the content in the following format:
             // Captain’s log
-            // Stardate < current - date >
+            // Star date < current date >
             // First line…
             // Second line…
             // …
             // Jean - Luc Picard
 
-            //CaptainsJournal cj = new CaptainsJournal();
-            //Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
-            //Console.WriteLine($"Current date: {DateTime.Now.ToString("dd/MM/yyyy")}");
-            //cj.WriteLog();
+            var cj = new CaptainsJournal();
+            Console.WriteLine("Welcome to captain's log. Type start to proceed ...");
+            Console.WriteLine($"Current date: {DateTime.Now:dd/MM/yyyy}");
+            cj.WriteLog();
 
             // Add another option – Stats – to your tic-tac-toe game.
             // After selecting New game both players should enter their usernames. 
@@ -43,15 +43,13 @@ namespace Assignments_6
 
             Layout layout = new Layout();
             GameEngine ge = new GameEngine();
-            int moveIndex;
 
             while (ge.GetMainLoop())
             {
                 layout.PrintMainMenu();
-                MainMenu menuTerm = MainMenu.Unassigned;
                 layout.ChooseMenuOption(out string opt);
 
-                if (Enum.TryParse(opt, out menuTerm))
+                if (Enum.TryParse(opt, out MainMenu menuTerm))
                 {
                     switch (menuTerm)
                     {
@@ -64,7 +62,9 @@ namespace Assignments_6
                             for (int j = 0; j < ge.GetBoardArray().Length; j++)
                             {
                                 layout.PrintBoard(ge.GetBoardArray());
-                                layout.PlayerMoveMessage(ge.GetCurrentSign());
+                                layout.PlayerMoveMessage(ge.GetCurrentSign(), ge.CurrentPlayer);
+
+                                int moveIndex;
 
                                 while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
                                 {
@@ -77,7 +77,7 @@ namespace Assignments_6
                                 {
                                     Console.Clear();
                                     layout.PrintBoard(ge.GetBoardArray());
-                                    layout.WinnerMessage(ge.GetCurrentSign());
+                                    layout.WinnerMessage(ge.GetCurrentSign(), ge.CurrentPlayer);
                                     ge.SaveStatistics();
                                     Console.WriteLine("[Press Enter to return to Main menu ...]");
                                     Console.ReadKey();
@@ -87,6 +87,7 @@ namespace Assignments_6
                                 }
 
                                 ge.SignSwitch();
+                                ge.PlayerNameSwitch();
                                 Console.Clear();
                             }
 
@@ -111,12 +112,14 @@ namespace Assignments_6
                             break;
                         case MainMenu.Quit:
                             Console.Clear();
-                            layout.QuiteMessage(out string q);        // question for mainloop break
+                            layout.QuiteMessage(out string q);        // question for main loop break
                             if (q.ToLower() == "y")
-                                ge.SetMainloop();
+                                ge.SetMainLoop();
+                            break;
+                        case MainMenu.Unassigned:
                             break;
                         default:
-                            break;
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
             }

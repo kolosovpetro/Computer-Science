@@ -3,27 +3,27 @@ using System.IO;
 
 namespace Assignments_6
 {
-    class CaptainsJournal
+    internal class CaptainsJournal
     {
         private string fileFolder;
         private string fileName;
         private string fileFullPath;
 
-        private void setFileName()
+        private void SetFileName()
         {
-            this.fileName = $"{DateTime.Now.ToString("dd/MM/yyyy")}.txt";
-            this.fileFolder = "../../CaptainsJournal";
-            this.fileFullPath = fileFolder + '/' + fileName;
+            fileName = $"{DateTime.Now:dd/MM/yyyy}.txt";
+            fileFolder = "../../CaptainsJournal";
+            fileFullPath = fileFolder + '/' + fileName;
         }
 
         public void WriteLog()
         {
-            for (string input = Console.ReadLine(); !input.Equals("start"); input = Console.ReadLine())
+            for (string input = Console.ReadLine(); input != null && !input.Equals("start"); input = Console.ReadLine())
             {
                 Console.WriteLine("This entry is not going to log. Type start to access to Captain's log.");
             }
 
-            this.setFileName();
+            SetFileName();
 
             Console.WriteLine("Entering Captain's journal ... ");
 
@@ -32,12 +32,12 @@ namespace Assignments_6
                 Directory.CreateDirectory(fileFolder);
             }
 
-            using (StreamWriter sw = new StreamWriter(fileFullPath, true))
+            using (var sw = new StreamWriter(fileFullPath, true))
             {
                 sw.WriteLine("Captain's Log");
-                sw.WriteLine($"Stardate{fileName}");
+                sw.WriteLine($"Star date {fileName} ");
 
-                for (string input = Console.ReadLine(); !input.Equals("end"); input = Console.ReadLine())
+                for (string input = Console.ReadLine(); input != null && !input.Equals("end"); input = Console.ReadLine())
                 {
                     sw.WriteLine(input);
                 }

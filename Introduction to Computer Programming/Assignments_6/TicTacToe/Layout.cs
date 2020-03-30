@@ -2,13 +2,13 @@
 
 namespace Assignments_6.TicTacToe
 {
-    class Layout
+    internal class Layout
     {
         private readonly string[] menuItems;
 
         public Layout()
         {
-            this.menuItems = new string[]
+            menuItems = new[]
             {
                 "1. New Game",
                 "2. About the author",
@@ -19,7 +19,7 @@ namespace Assignments_6.TicTacToe
 
         public void PrintMainMenu()
         {
-            foreach (string item in menuItems)
+            foreach (var item in menuItems)
             {
                 Console.WriteLine(item);
             }
@@ -31,14 +31,14 @@ namespace Assignments_6.TicTacToe
             ans = Console.ReadLine();
         }
 
-        public void PlayerMoveMessage(char sign)
+        public void PlayerMoveMessage(char sign, string playerName)
         {
-            Console.Write($"\n {sign}'s move >");
+            Console.Write($"\n{playerName} {sign}'s move > ");
         }
 
-        public void WinnerMessage(char sign)
+        public void WinnerMessage(char sign, string playerName)
         {
-            Console.WriteLine($"Player {sign} won!");
+            Console.WriteLine($"Player {playerName} with sign {sign} won!");
         }
 
         public void PrintBoard(char[] boardArray)

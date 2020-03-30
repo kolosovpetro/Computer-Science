@@ -4,38 +4,38 @@ using System.Linq;
 
 namespace Assignments_6.TicTacToe
 {
-    class GameEngine
+    internal class GameEngine
     {
         private char[] boardArray;
-        private const char crossSign = 'X';
-        private const char roundSign = 'O';
+        public readonly char CrossSign = 'X';
+        public readonly char RoundSign = 'O';
         private char currentSign;
         private bool mainLoop;
-        private const string statsFileFolder = "../../GameStatistics";
-        private const string statsFileName = "Stats.txt";
-        private readonly string statsFileFullPath = statsFileFolder + '/' + statsFileName;
+        private const string StatsFileFolder = "../../GameStatistics";
+        private const string StatsFileName = "Stats.txt";
+        private readonly string statsFileFullPath = StatsFileFolder + '/' + StatsFileName;
         private string crossPlayerName;
-        private string roungPlayerName;
-        public char CrossSign => crossSign;
-        public char RoundSign => roundSign;
+        private string roundPlayerName;
+        public string CurrentPlayer { get; private set; }
 
         public GameEngine()
         {
-            this.boardArray = new char[9];
+            boardArray = new char[9];
             for (int i = 0; i < boardArray.Length; i++)
                 boardArray[i] = ' ';
-            this.currentSign = roundSign;
-            this.mainLoop = true;
+
+            currentSign = RoundSign;
+            mainLoop = true;
         }
 
         public char GetCurrentSign()
         {
-            return this.currentSign;
+            return currentSign;
         }
 
         public void PerformMove(int index)
         {
-            this.boardArray[index] = currentSign;
+            boardArray[index] = currentSign;
         }
 
         public bool WinConditions()
@@ -59,22 +59,27 @@ namespace Assignments_6.TicTacToe
 
         public void SignSwitch()
         {
-            currentSign = currentSign == crossSign ? roundSign : crossSign;
+            currentSign = currentSign == CrossSign ? RoundSign : CrossSign;
+        }
+
+        public void PlayerNameSwitch()
+        {
+            CurrentPlayer = CurrentPlayer == roundPlayerName ? crossPlayerName : roundPlayerName;
         }
 
         public char[] GetBoardArray()
         {
-            return this.boardArray;
+            return boardArray;
         }
 
-        public void SetMainloop()
+        public void SetMainLoop()
         {
-            this.mainLoop = false;
+            mainLoop = false;
         }
 
         public bool GetMainLoop()
         {
-            return this.mainLoop;
+            return mainLoop;
         }
 
         public bool LegalMove(string move, out int index)
@@ -86,66 +91,67 @@ namespace Assignments_6.TicTacToe
 
         public void Reset()
         {
-            this.boardArray = new char[9];
-            for (int i = 0; i < boardArray.Length; i++)
-                boardArray[i] = ' ';
-            this.currentSign = roundSign;
+            boardArray = new GameEngine().boardArray;
         }
 
         public void SetCrossPlayerName(string newName)
         {
-            this.crossPlayerName = newName;
+            crossPlayerName = newName;
         }
 
         public void SetRoundPlayerName(string newName)
         {
-            this.roungPlayerName = newName;
+            roundPlayerName = newName;
+            CurrentPlayer = newName;
         }
 
         public void SaveStatistics()
         {
-            if (!Directory.Exists(statsFileFolder))
+            if (!Directory.Exists(StatsFileFolder))
             {
-                Directory.CreateDirectory(statsFileFolder);
+                Directory.CreateDirectory(StatsFileFolder);
             }
 
-            using (StreamWriter sw = new StreamWriter(statsFileFullPath, true))
+            using (var sw = new StreamWriter(statsFileFullPath, true))
             {
-                switch (this.GetCurrentSign())
+                switch (GetCurrentSign())
                 {
-                    case crossSign:
+                    case 'X':
                         sw.WriteLine($"{crossPlayerName} 1");
-                        sw.WriteLine($"{roungPlayerName} 0");
+                        sw.WriteLine($"{roundPlayerName} 0");
                         break;
                     default:
                         sw.WriteLine($"{crossPlayerName} 0");
-                        sw.WriteLine($"{roungPlayerName} 1");
+                        sw.WriteLine($"{roundPlayerName} 1");
                         break;
                 }
             }
         }
 
-        public (int, int) playerStats(string playerName)
+        public (int, int) PlayerStats(string playerName)
         {
             int gamesCount = 0, winsCount = 0;
 
-            using (StreamReader sr = new StreamReader(statsFileFullPath))
+            using (var sr = new StreamReader(statsFileFullPath))
             {
                 while (!sr.EndOfStream)
                 {
-                    string curr = sr.ReadLine();
-                    string[] splited = curr.Split(' ');
-                    if (splited.Contains(playerName))
-                    {
-                        gamesCount++;
+                    string currentLine = sr.ReadLine();
 
-                        switch (splited[1])
+                    if (currentLine != null)
+                    {
+                        string[] split = currentLine.Split(' ');
+
+                        if (split.Contains(playerName))
                         {
-                            case "1":
-                                winsCount++;
-                                break;
-                            default:
-                                break;
+                            gamesCount++;
+
+                            switch (split[1])
+                            {
+                                case "1":
+                                    winsCount++;
+                                    break;
+                            }
                         }
                     }
                 }
@@ -156,7 +162,7 @@ namespace Assignments_6.TicTacToe
 
         public void DisplayStats(string playerName)
         {
-            (int, int) stats = this.playerStats(playerName);
+            (int, int) stats = PlayerStats(playerName);
             switch (stats.Item1)
             {
                 case 0:
@@ -166,7 +172,7 @@ namespace Assignments_6.TicTacToe
                     Console.WriteLine($"Player {playerName} has the following stats: " +
                         $"{stats.Item1} games, " +
                 $"{stats.Item2} wins " +
-                $"and winrate {(double)stats.Item2 / stats.Item1 * 100} %");
+                $"and Win Rate {(double)stats.Item2 / stats.Item1 * 100} %");
                     break;
             }
         }
