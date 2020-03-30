@@ -1,39 +1,42 @@
-﻿using NUnit.Framework;
+﻿using Dictionary.Dictionary;
+using NUnit.Framework;
 
 namespace Dictionary.UnitTests
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
-        MyDictionary<int, string> MyDictionary = new MyDictionary<int, string>();
+        private readonly MyDictionary<int, string> _dictionary = new MyDictionary<int, string>();
 
         [Test]
         public void TestIsEmpty()
         {
-            Assert.That(MyDictionary.IsEmpty, Is.EqualTo(true));
-            MyDictionary.Add(2, "Maria");
-            Assert.That(MyDictionary.IsEmpty, Is.EqualTo(false));
+            Assert.That(_dictionary.IsEmpty, Is.EqualTo(true));
+            _dictionary.Add(2, "Maria");
+            Assert.That(_dictionary.IsEmpty, Is.EqualTo(false));
         }
+
         [Test]
         public void TestElementAt()
         {
-            MyDictionary.Add(0, "Andrey");
-            MyDictionary.Add(1, "Eugene");
-            MyDictionary.Add(2, "Maria");
-            Assert.That(MyDictionary.ElementAt(0).Value, Is.EqualTo("Andrey"));
-            Assert.That(MyDictionary.ElementAt(1).Value, Is.EqualTo("Eugene"));
-            Assert.That(MyDictionary.ElementAt(2).Value, Is.EqualTo("Maria"));
+            _dictionary.Add(0, "Andrey");
+            _dictionary.Add(1, "Eugene");
+            _dictionary.Add(2, "Maria");
+            Assert.That(_dictionary.ElementAt(0).Value, Is.EqualTo("Andrey"));
+            Assert.That(_dictionary.ElementAt(1).Value, Is.EqualTo("Eugene"));
+            Assert.That(_dictionary.ElementAt(2).Value, Is.EqualTo("Maria"));
         }
+
         [Test]
         public void TestContains()
         {
-            MyDictionary.Add(0, "Andrey");
-            MyDictionary.Add(1, "Eugene");
-            MyDictionary.Add(2, "Maria");
-            Assert.That(MyDictionary.Contains(0, "Andrey"), Is.EqualTo(true));
-            Assert.That(MyDictionary.Contains(1, "Eugene"), Is.EqualTo(true));
-            Assert.That(MyDictionary.Contains(2, "Maria"), Is.EqualTo(true));
-            Assert.That(MyDictionary.Contains(3, "Misha"), Is.EqualTo(false));
+            _dictionary.Add(0, "Andrey");
+            _dictionary.Add(1, "Eugene");
+            _dictionary.Add(2, "Maria");
+            Assert.That(_dictionary.Contains(0, "Andrey"), Is.EqualTo(true));
+            Assert.That(_dictionary.Contains(1, "Eugene"), Is.EqualTo(true));
+            Assert.That(_dictionary.Contains(2, "Maria"), Is.EqualTo(true));
+            Assert.That(_dictionary.Contains(3, "Misha"), Is.EqualTo(false));
         }
     }
 }

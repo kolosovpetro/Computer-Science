@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Dictionary.Dictionary;
 
 namespace Dictionary
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            MyDictionary<int, string> MyDictionary = new MyDictionary<int, string>();
-            MyDictionary.Add(0, "Andrey");
-            MyDictionary.Add(1, "Eugene");
-            MyDictionary.Add(3, "Elizabeth");
-            MyDictionary.Add(4, "Landariel");
-            MyDictionary.Add(5, "Andy");
+            var myDictionary = new MyDictionary<int, string>
+            {
+                {0, "Andrey"},
+                {1, "Eugene"},
+                {3, "Elizabeth"},
+                {4, "Landariel"},
+                {5, "Andy"}
+            };
 
-            foreach (Node<int, string> page in MyDictionary)
+
+            foreach (var page in myDictionary)
             {
                 Console.WriteLine($"{page.Key}, {page.Value}");
             }
 
-            for (int i = 0; i < MyDictionary.Count; i++)
+            for (int i = 0; i < myDictionary.Count; i++)
             {
-                Console.WriteLine($"{MyDictionary[i].Key}, {MyDictionary[i].Value}");
+                Console.WriteLine($"{myDictionary[i].Key}, {myDictionary[i].Value}");
             }
         }
     }

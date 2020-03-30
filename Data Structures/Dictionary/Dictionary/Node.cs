@@ -1,22 +1,24 @@
-﻿namespace Dictionary
+﻿namespace Dictionary.Dictionary
 {
-    class Node<TKey, TValue>
+    internal class Node<TKey, TValue>
     {
         public TKey Key { get; private set; }
         public TValue Value { get; private set; }
-        public Node(TKey newTKey, TValue newTValue)
+
+        public Node(TKey key, TValue value)
         {
-            Key = newTKey;
-            Value = newTValue;
-        }
-        public void SetKey(TKey newKey)
-        {
-            Key = newKey;
+            Key = key;
+            Value = value;
         }
 
-        public void SetValue(TValue newValue)
+        public void SetKey(TKey key)
         {
-            Value = newValue;
+            Key = key;
+        }
+
+        public void SetValue(TValue value)
+        {
+            Value = value;
         }
     }
 }
