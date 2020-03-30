@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignments_7
+﻿namespace Assignments_7
 {
     public class BankAccount
     {
-        private double accountBalance;
+        private double _accountBalance;
 
         /// <summary>
         /// Constructor of class Bank Account. Initializes field accountBalance.
@@ -17,7 +11,7 @@ namespace Assignments_7
         /// <see cref="BankAccount"/>
         public BankAccount(double accountBalance)
         {
-            this.accountBalance = accountBalance;
+            _accountBalance = accountBalance;
         }
 
         /// <summary>
@@ -32,12 +26,12 @@ namespace Assignments_7
                 throw new NegativeAmountException("Deduction cannot be negative.");
             }
 
-            if (this.accountBalance - deduction < 0)
+            if (_accountBalance - deduction < 0)
             {
-                throw new NotEnoughMoneyException("Insufficent account balance");
+                throw new NotEnoughMoneyException("Insufficient account balance");
             }
 
-            this.accountBalance -= deduction;
+            _accountBalance -= deduction;
         }
 
         /// <summary>
@@ -47,7 +41,7 @@ namespace Assignments_7
         /// <see cref="GetAccountBalance"/>
         public double GetAccountBalance()
         {
-            return this.accountBalance;
+            return _accountBalance;
         }
 
     }

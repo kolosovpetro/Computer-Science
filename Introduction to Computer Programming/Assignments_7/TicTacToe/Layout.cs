@@ -2,13 +2,13 @@
 
 namespace Assignments_7.TicTacToe
 {
-    class Layout
+    public class Layout
     {
-        private readonly string[] menuItems;
+        private readonly string[] _menuItems;
 
         public Layout()
         {
-            this.menuItems = new string[]
+            _menuItems = new[]
             {
                 "1. New Game",
                 "2. About the author",
@@ -23,7 +23,7 @@ namespace Assignments_7.TicTacToe
         /// <see cref="PrintMainMenu"/>
         public void PrintMainMenu()
         {
-            foreach (string item in menuItems)
+            foreach (var item in _menuItems)
             {
                 Console.WriteLine(item);
             }
@@ -32,12 +32,12 @@ namespace Assignments_7.TicTacToe
         /// <summary>
         /// Displays a request to user to choose corresponding item from menu
         /// </summary>
-        /// <param name="ans">Number user provides</param>
+        /// <param name="choose">Number user provides</param>
         /// <see cref="ChooseMenuOption(out string)"/>
-        public void ChooseMenuOption(out string ans)
+        public void ChooseMenuOption(out string choose)
         {
             Console.Write("\nType number to go from menu > ");
-            ans = Console.ReadLine();
+            choose = Console.ReadLine();
         }
 
         /// <summary>
@@ -47,16 +47,17 @@ namespace Assignments_7.TicTacToe
         /// <see cref="PlayerMoveMessage(char)"/>
         public void PlayerMoveMessage(char sign)
         {
-            Console.Write($"\n {sign}'s move >");
+            Console.Write($"\n{sign}'s move >");
         }
 
-        /// <summary>
-        /// Shows message to the winner along with a player's sign
-        /// </summary>
-        /// <param name="sign">Sign of current player, 'O' or 'X'</param>
-        public void WinnerMessage(char sign)
+        public void PlayerMoveMessage(Player player)
         {
-            Console.WriteLine($"Player {sign} won!");
+            Console.Write($"\n{player.PlayerName} {player.PlayerSign}'s move > ");
+        }
+
+        public void WinnerMessage(Player player)
+        {
+            Console.WriteLine($"Player {player.PlayerName} ({player.PlayerSign}) won!");
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace Assignments_7.TicTacToe
         /// <see cref="PrintBoard(char[])"/>
         public void PrintBoard(char[] boardArray)
         {
-            Console.WriteLine("Current board state: ");
+            Console.WriteLine("Current board state: \n");
             Console.WriteLine(" " + boardArray[0] + " | " + boardArray[1] + " | " + boardArray[2] + " ");
             Console.WriteLine("-----------");
             Console.WriteLine(" " + boardArray[3] + " | " + boardArray[4] + " | " + boardArray[5] + " ");
@@ -86,29 +87,21 @@ namespace Assignments_7.TicTacToe
         }
 
         /// <summary>
-        /// Displays illegal move message to curent player
+        /// Displays illegal move message to current player
         /// </summary>
-        /// <param name="sign"></param>
-        public void IllegalMoveNotice(char sign)
+        /// <param name="player"></param>
+        public void IllegalMoveNotice(Player player)
         {
-            Console.WriteLine($"{sign}, Provide an integer number of index of board: ");
+            Console.WriteLine($"{player.PlayerName} ({player.PlayerSign}), " +
+                              $"Provide an integer number of index of board: ");
         }
 
         /// <summary>
-        /// Displays gameover message
+        /// Displays game over message
         /// </summary>
         public void GameOverMessage()
         {
-            Console.WriteLine("Game over!");
-        }
-
-        /// <summary>
-        /// Displays request message for player's nickname
-        /// </summary>
-        /// <param name="sign">Current player sign</param>
-        public void NicknameRequest(char sign)
-        {
-            Console.WriteLine($"Player {sign} enter your nickname: ");
+            Console.WriteLine("Game over with Tie.");
         }
     }
 }

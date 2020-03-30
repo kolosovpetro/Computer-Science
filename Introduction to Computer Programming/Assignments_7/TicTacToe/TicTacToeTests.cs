@@ -1,36 +1,40 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignments_7.TicTacToe
 {
     [TestFixture]
-    class TicTacToeTests
+    internal class TicTacToeTests
     {
-        GameEngine ge = new GameEngine();
+        private readonly GameEngine _ge = new GameEngine();
+        private readonly Player _crossPlayer = new Player("Petro", 'X');
+        private readonly Player _roundPlayer = new Player("Olejka", 'O');
 
         [Test]
-        public void SignSwitchTest()
+        public void PlayerSwitchTest()
         {
-            Assert.That(ge.GetCurrentSign(), Is.EqualTo('O'));
-            ge.SignSwitch();
-            Assert.That(ge.GetCurrentSign(), Is.EqualTo('X'));
+            _ge.SetCrossPlayer(_crossPlayer);
+            _ge.SetRoundPlayer(_roundPlayer);
+
+            Assert.That(_ge.CurrentPlayer.PlayerName, Is.EqualTo("Olejka"));
+            Assert.That(_ge.CurrentPlayer.PlayerSign, Is.EqualTo('O'));
+
+            _ge.PlayerSwitch();
+
+            Assert.That(_ge.CurrentPlayer.PlayerName, Is.EqualTo("Petro"));
+            Assert.That(_ge.CurrentPlayer.PlayerSign, Is.EqualTo('X'));
         }
 
         [Test]
-        public void SetMainloopTest()
+        public void BreakMainLoopTest()
         {
-            ge.SetMainloop();
-            Assert.That(ge.GetMainLoop(), Is.EqualTo(false));
+            _ge.BreakMainLoop();
+            Assert.That(_ge.MainLoop, Is.EqualTo(false));
         }
 
         [Test]
         public void TestWinConditions()
         {
-            Assert.That(ge.WinConditions(), Is.EqualTo(false));
+            Assert.That(_ge.HaveWinner, Is.EqualTo(false));
         }
     }
 }
