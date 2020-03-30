@@ -7,12 +7,11 @@ using Assignments5;
 
 namespace Assignments_5_Library
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            string[] menu = new string[]
-            {
+            string[] menu = {
                 "1. Assignments 1",
                 "2. Assignments 2",
                 "3. Assignments 3",
@@ -22,7 +21,7 @@ namespace Assignments_5_Library
 
             Console.WriteLine("Main Menu: ");
 
-            foreach (string item in menu)
+            foreach (var item in menu)
             {
                 Console.WriteLine(item);
             }
@@ -34,21 +33,19 @@ namespace Assignments_5_Library
             switch (ans)
             {
                 case "1":
-                    Asgn1.Execute();
+                    Set1.Execute();
                     break;
                 case "2":
-                    Asgn2.Execute();
+                    Set2.Execute();
                     break;
                 case "3":
-                    Asgn3.Execute();
+                    Set3.Execute();
                     break;
                 case "4":
-                    Asgn4.Execute();
+                    Set4.Execute();
                     break;
                 case "5":
-                    Asgn5.Execute();
-                    break;
-                default:
+                    Set5.Execute();
                     break;
             }
         }

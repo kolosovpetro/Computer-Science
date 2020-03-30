@@ -2,7 +2,7 @@
 
 namespace Assignments2
 {
-    public class Asgn2
+    public class Set2
     {
         public static void Execute()
         {
@@ -38,19 +38,22 @@ namespace Assignments2
 
             Console.WriteLine("Program calculating the following equation a * b / (a+b)");
 
-            int a, b;
+            double a, b;
 
             Console.WriteLine("Provide an integer number a: ");
-            while (!int.TryParse(Console.ReadLine(), out a))
+
+            while (!double.TryParse(Console.ReadLine(), out a))
             {
                 Console.WriteLine("Provide an integer number a: ");
             }
 
             Console.WriteLine("Provide an integer number b: ");
-            while (!int.TryParse(Console.ReadLine(), out b))
+
+            while (!double.TryParse(Console.ReadLine(), out b))
             {
                 Console.WriteLine("Provide an integer number b: ");
             }
+
 
             double res = a * b / (a / b);
 
@@ -97,12 +100,10 @@ namespace Assignments2
             // as long as the user wants
             Console.WriteLine("Simple calculator allows for basic arithmetic’s (+, -, *, /) on two numbers.");
 
-            int A, B;
-
             const char plus = '+';
             const char minus = '-';
-            const char mult = '*';
-            const char div = '/';
+            const char multiply = '*';
+            const char divide = '/';
 
             char userSign = default;
 
@@ -111,13 +112,19 @@ namespace Assignments2
             while (true)
             {
                 Console.WriteLine("Provide first number (A): ");
-                while (!int.TryParse(Console.ReadLine(), out A))
+
+                int c;
+
+                while (!int.TryParse(Console.ReadLine(), out c))
                 {
                     Console.WriteLine("Provide an integer number A: ");
                 }
 
                 Console.WriteLine("Provide first number (B): ");
-                while (!int.TryParse(Console.ReadLine(), out B))
+
+                int d;
+
+                while (!int.TryParse(Console.ReadLine(), out d))
                 {
                     Console.WriteLine("Provide an integer number B: ");
                 }
@@ -125,9 +132,13 @@ namespace Assignments2
                 while (!signIsCorrect)
                 {
                     Console.WriteLine("Provide an operator: ");
-                    userSign = Console.ReadLine()[0];
-                    signIsCorrect = (userSign == plus) || (userSign == minus) || (userSign == mult)
-                        || (userSign == div);
+
+                    string userInput = Console.ReadLine();
+
+                    if (userInput != null) userSign = userInput[0];
+
+                    signIsCorrect = userSign == plus || userSign == minus || userSign == multiply
+                                    || userSign == divide;
                 }
 
                 Console.WriteLine($"Operator provided: {userSign}");
@@ -135,18 +146,18 @@ namespace Assignments2
                 switch (userSign)
                 {
                     case plus:
-                        Console.WriteLine($"Sum of A + B = {A + B}");
+                        Console.WriteLine($"Sum of A + B = {c + d}");
                         break;
                     case minus:
-                        Console.WriteLine($"Difference of A - B = {A - B}");
+                        Console.WriteLine($"Difference of A - B = {c - d}");
                         break;
-                    case mult:
-                        Console.WriteLine($"Multiplication A * B = {A * B}");
+                    case multiply:
+                        Console.WriteLine($"Multiplication A * B = {c * d}");
                         break;
-                    case div:
-                        if (A == 0)
+                    case divide:
+                        if (c == 0)
                             goto default;
-                        Console.WriteLine($"Division A / B = {A / B}");
+                        Console.WriteLine($"Division A / B = {c / d}");
                         break;
                     default:
                         Console.WriteLine("Division by zero occured. Terminated.");
@@ -166,12 +177,14 @@ namespace Assignments2
                 "from range <1,10> given by the user.");
 
             Console.WriteLine("Provide an integer number y: ");
+
             while (!int.TryParse(Console.ReadLine(), out y) && y <= 10)
             {
                 Console.WriteLine("Provide an integer number y: ");
             }
 
             Console.WriteLine("Provide an integer number x: ");
+
             while (!int.TryParse(Console.ReadLine(), out x) && z <= 10)
             {
                 Console.WriteLine("Provide an integer number x: ");
@@ -185,22 +198,26 @@ namespace Assignments2
             // provided by the user.
 
             int height, width;
+
             Console.WriteLine("Program which will draw a rectangle out of ‘*’ with width and height");
             Console.WriteLine("Provide an integer number height: ");
+
             while (!int.TryParse(Console.ReadLine(), out height))
             {
                 Console.WriteLine("Provide an integer number height: ");
             }
 
             Console.WriteLine("Provide an integer number width: ");
+
             while (!int.TryParse(Console.ReadLine(), out width))
             {
                 Console.WriteLine("Provide an integer number width: ");
             }
 
-            char sign = '*';
+            const char sign = '*';
 
             Console.WriteLine($"Rectangle {height} x {width} of {sign} :");
+
             for (int i = 0; i < height; i++)
             {
                 Console.WriteLine();
@@ -216,6 +233,7 @@ namespace Assignments2
                 "given by the user.");
 
             Console.WriteLine("Provide an integer number height: ");
+
             while (!int.TryParse(Console.ReadLine(), out height))
             {
                 Console.WriteLine("Provide an integer number height: ");
@@ -273,15 +291,14 @@ namespace Assignments2
             // when the board is filled. Just remember to prevent the user from making an illegal move! 
             // Below is an example game.
 
-            char[] fields = new char[9]; // array for storing board state
+            char[] fields = new char[9];                // array for storing board state
             const char crossSign = 'X';
             const char roundSign = 'O';
             char currentSign = crossSign;
-            int index;
 
             for (int i = 0; i < fields.Length; i++)
             {
-                fields[i] = ' '; // fill array with " " for fancy spacing
+                fields[i] = ' ';                        // fill array with " " for fancy spacing
             }
 
             Console.WriteLine("Tic tac toe board: \n");
@@ -296,6 +313,8 @@ namespace Assignments2
                 Console.WriteLine(" " + fields[6] + " | " + fields[7] + " | " + fields[8] + " ");
 
                 Console.Write($"\n {currentSign}'s move >");
+
+                int index;
 
                 while (!(int.TryParse(Console.ReadLine(), out index) && index >= 0 && index < 9))
                 {

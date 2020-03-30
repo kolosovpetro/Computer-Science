@@ -3,35 +3,34 @@ using System.Text;
 
 namespace Assignments4
 {
-    public class Asgn4
+    public enum MainMenu
     {
-        public enum MainMenu
-        {
-            NewGame = 1,
-            About = 2,
-            Quit = 3,
-            Unassigned = 4
-        }
+        NewGame = 1,
+        About = 2,
+        Quit = 3,
+        Unassigned = 4
+    }
+
+    public class Set4
+    {
         public static void Execute()
         {
-            // When solving the exercises remember to make sure your program doesn’t crash 
+            // When solving the exercises remember to make sure your program doesn't crash 
             // regardless of user’s input.
 
-            // Write a program which reads 20 numbers given by the user and prints them out in reverse order
-
-            string ans;                                 // varaible to break infinite loop
+            // Write a program which reads 20 numbers given by the user and prints them out
+            // in reverse order
 
             Random r = new Random();                    // in order to skip this task faster; 
                                                         // correct solution is commented in loop
             StringBuilder sb = new StringBuilder();
 
-            int[] arr;                                  // global array we work with
             int num;                                    // var for array term
 
             Console.WriteLine("Program which reads 20 numbers given by the user " +
                 "and prints them out in reverse order");
 
-            arr = new int[20];
+            var arr = new int[20];
 
             for (int i = 0; i < arr.Length; i++)
             {
@@ -86,13 +85,17 @@ namespace Assignments4
                 Console.WriteLine(num);
             }
 
-            for (int i = 0; i < arr.Length; i++)
-                avg += (double)arr[i] / size;                   // calculating average
+            foreach (var t in arr)
+                avg += (double)t / size;                        // calculating average
+
             sb.Append("\nThe average of array: ");              // append label message
+
             for (int i = 0; i < arr.Length; i++)
                 sb.Append(arr[arr.Length - 1 - i] + ", ");      // sb append array terms
+
             sb.Append($"is {avg}");                             // sb append average value
-            Console.WriteLine(sb.ToString());                   // print formated string
+
+            Console.WriteLine(sb.ToString());                   // print formatted string
 
             // Write a program which will sort an array of numbers given by the user. 
             // In your solution implement bubble sort algorithm.
@@ -104,7 +107,6 @@ namespace Assignments4
             while (swapped)
             {
                 swapped = false;
-                step = 0;
 
                 while (step < arr.Length - 1)
                 {
@@ -121,9 +123,10 @@ namespace Assignments4
                 }
 
                 Console.WriteLine("Sorted array: ");
-                for (int i = 0; i < arr.Length; i++)
+
+                foreach (var term in arr)
                 {
-                    Console.Write(arr[i] + " ");
+                    Console.Write(term + " ");
                 }
             }
 
@@ -191,9 +194,10 @@ namespace Assignments4
             {
                 sieve[i] = true;
             }
+
             for (int i = 2; i < Math.Sqrt(size); i++)
             {
-                if (sieve[i] == true)
+                if (sieve[i])
                 {
                     for (int j = (i * i); j < size; j = j + i)
                     {
@@ -202,10 +206,11 @@ namespace Assignments4
                 }
             }
 
-            Console.WriteLine("List of prime numbers upto given number are : ");
+            Console.WriteLine("List of prime numbers up to given number are : ");
+
             for (int i = 2; i < sieve.Length; i++)
             {
-                if (sieve[i] == true)
+                if (sieve[i])
                 {
                     Console.Write(i + ", ");
                 }
@@ -223,16 +228,16 @@ namespace Assignments4
             const char crossSign = 'X';
             const char roundSign = 'O';
             char currentSign = crossSign;
-            int index;
-            ans = default;                      // restore the mainloop veriable to default
+
+            string ans = default;
 
             while (true)
             {
                 foreach (var item in menuItems) Console.WriteLine(item); // main menu layout
-                MainMenu menuTerm = MainMenu.Unassigned;
                 Console.Write("\nType number to go from menu > ");
                 string userInput = Console.ReadLine();
-                if (Enum.TryParse(userInput, out menuTerm))
+
+                if (Enum.TryParse(userInput, out MainMenu menuTerm))
                 {
                     switch (menuTerm)
                     {
@@ -240,6 +245,7 @@ namespace Assignments4
                             Console.Clear();
 
                             // fill array with ' ' for fancy spacing
+
                             for (int i = 0; i < boardArray.Length; i++) boardArray[i] = ' ';
 
                             Console.WriteLine("Tic tac toe board: \n");
@@ -255,8 +261,9 @@ namespace Assignments4
 
                                 Console.Write($"\n {currentSign}'s move >");
 
+                                int index;
                                 while (!(int.TryParse(Console.ReadLine(), out index)
-                                    && index >= 0 && index < 9 && boardArray[index] == ' '))
+                                         && index >= 0 && index < 9 && boardArray[index] == ' '))
                                     Console.WriteLine($"{currentSign}, Provide an integer number of index of board: ");
 
                                 boardArray[index] = currentSign;

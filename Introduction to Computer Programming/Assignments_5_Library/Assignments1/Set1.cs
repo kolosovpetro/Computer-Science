@@ -2,7 +2,7 @@
 
 namespace Assignments1
 {
-    public class Asgn1
+    public class Set1
     {
         public static void Execute()
         {
@@ -12,6 +12,7 @@ namespace Assignments1
             // Write a program which will calculate an area of a rectangle with dimensions 
             // stored in variables a and b. 
             // Store the result in an additional variable before printing it to the console.
+
             int a = 10;
             int b = 20;
             int c = a * b;
@@ -23,45 +24,46 @@ namespace Assignments1
             // (2) Indicate errors which will occur during execution.
             // (3) Fix the errors.
 
-            int x = 5;
-
             // y = 0;
             int y = 0;
 
             // int x = Console.ReadLine(); - surely won't compile without parsing string
             Console.WriteLine("Provide an integer: ");
-            x = int.Parse(Console.ReadLine()); // may throw wrong input format exception
+            var x = int.Parse(Console.ReadLine());
 
-            // Console.WriteLine(x / y); - definately causes division by zero exception
+            // Console.WriteLine(x / y); - definitely causes division by zero exception
             Console.WriteLine("Area: ");
             Console.WriteLine(x * y);
 
             // Write a program which will convert a value from PLN to USD. 
             // For now, do not read the value from the console.
-            double convertedValue = 12.5f; // pln
-            double plnToUsdExchangeRate = 4.3f; // 1 usd = 4.3 pln
-            double usdAmount = convertedValue / plnToUsdExchangeRate; // convert the pln amount to usd
-            Console.WriteLine($"Pln {convertedValue} to USD is {usdAmount} USD"); // write result to console
+
+            double convertedValue = 12.5f;                                          // pln
+            double plnToUsdExchangeRate = 4.3f;                                     // 1 usd = 4.3 pln
+            double usdAmount = convertedValue / plnToUsdExchangeRate;               // convert the pln amount to usd
+            Console.WriteLine($"Pln {convertedValue} to USD is {usdAmount} USD");   // write result to console
 
             // Modify the solution to the previous exercise so that this time the value to be converted 
             // comes from the console as user input.
+
             Console.WriteLine("Another conversion of pln to usd.");
             Console.WriteLine("Provide new amount to convert: ");
-            convertedValue = double.Parse(Console.ReadLine()); // may throw wrong input format exception
-            usdAmount = convertedValue / plnToUsdExchangeRate; // convert the pln amount to usd
+            convertedValue = double.Parse(Console.ReadLine());      // may throw wrong input format exception
+            usdAmount = convertedValue / plnToUsdExchangeRate;      // convert the pln amount to usd
             Console.WriteLine($"Pln {convertedValue} to USD is {usdAmount} USD"); // write result to console
 
             // Write a program which will compute the value of a quadratic function y = ax2 + bx + c 
             // at a given point x.
             // The coefficients a, b, c and point x should be provided by the user during the execution.
             // Make sure the program has a reasonably clear interface.
+
             Console.WriteLine("Welcome to program to compute the value " +
                 "of a quadratic function y = ax2 + bx + c");
-            Console.WriteLine("Provide coefficint a: ");
+            Console.WriteLine("Provide coefficient a: ");
             a = int.Parse(Console.ReadLine()); // may throw wrong input format exception
-            Console.WriteLine("Provide coefficint b: ");
+            Console.WriteLine("Provide coefficient b: ");
             b = int.Parse(Console.ReadLine()); // may throw wrong input format exception
-            Console.WriteLine("Provide coefficint c: ");
+            Console.WriteLine("Provide coefficient c: ");
             c = int.Parse(Console.ReadLine()); // may throw wrong input format exception
             Console.WriteLine("Provide value x: ");
             x = int.Parse(Console.ReadLine()); // may throw wrong input format exception
@@ -70,16 +72,19 @@ namespace Assignments1
 
             // . Write a program which will ask a user to provide a (non-integer) number 
             // and output it as an integer.
+
             Console.WriteLine("Provide number to be floored: ");
-            double notFloored = double.Parse(Console.ReadLine()); // may throw wrong input format exception
-            int floored = (int)notFloored; // castng to int
+            double notFloored = double.Parse(Console.ReadLine());   // may throw wrong input format exception
+            int floored = (int)notFloored;                          // casting to int
             Console.WriteLine($"Result is: {floored}");
 
             // Draw a filled rectangle made with “*” of width 5 and height 3.
             int height = 3;
             int width = 5;
-            char sign = '*';
+            const char sign = '*';
+
             Console.WriteLine("Rectangle 5x3 of * :");
+
             for (int i = 0; i < height; i++)
             {
                 Console.WriteLine();
@@ -91,7 +96,7 @@ namespace Assignments1
 
             // Draw a tic-tac-toe board using console symbols.
             // Modify the program from the previous exercise by adding 9 variables which will hold the game state. 
-            // Assume that only spacebar, “X” and „O” are allowed. Next, draw the board again, however, this time 
+            // Assume that only space bar, “X” and „O” are allowed. Next, draw the board again, however, this time 
             // make it reflect the state that is stored in the variables.
             // Modify the solution from the previous exercise so that the program will draw the board with a 
             // state provided by the user.An example execution is presented below.

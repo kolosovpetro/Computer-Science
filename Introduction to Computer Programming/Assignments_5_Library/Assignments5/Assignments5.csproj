@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asgn5.cs" />
+    <Compile Include="Set5.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToe\GameEngine.cs" />

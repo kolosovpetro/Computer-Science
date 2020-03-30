@@ -10,7 +10,8 @@ namespace Assignments3
         Quit = 3,
         Unassigned = 4
     }
-    public class Asgn3
+
+    public class Set3
     {
         public static void Execute()
         {
@@ -37,7 +38,7 @@ namespace Assignments3
             Console.WriteLine("Provide user's city: ");
             string city = Console.ReadLine();
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append($"{firstName} {lastName}\n");
             sb.Append($"{streetName} {houseNumber}/{flatNumber}\n");
             sb.Append($"{zipCode} {city}");
@@ -48,40 +49,40 @@ namespace Assignments3
             // New game – print out New game and display menu again;
             // About the author – print out the information about the author and display menu again;
             // Quit – the program asks the user for confirmation. If the user confirms, the program quits.
-            // If the user doesn’t confirm – the program returns back to menu.
+            // If the user doesn't confirm – the program returns back to menu.
 
             string[] menuItems = new string[] { "1. New Game", "2. About the author", "3. Quit" };
 
             foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
 
-            MainMenu menuTerm = MainMenu.Unassigned;
             Console.WriteLine("Type number to go from menu: ");
             string userInput = Console.ReadLine();
-            if (Enum.TryParse(userInput, out menuTerm))
+
+            if (Enum.TryParse(userInput, out MainMenu menuTerm))
             {
                 switch (menuTerm)
                 {
                     case MainMenu.NewGame:
                         Console.Clear();
-                        Console.WriteLine("newgame ... ");
+                        Console.WriteLine("New game ... ");
                         foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
                         break;
                     case MainMenu.About:
                         Console.Clear();
-                        Console.WriteLine("about author");
+                        Console.WriteLine("About author ... ");
                         foreach (var item in menuItems) Console.WriteLine(item);        // menu layout
                         break;
                     case MainMenu.Quit:
                         Console.Clear();
-                        Console.WriteLine("quiting...");
+                        Console.WriteLine("Quit ...");
+
                         while (true)
                         {
                             Console.WriteLine("Confirm quite: y");
                             ans = Console.ReadLine();
                             if (ans == "y") break;
                         }
-                        break;
-                    default:
+
                         break;
                 }
             }
@@ -89,7 +90,7 @@ namespace Assignments3
             // Write a program with an Infinite loop, in which the program asks the user in 
             // every pass of the loop should it draw a next random number.If the user confirms, 
             // then the program draws a next random number and prints it to the console.
-            // If the user doesn’t confirm – the program ends.
+            // If the user doesn't confirm – the program ends.
 
             Random r = new Random();
 
@@ -112,14 +113,15 @@ namespace Assignments3
             const char crossSign = 'X';
             const char roundSign = 'O';
             char currentSign = crossSign;
-            int index;
-            ans = default;                      // restore the mainloop veriable to default
+            ans = default;                      // restore the main loop variable to default
 
             while (true)
             {
                 foreach (var item in menuItems) Console.WriteLine(item); // main menu layout
                 Console.Write("\nType number to go from menu > ");
+
                 userInput = Console.ReadLine();
+
                 if (Enum.TryParse(userInput, out menuTerm))
                 {
                     switch (menuTerm)
@@ -143,8 +145,9 @@ namespace Assignments3
 
                                 Console.Write($"\n {currentSign}'s move >");
 
+                                int index;
                                 while (!(int.TryParse(Console.ReadLine(), out index)
-                                    && index >= 0 && index < 9 && boardArray[index] == ' '))
+                                         && index >= 0 && index < 9 && boardArray[index] == ' '))
                                     Console.WriteLine($"{currentSign}, Provide an integer number of index of board: ");
 
                                 boardArray[index] = currentSign;

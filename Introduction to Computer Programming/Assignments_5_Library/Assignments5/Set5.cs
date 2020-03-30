@@ -4,19 +4,21 @@ using System.Collections.Generic;
 
 namespace Assignments5
 {
-    public class Asgn5
+    public class Set5
     {
         public static void Execute()
         {
             // Difference in modification of references vs value types
+
             int i = 0;
-            int[] t = { 0 };
+            int[] t = { 5 };
             Modify(ref i);
             Modify(t);
             Console.WriteLine(i);
             Console.WriteLine(t[0]);
 
             // Example of out keyword usage
+
             int x = 1;
             Console.WriteLine(x);
             ModifyingProcedure(out x);
@@ -30,15 +32,13 @@ namespace Assignments5
 
             Layout layout = new Layout();
             GameEngine ge = new GameEngine();
-            int moveIndex;
 
             while (ge.GetMainLoop())
             {
                 layout.PrintMainMenu();
-                MainMenu menuTerm = MainMenu.Unassigned;
                 layout.ChooseMenuOption(out string opt);
 
-                if (Enum.TryParse(opt, out menuTerm))
+                if (Enum.TryParse(opt, out MainMenu menuTerm))
                 {
                     switch (menuTerm)
                     {
@@ -47,6 +47,8 @@ namespace Assignments5
                             {
                                 layout.PrintBoard(ge.GetBoardArray());
                                 layout.PlayerMoveMessage(ge.GetCurrentSign());
+
+                                int moveIndex;
 
                                 while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
                                 {
@@ -74,6 +76,7 @@ namespace Assignments5
                             layout.GameOverMessage();
                             Console.Clear();
                             break;
+
                         case MainMenu.About:
                             Console.Clear();
                             Console.WriteLine("Author Petro Kolosov: https://github.com/kolosovpetro");
@@ -81,13 +84,12 @@ namespace Assignments5
                             Console.ReadKey();
                             Console.Clear();
                             break;
+
                         case MainMenu.Quit:
                             Console.Clear();
-                            layout.QuiteMessage(out string q);        // question for mainloop break
+                            layout.QuiteMessage(out string q);        // question for main loop break
                             if (q.ToLower() == "y")
-                                ge.SetMainloop();
-                            break;
-                        default:
+                                ge.SetMainLoop();
                             break;
                     }
                 }
@@ -102,7 +104,7 @@ namespace Assignments5
 
             Console.Clear();
             Console.WriteLine("Welcome to contact list application.");
-            List<Contact> contacts = new List<Contact>();
+            var contacts = new List<Contact>();
 
             while (true)
             {
@@ -119,34 +121,38 @@ namespace Assignments5
 
                 Console.WriteLine("Wish you to add another one contact ? y/n");
                 string ans = Console.ReadLine();
-                if (ans.ToLower() == "n") break;
+                if (ans != null && ans.ToLower() == "n") break;
             }
 
             Console.WriteLine("All contacts from list: ");
 
-            foreach (Contact item in contacts)
+            foreach (var item in contacts)
             {
                 Console.WriteLine(item.FullData);
             }
         }
 
         // Example how to modify value type properly
-        static void Modify(ref int a)
+
+        private static void Modify(ref int value)
         {
-            a = 5;
+            value = 5;
         }
 
         // Example how to modify reference type properly
-        static void Modify(int[] a)
+
+        private static void Modify(int[] a)
         {
             a[0] = 5;
         }
 
         // Returning values from voids
-        static void ModifyingProcedure(out int a)
+
+        private static void ModifyingProcedure(out int a)
         {
             a = 23;
         }
+
 
     }
 }

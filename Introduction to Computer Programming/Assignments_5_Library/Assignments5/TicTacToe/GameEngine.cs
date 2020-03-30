@@ -2,81 +2,80 @@
 {
     public class GameEngine
     {
-        private char[] boardArray;
-        private const char crossSign = 'X';
-        private const char roundSign = 'O';
-        private char currentSign;
-        private bool mainLoop;
+        private char[] _boardArray;
+        private const char CrossSign = 'X';
+        private const char RoundSign = 'O';
+        private char _currentSign;
+        private bool _mainLoop;
 
         public GameEngine()
         {
-            this.boardArray = new char[9];
-            for (int i = 0; i < boardArray.Length; i++)
-                boardArray[i] = ' ';
-            this.currentSign = roundSign;
-            this.mainLoop = true;
+            _boardArray = new char[9];
+
+            for (int i = 0; i < _boardArray.Length; i++)
+                _boardArray[i] = ' ';
+
+            _currentSign = RoundSign;
+            _mainLoop = true;
         }
 
         public char GetCurrentSign()
         {
-            return this.currentSign;
+            return _currentSign;
         }
 
         public void PerformMove(int index)
         {
-            boardArray[index] = currentSign;
+            _boardArray[index] = _currentSign;
         }
 
         public bool WinConditions()
         {
-            return (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
+            return (_boardArray[0] & _boardArray[1] & _boardArray[2] & _currentSign) == _currentSign
                 ||
-                (boardArray[0] & boardArray[3] & boardArray[6] & currentSign) == currentSign
+                (_boardArray[0] & _boardArray[3] & _boardArray[6] & _currentSign) == _currentSign
                 ||
-                (boardArray[0] & boardArray[4] & boardArray[8] & currentSign) == currentSign
+                (_boardArray[0] & _boardArray[4] & _boardArray[8] & _currentSign) == _currentSign
                 ||
-                (boardArray[1] & boardArray[4] & boardArray[7] & currentSign) == currentSign
+                (_boardArray[1] & _boardArray[4] & _boardArray[7] & _currentSign) == _currentSign
                 ||
-                (boardArray[2] & boardArray[5] & boardArray[8] & currentSign) == currentSign
+                (_boardArray[2] & _boardArray[5] & _boardArray[8] & _currentSign) == _currentSign
                 ||
-                (boardArray[2] & boardArray[4] & boardArray[6] & currentSign) == currentSign
+                (_boardArray[2] & _boardArray[4] & _boardArray[6] & _currentSign) == _currentSign
                 ||
-                (boardArray[3] & boardArray[4] & boardArray[5] & currentSign) == currentSign
+                (_boardArray[3] & _boardArray[4] & _boardArray[5] & _currentSign) == _currentSign
                 ||
-                (boardArray[6] & boardArray[7] & boardArray[8] & currentSign) == currentSign;
+                (_boardArray[6] & _boardArray[7] & _boardArray[8] & _currentSign) == _currentSign;
         }
 
         public void SignSwitch()
         {
-            currentSign = currentSign == crossSign ? roundSign : crossSign;
+            _currentSign = _currentSign == CrossSign ? RoundSign : CrossSign;
         }
 
         public char[] GetBoardArray()
         {
-            return this.boardArray;
+            return _boardArray;
         }
 
-        public void SetMainloop()
+        public void SetMainLoop()
         {
-            this.mainLoop = false;
+            _mainLoop = false;
         }
 
         public bool GetMainLoop()
         {
-            return this.mainLoop;
+            return _mainLoop;
         }
 
         public bool LegalMove(string move, out int index)
         {
-            return int.TryParse(move, out index) && index >= 0 && index < 9 && boardArray[index] == ' ';
+            return int.TryParse(move, out index) && index >= 0 && index < 9 && _boardArray[index] == ' ';
         }
 
         public void Reset()
         {
-            this.boardArray = new char[9];
-            for (int i = 0; i < boardArray.Length; i++)
-                boardArray[i] = ' ';
-            this.currentSign = roundSign;
+            _boardArray = new GameEngine()._boardArray;
         }
     }
 }
