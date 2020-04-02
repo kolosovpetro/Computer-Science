@@ -6,11 +6,18 @@ using Npgsql;
 
 namespace DataMapperPattern.CopyListRecordEntity
 {
-    internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
+    internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>,
+        IIdentityMap<ICopyListRecord>
     {
+        public IDictionary<int, ICopyListRecord> CacheDictionary { get; }
+        
+
         public static CopyListDbContext Instance { get; } = new CopyListDbContext();
 
-        private CopyListDbContext() { }
+        private CopyListDbContext()
+        {
+            CacheDictionary = new Dictionary<int, ICopyListRecord>();
+        }
 
         public ICopyListRecord Select(int movieId)
         {
@@ -47,6 +54,11 @@ namespace DataMapperPattern.CopyListRecordEntity
                     return copyListRecord;
                 }
             }
+        }
+
+        public void UpdateCache(ICopyListRecord record)
+        {
+            throw new NotImplementedException();
         }
     }
 }

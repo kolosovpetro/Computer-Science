@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataMapperPattern.DataBaseContexts;
 using Npgsql;
 
 namespace DataMapperPattern.MovieRecordEntity
 {
     internal class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
-        IInsertable<IMovieRecord>
+        IInsertable<IMovieRecord>, IIdentityMap<IMovieRecord>
     {
+        public IDictionary<int, IMovieRecord> CacheDictionary { get; }
+
         // singleton pattern applied
 
         public static MovieDbContext Instance { get; } = new MovieDbContext();
 
-        private MovieDbContext() { }
+        private MovieDbContext()
+        {
+            CacheDictionary = new Dictionary<int, IMovieRecord>();
+        }
 
         public void Insert(IMovieRecord entity)
         {
@@ -88,6 +94,11 @@ namespace DataMapperPattern.MovieRecordEntity
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void UpdateCache(IMovieRecord movie)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,11 +6,16 @@ using Npgsql;
 namespace DataMapperPattern.RentalsRecordEntity
 {
     internal class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
-        IInsertable<IRentalsRecord>
+        IInsertable<IRentalsRecord>, IIdentityMap<IEnumerable<IRentalsRecord>>
     {
+        public IDictionary<int, IEnumerable<IRentalsRecord>> CacheDictionary { get; }
+
         public static RentalsDbContext Instance { get; } = new RentalsDbContext();
-        
-        private RentalsDbContext() { }
+
+        private RentalsDbContext()
+        {
+            CacheDictionary = new Dictionary<int, IEnumerable<IRentalsRecord>>();
+        }
 
         public void Insert(IRentalsRecord entity)
         {
@@ -88,6 +93,11 @@ namespace DataMapperPattern.RentalsRecordEntity
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+        
+        public void UpdateCache(IEnumerable<IRentalsRecord> rentals)
+        {
+            throw new NotImplementedException();
         }
     }
 }

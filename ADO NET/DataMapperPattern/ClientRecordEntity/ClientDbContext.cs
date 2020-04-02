@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataMapperPattern.DataBaseContexts;
 using Npgsql;
 
 namespace DataMapperPattern.ClientRecordEntity
 {
     internal class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
-        IInsertable<IClientRecord>
+        IInsertable<IClientRecord>, IIdentityMap<IClientRecord>
     {
+        public IDictionary<int, IClientRecord> CacheDictionary { get; }
+        
+
         public static ClientDbContext Instance { get; } = new ClientDbContext();
 
-        private ClientDbContext() { }
+        private ClientDbContext()
+        {
+            CacheDictionary = new Dictionary<int, IClientRecord>();
+        }
 
         public void Insert(IClientRecord entity)
         {
@@ -34,6 +41,11 @@ namespace DataMapperPattern.ClientRecordEntity
 
         public IClientRecord Select(int movieId)
         {
+            if (CacheDictionary.ContainsKey(movieId))
+            {
+                return CacheDictionary[movieId];
+            }
+
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
@@ -56,6 +68,7 @@ namespace DataMapperPattern.ClientRecordEntity
                     client.SetFirstName((string)reader["first_name"]);
                     client.SetLastName((string)reader["last_name"]);
                     client.SetBirthday(Convert.ToDateTime(reader["birthday"]));
+                    CacheDictionary.Add(movieId, client);
                     return client;
                 }
             }
@@ -82,6 +95,11 @@ namespace DataMapperPattern.ClientRecordEntity
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void UpdateCache(IClientRecord entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataMapperPattern.DataBaseContexts;
 using Npgsql;
 
 namespace DataMapperPattern.CopyRecordEntity
 {
     internal class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
-        IInsertable<ICopyRecord>
+        IInsertable<ICopyRecord>, IIdentityMap<ICopyRecord>
     {
+        public IDictionary<int, ICopyRecord> CacheDictionary { get; }
+
+
         public static CopyDbContext Instance { get; } = new CopyDbContext();
 
-        private CopyDbContext() { }
+        private CopyDbContext()
+        {
+            CacheDictionary = new Dictionary<int, ICopyRecord>();
+        }
 
         public void Insert(ICopyRecord entity)
         {
@@ -33,6 +40,11 @@ namespace DataMapperPattern.CopyRecordEntity
 
         public ICopyRecord Select(int movieId)
         {
+            if (CacheDictionary.ContainsKey(movieId))
+            {
+                return CacheDictionary[movieId];
+            }
+
             using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
@@ -54,6 +66,7 @@ namespace DataMapperPattern.CopyRecordEntity
                     copy.SetMovieId((int)reader["movie_id"]);
                     copy.SetCopyId((int)reader["copy_id"]);
                     copy.SetAvailable((bool)reader["available"]);
+                    CacheDictionary.Add(movieId, copy);
                     return copy;
                 }
             }
@@ -76,6 +89,11 @@ namespace DataMapperPattern.CopyRecordEntity
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void UpdateCache(ICopyRecord copy)
+        {
+            throw new NotImplementedException();
         }
     }
 }

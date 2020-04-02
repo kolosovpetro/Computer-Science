@@ -84,6 +84,7 @@
     <Compile Include="CopyRecordEntity\CopyRecord.cs" />
     <Compile Include="CopyRecordEntity\CopyDbContext.cs" />
     <Compile Include="CopyRecordEntity\ICopyRecord.cs" />
+    <Compile Include="DataBaseContexts\IIdentityMap.cs" />
     <Compile Include="DataBaseContexts\IInsertable.cs" />
     <Compile Include="DataBaseContexts\IRemovable.cs" />
     <Compile Include="DataBaseContexts\ISelectable.cs" />
