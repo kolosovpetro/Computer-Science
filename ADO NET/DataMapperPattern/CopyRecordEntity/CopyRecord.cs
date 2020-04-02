@@ -1,4 +1,4 @@
-﻿namespace ActiveRecordPattern.CopyRecordEntity
+﻿namespace DataMapperPattern.CopyRecordEntity
 {
     internal class CopyRecord : ICopyRecord
     {

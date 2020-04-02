@@ -1,4 +1,4 @@
-﻿namespace ActiveRecordPattern.DataBaseContexts
+﻿namespace DataMapperPattern.DataBaseContexts
 {
     internal interface ISelectable<T>
     {

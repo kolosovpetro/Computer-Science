@@ -1,8 +1,8 @@
-﻿using ActiveRecordPattern.DataBaseContexts;
+﻿using System;
+using DataMapperPattern.DataBaseContexts;
 using Npgsql;
-using System;
 
-namespace ActiveRecordPattern.CopyRecordEntity
+namespace DataMapperPattern.CopyRecordEntity
 {
     internal class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
         IInsertable<ICopyRecord>

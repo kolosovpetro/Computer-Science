@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActiveRecordPattern.ClientRecordEntity
+namespace DataMapperPattern.ClientRecordEntity
 {
     internal interface IClientRecord
     {

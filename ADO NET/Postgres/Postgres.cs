@@ -2,7 +2,7 @@
 
 namespace Postgres
 {
-    class Postgres : IPostgres
+    internal class Postgres : IPostgres
     {
         public string Host { get; }
 
@@ -12,7 +12,7 @@ namespace Postgres
 
         public string Database { get; }
 
-        public NpgsqlConnection con { get; }
+        public NpgsqlConnection Conn { get; }
 
         public Postgres(string host, string username, string password, string database)
         {
@@ -21,15 +21,15 @@ namespace Postgres
             Password = $"Password={password};";
             Database = $"Database={database};";
 
-            con = new NpgsqlConnection(Host + Username + Password + Database);
+            Conn = new NpgsqlConnection(Host + Username + Password + Database);
         }
 
         public bool IsAvailable()
         {
             try
             {
-                con.Open();
-                con.Close();
+                Conn.Open();
+                Conn.Close();
                 return true;
             }
             catch (NpgsqlException)

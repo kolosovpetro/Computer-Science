@@ -1,8 +1,8 @@
-﻿using ActiveRecordPattern.DataBaseContexts;
+﻿using System;
+using DataMapperPattern.DataBaseContexts;
 using Npgsql;
-using System;
 
-namespace ActiveRecordPattern.ClientRecordEntity
+namespace DataMapperPattern.ClientRecordEntity
 {
     internal class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
         IInsertable<IClientRecord>

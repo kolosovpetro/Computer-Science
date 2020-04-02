@@ -1,4 +1,6 @@
-﻿namespace DecoratorLibrary
+﻿using DecoratorLibrary.BaseFunctionality;
+
+namespace DecoratorLibrary
 {
     class DecoratorA : BaseDecorator
     {
@@ -9,7 +11,7 @@
             return base.WriteColor() + WriteRed();
         }
 
-        private string WriteRed()                                       // additional functionlity added to base method
+        private string WriteRed()                                       // additional functionality added to base method
         {
             return "Red ";
         }

@@ -1,9 +1,9 @@
-﻿using ActiveRecordPattern.DataBaseContexts;
-using Npgsql;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DataMapperPattern.DataBaseContexts;
+using Npgsql;
 
-namespace ActiveRecordPattern.RentalsRecordEntity
+namespace DataMapperPattern.RentalsRecordEntity
 {
     internal class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>

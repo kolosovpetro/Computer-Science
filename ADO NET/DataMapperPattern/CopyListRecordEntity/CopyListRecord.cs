@@ -1,8 +1,8 @@
-﻿using ActiveRecordPattern.CopyRecordEntity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using DataMapperPattern.CopyRecordEntity;
 
-namespace ActiveRecordPattern.CopyListRecordEntity
+namespace DataMapperPattern.CopyListRecordEntity
 {
     internal class CopyListRecord : ICopyListRecord
     {

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DecoratorLibrary.BaseFunctionality;
+using NUnit.Framework;
 
 namespace DecoratorLibrary
 {

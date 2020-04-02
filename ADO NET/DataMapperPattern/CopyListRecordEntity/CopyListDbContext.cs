@@ -1,10 +1,10 @@
-﻿using ActiveRecordPattern.CopyRecordEntity;
-using ActiveRecordPattern.DataBaseContexts;
-using Npgsql;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DataMapperPattern.CopyRecordEntity;
+using DataMapperPattern.DataBaseContexts;
+using Npgsql;
 
-namespace ActiveRecordPattern.CopyListRecordEntity
+namespace DataMapperPattern.CopyListRecordEntity
 {
     internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
     {

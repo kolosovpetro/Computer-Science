@@ -3,13 +3,11 @@ using Npgsql;
 
 namespace Postgres
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Postgres p = new Postgres("localhost", "postgres", "postgres", "rental");
-            NpgsqlCommand c1;
-            string command;
+            var p = new Postgres("localhost", "postgres", "postgres", "rental");
             NpgsqlDataReader dr;
 
             Console.WriteLine(p.IsAvailable());         // checks if db is available
@@ -17,10 +15,10 @@ namespace Postgres
             // Create a program, that takes movie_id from the user and displays details about the movie
 
             Console.WriteLine("Enter movie id you want to display info about > ");
-            p.con.Open();
+            p.Conn.Open();
             int id = Inputs.ReadInt();
-            command = "SELECT * FROM movies WHERE movie_id = @id";
-            c1 = new NpgsqlCommand(command, p.con);
+            var command = "SELECT * FROM movies WHERE movie_id = @id";
+            var c1 = new NpgsqlCommand(command, p.Conn);
             c1.Parameters.AddWithValue("@id", id);
 
             try
@@ -35,7 +33,7 @@ namespace Postgres
                 {
                     Console.WriteLine($"Title: {dr["title"]}, " +
                         $"year: {dr["year"]}, " +
-                        $"age restiction: {dr["age_restriction"]}, " +
+                        $"age restriction: {dr["age_restriction"]}, " +
                         $"price: {dr["price"]}");
                 }
 
@@ -54,7 +52,7 @@ namespace Postgres
                 "JOIN starring s ON s.actor_id = a.actor_id " +
                 "JOIN movies m ON m.movie_id = s.movie_id " +
                 "WHERE m.movie_id = @id";
-            c1 = new NpgsqlCommand(command, p.con);
+            c1 = new NpgsqlCommand(command, p.Conn);
             c1.Parameters.AddWithValue("@id", id);
 
             try
@@ -84,7 +82,7 @@ namespace Postgres
                 "JOIN rentals r ON r.copy_id = c.copy_id " +
                 "JOIN clients cl ON cl.client_id = r.client_id " +
                 "WHERE movie_id = @id AND available = true";
-            c1 = new NpgsqlCommand(command, p.con);
+            c1 = new NpgsqlCommand(command, p.Conn);
             c1.Parameters.AddWithValue("@id", id);
 
             try
@@ -114,7 +112,7 @@ namespace Postgres
                 "JOIN rentals r ON r.copy_id = c.copy_id " +
                 "JOIN clients cl ON cl.client_id = r.client_id " +
                 "WHERE movie_id = @id";
-            c1 = new NpgsqlCommand(command, p.con);
+            c1 = new NpgsqlCommand(command, p.Conn);
             c1.Parameters.AddWithValue("@id", id);
 
             try
@@ -147,7 +145,8 @@ namespace Postgres
             }
 
             // Add an option for the user to create a new movie
-            Console.WriteLine("Add new movie to realtion");
+
+            Console.WriteLine("Add new movie to relation");
             Console.WriteLine("Enter new movie title: ");
             string movieTitle = Console.ReadLine();
             Console.WriteLine("Enter new movie year: ");
@@ -164,7 +163,7 @@ namespace Postgres
                 "VALUES " +
                 "(@movieTitle, @movieYear, @movieAgeRestriction, @movieId, @moviePrice)";
 
-            c1 = new NpgsqlCommand(command, p.con);
+            c1 = new NpgsqlCommand(command, p.Conn);
             c1.Parameters.AddWithValue("@movieTitle", movieTitle);
             c1.Parameters.AddWithValue("@movieYear", movieYear);
             c1.Parameters.AddWithValue("@movieAgeRestriction", movieAgeRestriction);

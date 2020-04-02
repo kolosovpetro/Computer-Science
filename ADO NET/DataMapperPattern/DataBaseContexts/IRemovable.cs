@@ -1,4 +1,4 @@
-﻿namespace ActiveRecordPattern.DataBaseContexts
+﻿namespace DataMapperPattern.DataBaseContexts
 {
     interface IRemovable<T>
     {

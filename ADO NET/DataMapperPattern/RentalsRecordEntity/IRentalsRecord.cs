@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ActiveRecordPattern.RentalsRecordEntity
+namespace DataMapperPattern.RentalsRecordEntity
 {
     internal interface IRentalsRecord
     {

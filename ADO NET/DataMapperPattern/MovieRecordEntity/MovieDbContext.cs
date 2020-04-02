@@ -1,6 +1,6 @@
-﻿using ActiveRecordPattern.DataBaseContexts;
-using Npgsql;
+﻿using Npgsql;
 using System;
+using DataMapperPattern.DataBaseContexts;
 
 namespace ActiveRecordPattern.MovieRecordEntity
 {

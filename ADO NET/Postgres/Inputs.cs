@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Postgres
 {
-    class Inputs
+    internal class Inputs
     {
         public static int ReadInt()
         {
@@ -15,7 +11,7 @@ namespace Postgres
                 try
                 {
                     Console.WriteLine("Write an integer: ");
-                    int num = int.Parse(Console.ReadLine());
+                    int num = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException("Null reference."));
                     return num;
                 }
                 catch (Exception ex)
@@ -24,6 +20,7 @@ namespace Postgres
                 }
             }
         }
+
         public static double ReadDouble()
         {
             while (true)
@@ -31,7 +28,7 @@ namespace Postgres
                 try
                 {
                     Console.WriteLine("Write a double: ");
-                    double num = double.Parse(Console.ReadLine());
+                    double num = double.Parse(Console.ReadLine() ?? throw new InvalidOperationException("Null reference."));
                     return num;
                 }
                 catch (Exception ex)

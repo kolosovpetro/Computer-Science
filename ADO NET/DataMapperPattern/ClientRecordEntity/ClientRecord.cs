@@ -1,10 +1,10 @@
-﻿using ActiveRecordPattern.CopyListRecordEntity;
-using ActiveRecordPattern.CopyRecordEntity;
-using System;
+﻿using System;
 using System.Linq;
-using ActiveRecordPattern.RentalsRecordEntity;
+using DataMapperPattern.CopyListRecordEntity;
+using DataMapperPattern.CopyRecordEntity;
+using DataMapperPattern.RentalsRecordEntity;
 
-namespace ActiveRecordPattern.ClientRecordEntity
+namespace DataMapperPattern.ClientRecordEntity
 {
     internal class ClientRecord : IClientRecord
     {
