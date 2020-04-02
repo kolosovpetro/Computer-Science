@@ -8,6 +8,10 @@ namespace DataMapperPattern.RentalsRecordEntity
     internal class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>
     {
+        public static RentalsDbContext Instance { get; } = new RentalsDbContext();
+        
+        private RentalsDbContext() { }
+
         public void Insert(IRentalsRecord entity)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
@@ -44,7 +48,7 @@ namespace DataMapperPattern.RentalsRecordEntity
 
                     var reader = cmd.ExecuteReader();
 
-                    if (!reader.HasRows) 
+                    if (!reader.HasRows)
                         throw new Exception("No such rental in relation");
 
                     var rentList = new List<RentalsRecord>();

@@ -7,6 +7,10 @@ namespace DataMapperPattern.ClientRecordEntity
     internal class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
         IInsertable<IClientRecord>
     {
+        public static ClientDbContext Instance { get; } = new ClientDbContext();
+
+        private ClientDbContext() { }
+
         public void Insert(IClientRecord entity)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))

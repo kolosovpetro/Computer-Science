@@ -7,6 +7,10 @@ namespace DataMapperPattern.CopyRecordEntity
     internal class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
         IInsertable<ICopyRecord>
     {
+        public static CopyDbContext Instance { get; } = new CopyDbContext();
+
+        private CopyDbContext() { }
+
         public void Insert(ICopyRecord entity)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
@@ -45,12 +49,12 @@ namespace DataMapperPattern.CopyRecordEntity
                     if (!reader.HasRows)
                         throw new Exception("No such item in relation");
 
-                    ICopyRecord newCopy = new CopyRecord();
+                    ICopyRecord copy = new CopyRecord();
                     reader.Read();
-                    newCopy.SetMovieId((int) reader["movie_id"]);
-                    newCopy.SetCopyId((int) reader["copy_id"]);
-                    newCopy.SetAvailable((bool) reader["available"]);
-                    return newCopy;
+                    copy.SetMovieId((int)reader["movie_id"]);
+                    copy.SetCopyId((int)reader["copy_id"]);
+                    copy.SetAvailable((bool)reader["available"]);
+                    return copy;
                 }
             }
         }

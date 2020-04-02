@@ -1,4 +1,4 @@
-﻿namespace ActiveRecordPattern.MovieRecordEntity
+﻿namespace DataMapperPattern.MovieRecordEntity
 {
     internal class MovieRecord : IMovieRecord
     {

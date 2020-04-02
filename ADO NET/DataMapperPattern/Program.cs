@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using DataMapperPattern.ClientRecordEntity;
 using DataMapperPattern.CopyListRecordEntity;
-using DataMapperPattern.CopyRecordEntity;
 
 namespace DataMapperPattern
 {
@@ -12,28 +10,28 @@ namespace DataMapperPattern
         {
             // rental of movie by client
 
-            var clientDbContext = new ClientDbContext();
+            var clientDbContext = ClientDbContext.Instance;
             var client = clientDbContext.Select(9);
             Console.WriteLine("Client introduce yourself: ");
             Console.WriteLine(client);
-            Console.WriteLine("Chosen movie id: 3");
+            Console.WriteLine("Chosen movie id: 6");
 
-            var copyListDbContext = new CopyListDbContext();
+            var copyListDbContext = CopyListDbContext.Instance;
             Console.WriteLine("Do we have available copies ?");
-            var copiesAvailable = copyListDbContext.Select(3).CopiesList;
+            var copiesAvailable = copyListDbContext.Select(6).CopiesList;
 
             foreach (var copyRecord in copiesAvailable)
             {
                 Console.WriteLine(copyRecord);
             }
 
-            Console.WriteLine("Client tries to rent movie 3");
+            Console.WriteLine("Client tries to rent movie id 6");
 
-            client.Rent(3);
+            client.Rent(6);
 
             Console.WriteLine("Check if rental was okay ... ");
 
-            copiesAvailable = copyListDbContext.Select(3).CopiesList;
+            copiesAvailable = copyListDbContext.Select(6).CopiesList;
 
             foreach (var copyRecord in copiesAvailable)
             {

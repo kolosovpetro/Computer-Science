@@ -1,12 +1,18 @@
-﻿using Npgsql;
-using System;
+﻿using System;
 using DataMapperPattern.DataBaseContexts;
+using Npgsql;
 
-namespace ActiveRecordPattern.MovieRecordEntity
+namespace DataMapperPattern.MovieRecordEntity
 {
     internal class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
         IInsertable<IMovieRecord>
     {
+        // singleton pattern applied
+
+        public static MovieDbContext Instance { get; } = new MovieDbContext();
+
+        private MovieDbContext() { }
+
         public void Insert(IMovieRecord entity)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))

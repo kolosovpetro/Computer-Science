@@ -56,13 +56,12 @@ namespace DataMapperPattern.ClientRecordEntity
 
         public void Rent(int movieId)
         {
-            ICopyListRecord copiesList = new CopyListDbContext()
-                .Select(movieId);
+            var copiesList = CopyListDbContext.Instance.Select(movieId);
 
             if (copiesList.AvailableCopiesCount == 0)
                 throw new Exception("No available copies of this movie");
 
-            var copyDbContext = new CopyDbContext();
+            var copyDbContext = CopyDbContext.Instance;
 
             var availableCopy = copiesList.CopiesList.First(p => p.Available);             // store first available copy
 
@@ -70,11 +69,11 @@ namespace DataMapperPattern.ClientRecordEntity
 
             copyDbContext.Update(availableCopy);                // update corresponding item in data base
 
-            var rentalsDbContext = new RentalsDbContext();      // context for rentals DB
+            var rentalsDbContext = RentalsDbContext.Instance;   // context for rentals DB
 
-            var newRental = new RentalsRecord(availableCopy.CopyId, ClientId, DateTime.Now, DateTime.Now.AddDays(7));  // new rental
+            var rental = new RentalsRecord(availableCopy.CopyId, ClientId, DateTime.Now, DateTime.Now.AddDays(7));  // new rental
 
-            rentalsDbContext.Insert(newRental);                 // insert new rental to data base     
+            rentalsDbContext.Insert(rental);                 // insert new rental to data base     
 
         }
     }

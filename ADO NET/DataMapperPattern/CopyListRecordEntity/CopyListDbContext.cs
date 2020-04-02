@@ -8,6 +8,10 @@ namespace DataMapperPattern.CopyListRecordEntity
 {
     internal class CopyListDbContext : RentalDataBase, ISelectable<ICopyListRecord>
     {
+        public static CopyListDbContext Instance { get; } = new CopyListDbContext();
+
+        private CopyListDbContext() { }
+
         public ICopyListRecord Select(int movieId)
         {
             using (var conn = new NpgsqlConnection(ConnectionString))
@@ -26,7 +30,7 @@ namespace DataMapperPattern.CopyListRecordEntity
                     if (!reader.HasRows)
                         throw new Exception("No any copies in relation");
 
-                    var newCopiesList = new List<ICopyRecord>();
+                    var copiesList = new List<ICopyRecord>();
 
                     while (reader.Read())
                     {
@@ -34,13 +38,13 @@ namespace DataMapperPattern.CopyListRecordEntity
                         copy.SetMovieId((int)reader["movie_id"]);
                         copy.SetCopyId((int)reader["copy_id"]);
                         copy.SetAvailable((bool)reader["available"]);
-                        newCopiesList.Add(copy);
+                        copiesList.Add(copy);
                     }
 
-                    var newCopyListRecord = new CopyListRecord();
-                    newCopyListRecord.SetAllCopies(newCopiesList);
+                    var copyListRecord = new CopyListRecord();
+                    copyListRecord.SetAllCopies(copiesList);
 
-                    return newCopyListRecord;
+                    return copyListRecord;
                 }
             }
         }
