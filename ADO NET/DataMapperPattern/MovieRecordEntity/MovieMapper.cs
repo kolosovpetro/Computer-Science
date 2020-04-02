@@ -5,16 +5,16 @@ using Npgsql;
 
 namespace DataMapperPattern.MovieRecordEntity
 {
-    internal class MovieDbContext : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
+    internal class MovieMapper : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
         IInsertable<IMovieRecord>, IIdentityMap<IMovieRecord>
     {
         public IDictionary<int, IMovieRecord> CacheDictionary { get; }
 
         // singleton pattern applied
 
-        public static MovieDbContext Instance { get; } = new MovieDbContext();
+        public static MovieMapper Instance { get; } = new MovieMapper();
 
-        private MovieDbContext()
+        private MovieMapper()
         {
             CacheDictionary = new Dictionary<int, IMovieRecord>();
         }

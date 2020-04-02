@@ -10,13 +10,13 @@ namespace DataMapperPattern
         {
             // rental of movie by client
 
-            var clientDbContext = ClientDbContext.Instance;
+            var clientDbContext = ClientMapper.Instance;
             var client = clientDbContext.Select(9);
             Console.WriteLine("Client introduce yourself: ");
             Console.WriteLine(client);
             Console.WriteLine("Chosen movie id: 6");
 
-            var copyListDbContext = CopyListDbContext.Instance;
+            var copyListDbContext = CopyListMapper.Instance;
             Console.WriteLine("Do we have available copies ?");
             var copiesAvailable = copyListDbContext.Select(6).CopiesList;
 

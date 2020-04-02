@@ -5,15 +5,14 @@ using Npgsql;
 
 namespace DataMapperPattern.CopyRecordEntity
 {
-    internal class CopyDbContext : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
+    internal class CopyMapper : RentalDataBase, ISelectable<ICopyRecord>, IUpdatable<ICopyRecord>,
         IInsertable<ICopyRecord>, IIdentityMap<ICopyRecord>
     {
         public IDictionary<int, ICopyRecord> CacheDictionary { get; }
 
+        public static CopyMapper Instance { get; } = new CopyMapper();
 
-        public static CopyDbContext Instance { get; } = new CopyDbContext();
-
-        private CopyDbContext()
+        private CopyMapper()
         {
             CacheDictionary = new Dictionary<int, ICopyRecord>();
         }

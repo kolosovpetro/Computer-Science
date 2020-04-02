@@ -5,15 +5,14 @@ using Npgsql;
 
 namespace DataMapperPattern.ClientRecordEntity
 {
-    internal class ClientDbContext : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
+    internal class ClientMapper : RentalDataBase, ISelectable<IClientRecord>, IUpdatable<IClientRecord>,
         IInsertable<IClientRecord>, IIdentityMap<IClientRecord>
     {
         public IDictionary<int, IClientRecord> CacheDictionary { get; }
         
+        public static ClientMapper Instance { get; } = new ClientMapper();
 
-        public static ClientDbContext Instance { get; } = new ClientDbContext();
-
-        private ClientDbContext()
+        private ClientMapper()
         {
             CacheDictionary = new Dictionary<int, IClientRecord>();
         }

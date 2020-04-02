@@ -5,14 +5,14 @@ using Npgsql;
 
 namespace DataMapperPattern.RentalsRecordEntity
 {
-    internal class RentalsDbContext : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
+    internal class RentalsMapper : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>, IIdentityMap<IEnumerable<IRentalsRecord>>
     {
         public IDictionary<int, IEnumerable<IRentalsRecord>> CacheDictionary { get; }
 
-        public static RentalsDbContext Instance { get; } = new RentalsDbContext();
+        public static RentalsMapper Instance { get; } = new RentalsMapper();
 
-        private RentalsDbContext()
+        private RentalsMapper()
         {
             CacheDictionary = new Dictionary<int, IEnumerable<IRentalsRecord>>();
         }
