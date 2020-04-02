@@ -5,12 +5,14 @@ using Npgsql;
 
 namespace DataMapperPattern.RentalsRecordEntity
 {
-    internal class RentalsMapper : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
+    internal sealed class RentalsMapper : RentalDataBase, ISelectable<IEnumerable<IRentalsRecord>>, IUpdatable<IRentalsRecord>,
         IInsertable<IRentalsRecord>, IIdentityMap<IEnumerable<IRentalsRecord>>
     {
         public IDictionary<int, IEnumerable<IRentalsRecord>> CacheDictionary { get; }
 
         public static RentalsMapper Instance { get; } = new RentalsMapper();
+
+        static RentalsMapper() { }
 
         private RentalsMapper()
         {
@@ -94,7 +96,7 @@ namespace DataMapperPattern.RentalsRecordEntity
                 }
             }
         }
-        
+
         public void UpdateCache(IEnumerable<IRentalsRecord> rentals)
         {
             throw new NotImplementedException();

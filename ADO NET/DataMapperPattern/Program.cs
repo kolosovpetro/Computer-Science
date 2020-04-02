@@ -27,7 +27,7 @@ namespace DataMapperPattern
 
             Console.WriteLine("Client tries to rent movie id 6");
 
-            client.Rent(6);
+            // client.Rent(6);
 
             Console.WriteLine("Check if rental was okay ... ");
 

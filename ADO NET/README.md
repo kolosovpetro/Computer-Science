@@ -16,7 +16,34 @@ Pattern to optimize interraction between application and database. In general, e
 
 ### Singleton pattern
 
-Singleton is widely used in application-database relations. It prevents unsynchrone changes in-memory and db objects by several instances of mappers.
+Singleton is widely used in application-database relations. It prevents unsynchrone changes in-memory and db objects by several instances of mappers. Thread-safe no-lock Singleton is:
+
+```cs
+public sealed class Singleton  
+{  
+    private static readonly Singleton instance = new Singleton();
+	
+    // Explicit static constructor to tell C# compiler  
+    // not to mark type as beforefieldinit  
+	
+    static Singleton()  
+    {  
+    }  
+    private Singleton()  
+    {  
+    }  
+    public static Singleton Instance  
+    {  
+        get  
+        {  
+            return instance;  
+        }  
+    }  
+}  
+```
+
+see https://www.c-sharpcorner.com/UploadFile/8911c4/singleton-design-pattern-in-C-Sharp/
+
 
 ### Postgres 
 

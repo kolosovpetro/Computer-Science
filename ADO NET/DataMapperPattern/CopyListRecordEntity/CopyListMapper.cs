@@ -6,12 +6,14 @@ using Npgsql;
 
 namespace DataMapperPattern.CopyListRecordEntity
 {
-    internal class CopyListMapper : RentalDataBase, ISelectable<ICopyListRecord>,
+    internal sealed class CopyListMapper : RentalDataBase, ISelectable<ICopyListRecord>,
         IIdentityMap<ICopyListRecord>
     {
         public IDictionary<int, ICopyListRecord> CacheDictionary { get; }
-        
+
         public static CopyListMapper Instance { get; } = new CopyListMapper();
+
+        static CopyListMapper() { }
 
         private CopyListMapper()
         {

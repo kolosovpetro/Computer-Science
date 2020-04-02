@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace DataMapperPattern.MovieRecordEntity
 {
-    internal class MovieMapper : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
+    internal sealed class MovieMapper : RentalDataBase, ISelectable<IMovieRecord>, IUpdatable<IMovieRecord>,
         IInsertable<IMovieRecord>, IIdentityMap<IMovieRecord>
     {
         public IDictionary<int, IMovieRecord> CacheDictionary { get; }
@@ -13,6 +13,8 @@ namespace DataMapperPattern.MovieRecordEntity
         // singleton pattern applied
 
         public static MovieMapper Instance { get; } = new MovieMapper();
+
+        static MovieMapper() { }
 
         private MovieMapper()
         {
