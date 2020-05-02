@@ -5,9 +5,9 @@ using NumericalIntegration.RPN;
 
 namespace NumericalIntegration
 {
-    class Function : IPolynomial
+    internal class Function : IPolynomial
     {
-        public double[] Coefficients { get; }
+        private double[] Coefficients { get; }
         public string PrintForm { get; }
 
         public Function()

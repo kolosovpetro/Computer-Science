@@ -5,9 +5,9 @@ namespace NumericalIntegration
 {
     internal class Integrator : IDiscreteIntegrable
     {
-        public double Min { get; }
-        public double Max { get; }
-        public Function Function { get; }
+        private double Min { get; }
+        private double Max { get; }
+        private Function Function { get; }
 
         public Integrator(double newMin, double newMax, Function newFunction)
         {

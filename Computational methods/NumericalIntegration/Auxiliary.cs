@@ -2,7 +2,7 @@
 
 namespace NumericalIntegration
 {
-    internal class Auxiliary
+    internal static class Auxiliary
     {
         public static int InputOfTypeInt(int min, int max)
         {
