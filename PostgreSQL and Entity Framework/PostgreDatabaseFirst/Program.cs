@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PostgreDatabaseFirst
@@ -10,6 +11,7 @@ namespace PostgreDatabaseFirst
             var rentalInstance = new rentalContext();
             var movies = rentalInstance.Movies.ToList();
 
+            #region Task set 1
             // Task 1: Fetch titles of all movies produced in 1998 or 1999
 
             var task1 = from i in movies
@@ -112,10 +114,77 @@ namespace PostgreDatabaseFirst
             var task15 = clients
                 .Select(x => $"{x.FirstName.ToLower()}.{x.LastName.ToLower()}@wsb.pl");
 
+            #endregion
 
-            foreach (var client in task15)
+            // Task 1: For every copy display it’s ID and title of the movie. Order the results by
+            // copy ID
+
+            var task21 = from m in rentalInstance.Movies
+                         join cop in rentalInstance.Copies on m.MovieId equals cop.MovieId
+                         select cop;
+
+            // Task 2: Display the titles of all the movies with copies 
+            // available in the rental store.
+            // Eliminate duplicates
+
+            var task22 = (from m in rentalInstance.Movies
+                          join cop in rentalInstance.Copies on m.MovieId equals cop.MovieId
+                          where (bool)cop.Available
+                          select new { m.Title }).Distinct();
+
+            // Task 3: Display IDs of copies of movies produced in 1984
+
+            var task23 = from m in rentalInstance.Movies
+                         join cop in rentalInstance.Copies on m.MovieId equals cop.MovieId
+                         where m.Year == 1984
+                         select new { cop.CopyId };
+
+            // Task 4: For every rental display date of rental, date of return 
+            // and name of client that made the rental
+
+            var task24 = from rent in rentalInstance.Rentals
+                         join client in rentalInstance.Clients
+                         on rent.ClientId equals client.ClientId
+                         select new
+                         {
+                             rental = rent.DateOfRental,
+                             ret = rent.DateOfReturn,
+                             name = client.LastName
+                         };
+
+            // Task 5: For every rental display name of the client that made the rental and title
+            // of the rented movie
+
+            var task25 = from rent in rentalInstance.Rentals
+                         join client in rentalInstance.Clients
+                         on rent.ClientId equals client.ClientId
+                         join cop in rentalInstance.Copies on rent.CopyId equals cop.CopyId
+                         join mov in rentalInstance.Movies on cop.MovieId equals mov.MovieId
+                         select new
+                         {
+                             name = client.LastName,
+                             title = mov.Title,
+                         };
+
+            // Task 6: Display titles and years of production of all the movies rented 
+            // by Gary Goodspeed
+
+            var task26 = from rent in rentalInstance.Rentals
+                         join client in rentalInstance.Clients
+                         on rent.ClientId equals client.ClientId
+                         join cop in rentalInstance.Copies on rent.CopyId equals cop.CopyId
+                         join mov in rentalInstance.Movies on cop.MovieId equals mov.MovieId
+                         where client.FirstName == "Gary" && client.LastName == "Goodspeed"
+                         select new
+                         {
+                             title = mov.Title,
+                             year = mov.Year
+                         };
+                          
+
+            foreach (var data in task26)
             {
-                Console.WriteLine(client);
+                Console.WriteLine(data);
             }
         }
     }
