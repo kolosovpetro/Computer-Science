@@ -12,5 +12,10 @@ namespace PostgreDatabaseFirst
 
         public virtual Clients Client { get; set; }
         public virtual Copies Copy { get; set; }
+
+        public override string ToString()
+        {
+            return $"Copy id: {CopyId} - Client id: {ClientId} - {DateOfRental} - {DateOfReturn}";
+        }
     }
 }

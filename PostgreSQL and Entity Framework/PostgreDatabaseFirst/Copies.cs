@@ -16,5 +16,13 @@ namespace PostgreDatabaseFirst
 
         public virtual Movies Movie { get; set; }
         public virtual ICollection<Rentals> Rentals { get; set; }
+
+        public override string ToString()
+        {
+            return $"Movie Id: {MovieId}, " +
+                $"Copy Id: {CopyId}, " +
+                $"Available: {(bool)Available}, " +
+                $"Title: {Movie.Title}";
+        }
     }
 }

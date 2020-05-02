@@ -16,5 +16,10 @@ namespace PostgreDatabaseFirst
         public DateTime? Birthday { get; set; }
 
         public virtual ICollection<Rentals> Rentals { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ClientId} - {FirstName} - {LastName}";
+        }
     }
 }

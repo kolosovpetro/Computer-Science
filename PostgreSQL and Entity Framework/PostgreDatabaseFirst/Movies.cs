@@ -19,5 +19,10 @@ namespace PostgreDatabaseFirst
 
         public virtual ICollection<Copies> Copies { get; set; }
         public virtual ICollection<Starring> Starring { get; set; }
+
+        public override string ToString()
+        {
+            return $"{MovieId} - {Title} - {Year} - {Price}";
+        }
     }
 }

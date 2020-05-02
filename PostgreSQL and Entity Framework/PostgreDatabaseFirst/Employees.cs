@@ -10,5 +10,10 @@ namespace PostgreDatabaseFirst
         public string LastName { get; set; }
         public string City { get; set; }
         public float? Salary { get; set; }
+
+        public override string ToString()
+        {
+            return $"{EmployeeId} - {FirstName} - {LastName}";
+        }
     }
 }
