@@ -1,0 +1,15 @@
+This technical test contains a folder for each exercise category, each folder contains one or multiple exercises. 
+
+Execution:
+  -The "Dependencies" folder does not contain exercises - it only provides context.
+  -Only files starting with "exercise" are to be edited.
+  -Each exercise starts with a quick description of the issue at hand.
+  -We do not expect the code to run.
+  -Comments are appreciated.
+
+Once you are done:
+  -Delete bin, obj from the exercises folder.
+  -Create a zip of the exercises folder.
+  -Send the zip to kharder@betadwarf.com.
+
+Happy coding!

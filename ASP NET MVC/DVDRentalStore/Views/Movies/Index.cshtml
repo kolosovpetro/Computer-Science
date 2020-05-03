@@ -1,0 +1,16 @@
+﻿@model DVDRentalStore.Models.MoviesModel
+
+@{
+    ViewData["Title"] = "Available movies";
+}
+
+<h1>List of all available movies in DVD Store</h1>
+<ul>
+    @{ 
+        foreach (var mov in MoviesModel.GetList())
+        {
+            <li>@mov.ToString()</li>
+        }
+    }
+</ul>
+
