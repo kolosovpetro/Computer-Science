@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DVDRentalStore.ReverseEngineering
+namespace DVDRentalStore.Models
 {
-    public partial class Rentals
+    public partial class RentalsModel
     {
         public int CopyId { get; set; }
         public int ClientId { get; set; }
         public DateTime? DateOfRental { get; set; }
         public DateTime? DateOfReturn { get; set; }
 
-        public virtual Clients Client { get; set; }
-        public virtual Copies Copy { get; set; }
+        public virtual ClientsModel Client { get; set; }
+        public virtual CopiesModel Copy { get; set; }
     }
 }

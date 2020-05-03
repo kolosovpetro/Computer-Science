@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DVDRentalStore.ReverseEngineering
+namespace DVDRentalStore.Models
 {
-    public partial class Employees
+    public partial class EmployeesModel
     {
         public int EmployeeId { get; set; }
         public string FirstName { get; set; }

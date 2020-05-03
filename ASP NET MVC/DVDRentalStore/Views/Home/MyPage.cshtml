@@ -5,16 +5,3 @@
 
 <h1>This is my page</h1>
 
-@{
-    var rentalInstance = new rentalContext();
-    var test = rentalInstance.Movies.Select(x => x);
-    <ul>
-        @{
-            foreach (var item in test)
-            {
-                <li>@item.Title</li>
-            }
-        }
-    </ul>
-}
-

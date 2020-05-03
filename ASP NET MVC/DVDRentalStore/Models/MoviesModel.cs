@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DVDRentalStore.ReverseEngineering;
 
 namespace DVDRentalStore.Models
 {
-    // here we print lis of all movies in the store
-
-    public class MoviesModel
+    public partial class MoviesModel
     {
-        private static readonly rentalContext rentalInstance = new rentalContext();
-
-        public static IQueryable<Movies> GetList()
+        public MoviesModel()
         {
-            return rentalInstance.Movies.Select(x => x);
+            Copies = new HashSet<CopiesModel>();
+            Starring = new HashSet<StarringModel>();
+        }
+
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public int? AgeRestriction { get; set; }
+        public int MovieId { get; set; }
+        public float? Price { get; set; }
+
+        public virtual ICollection<CopiesModel> Copies { get; set; }
+        public virtual ICollection<StarringModel> Starring { get; set; }
+
+        public override string ToString()
+        {
+            return $"{MovieId} - {Title} - {Year} - {Price}";
         }
     }
 }

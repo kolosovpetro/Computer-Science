@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Configuration;
+using DVDRentalStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DVDRentalStore.ReverseEngineering
+namespace DVDRentalStore.DAL
 {
     public partial class rentalContext : DbContext
     {
@@ -16,13 +17,13 @@ namespace DVDRentalStore.ReverseEngineering
         {
         }
 
-        public virtual DbSet<Actors> Actors { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<Copies> Copies { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Movies> Movies { get; set; }
-        public virtual DbSet<Rentals> Rentals { get; set; }
-        public virtual DbSet<Starring> Starring { get; set; }
+        public virtual DbSet<ActorsModel> Actors { get; set; }
+        public virtual DbSet<ClientsModel> Clients { get; set; }
+        public virtual DbSet<CopiesModel> Copies { get; set; }
+        public virtual DbSet<EmployeesModel> Employees { get; set; }
+        public virtual DbSet<MoviesModel> Movies { get; set; }
+        public virtual DbSet<RentalsModel> Rentals { get; set; }
+        public virtual DbSet<StarringModel> Starring { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,7 +35,7 @@ namespace DVDRentalStore.ReverseEngineering
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Actors>(entity =>
+            modelBuilder.Entity<ActorsModel>(entity =>
             {
                 entity.HasKey(e => e.ActorId)
                     .HasName("actors_pkey");
@@ -58,7 +59,7 @@ namespace DVDRentalStore.ReverseEngineering
                     .HasColumnType("character varying");
             });
 
-            modelBuilder.Entity<Clients>(entity =>
+            modelBuilder.Entity<ClientsModel>(entity =>
             {
                 entity.HasKey(e => e.ClientId)
                     .HasName("clients_pkey");
@@ -82,7 +83,7 @@ namespace DVDRentalStore.ReverseEngineering
                     .HasColumnType("character varying");
             });
 
-            modelBuilder.Entity<Copies>(entity =>
+            modelBuilder.Entity<CopiesModel>(entity =>
             {
                 entity.HasKey(e => e.CopyId)
                     .HasName("copies_pkey");
@@ -103,7 +104,7 @@ namespace DVDRentalStore.ReverseEngineering
                     .HasConstraintName("copies_movie_id_fkey");
             });
 
-            modelBuilder.Entity<Employees>(entity =>
+            modelBuilder.Entity<EmployeesModel>(entity =>
             {
                 entity.HasKey(e => e.EmployeeId)
                     .HasName("employees_pkey");
@@ -129,7 +130,7 @@ namespace DVDRentalStore.ReverseEngineering
                 entity.Property(e => e.Salary).HasColumnName("salary");
             });
 
-            modelBuilder.Entity<Movies>(entity =>
+            modelBuilder.Entity<MoviesModel>(entity =>
             {
                 entity.HasKey(e => e.MovieId)
                     .HasName("movies_pkey");
@@ -152,7 +153,7 @@ namespace DVDRentalStore.ReverseEngineering
                 entity.Property(e => e.Year).HasColumnName("year");
             });
 
-            modelBuilder.Entity<Rentals>(entity =>
+            modelBuilder.Entity<RentalsModel>(entity =>
             {
                 entity.HasKey(e => new { e.CopyId, e.ClientId })
                     .HasName("rentals_pkey");
@@ -184,7 +185,7 @@ namespace DVDRentalStore.ReverseEngineering
                     .HasConstraintName("rentals_copy_id_fkey");
             });
 
-            modelBuilder.Entity<Starring>(entity =>
+            modelBuilder.Entity<StarringModel>(entity =>
             {
                 entity.HasKey(e => new { e.ActorId, e.MovieId })
                     .HasName("starring_pkey");

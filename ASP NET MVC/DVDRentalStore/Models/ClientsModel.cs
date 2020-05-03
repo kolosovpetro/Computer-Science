@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DVDRentalStore.ReverseEngineering
+namespace DVDRentalStore.Models
 {
-    public partial class Clients
+    public partial class ClientsModel
     {
-        public Clients()
+        public ClientsModel()
         {
-            Rentals = new HashSet<Rentals>();
+            Rentals = new HashSet<RentalsModel>();
         }
 
         public int ClientId { get; set; }
@@ -15,6 +15,6 @@ namespace DVDRentalStore.ReverseEngineering
         public string LastName { get; set; }
         public DateTime? Birthday { get; set; }
 
-        public virtual ICollection<Rentals> Rentals { get; set; }
+        public virtual ICollection<RentalsModel> Rentals { get; set; }
     }
 }
