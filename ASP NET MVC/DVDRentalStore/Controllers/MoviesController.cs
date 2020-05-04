@@ -72,5 +72,53 @@ namespace DVDRentalStore.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var mov = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+            return View(mov);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id, IFormCollection collection)
+        {
+            // get all copies by movie id
+            var copiesByMovieId = _rentalDb.Copies
+                .Where(x => x.MovieId == id)
+                .ToArray();
+
+            var copiesIndexes = copiesByMovieId.Select(x => x.CopyId);
+
+            // get rentals by copy id
+            var rentalsByCopyId = _rentalDb.Rentals
+                .Where(x => copiesIndexes.Contains(x.CopyId))
+                .ToArray();
+
+            // delete of all rentals with copies by movie id
+            _rentalDb.Rentals.RemoveRange(rentalsByCopyId);
+
+            // delete all copies with movie id == id
+            _rentalDb.Copies.RemoveRange(copiesByMovieId);
+
+            // get all starring by movie id
+            var starringByMovieId = _rentalDb.Starring
+                .Where(x => x.MovieId == id)
+                .ToArray();
+
+            // delete all starring by movie id
+            _rentalDb.Starring.RemoveRange(starringByMovieId);
+
+            // get all movies with id
+            var movieById = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+
+            // delete all movies by id
+            _rentalDb.Movies.Remove(movieById);
+
+            // save changes
+            _rentalDb.SaveChanges();
+
+            // load main page
+            return RedirectToAction("Index");
+        }
     }
 }
