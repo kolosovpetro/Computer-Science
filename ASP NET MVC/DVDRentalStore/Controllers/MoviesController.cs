@@ -11,10 +11,41 @@ namespace DVDRentalStore.Controllers
     {
         private readonly rentalContext _rentalDb = new rentalContext();
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string sortOrder)
         {
             var movs = _rentalDb.Movies.Select(x => x);
+
+            switch (sortOrder)
+            {
+                case "titleAscending":
+                    movs = movs.OrderBy(x => x.Title);
+                    break;
+                case "yearAscending":
+                    movs = movs.OrderBy(x => x.Year);
+                    break;
+                case "idAscending":
+                    movs = movs.OrderBy(x => x.MovieId);
+                    break;
+                case "ageRestrictionAscending":
+                    movs = movs.OrderBy(x => x.AgeRestriction);
+                    break;
+                case "priceAscending":
+                    movs = movs.OrderBy(x => x.AgeRestriction);
+                    break;
+            }
+
             return View(movs);
+        }
+
+        [HttpPost]
+        public IActionResult Index(IFormCollection collection)
+        {
+            string searchItem = collection["searchString"];
+            ViewBag.currentSearchItem = searchItem;
+            var searchResult = _rentalDb.Movies
+                .Where(x => x.Title.ToLower().Contains(searchItem.ToLower()));
+            return View(searchResult);
         }
 
         [HttpGet]

@@ -10,23 +10,30 @@
 <p>
     <a asp-action="Create">Add new</a>
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("searchString", ViewBag.currentSearchString as string)
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Title), "Index", new { sortOrder = "titleAscending" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Year)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Year), "Index", new { sortOrder = "yearAscending" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AgeRestriction)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.AgeRestriction), "Index", new { sortOrder = "ageRestrictionAscending" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MovieId)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.MovieId), "Index", new { sortOrder = "idAscending" })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Price), "Index", new { sortOrder = "priceAscending" })
             </th>
             <th></th>
         </tr>
