@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+@using (Html.BeginForm())
+{
+<p>
+    @Html.TextBox("userLogin", ViewBag.currentLogin as string)
+    <br />
+    @Html.TextBox("userPassword", ViewBag.currentPassword as string)
+    <br />
+    <input type="submit" value="Search" class="btn btn-primary" />
+</p>
+}
+

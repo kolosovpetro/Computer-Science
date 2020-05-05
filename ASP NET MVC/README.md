@@ -12,6 +12,8 @@
 - Implement search in db
 - Implement action links in order to sort movies in index
 - Comment on code
+- Implement login form and admin functionlities like: edit movie, edit rental, edit client etc
+
 
 ### Notes
 

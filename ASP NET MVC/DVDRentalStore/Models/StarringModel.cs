@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DVDRentalStore.Models
+﻿namespace DVDRentalStore.Models
 {
     public partial class StarringModel
     {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using DVDRentalStore.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DVDRentalStore.DAL
 {

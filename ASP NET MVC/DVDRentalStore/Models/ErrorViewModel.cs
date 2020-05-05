@@ -1,5 +1,3 @@
-using System;
-
 namespace DVDRentalStore.Models
 {
     public class ErrorViewModel
