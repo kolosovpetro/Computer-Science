@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using DVDRentalStore.DAL;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
@@ -28,18 +25,21 @@ namespace DVDRentalStore.Controllers
             using (rentalContext rentContext = new rentalContext())
             {
                 user = rentContext.Employees
-                    .Where(x => x.FirstName == userLogin && x.LastName == userPassword).FirstOrDefault();
+                    .Where(x => x.FirstName == userLogin && x.LastName == userPassword)
+                    .FirstOrDefault();
             }
 
             if (user == null)
                 throw new Exception("No such user");
 
-            return RedirectToAction("Dashboard");
+            HttpContext.Session.SetString("username", user.FirstName);
+
+            return RedirectToAction("Dashboard", "Login");
         }
 
-        [HttpGet]
         public IActionResult Dashboard()
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
             return View();
         }
     }

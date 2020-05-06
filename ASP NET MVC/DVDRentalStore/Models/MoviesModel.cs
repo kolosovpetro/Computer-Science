@@ -19,9 +19,5 @@ namespace DVDRentalStore.Models
         public virtual ICollection<CopiesModel> Copies { get; set; }
         public virtual ICollection<StarringModel> Starring { get; set; }
 
-        public override string ToString()
-        {
-            return $"{MovieId} - {Title} - {Year} - {Price}";
-        }
     }
 }

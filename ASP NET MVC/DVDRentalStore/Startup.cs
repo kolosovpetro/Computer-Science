@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace DVDRentalStore
 {
@@ -21,6 +23,12 @@ namespace DVDRentalStore
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); //We set Time here 
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. 
@@ -35,7 +43,10 @@ namespace DVDRentalStore
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
