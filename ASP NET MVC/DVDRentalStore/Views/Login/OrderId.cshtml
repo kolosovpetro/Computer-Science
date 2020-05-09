@@ -5,9 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{ 
+    var movie = ViewData["Movie"] as MoviesModel;
+    var client = ViewData["Client"] as ClientsModel;
+}
+
 <h1>View</h1>
 
-<h4>Order movie @ViewBag.movieTitle (username: @ViewBag.username2)</h4>
+<h4>Order movie @movie.Title</h4>
+<p>Welcome, username @client.FirstName, @client.LastName</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,7 +30,7 @@
                 <span asp-validation-for="DateOfReturn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Order" class="btn btn-primary" />
             </div>
         </form>
     </div>

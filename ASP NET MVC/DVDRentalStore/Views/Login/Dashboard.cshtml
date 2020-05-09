@@ -1,16 +1,14 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{ 
+    var client = ViewData["Client"] as ClientsModel;
+}
 
 <h1>Dashboard</h1>
-<p>
-    Login was successed, @ViewBag.username
-</p>
-
-<p>
-    @Html.ActionLink("Rent movie", "Rent", "Login");
-</p>
-
+<p>Welcome @client.FirstName, @client.LastName</p>
+<p>@Html.ActionLink("Rent Movie", "Rent", "Login")</p>
+<p>@Html.ActionLink("View rental history", "RentHistiry", "Login")</p>
 

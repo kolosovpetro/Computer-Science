@@ -5,7 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Rent (username: @ViewBag.username2)</h1>
+@{ 
+    var client = ViewData["Client"] as DVDRentalStore.Models.ClientsModel;
+}
+
+<h1>Rent</h1>
+<p>Choose the movie to rent @client.FirstName, @client.LastName</p>
 
 <p>
     <a asp-action="Create">Create New</a>
