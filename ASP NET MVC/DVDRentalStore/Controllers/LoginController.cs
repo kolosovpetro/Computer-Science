@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DVDRentalStore.DAL;
+using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -72,7 +73,7 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult OrderId(int id, IFormCollection collection)
         {
-            // get all available copy of movie dy id
+            // get all available copy of movie by id
             var availableCopy = _rentalDb.Copies
                 .Where(x => (bool)x.Available && x.MovieId == id)
                 .FirstOrDefault();
@@ -90,5 +91,41 @@ namespace DVDRentalStore.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult RentHistory()
+        {
+            var userId = (int)HttpContext.Session.GetInt32("userId");
+            var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
+            var clientHistory = (from r in _rentalDb.Rentals
+                                 from c in _rentalDb.Copies
+                                 from m in _rentalDb.Movies
+                                 select new
+                                 {
+                                     r.ClientId,
+                                     m.Title,
+                                     m.Year,
+                                     m.MovieId,
+                                     m.Price,
+                                     m.AgeRestriction
+                                 }).Where(x => x.ClientId == userId).Distinct();
+
+            List<MoviesModel> clientMovies = new List<MoviesModel>();
+
+            foreach (var element in clientHistory)
+            {
+                clientMovies.Add(new MoviesModel
+                {
+                    Title = element.Title,
+                    MovieId = element.MovieId,
+                    Year = element.Year,
+                    Price = element.Price,
+                    AgeRestriction = element.AgeRestriction
+                });
+            }
+
+            ViewData["Client"] = client;
+
+            return View(clientMovies);
+        }
     }
 }
