@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DVDRentalStore.DAL;
@@ -58,14 +59,21 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult OrderId(int id)
         {
+            // movie client want to order
             ViewData["Movie"] = _rentalDb.Movies
                 .Where(x => x.MovieId == id)
                 .FirstOrDefault();
 
+            // instance of client
             var userId = (int)HttpContext.Session.GetInt32("userId");
+
+            // set instance of client to view data of view
             ViewData["Client"] = _rentalDb.Clients
                 .Where(x => x.ClientId == userId)
                 .FirstOrDefault();
+
+            // set session for client id
+            HttpContext.Session.SetInt32("userId", userId);
 
             return View();
         }
@@ -78,17 +86,42 @@ namespace DVDRentalStore.Controllers
                 .Where(x => (bool)x.Available && x.MovieId == id)
                 .FirstOrDefault();
 
-            // get client id by username
-            string userName = HttpContext.Session.GetString("username2");
+            // get client id from previous form
+            var userId = HttpContext.Session.GetInt32("userId");
+
+            // get client instance by 
             var clientId = _rentalDb.Clients
-                .Where(x => x.FirstName == userName)
+                .Where(x => x.ClientId == userId)
                 .Select(t => t.ClientId)
                 .FirstOrDefault();
 
+            // this check has to be moved in previous controller method
             if (availableCopy == null)
                 return NotFound("No available copies of movie");
 
-            return View();
+            // get date of rental
+            var dateOfRental = Convert.ToDateTime(collection["DateOfRental"]);
+
+            // get date of return
+            var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);
+
+            // add rental to database
+            _rentalDb.Rentals.Add(new RentalsModel
+            {
+                ClientId = clientId,
+                CopyId = availableCopy.CopyId,
+                DateOfRental = dateOfRental,
+                DateOfReturn = dateOfReturn
+            });
+
+            _rentalDb.SaveChanges();
+
+            // set copy to be unavailable
+            availableCopy.Available = false;
+            _rentalDb.Copies.Update(availableCopy);
+            _rentalDb.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -97,16 +130,20 @@ namespace DVDRentalStore.Controllers
             var userId = (int)HttpContext.Session.GetInt32("userId");
             var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
             var clientHistory = (from r in _rentalDb.Rentals
-                                 from c in _rentalDb.Copies
-                                 from m in _rentalDb.Movies
+                                 join c in _rentalDb.Clients
+                                 on r.ClientId equals c.ClientId
+                                 join cop in _rentalDb.Copies
+                                 on r.CopyId equals cop.CopyId
+                                 join mov in _rentalDb.Movies
+                                 on cop.MovieId equals mov.MovieId
                                  select new
                                  {
-                                     r.ClientId,
-                                     m.Title,
-                                     m.Year,
-                                     m.MovieId,
-                                     m.Price,
-                                     m.AgeRestriction
+                                     mov.Title,
+                                     mov.Year,
+                                     mov.AgeRestriction,
+                                     mov.MovieId,
+                                     mov.Price,
+                                     c.ClientId
                                  }).Where(x => x.ClientId == userId).Distinct();
 
             List<MoviesModel> clientMovies = new List<MoviesModel>();
