@@ -59,8 +59,15 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult OrderId(int id)
         {
-            // movie client want to order
+            // movie client want to order by movie id
             var movie = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+
+            // check if there available copies of movie by movie id
+            var availableCopy = _rentalDb.Copies.Where(x => (bool)x.Available && x.MovieId == id)
+                .FirstOrDefault();
+
+            if (availableCopy == null)
+                return NotFound($"There is no available copies of {movie.Title}");
 
             // pass movie instance to view
             ViewData["Movie"] = movie;
@@ -90,10 +97,6 @@ namespace DVDRentalStore.Controllers
             // get client id from session
             var clientId = (int)HttpContext.Session.GetInt32("userId");
 
-            // check if copy is available
-            if (availableCopy == null)
-                return NotFound("No avaialble movies");
-
             // get date of rental
             var dateOfRental = Convert.ToDateTime(collection["DateOfRental"]);
 
@@ -115,6 +118,7 @@ namespace DVDRentalStore.Controllers
             // save changes in db
             _rentalDb.SaveChanges();
 
+            // redirect to user's dashboard
             return RedirectToAction("Dashboard", "Login", new { id = clientId });
 
         }

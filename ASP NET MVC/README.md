@@ -12,10 +12,12 @@
 - Implement search in db
 - Implement action links in order to sort movies in index
 - Comment on code
-- Implement login form and admin functionlities like: edit movie, edit rental, edit client etc
+- Implement login form for user
+- Implement user dashboard
 - Impelemnt user registration form
-- Implement two different dashboards (admin, user)
 - Implement user functionality: order movie
+- Implement administator login form
+- Implement administator panel with functionlities: add movie, edit movie, delete movie, modify client data
 
 
 ### Notes
@@ -37,7 +39,7 @@
     <add name="Rental"
          connectionString="Server=localhost;User Id=postgres;Password=postgres;Database=rental;"
          providerName="Npgsql" />
-  </connectionStrings>
+</connectionStrings>
 ```
 
 - To use connection string from App.config
