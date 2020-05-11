@@ -60,19 +60,21 @@ namespace DVDRentalStore.Controllers
         public IActionResult OrderId(int id)
         {
             // movie client want to order
-            ViewData["Movie"] = _rentalDb.Movies
-                .Where(x => x.MovieId == id)
-                .FirstOrDefault();
+            var movie = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
 
-            // instance of client
+            // pass movie instance to view
+            ViewData["Movie"] = movie;
+
+            // get client id from session 
             var userId = (int)HttpContext.Session.GetInt32("userId");
 
-            // set instance of client to view data of view
-            ViewData["Client"] = _rentalDb.Clients
-                .Where(x => x.ClientId == userId)
-                .FirstOrDefault();
+            // get instance of client by id
+            var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
 
-            // set session for client id
+            // set instance of client to view data of view
+            ViewData["Client"] = client;
+
+            // set client id for next session
             HttpContext.Session.SetInt32("userId", userId);
 
             return View();
@@ -81,23 +83,16 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult OrderId(int id, IFormCollection collection)
         {
-            // get all available copy of movie by id
-            var availableCopy = _rentalDb.Copies
-                .Where(x => (bool)x.Available && x.MovieId == id)
+            // get available copy of movie by movie id
+            var availableCopy = _rentalDb.Copies.Where(x => (bool)x.Available && x.MovieId == id)
                 .FirstOrDefault();
 
-            // get client id from previous form
-            var userId = HttpContext.Session.GetInt32("userId");
+            // get client id from session
+            var clientId = (int)HttpContext.Session.GetInt32("userId");
 
-            // get client instance by 
-            var clientId = _rentalDb.Clients
-                .Where(x => x.ClientId == userId)
-                .Select(t => t.ClientId)
-                .FirstOrDefault();
-
-            // this check has to be moved in previous controller method
+            // check if copy is available
             if (availableCopy == null)
-                return NotFound("No available copies of movie");
+                return NotFound("No avaialble movies");
 
             // get date of rental
             var dateOfRental = Convert.ToDateTime(collection["DateOfRental"]);
@@ -105,23 +100,23 @@ namespace DVDRentalStore.Controllers
             // get date of return
             var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);
 
-            // add rental to database
-            _rentalDb.Rentals.Add(new RentalsModel
+            // instance of new rental
+            var newRental = new RentalsModel
             {
                 ClientId = clientId,
                 CopyId = availableCopy.CopyId,
                 DateOfRental = dateOfRental,
                 DateOfReturn = dateOfReturn
-            });
+            };
 
+            // add new rental to database
+            _rentalDb.Rentals.Add(newRental);
+
+            // save changes in db
             _rentalDb.SaveChanges();
 
-            // set copy to be unavailable
-            availableCopy.Available = false;
-            _rentalDb.Copies.Update(availableCopy);
-            _rentalDb.SaveChanges();
+            return RedirectToAction("Dashboard", "Login", new { id = clientId });
 
-            return RedirectToAction("Index");
         }
 
         [HttpGet]

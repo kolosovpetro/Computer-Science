@@ -5,37 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
+@{
     var movie = ViewData["Movie"] as MoviesModel;
     var client = ViewData["Client"] as ClientsModel;
 }
 
 <h1>View</h1>
-
-<h4>Order movie @movie.Title</h4>
-<p>Welcome, username @client.FirstName, @client.LastName</p>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="View">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DateOfRental" class="control-label"></label>
-                <input asp-for="DateOfRental" class="form-control" />
-                <span asp-validation-for="DateOfRental" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfReturn" class="control-label"></label>
-                <input asp-for="DateOfReturn" class="form-control" />
-                <span asp-validation-for="DateOfReturn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Order" class="btn btn-primary" />
-            </div>
-        </form>
+@using (Html.BeginForm())
+{
+    <h4>Order movie @movie.Title</h4>
+    <p>Welcome, username @client.FirstName, @client.LastName</p>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="View">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DateOfRental" class="control-label"></label>
+                    <input asp-for="DateOfRental" class="form-control" />
+                    <span asp-validation-for="DateOfRental" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfReturn" class="control-label"></label>
+                    <input asp-for="DateOfReturn" class="form-control" />
+                    <span asp-validation-for="DateOfReturn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Order" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+}
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

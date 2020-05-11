@@ -13,7 +13,6 @@
 - [ADO .NET](#ado-net)
 - [Git Simple Pull Request](#git-simple-pull-request)
 - [Computational Methods](#computational-methods)
-- [Misc](#misc)
 - [To Do List](#to-do-list)
 
 ---
@@ -170,13 +169,6 @@ Visit: https://github.com/kolosovpetro/Computer-Science/tree/develop/Simple%20Pu
 * Polynomial Interpolation (Vandermonde method)
 * Discrete Integration (Simpson's, Trapezoidal methods)
 * Monte Carlo Method (Estimation on the plan finishing time)
-
-## Misc
-
-Other projects.
-
-* **Database Control Panel**. Simple winforms app in order to perform SQL queries on PostgreSQL Database. Not protected from SQL injections. 
-* **LINQ**. A set of custom methods in order to operate over IEnumerable collections.
 
 ## To do list
 

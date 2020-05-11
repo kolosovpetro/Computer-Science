@@ -180,7 +180,7 @@ namespace PostgreDatabaseFirst
                              title = mov.Title,
                              year = mov.Year
                          };
-                          
+
 
             foreach (var data in task26)
             {
