@@ -1,0 +1,13 @@
+﻿@model EmployeesModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var employee = ViewData["Employee"] as EmployeesModel;
+}
+
+<h2>Administrator dashboard</h2>
+<p>Welcome @employee?.FirstName </p>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using DVDRentalStore.DAL;
 using DVDRentalStore.Models;
@@ -27,8 +26,7 @@ namespace DVDRentalStore.Controllers
             string currentPassword = collection["userPassword"];
 
             var currentUser = _rentalDb.Clients
-                .Where(x => x.FirstName == currentLogin && x.LastName == currentPassword)
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.FirstName == currentLogin && x.LastName == currentPassword);
 
             if (currentUser == null)
                 return NotFound("No such user");
@@ -39,9 +37,9 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult Dashboard(int id)
         {
-            var client = _rentalDb.Clients.Where(x => x.ClientId == id).FirstOrDefault();
+            var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == id);
             ViewData["Client"] = client;
-            HttpContext.Session.SetInt32("userId", client.ClientId);
+            if (client != null) HttpContext.Session.SetInt32("userId", client.ClientId);
             return View();
         }
 
@@ -49,7 +47,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult Rent()
         {
             var userId = (int)HttpContext.Session.GetInt32("userId");
-            var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
+            var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == userId);
             var movies = _rentalDb.Movies.Select(x => x);
             ViewData["Client"] = client;
             HttpContext.Session.SetInt32("userId", userId);
@@ -60,11 +58,11 @@ namespace DVDRentalStore.Controllers
         public IActionResult OrderId(int id)
         {
             // movie client want to order by movie id
-            var movie = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+            var movie = _rentalDb.Movies.FirstOrDefault(x => x.MovieId == id);
 
             // check if there available copies of movie by movie id
-            var availableCopy = _rentalDb.Copies.Where(x => (bool)x.Available && x.MovieId == id)
-                .FirstOrDefault();
+            var availableCopy = _rentalDb.Copies
+                .FirstOrDefault(x => (bool)x.Available && x.MovieId == id);
 
             if (availableCopy == null)
                 return NotFound($"There is no available copies of {movie.Title}");
@@ -76,7 +74,7 @@ namespace DVDRentalStore.Controllers
             var userId = (int)HttpContext.Session.GetInt32("userId");
 
             // get instance of client by id
-            var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
+            var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == userId);
 
             // set instance of client to view data of view
             ViewData["Client"] = client;
@@ -91,8 +89,8 @@ namespace DVDRentalStore.Controllers
         public IActionResult OrderId(int id, IFormCollection collection)
         {
             // get available copy of movie by movie id
-            var availableCopy = _rentalDb.Copies.Where(x => (bool)x.Available && x.MovieId == id)
-                .FirstOrDefault();
+            var availableCopy = _rentalDb.Copies
+                .FirstOrDefault(x => (bool)x.Available && x.MovieId == id);
 
             // get client id from session
             var clientId = (int)HttpContext.Session.GetInt32("userId");
@@ -104,16 +102,19 @@ namespace DVDRentalStore.Controllers
             var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);
 
             // instance of new rental
-            var newRental = new RentalsModel
+            if (availableCopy != null)
             {
-                ClientId = clientId,
-                CopyId = availableCopy.CopyId,
-                DateOfRental = dateOfRental,
-                DateOfReturn = dateOfReturn
-            };
+                var newRental = new RentalsModel
+                {
+                    ClientId = clientId,
+                    CopyId = availableCopy.CopyId,
+                    DateOfRental = dateOfRental,
+                    DateOfReturn = dateOfReturn
+                };
 
-            // add new rental to database
-            _rentalDb.Rentals.Add(newRental);
+                // add new rental to database
+                _rentalDb.Rentals.Add(newRental);
+            }
 
             // save changes in db
             _rentalDb.SaveChanges();
@@ -127,7 +128,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult RentHistory()
         {
             var userId = (int)HttpContext.Session.GetInt32("userId");
-            var client = _rentalDb.Clients.Where(x => x.ClientId == userId).FirstOrDefault();
+            var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == userId);
             var clientHistory = (from r in _rentalDb.Rentals
                                  join c in _rentalDb.Clients
                                  on r.ClientId equals c.ClientId
@@ -163,5 +164,6 @@ namespace DVDRentalStore.Controllers
 
             return View(clientMovies);
         }
+        
     }
 }

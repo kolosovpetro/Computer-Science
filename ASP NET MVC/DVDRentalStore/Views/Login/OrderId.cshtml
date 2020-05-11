@@ -13,12 +13,22 @@
 <h1>View</h1>
 @using (Html.BeginForm())
 {
-    <h4>Order movie @movie.Title</h4>
-    <p>Welcome, username @client.FirstName, @client.LastName</p>
+    <h4>Order movie
+        @if (movie != null)
+        {
+            @movie.Title
+        }
+    </h4>
+    <p>Welcome, username
+        @if (client != null)
+        {
+            @:@client.FirstName, @client.LastName
+        }
+    </p>
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="View">
+            <form asp-action="OrderId">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="DateOfRental" class="control-label"></label>

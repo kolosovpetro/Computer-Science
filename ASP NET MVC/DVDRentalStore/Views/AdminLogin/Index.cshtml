@@ -1,0 +1,18 @@
+﻿@model DVDRentalStore.Models.EmployeesModel
+
+@{
+    ViewBag.Title = "Administrator Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Administator login</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("adminLogin", ViewBag.currentAdminLogin as string)
+        <br/>
+        @Html.TextBox("adminPassword", ViewBag.currentAdminPassword as string)
+        <br/>
+        <input type="submit" value="Login" class="btn btn-primary"/>
+    </p>
+}

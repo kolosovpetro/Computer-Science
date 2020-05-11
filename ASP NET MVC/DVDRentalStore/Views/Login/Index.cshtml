@@ -6,12 +6,11 @@
 <h1>Login</h1>
 @using (Html.BeginForm())
 {
-<p>
-    @Html.TextBox("userLogin", ViewBag.currentLogin as string)
-    <br />
-    @Html.TextBox("userPassword", ViewBag.currentPassword as string)
-    <br />
-    <input type="submit" value="Login" class="btn btn-primary" />
-</p>
+    <p>
+        @Html.TextBox("userLogin", ViewBag.currentLogin as string)
+        <br/>
+        @Html.TextBox("userPassword", ViewBag.currentPassword as string)
+        <br/>
+        <input type="submit" value="Login" class="btn btn-primary"/>
+    </p>
 }
-

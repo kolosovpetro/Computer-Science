@@ -14,28 +14,28 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult Index(string sortOrder)
         {
-            var movs = _rentalDb.Movies.Select(x => x);
+            var movies = _rentalDb.Movies.Select(x => x);
 
             switch (sortOrder)
             {
                 case "titleAscending":
-                    movs = movs.OrderBy(x => x.Title);
+                    movies = movies.OrderBy(x => x.Title);
                     break;
                 case "yearAscending":
-                    movs = movs.OrderBy(x => x.Year);
+                    movies = movies.OrderBy(x => x.Year);
                     break;
                 case "idAscending":
-                    movs = movs.OrderBy(x => x.MovieId);
+                    movies = movies.OrderBy(x => x.MovieId);
                     break;
                 case "ageRestrictionAscending":
-                    movs = movs.OrderBy(x => x.AgeRestriction);
+                    movies = movies.OrderBy(x => x.AgeRestriction);
                     break;
                 case "priceAscending":
-                    movs = movs.OrderBy(x => x.AgeRestriction);
+                    movies = movies.OrderBy(x => x.AgeRestriction);
                     break;
             }
 
-            return View(movs);
+            return View(movies);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var movie = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+            var movie = _rentalDb.Movies.FirstOrDefault(x => x.MovieId == id);
             return View(movie);
         }
 
@@ -60,12 +60,16 @@ namespace DVDRentalStore.Controllers
         {
             try
             {
-                var movie = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
-                movie.MovieId = int.Parse(collection["MovieId"]);
-                movie.Title = collection["Title"];
-                movie.Year = int.Parse(collection["Year"]);
-                movie.AgeRestriction = int.Parse(collection["AgeRestriction"]);
-                movie.Price = float.Parse(collection["Price"]);
+                var movie = _rentalDb.Movies.FirstOrDefault(x => x.MovieId == id);
+                if (movie != null)
+                {
+                    movie.MovieId = int.Parse(collection["MovieId"]);
+                    movie.Title = collection["Title"];
+                    movie.Year = int.Parse(collection["Year"]);
+                    movie.AgeRestriction = int.Parse(collection["AgeRestriction"]);
+                    movie.Price = float.Parse(collection["Price"]);
+                }
+
                 _rentalDb.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -106,7 +110,7 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var mov = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+            var mov = _rentalDb.Movies.FirstOrDefault(x => x.MovieId == id);
             return View(mov);
         }
 
@@ -140,10 +144,10 @@ namespace DVDRentalStore.Controllers
             _rentalDb.Starring.RemoveRange(starringByMovieId);
 
             // get all movies with id
-            var movieById = _rentalDb.Movies.Where(x => x.MovieId == id).FirstOrDefault();
+            var movieById = _rentalDb.Movies.FirstOrDefault(x => x.MovieId == id);
 
             // delete all movies by id
-            _rentalDb.Movies.Remove(movieById);
+            _rentalDb.Movies.Remove(movieById ?? throw new NullReferenceException());
 
             // save changes
             _rentalDb.SaveChanges();
