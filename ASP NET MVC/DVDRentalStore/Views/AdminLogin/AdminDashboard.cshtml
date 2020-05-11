@@ -1,7 +1,7 @@
 ﻿@model EmployeesModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Admin Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,3 +11,4 @@
 
 <h2>Administrator dashboard</h2>
 <p>Welcome @employee?.FirstName </p>
+<p>@Html.ActionLink("List of Clients", "ListOfClients", "AdminLogin")</p>

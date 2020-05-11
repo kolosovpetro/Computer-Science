@@ -1,0 +1,20 @@
+﻿@model IEnumerable<DVDRentalStore.Models.ClientsModel>
+
+@{
+    ViewBag.Title = "List of clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of clients</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.DisplayFor(modelItem => item.FirstName),
+            @Html.DisplayFor(modelItem => item.LastName),
+            @Html.DisplayFor(modelItem => item.ClientId),
+            @Html.DisplayFor(modelItem => item.Birthday),
+            @Html.ActionLink("Edit client", "EditClient", new {id = item.ClientId})
+        </li>
+    }
+</ul>

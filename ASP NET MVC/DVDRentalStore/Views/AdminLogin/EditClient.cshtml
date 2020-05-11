@@ -1,0 +1,14 @@
+﻿@model DVDRentalStore.Models.ClientsModel
+
+@{
+    ViewBag.Title = "Edit Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Client</h2>
+<form asp-action="EditClient">
+    <label>First name</label>
+    <input asp-for="FirstName"/>
+    <label>Last name</label>
+    <input asp-for="LastName"/>
+</form>
