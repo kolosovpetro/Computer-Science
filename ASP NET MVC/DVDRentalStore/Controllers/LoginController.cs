@@ -22,8 +22,8 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            string currentLogin = collection["userLogin"];
-            string currentPassword = collection["userPassword"];
+            string currentLogin = collection["FirstName"];
+            string currentPassword = collection["LastName"];
 
             var currentUser = _rentalDb.Clients
                 .FirstOrDefault(x => x.FirstName == currentLogin && x.LastName == currentPassword);
@@ -40,7 +40,7 @@ namespace DVDRentalStore.Controllers
             var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == id);
             ViewData["Client"] = client;
             if (client != null) HttpContext.Session.SetInt32("userId", client.ClientId);
-            return View();
+            return View(client);
         }
 
         [HttpGet]

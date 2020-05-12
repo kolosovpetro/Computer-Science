@@ -1,14 +1,16 @@
-﻿
+﻿@model DVDRentalStore.Models.ClientsModel
+
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ 
-    var client = ViewData["Client"] as ClientsModel;
-}
 
 <h1>Dashboard</h1>
-<p>Welcome @client?.FirstName, @client?.LastName</p>
+<p>
+    Welcome 
+    @Html.DisplayFor(modelItem => Model.FirstName), 
+    @Html.DisplayFor(modelItem => Model.LastName)
+</p>
 <p>@Html.ActionLink("Rent Movie", "Rent", "Login")</p>
 <p>@Html.ActionLink("View rental history", "RentHistory", "Login")</p>
 

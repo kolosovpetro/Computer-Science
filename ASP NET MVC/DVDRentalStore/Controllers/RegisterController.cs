@@ -9,6 +9,8 @@ namespace DVDRentalStore.Controllers
 {
     public class RegisterController : Controller
     {
+        private readonly rentalContext _rentalContext = new rentalContext();
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -18,35 +20,37 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
+            // this is stupid approach to get id, however auto increment doesn't work
+
+            var clientId = _rentalContext.Clients.Select(x => x.ClientId).Max() + 1;
+
             string firstName = collection["FirstName"];
             string lastName = collection["LastName"];
             DateTime? birthday = Convert.ToDateTime(collection["Birthday"]);
 
-            using (rentalContext rentalDb = new rentalContext())
+
+
+            _rentalContext.Clients.Add(new ClientsModel
             {
-                // this is stupid approach, however auto increment doesn't work
+                ClientId = clientId,
+                FirstName = firstName,
+                LastName = lastName,
+                Birthday = birthday
+            });
 
-                int clientId = rentalDb.Clients.Select(x => x.ClientId).Max() + 1;
+            _rentalContext.SaveChanges();
 
-                rentalDb.Clients
-                    .Add(new ClientsModel
-                    {
-                        ClientId = clientId,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        Birthday = birthday
-                    });
 
-                rentalDb.SaveChanges();
-            }
-
-            return RedirectToAction("Success");
+            return RedirectToAction("Success", "Register", new { id = clientId });
         }
 
         [HttpGet]
-        public IActionResult Success()
+        public IActionResult Success(int id)
         {
-            return View();
+            var client = _rentalContext.Clients.FirstOrDefault(x => x.ClientId == id)
+                         ?? throw new ArgumentNullException(nameof(id));
+
+            return View(client);
         }
     }
 }

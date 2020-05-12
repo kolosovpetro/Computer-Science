@@ -1,16 +1,15 @@
-﻿@{
+﻿@model DVDRentalStore.Models.ClientsModel
+
+@{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Login</h1>
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("userLogin", ViewBag.currentLogin as string)
-        <br/>
-        @Html.TextBox("userPassword", ViewBag.currentPassword as string)
-        <br/>
-        <input type="submit" value="Login" class="btn btn-primary"/>
-    </p>
-}
+<h1>User's Login</h1>
+<form asp-action="Index">
+    <input asp-for="FirstName" />
+    <br />
+    <input asp-for="LastName" />
+    <br />
+    <input type="submit" value="Sign in" />
+</form>

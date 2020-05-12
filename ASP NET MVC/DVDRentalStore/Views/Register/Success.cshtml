@@ -1,10 +1,17 @@
-﻿
+﻿@model DVDRentalStore.Models.ClientsModel
 @{
-    ViewData["Title"] = "Sucess";
+    ViewData["Title"] = "Success";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Sucess</h1>
-Regiestration is successful
+<h1>Success</h1>
+<p>
+    Congrats,
+    @Html.DisplayFor(item => Model.FirstName)
+    @Html.DisplayFor(item => Model.LastName) !
+</p>
+<p>
+    You are registered
+</p>
 <br />
-@Html.ActionLink("Go to main page", "Index", "Movies")
+@Html.ActionLink("Go to main page", "Index", "Home")

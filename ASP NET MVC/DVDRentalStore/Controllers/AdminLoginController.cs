@@ -20,8 +20,8 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            var adminLogin = collection["adminLogin"].ToString();
-            var adminPassword = collection["adminPassword"].ToString();
+            var adminLogin = collection["FirstName"].ToString();
+            var adminPassword = collection["LastName"].ToString();
             var employee = _rentalContext.Employees
                 .FirstOrDefault(x => x.FirstName == adminLogin && x.LastName == adminPassword);
 
@@ -34,8 +34,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult AdminDashboard(int id)
         {
             var employee = _rentalContext.Employees.FirstOrDefault(x => x.EmployeeId == id);
-            ViewData["Employee"] = employee;
-            return View();
+            return View(employee);
         }
 
         [HttpGet]

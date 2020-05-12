@@ -1,4 +1,4 @@
-﻿@model MoviesModel
+﻿@model DVDRentalStore.Models.MoviesModel
 
 @{
     ViewBag.Title = "title";
@@ -8,25 +8,25 @@
 <h2>Edit Movie</h2>
 <form asp-action="EditMovie">
     <label>Movie Id</label>
-    <br/>
-    <input asp-for="MovieId"/>
-    <br/>
+    <br />
+    <input asp-for="MovieId" />
+    <br />
     <label>Title</label>
-    <br/>
-    <input asp-for="Title"/>
-    <br/>
+    <br />
+    <input asp-for="Title" />
+    <br />
     <label>Year</label>
-    <br/>
-    <input asp-for="Year"/>
-    <br/>
+    <br />
+    <input asp-for="Year" />
+    <br />
     <label>Price</label>
-    <br/>
-    <input asp-for="Price"/>
-    <br/>
+    <br />
+    <input asp-for="Price" />
+    <br />
     <label>Age Restriction</label>
-    <br/>
-    <input asp-for="AgeRestriction"/>
-    <br/>
-    <input type="submit" value="Save"/>
-    <br/>
+    <br />
+    <input asp-for="AgeRestriction" />
+    <br />
+    <input type="submit" value="Save" />
+    <br />
 </form>
