@@ -67,7 +67,8 @@ namespace LinearEquationsSolver
 
             return BackwardSubstitution(rows);
         }
-        public bool Pivot(double[][] rows, int row, int column)
+
+        private static bool Pivot(double[][] rows, int row, int column)
         {
             bool swapped = false;
             for (int z = rows.Length - 1; z > row; z--)
@@ -83,10 +84,11 @@ namespace LinearEquationsSolver
 
             return swapped;
         }
-        public double[] BackwardSubstitution(double[][] rows)
+
+        private double[] BackwardSubstitution(double[][] rows)
         {
-            int length = rows[0].Length;
-            double[] result = new double[rows.Length];
+            var length = rows[0].Length;
+            var result = new double[rows.Length];
             for (int i = rows.Length - 1; i >= 0; i--)
             {
                 var val = rows[i][length - 1];
@@ -103,7 +105,8 @@ namespace LinearEquationsSolver
             }
             return result;
         }
-        public bool IsValidResult(double result)
+
+        private static bool IsValidResult(double result)
         {
             return !(double.IsNaN(result) || double.IsInfinity(result));
         }

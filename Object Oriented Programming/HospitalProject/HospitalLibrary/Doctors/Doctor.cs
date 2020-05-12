@@ -1,40 +1,33 @@
 ﻿using System;
+using HospitalLibrary.Exceptions;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Doctors
 {
     [Serializable]
-    public abstract class Doctor : Employee
+    public abstract class Doctor : Employee.Employee
     {
         public string Speciality { get; private set; }
-        public string GMC { get; private set; }
+        public string Gmc { get; private set; }
 
-        public Doctor(string Name, string Surname, string Id, string Username,
-            string Password, string GMC) :
-            base(Name, Surname, Id, Username, Password)
+        protected Doctor(string name, string surname, string id, string username, string password, string gmc) :
+            base(name, surname, id, username, password)
         {
-            if (GMC.Length > 7)
+            if (gmc.Length > 7)
             {
-                throw new DoctorGMCException("GMC number must be less then 7 digits.");
+                throw new DoctorGmcException("GMC number must be less then 7 digits.");
             }
 
             Speciality = GetType().Name;
-            this.GMC = GMC;
+            Gmc = gmc;
         }
 
-        public void ChangeGMCNumber(string newNumber)
+        public void ChangeGmcNumber(string newNumber)
         {
-            GMC = newNumber;
+            Gmc = newNumber;
         }
 
         public override string EmployeeInfo()
         {
-            string ShiflList = "Dusties:";
-
-            for (int i = 0; i < Duties.Count; i++)
-            {
-                ShiflList += $" Day {i}: {Duties[i]}";
-            }
-
             return $"{Name}, {Surname} - {Id} - Username: {Username}, Pass: {Password} - Doctor - {GetType().Name}";
         }
     }

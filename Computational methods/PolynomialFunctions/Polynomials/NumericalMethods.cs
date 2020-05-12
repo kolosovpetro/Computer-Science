@@ -1,6 +1,6 @@
 ﻿namespace PolynomialFunctions.Polynomials
 {
-    internal class NumericalMethods
+    internal static class NumericalMethods
     {
         public static double[] SolveLinearEquations(double[][] rows)
         {

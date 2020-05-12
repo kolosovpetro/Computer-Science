@@ -3,31 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Exceptions;
+using DataAccess.Interfaces;
 
 namespace DataAccess
 {
-    public class Connection : IConnection
+    public sealed class Connection : IConnection
     {
+        private Database Database;
+        private bool _isOpen;
+        bool _disposed;
+        private readonly string _password;
+        private readonly string _userName;
+        private readonly IDatabase _database;
 
-        protected Database database;
-        protected bool isOpen;
-        bool disposed = false;
-        protected string password;
-        protected string userName;
+        IDatabase IConnection.Database => _database;
 
-        IDatabase IConnection.Database { get; }
-
-        public Connection(string newUserName, string newPassword)
+        public Connection(string newUserName, string newPassword, IDatabase database)
         {
-            this.userName = newUserName;
-            this.password = newPassword;
+            _userName = newUserName;
+            _password = newPassword;
+            _database = database;
         }
 
         public void Close()
         {
-            if (isOpen == true)
+            if (_isOpen)
             {
-                this.isOpen = false;
+                _isOpen = false;
             }
             else
             {
@@ -38,12 +41,12 @@ namespace DataAccess
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            GC.SuppressFinalize(obj: this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
             {
                 return;
             }
@@ -51,53 +54,44 @@ namespace DataAccess
             {
 
             }
-            disposed = true;
+            _disposed = true;
         }
 
         public string GetPassword()
         {
-            return this.password;
+            return _password;
         }
 
         public string GetUsername()
         {
-            return this.userName;
+            return _userName;
         }
 
         public bool IsOpen()
         {
-            if (isOpen == true)
+            if (_isOpen)
             {
                 Console.WriteLine("Open");
                 return true;
             }
-            else
-            {
-                Console.WriteLine("Closed");
-                return false;
-            }
+
+            Console.WriteLine("Closed");
+            return false;
         }
 
         public void Open()
         {
-
-            int loginValue;
-
-            if (isOpen == true)
+            if (_isOpen)
             {
                 throw new ConnectionAlreadyOpenedException("Connection was already opened");
             }
-            else
+
+            if (int.TryParse(_userName, out _) || int.TryParse(_password, out _) == false)
             {
-                if (int.TryParse(this.userName, out loginValue) == true || int.TryParse(this.password, out loginValue) == false)
-                {
-                    throw new AuthenticationException();
-                }
-                else
-                {
-                    isOpen = true;
-                }
+                throw new AuthenticationException();
             }
+
+            _isOpen = true;
 
         }
     }

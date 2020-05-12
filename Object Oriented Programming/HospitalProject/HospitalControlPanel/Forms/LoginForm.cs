@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using HospitalControlPanel.Forms;
-using HospitalLibrary;
+using HospitalLibrary.Administrators;
+using HospitalLibrary.Employee;
+using HospitalLibrary.Hospital;
 
-namespace HospitalControlPanel
+namespace HospitalControlPanel.Forms
 {
     public partial class LoginForm : Form
     {
-        public Hospital NewHospital { get; private set; }
+        public Hospital NewHospital { get; }
         public Employee CurrentUser { get; private set; }
         public LoginForm()
         {
@@ -21,31 +22,28 @@ namespace HospitalControlPanel
             //Administrator admin = new Administrator("Andrey", "Ivanov", "1337", "admin", "admin");
             //NewHospital.AddEmployee(admin);
 
-            if (!NewHospital.CreditsExist(UsernameField.Text, PasswordField.Text, out Employee NewCurrentUser))
+            if (!NewHospital.CreditsExist(UsernameField.Text, PasswordField.Text, out var newCurrentUser))
             {
-                MessageBox.Show("No such employee. Try again");
+                MessageBox.Show(@"No such employee. Try again");
                 return;
             }
 
-            foreach (Employee employee in NewHospital.Employees)
+            foreach (var employee in NewHospital.Employees)
             {
-                if (employee.Username == UsernameField.Text && employee.Password == PasswordField.Text
-                    && employee is Administrator)
+                if (employee.Username == UsernameField.Text && employee.Password == PasswordField.Text && employee is Administrator)
                 {
-                    this.Hide();
-                    this.CurrentUser = NewCurrentUser;
+                    Hide();
+                    CurrentUser = newCurrentUser;
                     new AdminForm(this).ShowDialog();
-                    this.Close();
+                    Close();
                 }
 
-                if (employee.Username == UsernameField.Text && employee.Password == PasswordField.Text
-                    && !employee.GetType().Name.Equals("Administrator"))
-                {
-                    this.Hide();
-                    this.CurrentUser = NewCurrentUser;
-                    new StaffForm(this).ShowDialog();
-                    this.Close();
-                }
+                if (employee.Username != UsernameField.Text || employee.Password != PasswordField.Text || employee.GetType().Name.Equals("Administrator")) 
+                    continue;
+                Hide();
+                CurrentUser = newCurrentUser;
+                new StaffForm(this).ShowDialog();
+                Close();
             }
         }
 

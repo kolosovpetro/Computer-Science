@@ -13,7 +13,7 @@ namespace NumericalIntegration
             Console.WriteLine("Type 1 it yo want to define a polynomial entering coefficients separated by space");
             Console.WriteLine("Type 2 if you want to define polynomial be Infix notation");
 
-            int userInput = Auxiliary.InputOfTypeInt(1, 2);
+            var userInput = Auxiliary.InputOfTypeInt(1, 2);
 
             switch (userInput)
             {
@@ -24,7 +24,7 @@ namespace NumericalIntegration
                         Console.WriteLine("Enter the coefficients separated by space > ");
                         try
                         {
-                            string coefficients = Console.ReadLine();
+                            var coefficients = Console.ReadLine();
                             function = new Function(coefficients);
                             break;
                         }
@@ -81,7 +81,7 @@ namespace NumericalIntegration
                 case 2:
                     Console.WriteLine("Enter the function in Infix: ");
 
-                    string infix = Console.ReadLine();
+                    var infix = Console.ReadLine();
 
                     while (true)
                     {

@@ -17,14 +17,14 @@ namespace MonteCarloMethod.Classes
 
         private void ParseData(string input)
         {
-            string[] NewValues = StringProcess.NumbersFromCollection(input.Split(Separator)).ToArray();
+            var NewValues = StringProcess.NumbersFromCollection(input.Split(Separator)).ToArray();
 
             if (NewValues.Length == 0)
                 throw new IncorrectTaskFormat("Incorrect formatting. Correct is: 10 20 30 ...");
 
             Estimations = new double[NewValues.Length];
 
-            for (int I = 0; I < NewValues.Length; I++)
+            for (var I = 0; I < NewValues.Length; I++)
             {
                 Estimations[I] = int.Parse(NewValues[I]);
                 if (I > 0 && Estimations[I] < Estimations[I - 1])

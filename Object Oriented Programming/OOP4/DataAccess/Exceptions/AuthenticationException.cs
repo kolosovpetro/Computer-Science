@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-[Serializable]
-
-public class AuthenticationException : Exception
+namespace DataAccess.Exceptions
 {
-    public AuthenticationException()
+    [Serializable]
+    public class AuthenticationException : Exception
     {
-    }
-    public AuthenticationException(string message)
-        : base(message)
-    {
-    }
-    public AuthenticationException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+        public AuthenticationException()
+        {
+        }
 
-    public AuthenticationException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
+        public AuthenticationException(string message)
+            : base(message)
+        {
+        }
+
+        public AuthenticationException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        public AuthenticationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 }

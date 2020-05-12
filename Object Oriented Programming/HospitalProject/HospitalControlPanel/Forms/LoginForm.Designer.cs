@@ -1,4 +1,4 @@
-﻿namespace HospitalControlPanel
+﻿namespace HospitalControlPanel.Forms
 {
     partial class LoginForm
     {

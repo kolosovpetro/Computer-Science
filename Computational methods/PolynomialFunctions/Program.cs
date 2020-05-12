@@ -5,38 +5,40 @@ using PolynomialFunctions.Polynomials;
 
 namespace PolynomialFunctions
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
-            Point p;
-            VandermondeMatrix vm = new VandermondeMatrix();
+            var vm = new VandermondeMatrix();
             Console.WriteLine("To finish adding of points type END.");
             Console.WriteLine($"Enter the coordinates of the point, separated by space: ");
-            int Step = default;
+            int step = default;
 
             while (true)
             {
-                Console.WriteLine($"Point {Step} coordinates > ");
+                Console.WriteLine($"Point {step} coordinates > ");
                 try
                 {
-                    string Point = Console.ReadLine();
+                    var point = Console.ReadLine();
 
-                    if (Point != null && Point.ToLower() == "end")
+                    if (point != null && point.ToLower() == "end")
                         break;
 
-                    if (Point != null)
+                    if (point != null)
                     {
-                        var Values = Point.Split(' ');
-                        if (Values.Contains(" ") || Values.Length != 2)
-                            throw new PointFormattingException("Point coordinates must be two integers separated by space.");
-                        int X = int.Parse(Values[0]);
-                        int Y = int.Parse(Values[1]);
-                        p = new Point(X, Y);
+                        var values = point.Split(' ');
+
+                        if (values.Contains(" ") || values.Length != 2)
+                            throw new PointFormattingException(
+                                "Point coordinates must be two integers separated by space.");
+
+                        var x = int.Parse(values[0]);
+                        var y = int.Parse(values[1]);
+                        var p = new Point(x, y);
                         vm.AddPoint(p);
                     }
 
-                    Step++;
+                    step++;
                 }
                 catch (Exception ex)
                 {
@@ -46,8 +48,8 @@ namespace PolynomialFunctions
 
             vm.PrintOrder();
 
-            double[] solutions = NumericalMethods.SolveLinearEquations(vm.AugmentedMatrix);
-            Polynomial pm1 = new Polynomial(solutions);
+            var solutions = NumericalMethods.SolveLinearEquations(vm.AugmentedMatrix);
+            var pm1 = new Polynomial(solutions);
             Console.WriteLine("Resulting polynomial is: ");
             Console.WriteLine(pm1.Display);
             Console.WriteLine("The values are: ");
@@ -55,12 +57,13 @@ namespace PolynomialFunctions
             Console.WriteLine("Derivative is: ");
             Console.WriteLine(pm1.Derivative);
             Console.WriteLine("Guess the root (int) : ");
-            int NewRoot = Auxiliary.InputOfTypeInt();
+
+            var guessRoot = Auxiliary.InputOfTypeInt();
 
             try
             {
-                double Root = pm1.GuessRoot(NewRoot);
-                Console.WriteLine($"Yes, root is at: {Root}");
+                var root = pm1.GuessRoot(guessRoot);
+                Console.WriteLine($"Yes, root is at: {root}");
             }
             catch (Exception ex)
             {

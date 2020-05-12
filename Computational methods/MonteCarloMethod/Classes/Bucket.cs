@@ -9,7 +9,7 @@ namespace MonteCarloMethod.Classes
         private Plan Tasks { get; }
         public int Size { get; }
         private double[] Assessments { get; }
-        public int Count { get; }
+        private int Count { get; }
         public double Min => Assessments.Min();
         public double Max => Assessments.Max();
         public double Avg => Assessments.Average();
@@ -23,7 +23,7 @@ namespace MonteCarloMethod.Classes
             Size = newSize;
             Assessments = new double[newSize];
 
-            for (int I = 0; I < Assessments.Length; I++)
+            for (var I = 0; I < Assessments.Length; I++)
             {
                 Assessments[I] = Tasks.GetRandomEstimations();
             }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace CarSimulator
 {
@@ -53,8 +52,8 @@ namespace CarSimulator
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == ',') e.KeyChar = '.';
-            if (e.KeyChar == '.' && (textBox1.Text.IndexOf('.') != -1)) e.Handled = true;
-            else if (!char.IsDigit(e.KeyChar) && (e.KeyChar != '\b') && (e.KeyChar != '.')) e.Handled = true;
+            if (e.KeyChar == '.' && textBox1.Text.IndexOf('.') != -1) e.Handled = true;
+            else if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b' && e.KeyChar != '.') e.Handled = true;
         }
     }
 }

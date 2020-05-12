@@ -1,21 +1,17 @@
 ﻿using DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccess.Interfaces;
 
 namespace ConsoleUI
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            IConnection newConnection = new Connection("dfdfdf", "4545");
-            IConnection oldConnection = new Connection("dfdfdf", "4545");
             IDatabase database = new Database("family data");
-            newConnection.Open();
-            database.GetData(newConnection);
+            IConnection connection = new Connection("dfdfdf", "4545", database);
+            IConnection oldConnection = new Connection("dfdfdf", "4545", database);
+            connection.Open();
+            database.GetData(connection);
             database.GetData(oldConnection);
         }
     }

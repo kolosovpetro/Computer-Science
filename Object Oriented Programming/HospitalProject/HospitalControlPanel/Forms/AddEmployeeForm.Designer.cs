@@ -254,7 +254,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 304);
             this.Controls.Add(this.EmployeeDataGroupBox);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddEmployeeForm";
@@ -262,30 +262,29 @@
             this.EmployeeDataGroupBox.ResumeLayout(false);
             this.EmployeeDataGroupBox.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.GroupBox EmployeeDataGroupBox;
-        private System.Windows.Forms.RadioButton NeurologistRadioButton;
-        private System.Windows.Forms.RadioButton UrologistRadioButton;
-        private System.Windows.Forms.RadioButton CardiologistRadioButton;
-        private System.Windows.Forms.RadioButton NurseRadioButton;
-        private System.Windows.Forms.RadioButton LaryngologistRadioButton;
         private System.Windows.Forms.RadioButton AdministratorRadioButton;
-        private System.Windows.Forms.Label IdLabel;
-        private System.Windows.Forms.Label SurnameLabel;
-        private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.Label UsernameLabel;
-        private System.Windows.Forms.Label GMCLabel;
+        private System.Windows.Forms.RadioButton CardiologistRadioButton;
+        private System.Windows.Forms.GroupBox EmployeeDataGroupBox;
         private System.Windows.Forms.TextBox GMCField;
-        private System.Windows.Forms.TextBox PasswordField;
-        private System.Windows.Forms.TextBox UsernameField;
+        private System.Windows.Forms.Label GMCLabel;
         private System.Windows.Forms.TextBox IdField;
-        private System.Windows.Forms.TextBox SurnameField;
+        private System.Windows.Forms.Label IdLabel;
+        private System.Windows.Forms.RadioButton LaryngologistRadioButton;
         private System.Windows.Forms.TextBox NameField;
+        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.RadioButton NeurologistRadioButton;
+        private System.Windows.Forms.RadioButton NurseRadioButton;
+        private System.Windows.Forms.TextBox PasswordField;
+        private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button RegisterNewEmployee;
+        private System.Windows.Forms.TextBox SurnameField;
+        private System.Windows.Forms.Label SurnameLabel;
+        private System.Windows.Forms.RadioButton UrologistRadioButton;
+        private System.Windows.Forms.TextBox UsernameField;
+        private System.Windows.Forms.Label UsernameLabel;
+
+        #endregion
     }
 }

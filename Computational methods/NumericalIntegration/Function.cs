@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using NumericalIntegration.Interfaces;
 using NumericalIntegration.RPN;
 
 namespace NumericalIntegration
 {
-    internal class Function : IPolynomial
+    internal class Function
     {
         private double[] Coefficients { get; }
         public string PrintForm { get; }
 
         public Function()
         {
-
         }
 
         public Function(string coefficients)
@@ -21,16 +19,16 @@ namespace NumericalIntegration
             PrintForm = NewPrintForm();
         }
 
-        public double[] GetCoefficients(string input)
+        private static double[] GetCoefficients(string input)
         {
-            string[] tokens = input.Split(' ');
+            var tokens = input.Split(' ');
 
             if (tokens.Contains(" "))
                 throw new FormatException("Wrong input format.");
 
-            double[] coefficients = new double[tokens.Length];
+            var coefficients = new double[tokens.Length];
 
-            for (int i = 0; i < coefficients.Length; i++)
+            for (var i = 0; i < coefficients.Length; i++)
                 coefficients[i] = double.Parse(tokens[i]);
 
             return coefficients;
@@ -38,11 +36,11 @@ namespace NumericalIntegration
 
         public double ValueInPoint(double variable)
         {
-            int size = Coefficients.Length;
+            var size = Coefficients.Length;
 
             double newValue = default;
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
                 newValue += Coefficients[i] * Math.Pow(variable, size - 1 - i);
 
             return newValue;
@@ -50,17 +48,18 @@ namespace NumericalIntegration
 
         public double ValueInPoint(string infix, double variable)
         {
-            string postfix = RpnCalculator.InfixToPostfix(infix, variable);
-            double result = RpnCalculator.PostfixEvaluator(postfix);
+            var postfix = RpnCalculator.InfixToPostfix(infix, variable);
+            var result = RpnCalculator.PostfixEvaluator(postfix);
             return result;
         }
+
         private string NewPrintForm(string variable = "x")
         {
-            int length = Coefficients.Length;
+            var length = Coefficients.Length;
 
-            string polynomialForm = $"f({variable}) = {Coefficients[0]}{variable}^{length - 1}";
+            var polynomialForm = $"f({variable}) = {Coefficients[0]}{variable}^{length - 1}";
 
-            for (int i = 1; i < length - 1; i++)
+            for (var i = 1; i < length - 1; i++)
                 polynomialForm += $" + {Coefficients[i]}{variable}^{length - 1 - i}";
 
             polynomialForm += $" + {Coefficients[length - 1]}";

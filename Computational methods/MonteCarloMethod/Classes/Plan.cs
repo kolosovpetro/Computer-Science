@@ -8,8 +8,8 @@ namespace MonteCarloMethod.Classes
     {
         private readonly Random _rand;
         private readonly List<Task> _newPlan;
-        public int Count { get; private set; }
-        public int Size { get; private set; }
+        private int Count { get; set; }
+        private int Size { get; set; }
 
         public Plan()
         {
@@ -38,9 +38,9 @@ namespace MonteCarloMethod.Classes
         {
             double Value = default;
 
-            for (int I = 0; I < this.Count; I++)
+            for (var I = 0; I < Count; I++)
             {
-                int CaseIndex = _rand.Next(0, Size);
+                var CaseIndex = _rand.Next(0, Size);
                 Value += _newPlan[I].Estimations[CaseIndex];
             }
 

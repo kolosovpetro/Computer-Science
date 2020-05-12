@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using HospitalLibrary.Exceptions;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Hospital
 {
     [Serializable]
     public class Hospital
     {
-        public List<Employee> Employees { get; private set; }
+        public List<Employee.Employee> Employees { get; private set; }
         public string HospitalName { get; private set; }
         public string SerializePath { get; private set; }
         public string SerializeFile { get; private set; }
+
         public Hospital(string newHospitalName)
         {
             HospitalName = newHospitalName;
@@ -21,33 +24,28 @@ namespace HospitalLibrary
 
             if (File.Exists(SerializePath + SerializeFile))
             {
-                using (FileStream fs = new FileStream(SerializePath + SerializeFile, FileMode.Open, FileAccess.Read))
+                using (var fs = new FileStream(SerializePath + SerializeFile, FileMode.Open, FileAccess.Read))
                 {
-                    IFormatter Formatter = new BinaryFormatter();
-                    Hospital NewHospital = (Hospital)Formatter.Deserialize(fs);
-                    HospitalName = NewHospital.HospitalName + "Deserialized";
-                    Employees = NewHospital.Employees;
+                    IFormatter formatter = new BinaryFormatter();
+                    Hospital newHospital = (Hospital) formatter.Deserialize(fs);
+                    HospitalName = newHospital.HospitalName + "Deserialized";
+                    Employees = newHospital.Employees;
                 }
             }
 
             else
             {
-                Employees = new List<Employee>();
+                Employees = new List<Employee.Employee>();
                 SerializeHospital();
             }
         }
 
-        public void AddEmployee(Employee newEmployee)
+        public void AddEmployee(Employee.Employee newEmployee)
         {
-            if (!EmployeeExist(newEmployee.Name, newEmployee.Surname))
-            {
-                Employees.Add(newEmployee);
-                SerializeHospital();
-                return;
-            }
-
-            throw new EmployeeExistException("Such employee already works in this hospital.");
-
+            if (EmployeeExist(newEmployee.Name, newEmployee.Surname))
+                throw new EmployeeExistException("Such employee already works in this hospital.");
+            Employees.Add(newEmployee);
+            SerializeHospital();
         }
 
         public void SerializeHospital()
@@ -57,82 +55,51 @@ namespace HospitalLibrary
                 Directory.CreateDirectory(SerializePath);
             }
 
-            using (FileStream fs = new FileStream(SerializePath + SerializeFile, FileMode.Create, FileAccess.Write))
+            using (var fs = new FileStream(SerializePath + SerializeFile, FileMode.Create, FileAccess.Write))
             {
-                IFormatter Formatter = new BinaryFormatter();
-                Formatter.Serialize(fs, this);
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(fs, this);
             }
         }
 
-        public bool EmployeeExist(string Id)
+        public bool EmployeeExist(string id)
         {
-            foreach (Employee employee in Employees)
-            {
-                if (employee.Id == Id)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Employees.Any(employee => employee.Id == id);
         }
-        
-        public bool EmployeeExist(string Id, out Employee Employee)
+
+        public bool EmployeeExist(string id, out Employee.Employee emp)
         {
-            foreach (Employee employee in Employees)
+            foreach (var employee in Employees.Where(employee => employee.Id == id))
             {
-                if (employee.Id == Id)
-                {
-                    Employee = employee;
-                    return true;
-                }
+                emp = employee;
+                return true;
             }
 
-            Employee = default;
+            emp = null;
             return false;
         }
 
-        public bool EmployeeExist(string Name, string Surname)
+        public bool EmployeeExist(string name, string surname)
         {
-            foreach (Employee employee in Employees)
-            {
-                if (employee.Name == Name && employee.Surname == Surname)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Employees.Any(employee => employee.Name == name && employee.Surname == surname);
         }
 
-        public bool CreditsExist(string Username, string Password)
+        public bool CreditsExist(string username, string password)
         {
-            foreach (Employee employee in Employees)
-            {
-                if (employee.Username == Username && employee.Password == Password)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        
-        public bool CreditsExist(string Username, string Password, out Employee Employee)
-        {
-            foreach (Employee employee in Employees)
-            {
-                if (employee.Username == Username && employee.Password == Password)
-                {
-                    Employee = employee;
-                    return true;
-                }
-            }
-
-            Employee = default;
-            return false;
+            return Employees.Any(employee => employee.Username == username && employee.Password == password);
         }
 
+        public bool CreditsExist(string username, string password, out Employee.Employee emp)
+        {
+            foreach (var employee in Employees.Where(employee =>
+                employee.Username == username && employee.Password == password))
+            {
+                emp = employee;
+                return true;
+            }
 
+            emp = null;
+            return false;
+        }
     }
 }

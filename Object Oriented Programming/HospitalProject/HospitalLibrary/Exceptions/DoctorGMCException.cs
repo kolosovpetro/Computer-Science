@@ -1,17 +1,11 @@
 ﻿using System;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Exceptions
 {
-    public class DoctorGMCException : Exception
+    public class DoctorGmcException : Exception
     {
-        public DoctorGMCException()
+        public DoctorGmcException(string message) : base(message)
         {
-
-        }
-
-        public DoctorGMCException(string Message) : base(Message)
-        {
-
         }
     }
 }

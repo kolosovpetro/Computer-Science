@@ -1,24 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 
 namespace Task3
 {
-    class MP3Player
+    internal class Mp3Player
     {
-        List<Song> PlayList = new List<Song>();
+        private readonly List<Song> _playList = new List<Song>();
 
-        public void Add(Song track) { PlayList.Add(track); }
+        public void Add(Song track)
+        {
+            _playList.Add(track);
+        }
 
-        public void Remove(int songNumber) { PlayList.RemoveAt(songNumber); }
+        public void Remove(int songNumber)
+        {
+            _playList.RemoveAt(songNumber);
+        }
 
-        public void Play(int songNumber) { PlayList[songNumber].Play(); }
+        public void Play(int songNumber)
+        {
+            _playList[songNumber].Play();
+        }
 
         public void PlaylistPlay()
         {
-            foreach (Song item in PlayList)
+            foreach (var item in _playList)
             {
                 Thread.Sleep(2000);
                 item.Play();

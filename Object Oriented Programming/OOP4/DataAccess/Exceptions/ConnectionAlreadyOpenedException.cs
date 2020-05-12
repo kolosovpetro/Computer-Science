@@ -1,25 +1,28 @@
-﻿
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
-[Serializable]
-
-public class ConnectionAlreadyOpenedException : Exception
+namespace DataAccess.Exceptions
 {
-    public ConnectionAlreadyOpenedException()
+    [Serializable]
+    public class ConnectionAlreadyOpenedException : Exception
     {
-    }
-    public ConnectionAlreadyOpenedException(string message)
-        : base(message)
-    {
-    }
-    public ConnectionAlreadyOpenedException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
+        public ConnectionAlreadyOpenedException()
+        {
+        }
 
-    public ConnectionAlreadyOpenedException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
+        public ConnectionAlreadyOpenedException(string message)
+            : base(message)
+        {
+        }
+
+        public ConnectionAlreadyOpenedException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        public ConnectionAlreadyOpenedException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 }

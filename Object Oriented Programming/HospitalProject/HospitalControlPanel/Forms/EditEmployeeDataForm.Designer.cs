@@ -262,7 +262,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 265);
             this.Controls.Add(this.groupBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditEmployeeDataForm";
@@ -270,31 +270,30 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox GMCField;
-        private System.Windows.Forms.TextBox PasswordField;
-        private System.Windows.Forms.TextBox UsernameField;
-        private System.Windows.Forms.TextBox SurnameField;
-        private System.Windows.Forms.TextBox NameField;
-        private System.Windows.Forms.Label GMCLabel;
-        private System.Windows.Forms.Label PasswordLabel;
-        private System.Windows.Forms.Label UsernameLabel;
-        private System.Windows.Forms.Label SurnameLabel;
-        private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Button ChangeGMCButton;
-        private System.Windows.Forms.Button ChangePasswordButton;
-        private System.Windows.Forms.Button ChangeUsernameButton;
-        private System.Windows.Forms.Button ChangeSurnameButton;
         private System.Windows.Forms.Button ChangeNameButton;
+        private System.Windows.Forms.Button ChangePasswordButton;
+        private System.Windows.Forms.Button ChangeSurnameButton;
+        private System.Windows.Forms.Button ChangeUsernameButton;
+        private System.Windows.Forms.Button DeleteCurrentEmployeeButton;
         private System.Windows.Forms.Label EmployeeNameLabel;
+        private System.Windows.Forms.TextBox GMCField;
+        private System.Windows.Forms.Label GMCLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox NameField;
+        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.TextBox PasswordField;
+        private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button SetShiftDay;
         private System.Windows.Forms.TextBox ShiftDayIndexField;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button DeleteCurrentEmployeeButton;
+        private System.Windows.Forms.TextBox SurnameField;
+        private System.Windows.Forms.Label SurnameLabel;
+        private System.Windows.Forms.TextBox UsernameField;
+        private System.Windows.Forms.Label UsernameLabel;
+
+        #endregion
     }
 }

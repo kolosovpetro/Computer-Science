@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task3
 {
-    class Rap : Song
+    internal class Rap : Song
     {
-        private string Genre;
+        private readonly string _genre;
 
-        public Rap(string newTrackName, string newArtist) :
-            base(newTrackName, newArtist)
-        { this.Genre = "Rap"; }
+        public Rap(string newTrackName, string newArtist) : base(newTrackName, newArtist)
+        {
+            _genre = "Rap";
+        }
 
         public override void Play()
         {
             base.Play();
-            Console.WriteLine($" of genre: {this.Genre} ");
+            Console.WriteLine($" of genre: {this._genre} ");
         }
     }
 }

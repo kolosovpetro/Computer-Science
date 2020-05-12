@@ -1,14 +1,13 @@
 ﻿using System.Threading;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace CarSimulator
 {
-    class Car
+    internal class Car
     {
-        private string make;
-        private string model;
-        private Engine engine;
+        private string _make;
+        private string _model;
+        private readonly Engine _engine;
 
         public Car(string newMake, string newModel, double newDisplacement, 
             double newAmountOfFuel, double newFuelTankCapacity) :
@@ -21,32 +20,32 @@ namespace CarSimulator
 
         public Car(string newMake, string newModel, Engine newEngine) // main constructor
         {
-            this.make = newMake;
-            this.model = newModel;
-            this.engine = newEngine;
+            _make = newMake;
+            _model = newModel;
+            _engine = newEngine;
         }
 
-        public void Go(double howManyKm, PictureBox pb1, Label RangePassed, Label FuelAvailable)
+        public void Go(double howManyKm, PictureBox pb1, Label rangePassed, Label fuelAvailable)
         {
             int tempRange = (int)howManyKm;
             int t = 0;
             while (true)
             {
-                this.engine.Work(FuelAvailable);
+                _engine.Work(fuelAvailable);
                 Thread.Sleep(100);
                 t++;
                 howManyKm--;
                 if (howManyKm == 0) break;
-                WinFormsAuxiliry.Animation(pb1);
-                WinFormsAuxiliry.ChangeLabelText(RangePassed, $"{t} km out of {tempRange}");
+                WinFormsAuxiliary.Animation(pb1);
+                WinFormsAuxiliary.ChangeLabelText(rangePassed, $"{t} km out of {tempRange}");
             }
 
-            WinFormsAuxiliry.ChangeLabelText(RangePassed, "Here I am");
+            WinFormsAuxiliary.ChangeLabelText(rangePassed, "Here I am");
         }
 
         public void Refuel(double fuelAmount)
         {
-            this.engine.Refuel(fuelAmount);
+            _engine.Refuel(fuelAmount);
         }
     }
 }

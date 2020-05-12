@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task3
 {
-    abstract class Song
+    internal abstract class Song
     {
-        protected string SongName { get; private set; }
-        protected string Artist { get; private set; }
+        private string SongName { get; }
+        private string Artist { get; }
 
-        public Song(string newSongName, string newArtist)
+        protected Song(string newSongName, string newArtist)
         {
-            this.SongName = newSongName;
-            this.Artist = newArtist;
+            SongName = newSongName;
+            Artist = newArtist;
         }
 
         public virtual void Play()
         {
-            Console.WriteLine($"Now plays: {this.SongName} - by {this.Artist}");
+            Console.WriteLine($"Now plays: {SongName} - by {Artist}");
         }
-
     }
 }

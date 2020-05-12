@@ -1,17 +1,11 @@
 ﻿using System;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Exceptions
 {
     public class EmployeeScheduleException : Exception
     {
-        public EmployeeScheduleException()
+        public EmployeeScheduleException(string message) : base(message)
         {
-
-        }
-
-        public EmployeeScheduleException(string Message) : base(Message)
-        {
-
         }
     }
 }

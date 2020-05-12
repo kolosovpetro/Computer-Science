@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-namespace DataAccess
+
+namespace DataAccess.Interfaces
 {
     public interface IDatabase
     {

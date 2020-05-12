@@ -3,11 +3,11 @@ using System;
 
 namespace MonteCarloMethod
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
-            Plan Tasks = new Plan();
+            var Tasks = new Plan();
             int TaskNumber = default;
 
             Console.WriteLine("To finish add Tasks, type END");
@@ -18,7 +18,7 @@ namespace MonteCarloMethod
                 try
                 {
                     Console.Write($"Task {TaskNumber} > ");
-                    string Input = Console.ReadLine();
+                    var Input = Console.ReadLine();
 
                     if (Input != null && Input.ToLower() == "end")
                     {

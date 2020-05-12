@@ -2,28 +2,27 @@
 
 namespace Client
 {
-    public class Person: IComparable
+    public class Person : IComparable
     {
-        public int IdNumber { get; }
-        public string FirstName { get; }
-        public string FamilyName { get; }
+        private int IdNumber { get; }
+        private string FirstName { get; }
+        private string FamilyName { get; }
 
         public Person(int newIdNumber, string newFirstName, string newFamilyName)
         {
-            this.IdNumber = newIdNumber;
-            this.FirstName = newFirstName;
-            this.FamilyName = newFamilyName;
+            IdNumber = newIdNumber;
+            FirstName = newFirstName;
+            FamilyName = newFamilyName;
         }
 
         public override string ToString()
         {
-            return this.IdNumber+". "+this.FirstName+" "+this.FamilyName;
+            return IdNumber + ". " + FirstName + " " + FamilyName;
         }
 
         public int CompareTo(object obj)
         {
             return IdNumber.CompareTo(obj);
-        }       
-
+        }
     }
 }

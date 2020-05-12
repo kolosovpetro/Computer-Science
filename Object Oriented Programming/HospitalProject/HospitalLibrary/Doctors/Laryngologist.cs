@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Doctors
 {
     [Serializable]
     public class Laryngologist : Doctor
     {
-        public Laryngologist(string Name, string Surname, string Id, string Username,
-            string Password, string GMC) :
-            base(Name, Surname, Id, Username, Password, GMC)
-        { }
+        public Laryngologist(string name, string surname, string id, string username, string password, string gmc) :
+            base(name, surname, id, username, password, gmc)
+        {
+        }
     }
 }

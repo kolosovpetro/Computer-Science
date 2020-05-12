@@ -35,16 +35,13 @@ namespace LinearEquationsSolver
 
             for (int i = 0; i < size; i++)
             {
-                if (arrayWithNulls[i] != null)
-                {
-                    arrayNoNulls[i] = arrayWithNulls[i];
-                }
+                arrayNoNulls[i] = arrayWithNulls[i];
             }
 
             return arrayNoNulls;
         }
 
-        public static string SetEquationForm(string[] entry)
+        private static string SetEquationForm(string[] entry)
         {
             int index = 1;
             string equation = null;

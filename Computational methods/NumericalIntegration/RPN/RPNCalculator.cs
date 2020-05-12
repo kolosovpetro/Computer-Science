@@ -2,13 +2,13 @@
 
 namespace NumericalIntegration.RPN
 {
-    internal class RpnCalculator
+    internal static class RpnCalculator
     {
         public static string InfixToPostfix(string infix)
         {
-            string output = "";
+            var output = "";
 
-            Stack<string> operators = new Stack<string>();
+            var operators = new Stack<string>();
 
             foreach (var item in infix.Split(' '))
             {
@@ -64,9 +64,9 @@ namespace NumericalIntegration.RPN
 
         public static string InfixToPostfix(string infix, double variable)
         {
-            string output = "";
+            var output = "";
 
-            Stack<string> operators = new Stack<string>();
+            var operators = new Stack<string>();
 
             foreach (var item in infix.Split(' '))
             {
@@ -125,7 +125,7 @@ namespace NumericalIntegration.RPN
 
         public static double PostfixEvaluator(string expression)
         {
-            Stack<double> operandStack = new Stack<double>();
+            var operandStack = new Stack<double>();
 
             foreach (var item in expression.Split(' '))
             {
@@ -136,9 +136,9 @@ namespace NumericalIntegration.RPN
 
                 else
                 {
-                    double op2 = operandStack.Pop();
-                    double op1 = operandStack.Pop();
-                    double output = Evaluate(op1, op2, item);
+                    var op2 = operandStack.Pop();
+                    var op1 = operandStack.Pop();
+                    var output = Evaluate(op1, op2, item);
                     operandStack.Push(output);
                 }
             }
@@ -146,35 +146,7 @@ namespace NumericalIntegration.RPN
             return operandStack.Pop();
         }
 
-        public static double PostfixEvaluator(string expression, double variable)
-        {
-            Stack<double> operandStack = new Stack<double>();
-
-            foreach (var item in expression.Split(' '))
-            {
-                if (double.TryParse(item, out double operand))
-                {
-                    operandStack.Push(operand);
-                }
-
-                if (item.ToLower() == "x")
-                {
-                    operandStack.Push(variable);
-                }
-
-                else
-                {
-                    double op2 = operandStack.Pop();
-                    double op1 = operandStack.Pop();
-                    double output = Evaluate(op1, op2, item);
-                    operandStack.Push(output);
-                }
-            }
-
-            return operandStack.Pop();
-        }
-
-        public static double Evaluate(double operand1, double operand2, string operation)
+        private static double Evaluate(double operand1, double operand2, string operation)
         {
             switch (operation)
             {
@@ -193,12 +165,12 @@ namespace NumericalIntegration.RPN
             }
         }
 
-        public static string Associativity(string op)
+        private static string Associativity(string op)
         {
             return op == "^" ? "right" : "left";
         }
 
-        public static int Precedence(string op)
+        private static int Precedence(string op)
         {
             switch (op)
             {

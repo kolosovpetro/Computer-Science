@@ -65,7 +65,7 @@ namespace DVDRentalStore.Controllers
                 .FirstOrDefault(x => (bool)x.Available && x.MovieId == id);
 
             if (availableCopy == null)
-                return NotFound($"There is no available copies of {movie.Title}");
+                return NotFound($"There is no available copies of {movie?.Title}");
 
             // pass movie instance to view
             ViewData["Movie"] = movie;

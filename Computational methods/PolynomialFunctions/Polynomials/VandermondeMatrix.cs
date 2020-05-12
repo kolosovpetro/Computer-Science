@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace PolynomialFunctions.Polynomials
 {
-    internal class VandermondeMatrix : IOrderable
+    internal class VandermondeMatrix
     {
-        public List<Point> Points { get; }
+        private List<Point> Points { get; }
         public int Order => Points.Count - 1;
         public double[][] AugmentedMatrix => GetAugmentedMatrix();
-        public double[] Solutions => GetSolutions();
 
         public VandermondeMatrix()
         {
@@ -27,33 +26,28 @@ namespace PolynomialFunctions.Polynomials
 
         private double[] GetAugmentedMatrixRow(Point p)
         {
-            int X = p.X;
-            int Y = p.Y;
-            int size = Order + 2;
-            double[] augmentedMatrixRow = new double[size];
+            var x = p.X;
+            var y = p.Y;
+            var size = Order + 2;
+            var augmentedMatrixRow = new double[size];
 
-            for (int i = 0; i < size; i++)
-                augmentedMatrixRow[i] = Math.Pow(X, size - 2 - i);
+            for (var i = 0; i < size; i++)
+                augmentedMatrixRow[i] = Math.Pow(x, size - 2 - i);
 
-            augmentedMatrixRow[size - 1] = Y;
+            augmentedMatrixRow[size - 1] = y;
+            
             return augmentedMatrixRow;
         }
 
         private double[][] GetAugmentedMatrix()
         {
-            int Size = Order + 1;
-            double[][] augmentedMatrix = new double[Size][];
+            var size = Order + 1;
+            var augmentedMatrix = new double[size][];
 
-            for (int i = 0; i < augmentedMatrix.Length; i++)
+            for (var i = 0; i < augmentedMatrix.Length; i++)
                 augmentedMatrix[i] = GetAugmentedMatrixRow(Points[i]);
 
             return augmentedMatrix;
-        }
-
-
-        private double[] GetSolutions()
-        {
-            return NumericalMethods.SolveLinearEquations(AugmentedMatrix);
         }
     }
 }

@@ -2,20 +2,20 @@
 
 namespace PolynomialFunctions.Polynomials
 {
-    internal class Auxiliary
+    internal static class Auxiliary
     {
         public static int InputOfTypeInt()
         {
-            string message = $"Enter the number of type integer: ";
+            const string message = "Enter the number of type integer: ";
             Console.WriteLine(message);
-            int UserInputInt;
+            int userInputInt;
 
-            while (!int.TryParse(Console.ReadLine(), out UserInputInt))
+            while (!int.TryParse(Console.ReadLine(), out userInputInt))
             {
                 Console.WriteLine("Ops, try again. " + message);
             }
 
-            return UserInputInt;
+            return userInputInt;
         }
     }
 }

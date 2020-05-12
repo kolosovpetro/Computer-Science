@@ -2,7 +2,7 @@
 
 namespace LinearEquationsSolver
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
@@ -49,8 +49,8 @@ namespace LinearEquationsSolver
                 }
 
                 Console.WriteLine("If you want to solve other system - press any key");
-                    Console.WriteLine("If you want to quite - press X");
-                
+                Console.WriteLine("If you want to quite - press X");
+
                 string exitOrNot = Console.ReadLine();
 
                 if (exitOrNot != null && exitOrNot.ToLower() == "x")
@@ -60,9 +60,6 @@ namespace LinearEquationsSolver
 
                 Console.Clear();
             }
-
         }
     }
 }
-
-

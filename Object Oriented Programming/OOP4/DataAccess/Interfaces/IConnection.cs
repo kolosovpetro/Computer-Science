@@ -1,5 +1,6 @@
 ﻿using System;
-namespace DataAccess
+
+namespace DataAccess.Interfaces
 {
     public interface IConnection: IDisposable
     {

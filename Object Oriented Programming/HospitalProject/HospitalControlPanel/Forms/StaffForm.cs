@@ -1,24 +1,25 @@
-﻿using HospitalLibrary;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using HospitalLibrary.Employee;
 
-namespace HospitalControlPanel
+namespace HospitalControlPanel.Forms
 {
     public partial class StaffForm : Form
     {
-        public LoginForm LoginForm { get; private set; }
+        private LoginForm LoginForm { get; }
         public StaffForm(LoginForm newLoginForm)
         {
             InitializeComponent();
             LoginForm = newLoginForm;
-            YourAccountLabel.Text = $"Welcome, {LoginForm.CurrentUser.Name}, {LoginForm.CurrentUser.Surname}. Current username: {LoginForm.CurrentUser.Username}. ";
+            YourAccountLabel.Text = $@"Welcome, {LoginForm.CurrentUser.Name}, {LoginForm.CurrentUser.Surname}. Current username: {LoginForm.CurrentUser.Username}. ";
         }
 
         private void UpdateEmpListButton_Click(object sender, EventArgs e)
         {
             EmployeesList.Clear();
-            EmployeeCount.Text = $"Current Employee Count: {LoginForm.NewHospital.Employees.Count}";
-            foreach (Employee employee in LoginForm.NewHospital.Employees)
+            EmployeeCount.Text = $@"Current Employee Count: {LoginForm.NewHospital.Employees.Count}";
+            
+            foreach (var employee in LoginForm.NewHospital.Employees)
             {
                 EmployeesList.AppendText("\n" + employee.EmployeeInfo());
             }

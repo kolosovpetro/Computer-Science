@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DataAccess.Exceptions;
+using DataAccess.Interfaces;
 
 
 namespace DataAccess
@@ -10,25 +8,31 @@ namespace DataAccess
 
     public struct PersonInfo
     {
-        public int ID;
-        public string firstName;
-        public string lastName;
+        private int _id;
+        private string _firstName;
+        private string _lastName;
+        
         public PersonInfo(int newId, string newFirstName, string newLastName)
         {
-            ID = newId;
-            firstName = newFirstName;
-            lastName = newLastName;
+            _id = newId;
+            _firstName = newFirstName;
+            _lastName = newLastName;
         }
     }
     public class Database: IDatabase
     {
-        protected string name;
+        private readonly string _name;
 
         public Database(string newName)
         {
-            this.name = newName;
+            _name = newName;
         }
 
+
+        public IConnection GetNewConnection(string userName, string password)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public List<Dictionary<string, object>> GetData(IConnection connection)
         {
@@ -39,30 +43,28 @@ namespace DataAccess
             {
                 throw new ConnectionClosedException();
             }
-            else
-            {
-                var persons = new Dictionary<string, object>();
 
-                for (int i = 0; i < 10; i++)
-                {
-                    persons.Add($"{i}", new PersonInfo(i, $"First_name_{i}", $"Last_name_{i}"));
-                }
-                outputData.Add(persons);
-                return outputData;
+            var persons = new Dictionary<string, object>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                persons.Add($"{i}", new PersonInfo(i, $"First_name_{i}", $"Last_name_{i}"));
             }
+            outputData.Add(persons);
+            return outputData;
         }
 
         
         public string GetDatabaseName()
         {
-            return this.name;
+            return _name;
         }
 
       
-        public IConnection GetNewConnection(string userName, string password)
+        public IConnection GetNewConnection(string userName, string password, Database db)
         {
-            Connection getNewConnecttion = new Connection(userName, password);
-            return getNewConnecttion;
+            var getNewConnection = new Connection(userName, password, db);
+            return getNewConnection;
         }
 
         

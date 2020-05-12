@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LinearEquationsSolver
 {
@@ -14,7 +13,7 @@ namespace LinearEquationsSolver
 
         private double[][] AugMatrix()
         {
-            int arraySize = _systemOfEquations.Count();
+            int arraySize = _systemOfEquations.Count;
             double[][] array = new double[arraySize][];
 
             for (int i = 0; i < array.Length; i++)
@@ -42,15 +41,6 @@ namespace LinearEquationsSolver
         private void SetAugMatrix()
         {
             _augmentedMatrix = AugMatrix();
-        }
-
-        public double[][] GetAugMatrix
-        {
-            get
-            {
-                SetAugMatrix();
-                return _augmentedMatrix;
-            }
         }
 
         public double[][] GetEliminatedMatrix
@@ -89,7 +79,7 @@ namespace LinearEquationsSolver
             SetAugMatrix();
             foreach (var item in _augmentedMatrix)
             {
-                Auxiliary.printArray(item);
+                Auxiliary.PrintArray(item);
                 Console.WriteLine();
             }
         }
@@ -115,7 +105,7 @@ namespace LinearEquationsSolver
             SetEliminatedMatrix();
             foreach (var item in _eliminatedMatrix)
             {
-                Auxiliary.printArray(item);
+                Auxiliary.PrintArray(item);
                 Console.WriteLine();
             }
         }

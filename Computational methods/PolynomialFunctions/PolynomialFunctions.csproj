@@ -63,11 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Polynomials\Auxiliary.cs" />
-    <Compile Include="Interfaces\IDerivative.cs" />
-    <Compile Include="Interfaces\IRoot.cs" />
-    <Compile Include="Interfaces\IOrderable.cs" />
-    <Compile Include="Interfaces\IPolynomialFormat.cs" />
-    <Compile Include="Interfaces\IValuable.cs" />
     <Compile Include="Polynomials\NumericalMethods.cs" />
     <Compile Include="Polynomials\Point.cs" />
     <Compile Include="Exceptions\PointFormattingException.cs" />

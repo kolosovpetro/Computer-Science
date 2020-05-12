@@ -1,17 +1,13 @@
 ﻿using System;
 
-namespace HospitalLibrary
+namespace HospitalLibrary.Administrators
 {
     [Serializable]
-    public class Administrator : Employee
+    public class Administrator : Employee.Employee
     {
-        public Hospital NewHospital { get; private set; }
-
-        public Administrator(string Name, string Surname, string Id, string Username, 
-            string Password) :
-            base(Name, Surname, Id, Username, Password)
-        { }
-
-
+        public Administrator(string name, string surname, string id, string username, string password) :
+            base(name, surname, id, username, password)
+        {
+        }
     }
 }
