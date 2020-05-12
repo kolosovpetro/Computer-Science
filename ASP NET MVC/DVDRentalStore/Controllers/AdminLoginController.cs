@@ -36,23 +36,46 @@ namespace DVDRentalStore.Controllers
             ViewData["Employee"] = employee;
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult ListOfClients()
         {
             var clients = _rentalContext.Clients.Select(x => x);
             return View(clients);
         }
-        
+
         [HttpGet]
         public IActionResult EditClient(int id)
         {
             var client = _rentalContext
-                .Clients
-                .FirstOrDefault(x => x.ClientId == id) 
+                             .Clients
+                             .FirstOrDefault(x => x.ClientId == id)
                          ?? throw new ArgumentNullException(nameof(id));
-            
+
             return View(client);
+        }
+
+        [HttpPost]
+        public IActionResult EditClient(int id, IFormCollection collection)
+        {
+            var client = _rentalContext.Clients.FirstOrDefault(x => x.ClientId == id);
+            var newFirstName = collection["FirstName"].ToString();
+            var newLastName = collection["LastName"].ToString();
+            var newClientId = int.Parse(collection["ClientId"]);
+            var newBirthDay = Convert.ToDateTime(collection["Birthday"]);
+
+            if (client != null)
+            {
+                client.FirstName = newFirstName;
+                client.LastName = newLastName;
+                client.ClientId = newClientId;
+                client.Birthday = newBirthDay;
+                _rentalContext.Update(client);
+            }
+
+            _rentalContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
