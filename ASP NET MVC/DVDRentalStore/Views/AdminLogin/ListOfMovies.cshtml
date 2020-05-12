@@ -6,6 +6,7 @@
 }
 
 <h2>List of Movies</h2>
+@Html.ActionLink("Add new movie", "AddMovie", "AdminLogin")
 <ul>
     @foreach (var item in Model)
     {
@@ -16,7 +17,8 @@
             @Html.DisplayFor(modelItem => item.Price),
             @Html.DisplayFor(modelItem => item.AgeRestriction),
             @Html.DisplayFor(modelItem => item.AgeRestriction),
-            @Html.ActionLink("Edit movie", "EditMovie", new {id = item.MovieId})
+            @Html.ActionLink("Edit movie", "EditMovie", new { id = item.MovieId }) |
+            @Html.ActionLink("Delete movie", "DeleteMovie", new { id = item.MovieId })
         </li>
     }
 </ul>

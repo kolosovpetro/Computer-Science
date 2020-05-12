@@ -24,7 +24,7 @@ namespace DVDRentalStore
             services.AddMvc();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); //We set Time here 
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // We set Time here 
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -55,7 +55,7 @@ namespace DVDRentalStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Movies}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -128,6 +128,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult RentHistory()
         {
             var userId = (int)HttpContext.Session.GetInt32("userId");
+
             var client = _rentalDb.Clients.FirstOrDefault(x => x.ClientId == userId);
             var clientHistory = (from r in _rentalDb.Rentals
                                  join c in _rentalDb.Clients
@@ -146,7 +147,7 @@ namespace DVDRentalStore.Controllers
                                      c.ClientId
                                  }).Where(x => x.ClientId == userId).Distinct();
 
-            List<MoviesModel> clientMovies = new List<MoviesModel>();
+            var clientMovies = new List<MoviesModel>();
 
             foreach (var element in clientHistory)
             {

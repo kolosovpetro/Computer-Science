@@ -1,11 +1,11 @@
 ﻿@model DVDRentalStore.Models.MoviesModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "DeleteMovie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>DeleteMovie</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -44,7 +44,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="DeleteMovie">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
