@@ -71,9 +71,46 @@ namespace DVDRentalStore.Controllers
                 client.ClientId = newClientId;
                 client.Birthday = newBirthDay;
                 _rentalContext.Update(client);
+                _rentalContext.SaveChanges();
             }
 
-            _rentalContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult ListOfMovies()
+        {
+            var movies = _rentalContext.Movies.Select(x => x);
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult EditMovie(int id)
+        {
+            var movie = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == id);
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult EditMovie(int id, IFormCollection collection)
+        {
+            var movie = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == id);
+            var newMovieId = int.Parse(collection["MovieId"]);
+            var newTitle = collection["Title"].ToString();
+            var newYear = int.Parse(collection["Year"]);
+            var newPrice = float.Parse(collection["Price"]);
+            var newAgeRestriction = int.Parse(collection["AgeRestriction"]);
+
+            if (movie != null)
+            {
+                movie.MovieId = newMovieId;
+                movie.Title = newTitle;
+                movie.Year = newYear;
+                movie.Price = newPrice;
+                movie.AgeRestriction = newAgeRestriction;
+                _rentalContext.Update(movie);
+                _rentalContext.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }

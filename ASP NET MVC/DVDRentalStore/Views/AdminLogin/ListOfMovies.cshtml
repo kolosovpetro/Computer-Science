@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DVDRentalStore.Models.MoviesModel>
+
+@{
+    ViewBag.Title = "List Of Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Movies</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.DisplayFor(modelItem => item.MovieId),
+            @Html.DisplayFor(modelItem => item.Title),
+            @Html.DisplayFor(modelItem => item.Year),
+            @Html.DisplayFor(modelItem => item.Price),
+            @Html.DisplayFor(modelItem => item.AgeRestriction),
+            @Html.DisplayFor(modelItem => item.AgeRestriction),
+            @Html.ActionLink("Edit movie", "EditMovie", new {id = item.MovieId})
+        </li>
+    }
+</ul>
