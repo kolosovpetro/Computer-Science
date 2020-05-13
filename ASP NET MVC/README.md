@@ -19,6 +19,12 @@
 - Implement administator login form
 - Implement administator panel with functionlities: add movie, edit movie, delete movie, modify client data
 
+### To do
+
+- Fix view User's login form
+- Fix view Admin Login form
+- Fix view Edit Client
+- Fix view List of clients
 
 ### Notes
 

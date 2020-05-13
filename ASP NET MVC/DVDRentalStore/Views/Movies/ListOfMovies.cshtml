@@ -1,19 +1,14 @@
 ﻿@model IEnumerable<DVDRentalStore.Models.MoviesModel>
 
 @{
-    ViewData["Title"] = "Rent";
+    ViewData["Title"] = "Movies";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
-    var client = ViewData["Client"] as DVDRentalStore.Models.ClientsModel;
-}
-
-<h1>Rent</h1>
-<p>Choose the movie to rent, @client?.FirstName @client?.LastName</p>
+<h1>List of movies in Rental Store</h1>
 
 <p>
-    <a asp-action="Rent">Create New</a>
+    <a asp-action="AddMovie">Add new Movie</a>
 </p>
 <table class="table">
     <thead>
@@ -56,9 +51,8 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Order Movie", "OrderId", new { id = item.MovieId }) @*|*@
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    @Html.ActionLink("Edit", "EditMovie", new { id = item.MovieId }) |
+                    @Html.ActionLink("Delete", "DeleteMovie", new { id = item.MovieId })
                 </td>
             </tr>
         }
