@@ -13,6 +13,8 @@ namespace DVDRentalStore.Infrastructure
         // Marks an entity to be removed
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
+
+        void Delete(IEnumerable<T> objects);
         // Get an entity by int id
         T GetById(int id);
         // Get an entity using delegate

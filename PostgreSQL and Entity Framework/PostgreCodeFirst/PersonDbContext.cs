@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using System.Data.Entity.Migrations;
 
 namespace PostgreCodeFirst
 {
@@ -7,14 +7,11 @@ namespace PostgreCodeFirst
     {
         public DbSet<Person> Persons { get; set; }
 
-        public PersonDbContext()
-        {
-            Database.EnsureCreated();
-        }
+        private DbMigrationsConfiguration Configuration { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["PersonsDb"].ConnectionString);
+            optionsBuilder.UseNpgsql(@"Server=localhost;Username=postgres;Password=postgres;Database=PersonCodeFirst2;");
         }
     }
 }

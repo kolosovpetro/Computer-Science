@@ -12,7 +12,7 @@ namespace DVDRentalStore.Infrastructure
         #region Properties
 
         private RentalContext _rentalContext;    // database context
-        private readonly DbSet<T> _dbSet;        // set of T objects in Db
+        public readonly DbSet<T> DbSet;        // set of T objects in Db
 
         protected IDbFactory DbFactory
         {
@@ -26,52 +26,56 @@ namespace DVDRentalStore.Infrastructure
         public RepositoryBase(IDbFactory dbFactory)
         {
             DbFactory = dbFactory;
-            _dbSet = DbContext.Set<T>();
+            DbSet = DbContext.Set<T>();
         }
 
 
         #region Implementations
         public virtual void Add(T entity)
         {
-            _dbSet.Add(entity);
+            DbSet.Add(entity);
         }
 
         public virtual void Update(T entity)
         {
-            _dbSet.Attach(entity);
+            DbSet.Attach(entity);
             _rentalContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
         {
-            _dbSet.Remove(entity);
+            DbSet.Remove(entity);
         }
 
         public virtual void Delete(Expression<Func<T, bool>> @where)
         {
-            var objects = _dbSet.Where(where).AsEnumerable();
-            foreach (var obj in objects)
-                _dbSet.Remove(obj);
+            var objects = DbSet.Where(where).AsEnumerable();
+            DbSet.RemoveRange(objects);
+        }
+
+        public void Delete(IEnumerable<T> objects)
+        {
+            DbSet.RemoveRange(objects);
         }
 
         public virtual T GetById(int id)
         {
-            return _dbSet.Find(id);
+            return DbSet.Find(id);
         }
 
         public virtual T Get(Expression<Func<T, bool>> @where)
         {
-            return _dbSet.Where(where).FirstOrDefault();
+            return DbSet.Where(where).FirstOrDefault();
         }
 
         public virtual IEnumerable<T> GetAll()
         {
-            return _dbSet.ToList();
+            return DbSet.ToList();
         }
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> @where)
         {
-            return _dbSet.Where(where).ToList();
+            return DbSet.Where(where).ToList();
         }
 
         public void Save()

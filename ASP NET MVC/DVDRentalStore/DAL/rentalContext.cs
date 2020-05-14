@@ -55,6 +55,7 @@ namespace DVDRentalStore.DAL
                 entity.Property(e => e.LastName)
                     .HasColumnName("last_name")
                     .HasColumnType("character varying");
+
             });
 
             modelBuilder.Entity<ClientsModel>(entity =>
@@ -173,13 +174,13 @@ namespace DVDRentalStore.DAL
                 entity.HasOne(d => d.Client)
                     .WithMany(p => p.Rentals)
                     .HasForeignKey(d => d.ClientId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("rentals_client_id_fkey");
 
                 entity.HasOne(d => d.Copy)
                     .WithMany(p => p.Rentals)
                     .HasForeignKey(d => d.CopyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("rentals_copy_id_fkey");
             });
 
@@ -197,13 +198,13 @@ namespace DVDRentalStore.DAL
                 entity.HasOne(d => d.Actor)
                     .WithMany(p => p.Starring)
                     .HasForeignKey(d => d.ActorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("starring_actor_id_fkey");
 
                 entity.HasOne(d => d.Movie)
                     .WithMany(p => p.Starring)
                     .HasForeignKey(d => d.MovieId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("starring_movie_id_fkey");
             });
 

@@ -12,6 +12,7 @@ namespace DVDRentalStore.Controllers
         private readonly IRepository<CopiesModel> _copiesRepository;
         private readonly IRepository<RentalsModel> _rentalsRepository;
         private readonly IRepository<StarringModel> _starringRepository;
+        private readonly IRepository<ActorsModel> _actorsRepository;
 
         public MoviesController()
         {
@@ -20,6 +21,7 @@ namespace DVDRentalStore.Controllers
             _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
             _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
             _starringRepository = new RepositoryBase<StarringModel>(dbFactory);
+            _actorsRepository = new RepositoryBase<ActorsModel>(dbFactory);
         }
 
         [HttpGet]
@@ -71,31 +73,42 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult DeleteMovie()
         {
-            var id = (int)HttpContext.Session.GetInt32("movieId");  // movie id
+            var movieId = (int)HttpContext.Session.GetInt32("movieId");  // movie id
 
-            // get all copies id's by movie id
-            var copiesById = _copiesRepository
-                .GetMany(x => x.MovieId == id)
-                .Select(x => x.CopyId)
-                .ToArray();
+            // this is cannot be done since db-first migrations are not allowed
 
-            // delete of all rentals with copies by movie id
-            _rentalsRepository.Delete(x => copiesById.Contains(x.CopyId));
+            // 1 - starring select obj where obj.movieId == id
+            var starring = _starringRepository
+                .GetMany(x => x.MovieId == movieId).ToArray();
 
-            // delete all copies with: movie id == id
-            _copiesRepository.Delete(x => x.MovieId == id);
+            // 2 - array of actor id's in 1
+            var starringIndexes = starring.Select(x => x.ActorId).ToArray();
 
-            // delete all starring by movie id
-            _starringRepository.Delete(x => x.MovieId == id);
+            // 3 delete in actors obj such that obj.actor id IN 2
+            _actorsRepository.Delete(x => starringIndexes.Contains(x.ActorId));
 
-            // get all movies with id: x => x.MovieId == movieId
-            var movieById = _moviesRepository.GetById(id);
+            // 4 delete in starring obj such that obj IN 1
+            _starringRepository.Delete(starring);
 
-            // delete all movies by id
-            _moviesRepository.Delete(movieById);
+            // 5 select from copies obj such that obj.movie id == movie id
+            var copies = _copiesRepository.GetMany(x => x.MovieId == movieId);
 
-            // save changes
+            // 6 rentals remove obj such that obj.copyId IN 5
+            _rentalsRepository.Delete(x => copies.Select(t => t.CopyId).Contains(x.CopyId));
+
+            // 7 copies remove obj such that obj IN 5
+            _copiesRepository.Delete(x => copies.Contains(x));
+
+            // 8 remove movie by movie id
+            _moviesRepository.Delete(x => x.MovieId == movieId);
+
+            // 9 save changes to databases
             _moviesRepository.Save();
+            _starringRepository.Save();
+            _actorsRepository.Save();
+            _copiesRepository.Save();
+            _rentalsRepository.Save();
+
 
             // redirect to admin login from
             return RedirectToAction("Index", "AdminLogin");
