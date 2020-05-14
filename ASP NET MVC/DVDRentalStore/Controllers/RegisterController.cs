@@ -9,7 +9,7 @@ namespace DVDRentalStore.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly rentalContext _rentalContext = new rentalContext();
+        private readonly RentalContext _rentalContext = new RentalContext();
 
         [HttpGet]
         public IActionResult Index()

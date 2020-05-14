@@ -25,6 +25,7 @@
 - Fix view Admin Login form
 - Fix view Edit Client
 - Fix view List of clients
+- Implement all controllers with repository pattern
 
 ### Notes
 

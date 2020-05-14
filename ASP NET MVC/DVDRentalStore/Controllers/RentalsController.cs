@@ -10,7 +10,7 @@ namespace DVDRentalStore.Controllers
 {
     public class RentalsController : Controller
     {
-        private readonly rentalContext _rentalContext = new rentalContext();
+        private readonly RentalContext _rentalContext = new RentalContext();
 
         [HttpGet]
         public IActionResult Rent()

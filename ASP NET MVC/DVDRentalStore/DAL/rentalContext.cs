@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DVDRentalStore.DAL
 {
-    public partial class rentalContext : DbContext
+    public partial class RentalContext : DbContext
     {
-        public rentalContext()
+        public RentalContext()
         {
         }
 
-        public rentalContext(DbContextOptions<rentalContext> options)
+        public RentalContext(DbContextOptions<RentalContext> options)
             : base(options)
         {
         }

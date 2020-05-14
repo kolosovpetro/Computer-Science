@@ -8,7 +8,7 @@ namespace DVDRentalStore.Controllers
     public class UserLoginController : Controller
     {
         // database context
-        private readonly rentalContext _rentalDb = new rentalContext();
+        private readonly RentalContext _rentalDb = new RentalContext();
 
         [HttpGet]
         public IActionResult Index()

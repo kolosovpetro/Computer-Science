@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using DVDRentalStore.DAL;
+﻿using DVDRentalStore.Infrastructure;
+using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +7,13 @@ namespace DVDRentalStore.Controllers
 {
     public class AdminLoginController : Controller
     {
-        private readonly rentalContext _rentalContext = new rentalContext();
+        private readonly IRepository<EmployeesModel> _employeesRepository;
+
+        public AdminLoginController()
+        {
+            IDbFactory dbFactory = new DbFactory();
+            _employeesRepository = new RepositoryBase<EmployeesModel>(dbFactory);
+        }
 
         [HttpGet]
         public IActionResult Index()
@@ -18,10 +24,10 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            var adminLogin = collection["FirstName"].ToString();
-            var adminPassword = collection["LastName"].ToString();
-            var employee = _rentalContext.Employees
-                .FirstOrDefault(x => x.FirstName == adminLogin && x.LastName == adminPassword);
+            var username = collection["FirstName"].ToString();
+            var password = collection["LastName"].ToString();
+            var employee = _employeesRepository
+                .Get(x => x.FirstName == username && x.LastName == password);
 
             if (employee == null) return NotFound("There is no such employee");
             var employeeId = employee.EmployeeId;
@@ -31,8 +37,7 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult AdminDashboard(int id)
         {
-            var employee = _rentalContext.Employees
-                .FirstOrDefault(x => x.EmployeeId == id);
+            var employee = _employeesRepository.Get(x => x.EmployeeId == id);
             return View(employee);
         }
 
