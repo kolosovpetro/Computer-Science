@@ -1,6 +1,5 @@
-﻿using System;
-using System.Linq;
-using DVDRentalStore.DAL;
+﻿using System.Linq;
+using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,41 +8,53 @@ namespace DVDRentalStore.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly RentalContext _rentalContext = new RentalContext();
+        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly IRepository<CopiesModel> _copiesRepository;
+        private readonly IRepository<RentalsModel> _rentalsRepository;
+        private readonly IRepository<StarringModel> _starringRepository;
+
+        public MoviesController()
+        {
+            IDbFactory dbFactory = new DbFactory();
+            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
+            _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
+            _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
+            _starringRepository = new RepositoryBase<StarringModel>(dbFactory);
+        }
 
         [HttpGet]
         public IActionResult ListOfMovies()
         {
-            var movies = _rentalContext.Movies.Select(x => x);
+            var movies = _moviesRepository.GetAll();
             return View(movies);
         }
 
         [HttpGet]
         public IActionResult EditMovie(int id)
         {
-            var movie = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == id);
+            var movie = _moviesRepository.GetById(id);
             return View(movie);
         }
 
         [HttpPost]
         public IActionResult EditMovie(int id, IFormCollection collection)
         {
-            var movie = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == id);
-            var newMovieId = int.Parse(collection["MovieId"]);
-            var newTitle = collection["Title"].ToString();
-            var newYear = int.Parse(collection["Year"]);
-            var newPrice = float.Parse(collection["Price"]);
-            var newAgeRestriction = int.Parse(collection["AgeRestriction"]);
+            var movie = _moviesRepository.GetById(id);
+            var movieId = int.Parse(collection["MovieId"]);
+            var title = collection["Title"].ToString();
+            var year = int.Parse(collection["Year"]);
+            var price = float.Parse(collection["Price"]);
+            var ageRestriction = int.Parse(collection["AgeRestriction"]);
 
             if (movie != null)
             {
-                movie.MovieId = newMovieId;
-                movie.Title = newTitle;
-                movie.Year = newYear;
-                movie.Price = newPrice;
-                movie.AgeRestriction = newAgeRestriction;
-                _rentalContext.Update(movie);
-                _rentalContext.SaveChanges();
+                movie.MovieId = movieId;
+                movie.Title = title;
+                movie.Year = year;
+                movie.Price = price;
+                movie.AgeRestriction = ageRestriction;
+                _moviesRepository.Update(movie);
+                _moviesRepository.Save();
             }
 
             return RedirectToAction("Index", "AdminLogin");
@@ -52,8 +63,7 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult DeleteMovie(int id)
         {
-            var movie = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == id)
-                        ?? throw new ArgumentNullException(nameof(id));
+            var movie = _moviesRepository.GetById(id);
             HttpContext.Session.SetInt32("movieId", id);
             return View(movie);
         }
@@ -61,42 +71,31 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult DeleteMovie()
         {
-            var movieId = HttpContext.Session.GetInt32("movieId");
+            var id = (int)HttpContext.Session.GetInt32("movieId");  // movie id
 
-            // get all copies by movie id
-            var copiesByMovieId = _rentalContext.Copies
-                .Where(x => x.MovieId == movieId)
-                .ToArray();
-
-            var copiesIndexes = copiesByMovieId.Select(x => x.CopyId);
-
-            // get rentals by copy id
-            var rentalsByCopyId = _rentalContext.Rentals
-                .Where(x => copiesIndexes.Contains(x.CopyId))
+            // get all copies id's by movie id
+            var copiesById = _copiesRepository
+                .GetMany(x => x.MovieId == id)
+                .Select(x => x.CopyId)
                 .ToArray();
 
             // delete of all rentals with copies by movie id
-            _rentalContext.Rentals.RemoveRange(rentalsByCopyId);
+            _rentalsRepository.Delete(x => copiesById.Contains(x.CopyId));
 
-            // delete all copies with movie id == id
-            _rentalContext.Copies.RemoveRange(copiesByMovieId);
-
-            // get all starring by movie id
-            var starringByMovieId = _rentalContext.Starring
-                .Where(x => x.MovieId == movieId)
-                .ToArray();
+            // delete all copies with: movie id == id
+            _copiesRepository.Delete(x => x.MovieId == id);
 
             // delete all starring by movie id
-            _rentalContext.Starring.RemoveRange(starringByMovieId);
+            _starringRepository.Delete(x => x.MovieId == id);
 
-            // get all movies with id
-            var movieById = _rentalContext.Movies.FirstOrDefault(x => x.MovieId == movieId);
+            // get all movies with id: x => x.MovieId == movieId
+            var movieById = _moviesRepository.GetById(id);
 
             // delete all movies by id
-            _rentalContext.Movies.Remove(movieById ?? throw new NullReferenceException());
+            _moviesRepository.Delete(movieById);
 
             // save changes
-            _rentalContext.SaveChanges();
+            _moviesRepository.Save();
 
             // redirect to admin login from
             return RedirectToAction("Index", "AdminLogin");
@@ -112,29 +111,29 @@ namespace DVDRentalStore.Controllers
         public IActionResult AddMovie(IFormCollection collection)
         {
             // movie id is calculated from database
-            var movieId = _rentalContext.Movies.Select(x => x.MovieId).Max() + 1;
+            var id = _moviesRepository.GetAll().Max(x => x.MovieId) + 1;
 
             // get movie data from form collection
-            var movieTitle = collection["Title"].ToString();
-            var movieYear = int.Parse(collection["Year"]);
-            var moviePrice = float.Parse(collection["Price"]);
-            var movieAgeRestriction = int.Parse(collection["AgeRestriction"]);
+            var title = collection["Title"].ToString();
+            var year = int.Parse(collection["Year"]);
+            var price = float.Parse(collection["Price"]);
+            var ageRestriction = int.Parse(collection["AgeRestriction"]);
 
             // create new movie instance
-            var newMovie = new MoviesModel
+            var movie = new MoviesModel
             {
-                Title = movieTitle,
-                MovieId = movieId,
-                Year = movieYear,
-                AgeRestriction = movieAgeRestriction,
-                Price = moviePrice
+                Title = title,
+                MovieId = id,
+                Year = year,
+                AgeRestriction = ageRestriction,
+                Price = price
             };
 
             // add an instance of new movie to database
-            _rentalContext.Movies.Add(newMovie);
+            _moviesRepository.Add(movie);
 
             // save changes in database
-            _rentalContext.SaveChanges();
+            _moviesRepository.Save();
 
             // redirect to index
             return RedirectToAction("Index", "AdminLogin");
