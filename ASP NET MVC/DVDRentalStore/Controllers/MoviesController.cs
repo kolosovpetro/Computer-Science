@@ -73,41 +73,27 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult DeleteMovie()
         {
-            var movieId = (int)HttpContext.Session.GetInt32("movieId");  // movie id
+            // 1 - movie id
+            var movieId = HttpContext.Session.GetInt32("movieId");
 
-            // this is cannot be done since db-first migrations are not allowed
-
-            // 1 - starring select obj where obj.movieId == id
-            var starring = _starringRepository
-                .GetMany(x => x.MovieId == movieId).ToArray();
-
-            // 2 - array of actor id's in 1
-            var starringIndexes = starring.Select(x => x.ActorId).ToArray();
-
-            // 3 delete in actors obj such that obj.actor id IN 2
-            _actorsRepository.Delete(x => starringIndexes.Contains(x.ActorId));
-
-            // 4 delete in starring obj such that obj IN 1
-            _starringRepository.Delete(starring);
-
-            // 5 select from copies obj such that obj.movie id == movie id
+            // 6 get list of copies such that movie id == id
             var copies = _copiesRepository.GetMany(x => x.MovieId == movieId);
 
-            // 6 rentals remove obj such that obj.copyId IN 5
-            _rentalsRepository.Delete(x => copies.Select(t => t.CopyId).Contains(x.CopyId));
+            // 7 get rentals from 6
+            var rentals = _rentalsRepository
+                .GetMany(x => copies.Select(t => t.CopyId).Contains(x.CopyId));
 
-            // 7 copies remove obj such that obj IN 5
-            _copiesRepository.Delete(x => copies.Contains(x));
-
-            // 8 remove movie by movie id
-            _moviesRepository.Delete(x => x.MovieId == movieId);
-
-            // 9 save changes to databases
-            _moviesRepository.Save();
-            _starringRepository.Save();
-            _actorsRepository.Save();
-            _copiesRepository.Save();
+            // 8 delete from rentals set of rentals 7
+            _rentalsRepository.Delete(rentals);
             _rentalsRepository.Save();
+
+            // 9 delete from copies set of copies 6
+            _copiesRepository.Delete(copies);
+            _copiesRepository.Save();
+
+            // 10 delete movie by id == id
+            _moviesRepository.Delete(x => x.MovieId == movieId);
+            _moviesRepository.Save();
 
 
             // redirect to admin login from

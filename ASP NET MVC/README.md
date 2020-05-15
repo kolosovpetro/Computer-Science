@@ -28,6 +28,10 @@
 - Implement all controllers with repository pattern
 - Work on routing
 
+### Migration command
+
+Enable-Migrations -ProjectName DVDRentalStore -ContextTypeName DVDRentalStore.DAL.RentalContext -Force
+
 ### Notes
 
 - Libraries for Reverse engineering of Postgres DB:

@@ -27,7 +27,7 @@ namespace DVDRentalStore.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["Rental"].ConnectionString);
+                optionsBuilder.UseNpgsql("Server=localhost;User Id=postgres;Password=postgres;Database=rental_cascade;");
             }
         }
 

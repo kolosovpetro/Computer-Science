@@ -10,17 +10,20 @@ namespace DVDRentalStore.Controllers
     public class ClientsController : Controller
     {
         private readonly IRepository<ClientsModel> _clientsRepository;
+        private readonly IRepository<RentalsModel> _rentalsRepository;
 
         public ClientsController()
         {
             IDbFactory dbFactory = new DbFactory();
             _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
+            _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
         }
 
         [HttpGet]
         public IActionResult ListOfClients()
         {
-            var clients = _clientsRepository.GetAll();
+            var clients = _clientsRepository.GetAll()
+                .OrderBy(x => x.ClientId);
             return View(clients);
         }
 
@@ -90,5 +93,34 @@ namespace DVDRentalStore.Controllers
             // redirect to index
             return RedirectToAction("Index", "AdminLogin");
         }
+
+        [HttpGet]
+        public IActionResult DeleteClient(int id)
+        {
+            var client = _clientsRepository.GetById(id);
+            HttpContext.Session.SetInt32("clientId", id);
+            return View(client);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteClient()
+        {
+            var clientId = HttpContext.Session.GetInt32("clientId");
+
+            // delete from rentals history
+            _rentalsRepository.Delete(x => x.ClientId == clientId);
+
+            // delete from clients
+            _clientsRepository.Delete(x => x.ClientId == clientId);
+
+            // save changes to databases
+            _rentalsRepository.Save();
+            _clientsRepository.Save();
+
+            // redirect to index
+            return RedirectToAction("Index", "AdminLogin");
+        }
+
+
     }
 }
