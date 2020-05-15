@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using DVDRentalStore.DAL;
+using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,13 @@ namespace DVDRentalStore.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly RentalContext _rentalContext = new RentalContext();
+        private readonly IRepository<ClientsModel> _clientsRepository;
+
+        public RegisterController()
+        {
+            IDbFactory dbFactory = new DbFactory();
+            _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
+        }
 
         [HttpGet]
         public IActionResult Index()
@@ -22,15 +28,13 @@ namespace DVDRentalStore.Controllers
         {
             // this is stupid approach to get id, however auto increment doesn't work
 
-            var clientId = _rentalContext.Clients.Select(x => x.ClientId).Max() + 1;
+            var clientId = _clientsRepository.GetAll().Max(x => x.ClientId) + 1;
 
             string firstName = collection["FirstName"];
             string lastName = collection["LastName"];
             DateTime? birthday = Convert.ToDateTime(collection["Birthday"]);
 
-
-
-            _rentalContext.Clients.Add(new ClientsModel
+            _clientsRepository.Add(new ClientsModel
             {
                 ClientId = clientId,
                 FirstName = firstName,
@@ -38,8 +42,7 @@ namespace DVDRentalStore.Controllers
                 Birthday = birthday
             });
 
-            _rentalContext.SaveChanges();
-
+            _clientsRepository.Save();
 
             return RedirectToAction("Success", "Register", new { id = clientId });
         }
@@ -47,9 +50,7 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult Success(int id)
         {
-            var client = _rentalContext.Clients.FirstOrDefault(x => x.ClientId == id)
-                         ?? throw new ArgumentNullException(nameof(id));
-
+            var client = _clientsRepository.GetById(id);
             return View(client);
         }
     }

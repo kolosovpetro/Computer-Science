@@ -11,8 +11,6 @@ namespace DVDRentalStore.Controllers
         private readonly IRepository<MoviesModel> _moviesRepository;
         private readonly IRepository<CopiesModel> _copiesRepository;
         private readonly IRepository<RentalsModel> _rentalsRepository;
-        private readonly IRepository<StarringModel> _starringRepository;
-        private readonly IRepository<ActorsModel> _actorsRepository;
 
         public MoviesController()
         {
@@ -20,8 +18,6 @@ namespace DVDRentalStore.Controllers
             _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
             _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
             _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
-            _starringRepository = new RepositoryBase<StarringModel>(dbFactory);
-            _actorsRepository = new RepositoryBase<ActorsModel>(dbFactory);
         }
 
         [HttpGet]

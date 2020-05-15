@@ -12,7 +12,7 @@ namespace DVDRentalStore.Infrastructure
         #region Properties
 
         private RentalContext _rentalContext;    // database context
-        public readonly DbSet<T> DbSet;        // set of T objects in Db
+        public readonly DbSet<T> DbSet;       // set of T objects in Db
 
         protected IDbFactory DbFactory
         {
