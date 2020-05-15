@@ -5,24 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DVDRentalStore.Controllers
 {
-    public class AdminLoginController : Controller
+    public class AdminSignInController : Controller
     {
         private readonly IRepository<EmployeesModel> _employeesRepository;
 
-        public AdminLoginController()
+        public AdminSignInController()
         {
             IDbFactory dbFactory = new DbFactory();
             _employeesRepository = new RepositoryBase<EmployeesModel>(dbFactory);
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult AdminSignIn()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(IFormCollection collection)
+        public IActionResult AdminSignIn(IFormCollection collection)
         {
             var username = collection["FirstName"].ToString();
             var password = collection["LastName"].ToString();
@@ -31,15 +31,7 @@ namespace DVDRentalStore.Controllers
 
             if (employee == null) return NotFound("There is no such employee");
             var employeeId = employee.EmployeeId;
-            return RedirectToAction("AdminDashboard", "AdminLogin", new { id = employeeId });
+            return RedirectToAction("AdminDashboard", "AdminSignIn", new { id = employeeId });
         }
-
-        [HttpGet]
-        public IActionResult AdminDashboard(int id)
-        {
-            var employee = _employeesRepository.Get(x => x.EmployeeId == id);
-            return View(employee);
-        }
-
     }
 }

@@ -9,80 +9,71 @@ namespace DVDRentalStore.Infrastructure
 {
     public class RepositoryBase<T> : IRepository<T> where T : class
     {
-        #region Properties
 
-        private RentalContext _rentalContext;    // database context
-        public readonly DbSet<T> DbSet;       // set of T objects in Db
+        private RentalContext _rentalContext;
+        private readonly DbSet<T> _dbSet;
 
-        protected IDbFactory DbFactory
-        {
-            get;
-        }
+        protected IDbFactory DbFactory { get; }
 
         protected RentalContext DbContext => _rentalContext ??= DbFactory.Init();
-
-        #endregion
 
         public RepositoryBase(IDbFactory dbFactory)
         {
             DbFactory = dbFactory;
-            DbSet = DbContext.Set<T>();
+            _dbSet = DbContext.Set<T>();
         }
 
 
-        #region Implementations
         public virtual void Add(T entity)
         {
-            DbSet.Add(entity);
+            _dbSet.Add(entity);
         }
 
         public virtual void Update(T entity)
         {
-            DbSet.Attach(entity);
+            _dbSet.Attach(entity);
             _rentalContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
         {
-            DbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public virtual void Delete(Expression<Func<T, bool>> @where)
         {
-            var objects = DbSet.Where(where).AsEnumerable();
-            DbSet.RemoveRange(objects);
+            var objects = _dbSet.Where(where).AsEnumerable();
+            _dbSet.RemoveRange(objects);
         }
 
         public void Delete(IEnumerable<T> objects)
         {
-            DbSet.RemoveRange(objects);
+            _dbSet.RemoveRange(objects);
         }
 
         public virtual T GetById(int id)
         {
-            return DbSet.Find(id);
+            return _dbSet.Find(id);
         }
 
         public virtual T Get(Expression<Func<T, bool>> @where)
         {
-            return DbSet.Where(where).FirstOrDefault();
+            return _dbSet.Where(where).FirstOrDefault();
         }
 
         public virtual IEnumerable<T> GetAll()
         {
-            return DbSet.ToList();
+            return _dbSet.ToList();
         }
 
         public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> @where)
         {
-            return DbSet.Where(where).ToList();
+            return _dbSet.Where(where).ToList();
         }
 
         public void Save()
         {
             _rentalContext.SaveChanges();
         }
-
-        #endregion
     }
 }
