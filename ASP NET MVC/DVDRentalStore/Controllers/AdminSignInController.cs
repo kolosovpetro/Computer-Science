@@ -31,7 +31,7 @@ namespace DVDRentalStore.Controllers
 
             if (employee == null) return NotFound("There is no such employee");
             var employeeId = employee.EmployeeId;
-            return RedirectToAction("AdminDashboard", "AdminSignIn", new { id = employeeId });
+            return RedirectToAction("AdminDashboard", "AdminDashboard", new { id = employeeId });
         }
     }
 }

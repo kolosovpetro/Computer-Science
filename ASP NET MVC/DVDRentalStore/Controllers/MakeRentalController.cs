@@ -25,31 +25,24 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult MakeRental(int id)
         {
-            // movie client want to order by movie id
-            var movie = _moviesRepository.GetById(id);
+            var movie = _moviesRepository.GetById(id);  // get movie by id
 
-            // check if there available copies of movie by movie id
             var availableCopy = _copiesRepository
-                .GetMany(x => (bool)x.Available && x.MovieId == id);
+                .Get(x => (bool)x.Available && x.MovieId == id);    // check available copy
 
             if (availableCopy == null)
                 return NotFound($"There is no available copies of {movie?.Title}");
 
-            // pass movie instance to view
-            ViewData["Movie"] = movie;
+            ViewData["Movie"] = movie;  // bring movie instance to view data
 
-            // get client id from session 
             // ReSharper disable once PossibleInvalidOperationException
-            var clientId = (int)HttpContext.Session.GetInt32("userId");
+            var clientId = (int)HttpContext.Session.GetInt32("userId");     // get users id from session
 
-            // get instance of client by id
-            var client = _clientsRepository.GetById(clientId);
+            var client = _clientsRepository.GetById(clientId);      // get instance of client
 
-            // set instance of client to view data of view
-            ViewData["Client"] = client;
+            ViewData["Client"] = client;    // set instance to view
 
-            // set client id for next session
-            HttpContext.Session.SetInt32("clientId", clientId);
+            HttpContext.Session.SetInt32("clientId", clientId);     // set client id for post
 
             return View();
         }
@@ -57,41 +50,32 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult MakeRental(int id, IFormCollection collection)
         {
-            // get available copy of movie by movie id
             var availableCopy = _copiesRepository
-                .Get(x => (bool)x.Available && x.MovieId == id);
+                .Get(x => (bool)x.Available && x.MovieId == id);    // check available copy
 
-            // get client id from session
             // ReSharper disable once PossibleInvalidOperationException
-            var clientId = (int)HttpContext.Session.GetInt32("clientId");
+            var clientId = (int)HttpContext.Session.GetInt32("clientId");   // get client id from session
 
-            // get date of rental
-            var dateOfRental = Convert.ToDateTime(collection["DateOfRental"]);
+            var dateOfRental = Convert.ToDateTime(collection["DateOfRental"]);  // get date of rental of form
 
-            // get date of return
-            var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);
+            var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);  // get date of return of form
 
-            // instance of new rental
             if (availableCopy != null)
             {
-                var newRental = new RentalsModel
+                // create new rental instance
+                var rental = new RentalsModel
                 {
                     ClientId = clientId,
                     CopyId = availableCopy.CopyId,
                     DateOfRental = dateOfRental,
                     DateOfReturn = dateOfReturn
-                };
+                };  
 
-                // add new rental to database
-                _rentalsRepository.Add(newRental);
-
-                // save changes in db
-                _rentalsRepository.Save();
+                _rentalsRepository.Add(rental);     // add new rental instance to database
+                _rentalsRepository.Save();          // save changes in database
             }
 
-            // redirect to user's dashboard
-            return RedirectToAction("UserDashboard", "UserLogin", new { id = clientId });
-
+            return RedirectToAction("UserDashboard", "UserDashboard", new { id = clientId });
         }
     }
 }

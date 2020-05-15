@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
@@ -30,25 +28,25 @@ namespace DVDRentalStore.Controllers
             // ReSharper disable once PossibleInvalidOperationException
             var clientId = (int)HttpContext.Session.GetInt32("userId");
 
-            // double primary key makes it necessary to access from dbFactory
-            var client = _dbFactory.Init().Clients.FirstOrDefault(x => x.ClientId == clientId);
+            var client = _dbFactory.Init().Clients
+                .FirstOrDefault(x => x.ClientId == clientId);   // we access this way since of 2-pkey
 
             var clientHistory = (from r in _rentalsRepository.GetAll()
-                join c in _clientsRepository.GetAll()
-                    on r.ClientId equals c.ClientId
-                join cop in _copiesRepository.GetAll()
-                    on r.CopyId equals cop.CopyId
-                join mov in _moviesRepository.GetAll()
-                    on cop.MovieId equals mov.MovieId
-                select new
-                {
-                    mov.Title,
-                    mov.Year,
-                    mov.AgeRestriction,
-                    mov.MovieId,
-                    mov.Price,
-                    c.ClientId
-                }).Where(x => x.ClientId == clientId).Distinct();
+                                 join c in _clientsRepository.GetAll()
+                                     on r.ClientId equals c.ClientId
+                                 join cop in _copiesRepository.GetAll()
+                                     on r.CopyId equals cop.CopyId
+                                 join mov in _moviesRepository.GetAll()
+                                     on cop.MovieId equals mov.MovieId
+                                 select new
+                                 {
+                                     mov.Title,
+                                     mov.Year,
+                                     mov.AgeRestriction,
+                                     mov.MovieId,
+                                     mov.Price,
+                                     c.ClientId
+                                 }).Where(x => x.ClientId == clientId).Distinct();
 
             var clientMovies = new List<MoviesModel>();
 
@@ -66,7 +64,7 @@ namespace DVDRentalStore.Controllers
 
             ViewData["Client"] = client;
 
-            return View(clientMovies);
+            return View(clientMovies.OrderBy(x => x.MovieId));
         }
     }
 }

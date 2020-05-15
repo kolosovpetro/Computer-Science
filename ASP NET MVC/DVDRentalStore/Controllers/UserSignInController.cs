@@ -38,7 +38,7 @@ namespace DVDRentalStore.Controllers
             if (user == null)
                 return NotFound("No such user");
 
-            return RedirectToAction("UserDashboard", "UserLogin", new { id = user.ClientId });
+            return RedirectToAction("UserDashboard", "UserDashboard", new { id = user.ClientId });
         }
     }
 }
