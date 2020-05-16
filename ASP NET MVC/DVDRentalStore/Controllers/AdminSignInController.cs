@@ -26,12 +26,15 @@ namespace DVDRentalStore.Controllers
         {
             var username = collection["FirstName"].ToString();
             var password = collection["LastName"].ToString();
-            var employee = _employeesRepository
+            var admin = _employeesRepository
                 .Get(x => x.FirstName == username && x.LastName == password);
 
-            if (employee == null) return NotFound("There is no such employee");
-            var employeeId = employee.EmployeeId;
-            return RedirectToAction("AdminDashboard", "AdminDashboard", new { id = employeeId });
+            if (admin == null) 
+                return NotFound("There is no such employee");
+
+            HttpContext.Session.SetInt32("adminId", admin.EmployeeId);
+
+            return RedirectToAction("AdminDashboard", "AdminDashboard");
         }
     }
 }

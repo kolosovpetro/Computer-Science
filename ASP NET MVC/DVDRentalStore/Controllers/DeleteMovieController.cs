@@ -49,7 +49,7 @@ namespace DVDRentalStore.Controllers
             _moviesRepository.Delete(x => x.MovieId == movieId);    // delete movie by movie id
             _moviesRepository.Save();
 
-            return RedirectToAction("AdminSignIn", "AdminSignIn");     // redirect to index
+            return RedirectToAction("AdminDashboard", "AdminDashboard");     // redirect to index
         }
     }
 }

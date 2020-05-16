@@ -9,12 +9,11 @@
 
 <h3>
     Are you sure you want to delete client
-    @Html.DisplayFor(item => Model.FirstName) 
-    @Html.DisplayFor(item => Model.LastName) 
+    @Html.DisplayFor(item => Model.FirstName)
+    @Html.DisplayFor(item => Model.LastName)?
 </h3>
+<hr />
 <div>
-    <h4>ClientsModel</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ClientId)
@@ -44,6 +43,6 @@
 
     <form asp-action="DeleteClient">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-controller="Home" asp-action="Index">Back to List</a>
+        <a asp-controller="AdminDashboard" asp-action="AdminDashboard">Cancel</a>
     </form>
 </div>

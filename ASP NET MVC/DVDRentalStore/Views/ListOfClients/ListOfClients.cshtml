@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Clients of DVD Rental Store</h1>
+<h1>Our Clients</h1>
 
 <p>
     <a asp-controller="AddClient" asp-action="AddClient">Add new Client</a>
@@ -45,10 +45,13 @@
                     @Html.DisplayFor(modelItem => item.Birthday)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditClient", new { id = item.ClientId }) |
-                    @Html.ActionLink("Delete", "DeleteClient", new { id = item.ClientId })
+                    @Html.ActionLink("Edit", "EditClient", "EditClient", new { id = item.ClientId }) |
+                    @Html.ActionLink("Delete", "DeleteClient", "DeleteClient", new { id = item.ClientId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<div>
+    @Html.ActionLink("To Dashboard", "AdminDashboard", "AdminDashboard")
+</div>

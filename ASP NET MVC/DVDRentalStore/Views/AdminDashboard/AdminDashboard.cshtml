@@ -1,16 +1,15 @@
-﻿@model DVDRentalStore.Models.EmployeesModel
-
-@{
+﻿@{
     ViewBag.Title = "Admin Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var admin = ViewData["Admin"] as EmployeesModel;
 }
 
 
 <h2>Administrator dashboard</h2>
 <p>
     Welcome,
-    @Html.DisplayFor(item => Model.FirstName)
-    @Html.DisplayFor(item => Model.LastName)
+    @admin?.FirstName
+    @admin?.LastName
 </p>
 <p>@Html.ActionLink("List of Clients", "ListOfClients", "ListOfClients")</p>
 <p>@Html.ActionLink("List of Movies", "ListOfMovies", "ListOfMovies")</p>

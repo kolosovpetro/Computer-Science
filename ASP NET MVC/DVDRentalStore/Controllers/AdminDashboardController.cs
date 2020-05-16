@@ -1,5 +1,6 @@
 ﻿using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DVDRentalStore.Controllers
@@ -15,10 +16,17 @@ namespace DVDRentalStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminDashboard(int id)
+        public IActionResult AdminDashboard()
         {
-            var employee = _employeesRepository.Get(x => x.EmployeeId == id);
-            return View(employee);
+            var adminId = HttpContext.Session.GetInt32("adminId");
+            var admin = _employeesRepository.Get(x => x.EmployeeId == adminId);
+
+            if (admin == null)
+                return NotFound("No such admin user or wrong attempt to connect");
+
+            ViewData["Admin"] = admin;
+            return View();
+
         }
     }
 }

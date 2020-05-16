@@ -3,14 +3,12 @@
 @{
     ViewData["Title"] = "Rent";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@{ 
     var client = ViewData["Client"] as DVDRentalStore.Models.ClientsModel;
 }
 
-<h1>Rent</h1>
-<p>Choose the movie to rent, @client?.FirstName @client?.LastName</p>
+
+<h1>Choose movie to rent</h1>
+<p>Account name: @client?.FirstName</p>
 
 <table class="table">
     <thead>
@@ -59,3 +57,6 @@
         }
     </tbody>
 </table>
+<div>
+    @Html.ActionLink("To Dashboard", "UserDashboard", "UserDashboard", new { id = client?.ClientId })
+</div>

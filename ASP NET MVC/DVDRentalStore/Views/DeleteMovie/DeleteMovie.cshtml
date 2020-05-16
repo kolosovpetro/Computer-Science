@@ -7,6 +7,7 @@
 
 
 <h3>Are you sure you want to delete movie @Html.DisplayFor(item => Model.Title) ?</h3>
+<hr />
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -43,6 +44,6 @@
 
     <form asp-action="DeleteMovie">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-controller="AdminSignIn" asp-action="AdminSignIn">Back to List</a>
+        <a asp-controller="AdminDashboard" asp-action="AdminDashboard">Cancel</a>
     </form>
 </div>
