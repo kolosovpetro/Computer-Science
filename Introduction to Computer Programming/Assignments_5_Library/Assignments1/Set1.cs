@@ -25,11 +25,11 @@ namespace Assignments1
             // (3) Fix the errors.
 
             // y = 0;
-            int y = 0;
+            const int y = 0;
 
             // int x = Console.ReadLine(); - surely won't compile without parsing string
             Console.WriteLine("Provide an integer: ");
-            var x = int.Parse(Console.ReadLine());
+            var x = int.Parse(Console.ReadLine() ?? string.Empty);
 
             // Console.WriteLine(x / y); - definitely causes division by zero exception
             Console.WriteLine("Area: ");
@@ -48,7 +48,7 @@ namespace Assignments1
 
             Console.WriteLine("Another conversion of pln to usd.");
             Console.WriteLine("Provide new amount to convert: ");
-            convertedValue = double.Parse(Console.ReadLine());      // may throw wrong input format exception
+            convertedValue = double.Parse(Console.ReadLine() ?? string.Empty);      // may throw wrong input format exception
             usdAmount = convertedValue / plnToUsdExchangeRate;      // convert the pln amount to usd
             Console.WriteLine($"Pln {convertedValue} to USD is {usdAmount} USD"); // write result to console
 
@@ -60,13 +60,13 @@ namespace Assignments1
             Console.WriteLine("Welcome to program to compute the value " +
                 "of a quadratic function y = ax2 + bx + c");
             Console.WriteLine("Provide coefficient a: ");
-            a = int.Parse(Console.ReadLine()); // may throw wrong input format exception
+            a = int.Parse(Console.ReadLine() ?? string.Empty); // may throw wrong input format exception
             Console.WriteLine("Provide coefficient b: ");
-            b = int.Parse(Console.ReadLine()); // may throw wrong input format exception
+            b = int.Parse(Console.ReadLine() ?? string.Empty); // may throw wrong input format exception
             Console.WriteLine("Provide coefficient c: ");
-            c = int.Parse(Console.ReadLine()); // may throw wrong input format exception
+            c = int.Parse(Console.ReadLine() ?? string.Empty); // may throw wrong input format exception
             Console.WriteLine("Provide value x: ");
-            x = int.Parse(Console.ReadLine()); // may throw wrong input format exception
+            x = int.Parse(Console.ReadLine() ?? string.Empty); // may throw wrong input format exception
             double res = a * Math.Pow(x, 2) + b * x + c;
             Console.WriteLine($"Result is: {res}");
 
@@ -74,7 +74,7 @@ namespace Assignments1
             // and output it as an integer.
 
             Console.WriteLine("Provide number to be floored: ");
-            double notFloored = double.Parse(Console.ReadLine());   // may throw wrong input format exception
+            double notFloored = double.Parse(Console.ReadLine() ?? string.Empty);   // may throw wrong input format exception
             int floored = (int)notFloored;                          // casting to int
             Console.WriteLine($"Result is: {floored}");
 

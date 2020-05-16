@@ -7,15 +7,14 @@ namespace Assignments3
     {
         NewGame = 1,
         About = 2,
-        Quit = 3,
-        Unassigned = 4
+        Quit = 3
     }
 
     public class Set3
     {
         public static void Execute()
         {
-            // When solving the exercises remember to make sure your program doesn’t crash 
+            // When solving the exercises remember to make sure your program doesn't crash 
             // regardless of user’s input.
 
             // Ask the user to give his first name, last name, street, house number, flat number, 

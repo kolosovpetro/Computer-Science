@@ -30,10 +30,10 @@ namespace Assignments5
             // Divide your tic-tac-toe game into functions and classes according to functionality 
             // (e.g., separate class form game mechanics and separate class for displaying).
 
-            Layout layout = new Layout();
-            GameEngine ge = new GameEngine();
+            var layout = new Layout();
+            var engine = new GameEngine();
 
-            while (ge.GetMainLoop())
+            while (engine.GetMainLoop())
             {
                 layout.PrintMainMenu();
                 layout.ChooseMenuOption(out string opt);
@@ -43,33 +43,33 @@ namespace Assignments5
                     switch (menuTerm)
                     {
                         case MainMenu.NewGame:
-                            for (int j = 0; j < ge.GetBoardArray().Length; j++)
+                            for (int j = 0; j < engine.GetBoardArray().Length; j++)
                             {
-                                layout.PrintBoard(ge.GetBoardArray());
-                                layout.PlayerMoveMessage(ge.GetCurrentSign());
+                                layout.PrintBoard(engine.GetBoardArray());
+                                layout.PlayerMoveMessage(engine.GetCurrentSign());
 
                                 int moveIndex;
 
-                                while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
+                                while (!engine.LegalMove(Console.ReadLine(), out moveIndex))
                                 {
-                                    layout.IllegalMoveNotice(ge.GetCurrentSign());
+                                    layout.IllegalMoveNotice(engine.GetCurrentSign());
                                 }
 
-                                ge.PerformMove(moveIndex);
+                                engine.PerformMove(moveIndex);
 
-                                if (ge.WinConditions())
+                                if (engine.WinConditions())
                                 {
                                     Console.Clear();
-                                    layout.PrintBoard(ge.GetBoardArray());
-                                    layout.WinnerMessage(ge.GetCurrentSign());
+                                    layout.PrintBoard(engine.GetBoardArray());
+                                    layout.WinnerMessage(engine.GetCurrentSign());
                                     Console.WriteLine("[Press Enter to return to Main menu...]");
                                     Console.ReadKey();
-                                    ge.Reset();
+                                    engine.Reset();
                                     Console.Clear();
                                     break;
                                 }
 
-                                ge.SignSwitch();
+                                engine.SignSwitch();
                                 Console.Clear();
                             }
 
@@ -89,8 +89,10 @@ namespace Assignments5
                             Console.Clear();
                             layout.QuiteMessage(out string q);        // question for main loop break
                             if (q.ToLower() == "y")
-                                ge.SetMainLoop();
+                                engine.SetMainLoop();
                             break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
             }
@@ -136,6 +138,9 @@ namespace Assignments5
 
         private static void Modify(ref int value)
         {
+            if (value <= 0) 
+                throw new ArgumentOutOfRangeException(nameof(value));
+
             value = 5;
         }
 

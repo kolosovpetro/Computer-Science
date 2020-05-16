@@ -16,8 +16,8 @@
 
         public void AddAfter(T data, INode<T> newNode)
         {
-            INode<T> current = SearchNode(data);
-            INode<T> next = current.Next;
+            var current = SearchNode(data);
+            var next = current.Next;
 
             if (Last.Data.Equals(current.Data))
             {

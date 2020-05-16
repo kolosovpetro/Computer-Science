@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Assignments5
+﻿namespace Assignments5
 {
-    public struct Contact
+    public readonly struct Contact
     {
         private readonly string _firstName;
         private readonly string _lastName;
@@ -19,11 +17,6 @@ namespace Assignments5
             _lastName = lastName;
             _phoneNumber = phoneNumber;
             _emailAddress = emailAddress;
-        }
-
-        public void DisplayInfo()
-        {
-            Console.WriteLine(FullData);
         }
     }
 }

@@ -28,9 +28,9 @@ namespace Assignments_5_Library
 
             Console.WriteLine("Type number: ");
 
-            string ans = Console.ReadLine();
+            string choose = Console.ReadLine();
 
-            switch (ans)
+            switch (choose)
             {
                 case "1":
                     Set1.Execute();

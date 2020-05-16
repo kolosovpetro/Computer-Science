@@ -7,8 +7,7 @@ namespace Assignments4
     {
         NewGame = 1,
         About = 2,
-        Quit = 3,
-        Unassigned = 4
+        Quit = 3
     }
 
     public class Set4

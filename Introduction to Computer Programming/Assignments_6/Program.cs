@@ -41,53 +41,53 @@ namespace Assignments_6
             // the program asks for both players’ names and prints out the total number of
             //their games and what percent of games each of them won.
 
-            Layout layout = new Layout();
-            GameEngine ge = new GameEngine();
+            var layout = new Layout();
+            var engine = new GameEngine();
 
-            while (ge.GetMainLoop())
+            while (engine.GetMainLoop())
             {
                 layout.PrintMainMenu();
-                layout.ChooseMenuOption(out string opt);
+                layout.ChooseMenuOption(out var opt);
 
                 if (Enum.TryParse(opt, out MainMenu menuTerm))
                 {
                     switch (menuTerm)
                     {
                         case MainMenu.NewGame:
-                            layout.NicknameRequest(ge.CrossSign);
-                            ge.SetCrossPlayerName(Console.ReadLine());
-                            layout.NicknameRequest(ge.RoundSign);
-                            ge.SetRoundPlayerName(Console.ReadLine());
+                            layout.NicknameRequest(engine.CrossSign);
+                            engine.SetCrossPlayerName(Console.ReadLine());
+                            layout.NicknameRequest(engine.RoundSign);
+                            engine.SetRoundPlayerName(Console.ReadLine());
 
-                            for (int j = 0; j < ge.GetBoardArray().Length; j++)
+                            for (int j = 0; j < engine.GetBoardArray().Length; j++)
                             {
-                                layout.PrintBoard(ge.GetBoardArray());
-                                layout.PlayerMoveMessage(ge.GetCurrentSign(), ge.CurrentPlayer);
+                                layout.PrintBoard(engine.GetBoardArray());
+                                layout.PlayerMoveMessage(engine.GetCurrentSign(), engine.CurrentPlayer);
 
                                 int moveIndex;
 
-                                while (!ge.LegalMove(Console.ReadLine(), out moveIndex))
+                                while (!engine.LegalMove(Console.ReadLine(), out moveIndex))
                                 {
-                                    layout.IllegalMoveNotice(ge.GetCurrentSign());
+                                    layout.IllegalMoveNotice(engine.GetCurrentSign());
                                 }
 
-                                ge.PerformMove(moveIndex);
+                                engine.PerformMove(moveIndex);
 
-                                if (ge.WinConditions())
+                                if (engine.WinConditions())
                                 {
                                     Console.Clear();
-                                    layout.PrintBoard(ge.GetBoardArray());
-                                    layout.WinnerMessage(ge.GetCurrentSign(), ge.CurrentPlayer);
-                                    ge.SaveStatistics();
+                                    layout.PrintBoard(engine.GetBoardArray());
+                                    layout.WinnerMessage(engine.GetCurrentSign(), engine.CurrentPlayer);
+                                    engine.SaveStatistics();
                                     Console.WriteLine("[Press Enter to return to Main menu ...]");
                                     Console.ReadKey();
-                                    ge.Reset();
+                                    engine.Reset();
                                     Console.Clear();
                                     break;
                                 }
 
-                                ge.SignSwitch();
-                                ge.PlayerNameSwitch();
+                                engine.SignSwitch();
+                                engine.PlayerNameSwitch();
                                 Console.Clear();
                             }
 
@@ -105,7 +105,7 @@ namespace Assignments_6
                         case MainMenu.Stats:
                             Console.WriteLine("Here stats will be implemented ... ");
                             Console.WriteLine("Enter the name of player you wanna see statistics of: ");
-                            ge.DisplayStats(Console.ReadLine());
+                            engine.DisplayStats(Console.ReadLine());
                             Console.WriteLine("[Press Enter to return to Main menu ...]");
                             Console.ReadKey();
                             Console.Clear();
@@ -114,7 +114,7 @@ namespace Assignments_6
                             Console.Clear();
                             layout.QuiteMessage(out string q);        // question for main loop break
                             if (q.ToLower() == "y")
-                                ge.SetMainLoop();
+                                engine.SetMainLoop();
                             break;
                         case MainMenu.Unassigned:
                             break;

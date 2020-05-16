@@ -8,7 +8,7 @@ namespace ActiveRecordPattern
         {
             // Simple fetch from database
 
-            MovieRecord mr = MovieRecord.GetById(2);
+            var mr = MovieRecord.GetById(2);
             Console.WriteLine(mr.ToString());
 
             // New object is created

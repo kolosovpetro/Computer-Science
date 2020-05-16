@@ -6,102 +6,103 @@ namespace Assignments_6.TicTacToe
 {
     internal class GameEngine
     {
-        private char[] boardArray;
+        private char[] _boardArray;
         public readonly char CrossSign = 'X';
         public readonly char RoundSign = 'O';
-        private char currentSign;
-        private bool mainLoop;
+        private char _currentSign;
+        private bool _mainLoop;
         private const string StatsFileFolder = "../../GameStatistics";
         private const string StatsFileName = "Stats.txt";
-        private readonly string statsFileFullPath = StatsFileFolder + '/' + StatsFileName;
-        private string crossPlayerName;
-        private string roundPlayerName;
+        private readonly string _statsFileFullPath = StatsFileFolder + '/' + StatsFileName;
+        private string _crossPlayerName;
+        private string _roundPlayerName;
         public string CurrentPlayer { get; private set; }
 
         public GameEngine()
         {
-            boardArray = new char[9];
-            for (int i = 0; i < boardArray.Length; i++)
-                boardArray[i] = ' ';
+            _boardArray = new char[9];
+            for (int i = 0; i < _boardArray.Length; i++)
+                _boardArray[i] = ' ';
 
-            currentSign = RoundSign;
-            mainLoop = true;
+            _currentSign = RoundSign;
+            _mainLoop = true;
         }
 
         public char GetCurrentSign()
         {
-            return currentSign;
+            return _currentSign;
         }
 
         public void PerformMove(int index)
         {
-            boardArray[index] = currentSign;
+            _boardArray[index] = _currentSign;
         }
 
         public bool WinConditions()
         {
-            return (boardArray[0] & boardArray[1] & boardArray[2] & currentSign) == currentSign
+            return (_boardArray[0] & _boardArray[1] & _boardArray[2] & _currentSign) == _currentSign
                 ||
-                (boardArray[0] & boardArray[3] & boardArray[6] & currentSign) == currentSign
+                (_boardArray[0] & _boardArray[3] & _boardArray[6] & _currentSign) == _currentSign
                 ||
-                (boardArray[0] & boardArray[4] & boardArray[8] & currentSign) == currentSign
+                (_boardArray[0] & _boardArray[4] & _boardArray[8] & _currentSign) == _currentSign
                 ||
-                (boardArray[1] & boardArray[4] & boardArray[7] & currentSign) == currentSign
+                (_boardArray[1] & _boardArray[4] & _boardArray[7] & _currentSign) == _currentSign
                 ||
-                (boardArray[2] & boardArray[5] & boardArray[8] & currentSign) == currentSign
+                (_boardArray[2] & _boardArray[5] & _boardArray[8] & _currentSign) == _currentSign
                 ||
-                (boardArray[2] & boardArray[4] & boardArray[6] & currentSign) == currentSign
+                (_boardArray[2] & _boardArray[4] & _boardArray[6] & _currentSign) == _currentSign
                 ||
-                (boardArray[3] & boardArray[4] & boardArray[5] & currentSign) == currentSign
+                (_boardArray[3] & _boardArray[4] & _boardArray[5] & _currentSign) == _currentSign
                 ||
-                (boardArray[6] & boardArray[7] & boardArray[8] & currentSign) == currentSign;
+                (_boardArray[6] & _boardArray[7] & _boardArray[8] & _currentSign) == _currentSign;
         }
 
         public void SignSwitch()
         {
-            currentSign = currentSign == CrossSign ? RoundSign : CrossSign;
+            _currentSign = _currentSign == CrossSign ? RoundSign : CrossSign;
         }
 
         public void PlayerNameSwitch()
         {
-            CurrentPlayer = CurrentPlayer == roundPlayerName ? crossPlayerName : roundPlayerName;
+            CurrentPlayer = CurrentPlayer == _roundPlayerName ? _crossPlayerName : _roundPlayerName;
         }
 
         public char[] GetBoardArray()
         {
-            return boardArray;
+            return _boardArray;
         }
 
         public void SetMainLoop()
         {
-            mainLoop = false;
+            _mainLoop = false;
         }
 
         public bool GetMainLoop()
         {
-            return mainLoop;
+            return _mainLoop;
         }
 
         public bool LegalMove(string move, out int index)
         {
-            return int.TryParse(move, out index)
-                && index >= 0 && index < 9
-                && boardArray[index] == ' ';
+            return int.TryParse(move, out index) 
+                   && index >= 0 
+                   && index < 9
+                   && _boardArray[index] == ' ';
         }
 
         public void Reset()
         {
-            boardArray = new GameEngine().boardArray;
+            _boardArray = new GameEngine()._boardArray;
         }
 
         public void SetCrossPlayerName(string newName)
         {
-            crossPlayerName = newName;
+            _crossPlayerName = newName;
         }
 
         public void SetRoundPlayerName(string newName)
         {
-            roundPlayerName = newName;
+            _roundPlayerName = newName;
             CurrentPlayer = newName;
         }
 
@@ -112,17 +113,17 @@ namespace Assignments_6.TicTacToe
                 Directory.CreateDirectory(StatsFileFolder);
             }
 
-            using (var sw = new StreamWriter(statsFileFullPath, true))
+            using (var sw = new StreamWriter(_statsFileFullPath, true))
             {
                 switch (GetCurrentSign())
                 {
                     case 'X':
-                        sw.WriteLine($"{crossPlayerName} 1");
-                        sw.WriteLine($"{roundPlayerName} 0");
+                        sw.WriteLine($"{_crossPlayerName} 1");
+                        sw.WriteLine($"{_roundPlayerName} 0");
                         break;
                     default:
-                        sw.WriteLine($"{crossPlayerName} 0");
-                        sw.WriteLine($"{roundPlayerName} 1");
+                        sw.WriteLine($"{_crossPlayerName} 0");
+                        sw.WriteLine($"{_roundPlayerName} 1");
                         break;
                 }
             }
@@ -132,7 +133,7 @@ namespace Assignments_6.TicTacToe
         {
             int gamesCount = 0, winsCount = 0;
 
-            using (var sr = new StreamReader(statsFileFullPath))
+            using (var sr = new StreamReader(_statsFileFullPath))
             {
                 while (!sr.EndOfStream)
                 {

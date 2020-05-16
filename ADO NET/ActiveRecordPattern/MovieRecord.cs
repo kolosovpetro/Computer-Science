@@ -36,19 +36,18 @@ namespace ActiveRecordPattern
                 {
                     command.Parameters.AddWithValue("@ID", id);
 
-                    NpgsqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
 
-                    if (reader.HasRows)
-                    {
-                        reader.Read();
-                        double pp = Convert.ToDouble(reader["price"]);
-                        var copies = CopyRecord.GetByMovieId(id);
-                        return new MovieRecord(id, (string)reader["title"], (int)reader["year"], pp, copies);
-                    }
+                    if (!reader.HasRows) 
+                        return null;
+
+                    reader.Read();
+                    var price = Convert.ToDouble(reader["price"]);
+                    var copies = CopyRecord.GetByMovieId(id);
+
+                    return new MovieRecord(id, (string)reader["title"], (int)reader["year"], price, copies);
                 }
             }
-
-            return null;
         }
 
         public void Save()
@@ -92,9 +91,9 @@ namespace ActiveRecordPattern
             }
         }
 
-        public void ChangePrice(double newPrice)
+        public void ChangePrice(double price)
         {
-            Price = newPrice;       // Change price of object in memory
+            Price = price;       // Change price of object in memory
             Save();                 // Changes price of row in database
         }
     }

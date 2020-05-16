@@ -4,11 +4,11 @@ namespace Assignments_6.TicTacToe
 {
     internal class Layout
     {
-        private readonly string[] menuItems;
+        private readonly string[] _menuItems;
 
         public Layout()
         {
-            menuItems = new[]
+            _menuItems = new[]
             {
                 "1. New Game",
                 "2. About the author",
@@ -19,7 +19,7 @@ namespace Assignments_6.TicTacToe
 
         public void PrintMainMenu()
         {
-            foreach (var item in menuItems)
+            foreach (var item in _menuItems)
             {
                 Console.WriteLine(item);
             }

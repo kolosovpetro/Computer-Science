@@ -19,35 +19,37 @@ namespace ActiveRecordPattern
 
         public static CopyRecord GetById(int id)
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var command = new NpgsqlCommand("SELECT * FROM copies WHERE copy_id = @ID", conn))
                 {
                     command.Parameters.AddWithValue("@ID", id);
 
-                    NpgsqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        reader.Read();
-                        return new CopyRecord(id, (bool)reader["available"], (int)reader["movie_id"]);
-                    }
+                    var reader = command.ExecuteReader();
+
+                    if (!reader.HasRows) 
+                        return null;
+
+                    reader.Read();
+                    return new CopyRecord(id, (bool)reader["available"], (int)reader["movie_id"]);
                 }
             }
-            return null;
         }
 
         public static List<CopyRecord> GetByMovieId(int movieId)
         {
-            List<CopyRecord> list = new List<CopyRecord>();
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            var list = new List<CopyRecord>();
+
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var command = new NpgsqlCommand("SELECT * FROM copies WHERE movie_id = @movieID", conn))
                 {
                     command.Parameters.AddWithValue("@movieID", movieId);
 
-                    NpgsqlDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
+
                     while (reader.Read())
                     {
                         list.Add(new CopyRecord((int)reader["copy_id"], (bool)reader["available"], (int)reader["movie_id"]));
@@ -59,10 +61,12 @@ namespace ActiveRecordPattern
 
         public void Save()
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
+
                 // This is an UPSERT operation - if record doesn't exist in the database it is created, otherwise it is updated
+               
                 using (var command = new NpgsqlCommand("INSERT INTO copies(copy_id, available, movie_id) " +
                     "VALUES (@ID, @available, @movieId) " +
                     "ON CONFLICT (copy_id) DO UPDATE " +
@@ -78,7 +82,7 @@ namespace ActiveRecordPattern
 
         public void Remove()
         {
-            using (NpgsqlConnection conn = new NpgsqlConnection(ConnectionString))
+            using (var conn = new NpgsqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var command = new NpgsqlCommand("DELETE FROM copies WHERE copy_id = @ID", conn))

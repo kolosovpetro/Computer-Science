@@ -164,22 +164,20 @@ namespace Assignments_7.TicTacToe
             {
                 while (!sr.EndOfStream)
                 {
-                    string currentLine = sr.ReadLine();
+                    var currentLine = sr.ReadLine();
 
-                    if (currentLine != null)
+                    if (currentLine == null) continue;
+                    var split = currentLine.Split(' ');
+
+                    if (split.Contains(playerName))
                     {
-                        string[] split = currentLine.Split(' ');
+                        gamesCount++;
 
-                        if (split.Contains(playerName))
+                        switch (split[1])
                         {
-                            gamesCount++;
-
-                            switch (split[1])
-                            {
-                                case "1":
-                                    winsCount++;
-                                    break;
-                            }
+                            case "1":
+                                winsCount++;
+                                break;
                         }
                     }
                 }
@@ -194,17 +192,17 @@ namespace Assignments_7.TicTacToe
         /// <param name="playerName">Name of player</param>
         public void DisplayStats(string playerName)
         {
-            var stats = PlayerStats(playerName);
-            switch (stats.Item1)
+            var (item1, item2) = PlayerStats(playerName);
+            switch (item1)
             {
                 case 0:
                     Console.WriteLine("There is no such player in database.");
                     break;
                 default:
                     Console.WriteLine($"Player {playerName} has the following stats: " +
-                        $"{stats.Item1} games, " +
-                $"{stats.Item2} wins " +
-                $"and Win Rate {(double)stats.Item2 / stats.Item1 * 100} %");
+                        $"{item1} games, " +
+                $"{item2} wins " +
+                $"and Win Rate {(double)item2 / item1 * 100} %");
                     break;
             }
         }

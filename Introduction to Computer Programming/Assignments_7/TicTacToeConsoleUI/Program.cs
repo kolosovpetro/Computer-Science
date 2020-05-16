@@ -7,8 +7,8 @@ namespace TicTacToeConsoleUI
     {
         private static void Main()
         {
-            GameEngine engine = new GameEngine();
-            Layout layout = new Layout();
+            var engine = new GameEngine();
+            var layout = new Layout();
 
             while (engine.MainLoop)
             {
@@ -25,12 +25,12 @@ namespace TicTacToeConsoleUI
                             Console.WriteLine("Welcome to tic tac toe game.");
 
                             Console.WriteLine("Enter player's (O) name: ");
-                            string playerName = Console.ReadLine();
-                            Player roundPlayer = new Player(playerName, 'O');
+                            var playerName = Console.ReadLine();
+                            var roundPlayer = new Player(playerName, 'O');
 
                             Console.WriteLine("Enter player's (X) name: ");
                             playerName = Console.ReadLine();
-                            Player crossPlayer = new Player(playerName, 'X');
+                            var crossPlayer = new Player(playerName, 'X');
 
                             Console.WriteLine("System is setting player names ... ");
                             engine.SetRoundPlayer(roundPlayer);
