@@ -28,7 +28,7 @@ namespace DVDRentalStore.Controllers
             var id = _moviesRepository.GetAll()
                 .Max(x => x.MovieId) + 1;   // calculate new movie id
 
-            var title = collection["Title"];    
+            var title = collection["Title"].ToString();    
             var year = int.Parse(collection["Year"]);
             var price = float.Parse(collection["Price"]);
             var ageRestriction = int.Parse(collection["AgeRestriction"]);
@@ -40,7 +40,7 @@ namespace DVDRentalStore.Controllers
                 Year = year,
                 AgeRestriction = ageRestriction,
                 Price = price
-            };      // instance of new movie to be added
+            };
 
             _moviesRepository.Add(movie);
             _moviesRepository.Save();

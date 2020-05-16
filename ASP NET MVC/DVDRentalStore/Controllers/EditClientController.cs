@@ -20,6 +20,10 @@ namespace DVDRentalStore.Controllers
         public IActionResult EditClient(int id)
         {
             var client = _clientsRepository.GetById(id);
+
+            if (client == null)
+                return NotFound("No such client in database");
+
             return View(client);
         }
 
@@ -27,20 +31,17 @@ namespace DVDRentalStore.Controllers
         public IActionResult EditClient(int id, IFormCollection collection)
         {
             var client = _clientsRepository.GetById(id);
-            var newFirstName = collection["FirstName"].ToString();
-            var newLastName = collection["LastName"].ToString();
-            var newBirthDay = Convert.ToDateTime(collection["Birthday"]);
+            var firstname = collection["FirstName"].ToString();
+            var lastname = collection["LastName"].ToString();
+            var birthday = Convert.ToDateTime(collection["Birthday"]);
 
-            if (client != null)
-            {
-                client.FirstName = newFirstName;
-                client.LastName = newLastName;
-                client.Birthday = newBirthDay;
-                _clientsRepository.Update(client);
-                _clientsRepository.Save();
-            }
+            client.FirstName = firstname;
+            client.LastName = lastname;
+            client.Birthday = birthday;
+            _clientsRepository.Update(client);
+            _clientsRepository.Save();
 
-            return RedirectToAction("AdminSignIn", "AdminSignIn");
+            return RedirectToAction("AdminDashboard", "AdminDashboard");
         }
     }
 }

@@ -26,19 +26,18 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            // this is stupid approach to get id, however auto increment doesn't work
+            var clientId = _clientsRepository.GetAll()
+                .Max(x => x.ClientId) + 1;  // calculate new client id
 
-            var clientId = _clientsRepository.GetAll().Max(x => x.ClientId) + 1;
-
-            string firstName = collection["FirstName"];
-            string lastName = collection["LastName"];
-            DateTime? birthday = Convert.ToDateTime(collection["Birthday"]);
+            var firstname = collection["FirstName"];
+            var lastname = collection["LastName"];
+            var birthday = Convert.ToDateTime(collection["Birthday"]);
 
             _clientsRepository.Add(new ClientsModel
             {
                 ClientId = clientId,
-                FirstName = firstName,
-                LastName = lastName,
+                FirstName = firstname,
+                LastName = lastname,
                 Birthday = birthday
             });
 

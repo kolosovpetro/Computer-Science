@@ -26,14 +26,14 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            string username = collection["FirstName"];
-            string password = collection["LastName"];
+            var username = collection["FirstName"].ToString();
+            var password = collection["LastName"].ToString();
 
             var user = _clientsRepository.GetAll()
                 .FirstOrDefault(x => x.FirstName == username && x.LastName == password);
 
             if (user == null)
-                return NotFound("No such user");
+                return NotFound("Wrong username or password");
 
             return RedirectToAction("UserDashboard", "UserDashboard", new { id = user.ClientId });
         }

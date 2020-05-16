@@ -26,10 +26,11 @@ namespace DVDRentalStore.Controllers
         {
             var username = collection["FirstName"].ToString();
             var password = collection["LastName"].ToString();
+
             var admin = _employeesRepository
                 .Get(x => x.FirstName == username && x.LastName == password);
 
-            if (admin == null) 
+            if (admin == null)
                 return NotFound("There is no such employee");
 
             HttpContext.Session.SetInt32("adminId", admin.EmployeeId);

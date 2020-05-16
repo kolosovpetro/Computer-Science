@@ -30,18 +30,13 @@ namespace DVDRentalStore.Controllers
         {
             var clientId = HttpContext.Session.GetInt32("clientId");
 
-            // delete from rentals history
-            _rentalsRepository.Delete(x => x.ClientId == clientId);
-
-            // delete from clients
-            _clientsRepository.Delete(x => x.ClientId == clientId);
-
-            // save changes to databases
+            _rentalsRepository.Delete(x => x.ClientId == clientId); // delete client's rentals
             _rentalsRepository.Save();
+
+            _clientsRepository.Delete(x => x.ClientId == clientId); // delete from clients set
             _clientsRepository.Save();
 
-            // redirect to index
-            return RedirectToAction("AdminSignIn", "AdminSignIn");
+            return RedirectToAction("AdminDashboard", "AdminDashboard");
         }
     }
 }

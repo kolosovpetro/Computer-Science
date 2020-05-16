@@ -60,20 +60,17 @@ namespace DVDRentalStore.Controllers
 
             var dateOfReturn = Convert.ToDateTime(collection["DateOfReturn"]);  // get date of return of form
 
-            if (availableCopy != null)
+            var rental = new RentalsModel
             {
-                // create new rental instance
-                var rental = new RentalsModel
-                {
-                    ClientId = clientId,
-                    CopyId = availableCopy.CopyId,
-                    DateOfRental = dateOfRental,
-                    DateOfReturn = dateOfReturn
-                };  
+                ClientId = clientId,
+                CopyId = availableCopy.CopyId,
+                DateOfRental = dateOfRental,
+                DateOfReturn = dateOfReturn
+            };
 
-                _rentalsRepository.Add(rental);     // add new rental instance to database
-                _rentalsRepository.Save();          // save changes in database
-            }
+            _rentalsRepository.Add(rental);
+            _rentalsRepository.Save();
+
 
             return RedirectToAction("UserDashboard", "UserDashboard", new { id = clientId });
         }

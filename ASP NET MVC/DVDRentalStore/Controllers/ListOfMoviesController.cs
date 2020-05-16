@@ -1,4 +1,5 @@
-﻿using DVDRentalStore.Infrastructure;
+﻿using System.Linq;
+using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,9 @@ namespace DVDRentalStore.Controllers
         [HttpGet]
         public IActionResult ListOfMovies()
         {
-            var movies = _moviesRepository.GetAll();
+            var movies = _moviesRepository.GetAll()
+                .OrderBy(x => x.MovieId);
+
             return View(movies);
         }
     }
