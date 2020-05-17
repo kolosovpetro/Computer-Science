@@ -1,4 +1,5 @@
-﻿using DVDRentalStore.Infrastructure;
+﻿using System.Linq;
+using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,11 @@ namespace DVDRentalStore.Controllers
             // ReSharper disable once PossibleInvalidOperationException
             var clientId = (int)HttpContext.Session.GetInt32("userId");
 
+            var movies = _moviesRepository
+                .GetAll().OrderBy(x => x.MovieId);
+
             var client = _clientsRepository.GetById(clientId);
-            var movies = _moviesRepository.GetAll();
+
             ViewData["Client"] = client;
 
             HttpContext.Session.SetInt32("userId", clientId);
