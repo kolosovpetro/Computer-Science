@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace DVDRentalStore.Infrastructure
 {
-    interface IRepository<T> where T : class
+    internal interface IRepository<T> where T : class
     {
         // Marks an entity as new
         void Add(T entity);

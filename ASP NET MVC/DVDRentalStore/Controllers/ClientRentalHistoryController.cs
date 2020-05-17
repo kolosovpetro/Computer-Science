@@ -4,7 +4,6 @@ using AutoMapper;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Misc;
 using DVDRentalStore.Models;
-using DVDRentalStore.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,11 +26,11 @@ namespace DVDRentalStore.Controllers
             _moviesRepository = new RepositoryBase<MoviesModel>(_dbFactory);
         }
 
-        private IEnumerable<MoviesViewModel> GetHistory(int clientId)
+        private IEnumerable<MoviesModel> GetHistory(int clientId)
         {
             // mapper config
             var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<ClientHistoryQueryObject, MoviesViewModel>());
+                cfg.CreateMap<ClientHistoryQueryObject, MoviesModel>());
 
             // create new mapper instance
             var mapper = new Mapper(config);
@@ -58,7 +57,7 @@ namespace DVDRentalStore.Controllers
                 .Distinct()
                 .ToList();
 
-            return mapper.Map<IEnumerable<MoviesViewModel>>(query);
+            return mapper.Map<IEnumerable<MoviesModel>>(query);
         }
 
         public IActionResult ClientRentalHistory()
