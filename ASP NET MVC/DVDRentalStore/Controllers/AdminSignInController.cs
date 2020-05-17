@@ -1,5 +1,5 @@
-﻿using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
+﻿using DVDRentalStore.DAL;
+using DVDRentalStore.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +7,12 @@ namespace DVDRentalStore.Controllers
 {
     public class AdminSignInController : Controller
     {
-        private readonly IRepository<EmployeesModel> _employeesRepository;
+        private readonly EmployeesRepository _employeesRepository;
 
         public AdminSignInController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _employeesRepository = new RepositoryBase<EmployeesModel>(dbFactory);
+            _employeesRepository = new EmployeesRepository(dbFactory);
         }
 
         [HttpGet]

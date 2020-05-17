@@ -1,5 +1,5 @@
-﻿using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
+﻿using DVDRentalStore.DAL;
+using DVDRentalStore.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +7,12 @@ namespace DVDRentalStore.Controllers
 {
     public class AdminDashboardController : Controller
     {
-        private readonly IRepository<EmployeesModel> _employeesRepository;
+        private readonly EmployeesRepository _employeesRepository;
 
         public AdminDashboardController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _employeesRepository = new RepositoryBase<EmployeesModel>(dbFactory);
+            _employeesRepository = new EmployeesRepository(dbFactory);
         }
 
         [HttpGet]
@@ -25,8 +25,8 @@ namespace DVDRentalStore.Controllers
                 return NotFound("No such admin user or wrong attempt to connect");
 
             ViewData["Admin"] = admin;
-            return View();
 
+            return View();
         }
     }
 }

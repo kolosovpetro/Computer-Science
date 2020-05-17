@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,16 +8,16 @@ namespace DVDRentalStore.Controllers
 {
     public class DeleteMovieController : Controller
     {
-        private readonly IRepository<MoviesModel> _moviesRepository;
-        private readonly IRepository<CopiesModel> _copiesRepository;
-        private readonly IRepository<RentalsModel> _rentalsRepository;
+        private readonly MoviesRepository _moviesRepository;
+        private readonly CopiesRepository _copiesRepository;
+        private readonly RentalsRepository _rentalsRepository;
 
         public DeleteMovieController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
-            _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
-            _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
+            _copiesRepository = new CopiesRepository(dbFactory);
+            _rentalsRepository = new RentalsRepository(dbFactory);
         }
 
         [HttpGet]

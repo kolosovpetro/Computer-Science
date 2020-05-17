@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Misc;
 using DVDRentalStore.Models;
@@ -12,18 +13,18 @@ namespace DVDRentalStore.Controllers
     public class ClientRentalHistoryController : Controller
     {
         private readonly IDbFactory _dbFactory;
-        private readonly IRepository<CopiesModel> _copiesRepository;
-        private readonly IRepository<ClientsModel> _clientsRepository;
-        private readonly IRepository<RentalsModel> _rentalsRepository;
-        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly CopiesRepository _copiesRepository;
+        private readonly ClientsRepository _clientsRepository;
+        private readonly RentalsRepository _rentalsRepository;
+        private readonly MoviesRepository _moviesRepository;
 
         public ClientRentalHistoryController()
         {
             _dbFactory = new DbFactory();
-            _copiesRepository = new RepositoryBase<CopiesModel>(_dbFactory);
-            _clientsRepository = new RepositoryBase<ClientsModel>(_dbFactory);
-            _rentalsRepository = new RepositoryBase<RentalsModel>(_dbFactory);
-            _moviesRepository = new RepositoryBase<MoviesModel>(_dbFactory);
+            _copiesRepository = new CopiesRepository(_dbFactory);
+            _clientsRepository = new ClientsRepository(_dbFactory);
+            _rentalsRepository = new RentalsRepository(_dbFactory);
+            _moviesRepository = new MoviesRepository(_dbFactory);
         }
 
         private IEnumerable<MoviesModel> GetHistory(int clientId)

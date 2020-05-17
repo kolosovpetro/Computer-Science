@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
@@ -9,12 +10,12 @@ namespace DVDRentalStore.Controllers
 {
     public class AddClientController : Controller
     {
-        private readonly IRepository<ClientsModel> _clientsRepository;
+        private readonly ClientsRepository _clientsRepository;
 
         public AddClientController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
         }
 
         [HttpGet]

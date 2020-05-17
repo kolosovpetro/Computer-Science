@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
@@ -8,12 +10,12 @@ namespace DVDRentalStore.Controllers
 {
     public class AddMovieController : Controller
     {
-        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly MoviesRepository _moviesRepository;
 
         public AddMovieController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
         }
 
         [HttpGet]
@@ -28,9 +30,9 @@ namespace DVDRentalStore.Controllers
             var id = _moviesRepository.GetAll()
                 .Max(x => x.MovieId) + 1;   // calculate new movie id
 
-            var title = collection["Title"].ToString();    
+            var title = collection["Title"].ToString();
             var year = int.Parse(collection["Year"]);
-            var price = float.Parse(collection["Price"]);
+            var price = float.Parse(collection["Price"].ToString(), CultureInfo.InvariantCulture);
             var ageRestriction = int.Parse(collection["AgeRestriction"]);
 
             var movie = new MoviesModel
@@ -45,7 +47,7 @@ namespace DVDRentalStore.Controllers
             _moviesRepository.Add(movie);
             _moviesRepository.Save();
 
-            return RedirectToAction("AdminSignIn", "AdminSignIn");
+            return RedirectToAction("AdminDashboard", "AdminDashboard");
         }
     }
 }

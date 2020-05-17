@@ -1,5 +1,5 @@
-﻿using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
+﻿using DVDRentalStore.DAL;
+using DVDRentalStore.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,14 +7,14 @@ namespace DVDRentalStore.Controllers
 {
     public class DeleteClientController : Controller
     {
-        private readonly IRepository<ClientsModel> _clientsRepository;
-        private readonly IRepository<RentalsModel> _rentalsRepository;
+        private readonly ClientsRepository _clientsRepository;
+        private readonly RentalsRepository _rentalsRepository;
 
         public DeleteClientController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
-            _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
+            _rentalsRepository = new RentalsRepository(dbFactory);
         }
 
         [HttpGet]

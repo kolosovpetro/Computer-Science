@@ -1,18 +1,18 @@
 ﻿using System.Linq;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DVDRentalStore.Controllers
 {
     public class ListOfMoviesController : Controller
     {
-        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly MoviesRepository _moviesRepository;
 
         public ListOfMoviesController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
         }
 
         [HttpGet]

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +8,12 @@ namespace DVDRentalStore.Controllers
 {
     public class EditMovieController : Controller
     {
-        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly MoviesRepository _moviesRepository;
 
         public EditMovieController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
         }
 
         [HttpGet]

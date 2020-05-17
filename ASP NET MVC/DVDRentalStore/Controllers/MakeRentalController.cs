@@ -1,4 +1,5 @@
 ﻿using System;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 using Microsoft.AspNetCore.Http;
@@ -8,18 +9,18 @@ namespace DVDRentalStore.Controllers
 {
     public class MakeRentalController : Controller
     {
-        private readonly IRepository<CopiesModel> _copiesRepository;
-        private readonly IRepository<ClientsModel> _clientsRepository;
-        private readonly IRepository<RentalsModel> _rentalsRepository;
-        private readonly IRepository<MoviesModel> _moviesRepository;
+        private readonly CopiesRepository _copiesRepository;
+        private readonly ClientsRepository _clientsRepository;
+        private readonly RentalsRepository _rentalsRepository;
+        private readonly MoviesRepository _moviesRepository;
 
         public MakeRentalController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
-            _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
-            _rentalsRepository = new RepositoryBase<RentalsModel>(dbFactory);
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
+            _copiesRepository = new CopiesRepository(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
+            _rentalsRepository = new RentalsRepository(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
         }
 
         [HttpGet]

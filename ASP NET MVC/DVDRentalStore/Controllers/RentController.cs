@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Misc;
 using DVDRentalStore.Models;
@@ -11,16 +12,16 @@ namespace DVDRentalStore.Controllers
 {
     public class RentController : Controller
     {
-        private readonly IRepository<ClientsModel> _clientsRepository;
-        private readonly IRepository<MoviesModel> _moviesRepository;
-        private readonly IRepository<CopiesModel> _copiesRepository;
+        private readonly ClientsRepository _clientsRepository;
+        private readonly MoviesRepository _moviesRepository;
+        private readonly CopiesRepository _copiesRepository;
 
         public RentController()
         {
             IDbFactory dbFactory = new DbFactory();
-            _clientsRepository = new RepositoryBase<ClientsModel>(dbFactory);
-            _moviesRepository = new RepositoryBase<MoviesModel>(dbFactory);
-            _copiesRepository = new RepositoryBase<CopiesModel>(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
+            _copiesRepository = new CopiesRepository(dbFactory);
         }
 
         [HttpGet]
