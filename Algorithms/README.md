@@ -13,5 +13,3 @@ Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
   * Merge sort O(n*log(n))
   * Quick sort O(log(n))
   * Selection sort O(n^2)
-* Coin Change Problem (Intro to Dynamic programming)
-* RPN Calculator (postfix calculator based on stack data structure)

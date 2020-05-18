@@ -1,8 +1,8 @@
-﻿namespace BuilderLibrary
+﻿namespace BuilderLibrary.AbstractVehicles
 {
-    abstract class Car : ITransport
+    internal abstract class Car : ITransport
     {
-        public ITransport transport { get; private set; }
+        public ITransport transport { get; }
 
         public string Manufacturer { get; private set; }
 
@@ -21,8 +21,6 @@
         public double MaxSpeed { get; private set; }
 
         public virtual void Reset() { }
-
-        protected Car() { }
 
         public void SetCylinderNumber(int newNumber)
         {
