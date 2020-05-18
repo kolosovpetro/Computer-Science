@@ -29,14 +29,12 @@ namespace DVDRentalStore.Controllers
 
         private IEnumerable<MoviesModel> GetHistory(int clientId)
         {
-            // mapper config
             var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<ClientHistoryQueryObject, MoviesModel>());
+                cfg.CreateMap<ClientHistoryQueryObject, MoviesModel>());    // configure auto-mapper
 
-            // create new mapper instance
-            var mapper = new Mapper(config);
+            var mapper = new Mapper(config);    // create new auto-mapper instance
 
-            // get collection collection
+            // get required collection
             var query = (from r in _rentalsRepository.GetAll()
                          join c in _clientsRepository.GetAll()
                              on r.ClientId equals c.ClientId
@@ -58,7 +56,7 @@ namespace DVDRentalStore.Controllers
                 .Distinct()
                 .ToList();
 
-            return mapper.Map<IEnumerable<MoviesModel>>(query);
+            return mapper.Map<IEnumerable<MoviesModel>>(query);     // return mapper collection
         }
 
         public IActionResult ClientRentalHistory()

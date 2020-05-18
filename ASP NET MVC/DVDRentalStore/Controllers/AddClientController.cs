@@ -27,20 +27,20 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult AddClient(IFormCollection collection)
         {
-            var clientId = _clientsRepository.GetAll()
+            var id = _clientsRepository.GetAll()
                                .Max(x => x.ClientId) + 1;   // calculate new client id
 
-            var firstName = collection["FirstName"].ToString();    // get client firstname
+            var firstname = collection["FirstName"].ToString();    // get client firstname
 
-            var lastName = collection["LastName"].ToString();  // get client lastname
+            var lastname = collection["LastName"].ToString();  // get client lastname
 
             var birthday = Convert.ToDateTime(collection["Birthday"]);  // get client birthday
 
             var client = new ClientsModel
             {
-                ClientId = clientId,
-                FirstName = firstName,
-                LastName = lastName,
+                ClientId = id,
+                FirstName = firstname,
+                LastName = lastname,
                 Birthday = birthday
             };
 

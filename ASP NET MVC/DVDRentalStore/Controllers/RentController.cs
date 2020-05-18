@@ -30,8 +30,8 @@ namespace DVDRentalStore.Controllers
             // ReSharper disable once PossibleInvalidOperationException
             var clientId = (int)HttpContext.Session.GetInt32("userId");
 
-            // select movies where are available copy
-            var joinModels =
+            // join movies and copies to get available property
+            var moviesJoinCopies =
                 from mov in _moviesRepository.GetAll()
                 join cop in _copiesRepository.GetAll()
                     on mov.MovieId equals cop.MovieId
@@ -45,26 +45,22 @@ namespace DVDRentalStore.Controllers
                     Available = cop.Available
                 };
 
-            // get set of available copies by movie id
-            var availableMovies = joinModels
+            var availableCopies = moviesJoinCopies
                 .Where(x => x.Available != null && (bool)x.Available)
-                .OrderBy(g => g.MovieId);
+                .OrderBy(g => g.MovieId);   // available copies
 
-            // config auto-mapper
             var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<AvailableMovieQueryObject, MoviesModel>());
+                cfg.CreateMap<AvailableMovieQueryObject, MoviesModel>());   // configure auto-mapper
 
-            // create auto-mapper instance
-            var mapper = new Mapper(config);
+            var mapper = new Mapper(config);    // create auto-mapper instance
 
-            // map collection we got previously
-            var viewModel = mapper.Map<IEnumerable<MoviesModel>>(availableMovies);
+            var viewModel = mapper.Map<IEnumerable<MoviesModel>>(availableCopies);  // map available copies
 
-            var client = _clientsRepository.GetById(clientId);
+            var client = _clientsRepository.GetById(clientId);      // get client by id
 
-            ViewData["Client"] = client;
+            ViewData["Client"] = client;    // set client instance to view data
 
-            HttpContext.Session.SetInt32("userId", clientId);
+            HttpContext.Session.SetInt32("userId", clientId);   // set session integer of clientId
 
             return View(viewModel);
         }
