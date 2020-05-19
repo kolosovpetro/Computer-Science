@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DVDRentalStore.Controllers

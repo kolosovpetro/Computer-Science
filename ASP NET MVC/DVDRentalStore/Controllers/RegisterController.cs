@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,9 +27,7 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult Index(IFormCollection collection)
         {
-            var clientId = _clientsRepository.GetAll()
-                .Max(x => x.ClientId) + 1;  // calculate new client id
-
+            var clientId = _clientsRepository.GetAll().Max(x => x.ClientId) + 1;
             var firstname = collection["FirstName"];
             var lastname = collection["LastName"];
             var birthday = Convert.ToDateTime(collection["Birthday"]);

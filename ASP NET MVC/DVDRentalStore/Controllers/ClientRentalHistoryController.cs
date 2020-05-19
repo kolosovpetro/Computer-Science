@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
-using DVDRentalStore.Misc;
-using DVDRentalStore.Models;
+using DVDRentalStore.Repositories;
+using DVDRentalStore.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,36 +25,27 @@ namespace DVDRentalStore.Controllers
             _moviesRepository = new MoviesRepository(_dbFactory);
         }
 
-        private IEnumerable<MoviesModel> GetHistory(int clientId)
+        private IEnumerable<ClientHistoryViewModel> GetHistory(int clientId)
         {
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<ClientHistoryQueryObject, MoviesModel>());    // configure auto-mapper
-
-            var mapper = new Mapper(config);    // create new auto-mapper instance
-
-            // get required collection
-            var query = (from r in _rentalsRepository.GetAll()
-                         join c in _clientsRepository.GetAll()
-                             on r.ClientId equals c.ClientId
-                         join cop in _copiesRepository.GetAll()
-                             on r.CopyId equals cop.CopyId
-                         join mov in _moviesRepository.GetAll()
-                             on cop.MovieId equals mov.MovieId
-                         select new ClientHistoryQueryObject()
-                         {
-                             Title = mov.Title,
-                             Year = mov.Year,
-                             AgeRestriction = mov.AgeRestriction,
-                             MovieId = mov.MovieId,
-                             Price = mov.Price,
-                             ClientId = c.ClientId
-                         })
-                .Where(x => x.ClientId == clientId)
+            return (from r in _rentalsRepository.GetAll()
+                    join c in _clientsRepository.GetAll()
+                        on r.ClientId equals c.ClientId
+                    join cop in _copiesRepository.GetAll()
+                        on r.CopyId equals cop.CopyId
+                    join mov in _moviesRepository.GetAll()
+                        on cop.MovieId equals mov.MovieId
+                    select new ClientHistoryViewModel()
+                    {
+                        Title = mov.Title,
+                        Year = mov.Year,
+                        AgeRestriction = mov.AgeRestriction,
+                        MovieId = mov.MovieId,
+                        Price = mov.Price,
+                        Client = c
+                    })
+                .Where(x => x.Client.ClientId == clientId)
                 .OrderBy(x => x.MovieId)
-                .Distinct()
-                .ToList();
-
-            return mapper.Map<IEnumerable<MoviesModel>>(query);     // return mapper collection
+                .Distinct();
         }
 
         public IActionResult ClientRentalHistory()

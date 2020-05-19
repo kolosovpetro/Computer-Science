@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using DVDRentalStore.DAL;
+using DVDRentalStore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace DVDRentalStore.Infrastructure
+namespace DVDRentalStore.Repositories
 {
     public class RepositoryBase<T> : IRepository<T> where T : class
     {

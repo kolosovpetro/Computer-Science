@@ -1,7 +1,7 @@
 ﻿using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
 
-namespace DVDRentalStore.DAL
+namespace DVDRentalStore.Repositories
 {
     public class ClientsRepository : RepositoryBase<ClientsModel>
     {

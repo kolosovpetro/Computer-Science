@@ -1,7 +1,7 @@
 ﻿using System;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

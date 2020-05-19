@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

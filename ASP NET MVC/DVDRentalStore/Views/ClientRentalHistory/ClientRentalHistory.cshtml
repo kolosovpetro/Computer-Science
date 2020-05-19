@@ -1,16 +1,15 @@
-﻿@model IEnumerable<DVDRentalStore.Models.MoviesModel>
+﻿@model IEnumerable<DVDRentalStore.ViewModels.ClientHistoryViewModel>
 
 @{
     ViewData["Title"] = "RentHistory";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var client = ViewData["Client"] as ClientsModel;
 }
 
 
 <h1>
     Rental history of
-    @client?.FirstName
-    @client?.LastName
+    @Model.FirstOrDefault()?.Client.FirstName
+    @Model.FirstOrDefault()?.Client.LastName
 </h1>
 
 <table class="table">
@@ -58,5 +57,5 @@
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("To Dashboard", "UserDashboard", "UserDashboard", new { id = client?.ClientId })
+    @Html.ActionLink("To Dashboard", "UserDashboard", "UserDashboard", new { id = Model.FirstOrDefault()?.Client.ClientId })
 </div>

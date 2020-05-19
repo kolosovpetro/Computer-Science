@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace DVDRentalStore.Infrastructure
+namespace DVDRentalStore.Repositories
 {
     internal interface IRepository<T> where T : class
     {

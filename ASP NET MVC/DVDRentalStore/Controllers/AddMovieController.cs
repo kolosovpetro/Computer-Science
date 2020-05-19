@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Linq;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Models;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,8 +27,7 @@ namespace DVDRentalStore.Controllers
         [HttpPost]
         public IActionResult AddMovie(IFormCollection collection)
         {
-            var id = _moviesRepository.GetAll()
-                .Max(x => x.MovieId) + 1;   // calculate new movie id
+            var id = _moviesRepository.GetAll().Max(x => x.MovieId) + 1;
 
             var title = collection["Title"].ToString();
             var year = int.Parse(collection["Year"]);

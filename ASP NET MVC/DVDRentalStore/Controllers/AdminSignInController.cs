@@ -1,5 +1,5 @@
-﻿using DVDRentalStore.DAL;
-using DVDRentalStore.Infrastructure;
+﻿using DVDRentalStore.Infrastructure;
+using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +30,7 @@ namespace DVDRentalStore.Controllers
             var admin = _employeesRepository
                 .Get(x => x.FirstName == username && x.LastName == password);
 
-            if (admin == null)
+            if (admin == null) 
                 return NotFound("There is no such employee");
 
             HttpContext.Session.SetInt32("adminId", admin.EmployeeId);

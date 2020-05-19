@@ -5,13 +5,11 @@
 }
 
 <h1>DVD Rental Store</h1>
-<p>Menu:</p>
-<br />
-@Html.ActionLink("Home", "Index", "Home")
-<br />
-@Html.ActionLink("Register", "Index", "Register")
-<br />
-@Html.ActionLink("User's Login", "Index", "UserSignIn")
-<br />
-@Html.ActionLink("Admin Login", "AdminSignIn", "AdminSignIn")
+<h3>Menu:</h3>
+<ul>
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("Register", "Index", "Register")</li>
+    <li>@Html.ActionLink("User's Login", "Index", "UserSignIn")</li>
+    <li>@Html.ActionLink("Admin Login", "AdminSignIn", "AdminSignIn")</li>
+</ul>
 
