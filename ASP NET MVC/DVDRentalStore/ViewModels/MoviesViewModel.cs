@@ -1,6 +1,4 @@
-﻿using DVDRentalStore.Models;
-
-namespace DVDRentalStore.ViewModels
+﻿namespace DVDRentalStore.ViewModels
 {
     public class MoviesViewModel
     {
@@ -10,6 +8,5 @@ namespace DVDRentalStore.ViewModels
         public int MovieId { get; set; }
         public float? Price { get; set; }
         public bool? Available { get; set; }
-        public ClientsModel Client { get; set; }
     }
 }

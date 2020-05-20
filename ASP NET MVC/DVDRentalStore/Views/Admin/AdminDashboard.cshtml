@@ -1,0 +1,15 @@
+﻿@model DVDRentalStore.Models.EmployeesModel
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Administrator dashboard</h2>
+<p>
+    Welcome,
+    @Model.FirstName
+    @Model.LastName
+</p>
+<p>@Html.ActionLink("List of Clients", "ListOfClients", "Admin")</p>
+<p>@Html.ActionLink("List of Movies", "ListOfMovies", "Admin")</p>

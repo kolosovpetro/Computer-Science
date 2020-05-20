@@ -7,7 +7,7 @@
 
 
 <h1>Choose movie to rent</h1>
-<p>Account name: @Model.FirstOrDefault()?.Client.FirstName @Model.FirstOrDefault()?.Client.LastName</p>
+<p>Account name: </p>
 
 <table class="table">
     <thead>
@@ -57,5 +57,5 @@
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("To Dashboard", "UserDashboard", "UserDashboard", new { id = Model.FirstOrDefault()?.Client.ClientId })
+    @Html.ActionLink("To Dashboard", "UserDashboard", "ClientDashboard")
 </div>
