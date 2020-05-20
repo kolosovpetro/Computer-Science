@@ -7,10 +7,10 @@
 
 <h1>Dashboard</h1>
 <p>
-    Welcome 
-    @Html.DisplayFor(modelItem => Model.FirstName), 
+    Welcome
+    @Html.DisplayFor(modelItem => Model.FirstName),
     @Html.DisplayFor(modelItem => Model.LastName)
 </p>
 <p>@Html.ActionLink("Rent Movie", "Rent", "Rent")</p>
-<p>@Html.ActionLink("View rental history", "ClientRentalHistory", "ClientRentalHistory")</p>
+<p>@Html.ActionLink("View rental history", "ClientRentalHistory", "ClientHistory", new { id = Model.ClientId })</p>
 

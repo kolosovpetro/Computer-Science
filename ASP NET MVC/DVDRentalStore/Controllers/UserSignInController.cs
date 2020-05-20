@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -30,13 +29,13 @@ namespace DVDRentalStore.Controllers
             var username = collection["FirstName"].ToString();
             var password = collection["LastName"].ToString();
 
-            var user = _clientsRepository.GetAll()
+            var client = _clientsRepository.GetAll()
                 .FirstOrDefault(x => x.FirstName == username && x.LastName == password);
 
-            if (user == null)
+            if (client == null)
                 return NotFound("Wrong username or password");
 
-            return RedirectToAction("UserDashboard", "UserDashboard", new { id = user.ClientId });
+            return RedirectToAction("UserDashboard", "UserDashboard", new { id = client.ClientId });
         }
     }
 }

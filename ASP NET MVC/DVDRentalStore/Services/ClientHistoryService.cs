@@ -3,29 +3,26 @@ using System.Linq;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Repositories;
 using DVDRentalStore.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace DVDRentalStore.Controllers
+namespace DVDRentalStore.Services
 {
-    public class ClientRentalHistoryController : Controller
+    public class ClientHistoryService
     {
-        private readonly IDbFactory _dbFactory;
         private readonly CopiesRepository _copiesRepository;
         private readonly ClientsRepository _clientsRepository;
         private readonly RentalsRepository _rentalsRepository;
         private readonly MoviesRepository _moviesRepository;
 
-        public ClientRentalHistoryController()
+        public ClientHistoryService()
         {
-            _dbFactory = new DbFactory();
-            _copiesRepository = new CopiesRepository(_dbFactory);
-            _clientsRepository = new ClientsRepository(_dbFactory);
-            _rentalsRepository = new RentalsRepository(_dbFactory);
-            _moviesRepository = new MoviesRepository(_dbFactory);
+            IDbFactory dbFactory = new DbFactory();
+            _copiesRepository = new CopiesRepository(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
+            _rentalsRepository = new RentalsRepository(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
         }
 
-        private IEnumerable<ClientHistoryViewModel> GetHistory(int clientId)
+        public IEnumerable<ClientHistoryViewModel> GetHistory(int clientId)
         {
             return (from r in _rentalsRepository.GetAll()
                     join c in _clientsRepository.GetAll()
@@ -34,7 +31,7 @@ namespace DVDRentalStore.Controllers
                         on r.CopyId equals cop.CopyId
                     join mov in _moviesRepository.GetAll()
                         on cop.MovieId equals mov.MovieId
-                    select new ClientHistoryViewModel()
+                    select new ClientHistoryViewModel
                     {
                         Title = mov.Title,
                         Year = mov.Year,
@@ -46,19 +43,6 @@ namespace DVDRentalStore.Controllers
                 .Where(x => x.Client.ClientId == clientId)
                 .OrderBy(x => x.MovieId)
                 .Distinct();
-        }
-
-        public IActionResult ClientRentalHistory()
-        {
-            // ReSharper disable once PossibleInvalidOperationException
-            var clientId = (int)HttpContext.Session.GetInt32("userId");
-
-            var client = _dbFactory.Init().Clients
-                .FirstOrDefault(x => x.ClientId == clientId);   // we access this way since of 2-pkey
-
-            ViewData["Client"] = client;
-
-            return View(GetHistory(clientId));
         }
     }
 }

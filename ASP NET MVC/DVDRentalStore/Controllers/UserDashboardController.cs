@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-using DVDRentalStore.DAL;
 using DVDRentalStore.Infrastructure;
 using DVDRentalStore.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DVDRentalStore.Controllers
@@ -22,9 +20,6 @@ namespace DVDRentalStore.Controllers
         {
             var client = _clientsRepository.GetAll()
                 .FirstOrDefault(x => x.ClientId == id);
-
-            if (client != null)
-                HttpContext.Session.SetInt32("userId", client.ClientId);
 
             return View(client);
         }
