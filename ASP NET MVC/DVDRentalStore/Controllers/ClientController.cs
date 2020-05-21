@@ -18,9 +18,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult ClientRegister(IFormCollection collection)
         {
             var client = _services.ClientRegisterPost(collection);
-
             _services.AddToDatabase(client);
-
             return RedirectToAction("Success", "Client", new { id = client });
         }
 
@@ -41,10 +39,7 @@ namespace DVDRentalStore.Controllers
         public IActionResult Index(IFormCollection collection)
         {
             var client = _services.ClientSignInModel(collection);
-
-            if (client == null)
-                return NotFound("Wrong username or password");
-
+            if (client == null) return NotFound("Wrong username or password");
             return RedirectToAction("ClientDashboard", "Client", new { id = client.ClientId });
         }
 

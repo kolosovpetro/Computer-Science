@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using DVDRentalStore.Models;
+﻿using DVDRentalStore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVDRentalStore.DAL

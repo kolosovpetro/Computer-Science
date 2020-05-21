@@ -12,5 +12,5 @@
     @Html.DisplayFor(modelItem => Model.LastName)
 </p>
 <p>@Html.ActionLink("Rent Movie", "Rent", "Client", new { id = Model.ClientId })</p>
-<p>@Html.ActionLink("View rental history", "ClientRentalHistory", "ClientHistory", new { id = Model.ClientId })</p>
+<p>@Html.ActionLink("View rental history", "ClientRentalHistory", "Client", new { id = Model.ClientId })</p>
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using DVDRentalStore.Infrastructure;
@@ -18,11 +19,12 @@ namespace DVDRentalStore.Services
 
         public AdminServices()
         {
-            _copiesRepository = new CopiesRepository(new DbFactory());
-            _clientsRepository = new ClientsRepository(new DbFactory());
-            _rentalsRepository = new RentalsRepository(new DbFactory());
-            _moviesRepository = new MoviesRepository(new DbFactory());
-            _employeesRepository = new EmployeesRepository(new DbFactory());
+            IDbFactory dbFactory = new DbFactory();
+            _copiesRepository = new CopiesRepository(dbFactory);
+            _clientsRepository = new ClientsRepository(dbFactory);
+            _rentalsRepository = new RentalsRepository(dbFactory);
+            _moviesRepository = new MoviesRepository(dbFactory);
+            _employeesRepository = new EmployeesRepository(dbFactory);
         }
 
         // admin sign in view model
@@ -30,17 +32,13 @@ namespace DVDRentalStore.Services
         {
             var username = collection["FirstName"].ToString();
             var password = collection["LastName"].ToString();
-
-            var admin = _employeesRepository
-                .Get(x => x.FirstName == username && x.LastName == password);
-            return admin;
+            return _employeesRepository.Get(x => x.FirstName == username && x.LastName == password);
         }
 
         // admin dashboard view model
-        public EmployeesModel AdminDashboardModel(int id)
+        public EmployeesModel GetEmployeeModelById(int adminId)
         {
-            var admin = _employeesRepository.Get(x => x.EmployeeId == id);
-            return admin;
+            return _employeesRepository.GetById(adminId);
         }
 
         // add client auxiliary methods
@@ -51,27 +49,25 @@ namespace DVDRentalStore.Services
             var lastname = collection["LastName"].ToString();
             var birthday = Convert.ToDateTime(collection["Birthday"]);
 
-            var client = new ClientsModel
+            return new ClientsModel
             {
                 ClientId = id,
                 FirstName = firstname,
                 LastName = lastname,
                 Birthday = birthday
             };
-            return client;
         }
 
-        public void SaveClientInDatabase(ClientsModel client)
+        public void AddAndSaveClientInDatabase(ClientsModel client)
         {
             _clientsRepository.Add(client);
             _clientsRepository.Save();
         }
 
         // edit client
-        public ClientsModel EditClientModel(int id)
+        public ClientsModel GetClientModelById(int id)
         {
-            var client = _clientsRepository.GetById(id);
-            return client;
+            return _clientsRepository.GetById(id);
         }
 
         public void EditAndSaveClient(int id, IFormCollection collection)
@@ -89,27 +85,18 @@ namespace DVDRentalStore.Services
         }
 
         // list of movies model
-        public IOrderedEnumerable<MoviesModel> ListOfMoviesModel()
+        public IEnumerable<MoviesModel> ListOfMoviesModel()
         {
-            var movies = _moviesRepository.GetAll()
-                .OrderBy(x => x.MovieId);
-            return movies;
+            return _moviesRepository.GetAll().OrderBy(x => x.MovieId);
         }
 
         // list of clients model
-        public IOrderedEnumerable<ClientsModel> ListOfClientModel()
+        public IEnumerable<ClientsModel> ListOfClientModel()
         {
-            var clients = _clientsRepository.GetAll()
-                .OrderBy(x => x.ClientId);
-            return clients;
+            return _clientsRepository.GetAll().OrderBy(x => x.ClientId);
         }
 
         // edit movie auxiliaries
-        public MoviesModel EditMovieModel(int movieId)
-        {
-            var movie = _moviesRepository.GetById(movieId);
-            return movie;
-        }
 
         public void EditAndSaveMovie(int movieId, IFormCollection collection)
         {
@@ -129,10 +116,9 @@ namespace DVDRentalStore.Services
         }
 
         // delete movie auxiliaries
-        public MoviesModel DeleteMovieModel(int id)
+        public MoviesModel GetMovieById(int movieId)
         {
-            var movie = _moviesRepository.GetById(id);
-            return movie;
+            return _moviesRepository.GetById(movieId);
         }
 
         public void DeleteAndSaveMovie(int? movieId)
@@ -159,7 +145,7 @@ namespace DVDRentalStore.Services
             var price = float.Parse(collection["Price"].ToString(), CultureInfo.InvariantCulture);
             var ageRestriction = int.Parse(collection["AgeRestriction"]);
 
-            var movie = new MoviesModel
+            return new MoviesModel
             {
                 Title = title,
                 MovieId = id,
@@ -167,7 +153,6 @@ namespace DVDRentalStore.Services
                 AgeRestriction = ageRestriction,
                 Price = price
             };
-            return movie;
         }
 
         public void AddAndSaveMovie(MoviesModel movie)
@@ -177,11 +162,6 @@ namespace DVDRentalStore.Services
         }
 
         // delete client auxiliaries
-        public ClientsModel DeleteClientModel(int id)
-        {
-            var client = _clientsRepository.GetById(id);
-            return client;
-        }
 
         public void DeleteAndSaveClient(int? clientId)
         {

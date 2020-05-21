@@ -18,7 +18,7 @@ namespace DVDRentalStore.Repositories
 
         protected RentalContext DbContext => _rentalContext ??= DbFactory.Init();
 
-        protected RepositoryBase(IDbFactory dbFactory)
+        public RepositoryBase(IDbFactory dbFactory)
         {
             DbFactory = dbFactory;
             _dbSet = DbContext.Set<T>();

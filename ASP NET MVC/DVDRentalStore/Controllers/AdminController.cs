@@ -18,16 +18,21 @@ namespace DVDRentalStore.Controllers
         public IActionResult AdminSignIn(IFormCollection collection)
         {
             var admin = _adminServices.AdminSignInModel(collection);
-            if (admin == null) return NotFound("There is no such employee");
-            return RedirectToAction("AdminDashboard", "Admin", new { id = admin.EmployeeId });
+            if (admin == null)
+                return NotFound("Wrong login or password");
+            HttpContext.Session.SetInt32("AdminId", admin.EmployeeId);      // set admin id in session
+            return RedirectToAction("AdminDashboard", "Admin");
         }
 
         [HttpGet]
-        public IActionResult AdminDashboard(int id)
+        public IActionResult AdminDashboard()
         {
-            var admin = _adminServices.AdminDashboardModel(id);
-            if (admin == null) return NotFound("No such admin user or wrong attempt to connect");
+            var adminId = HttpContext.Session.GetInt32("AdminId");
+            if (adminId == null)
+                return NotFound("Wrong login or password");
+            var admin = _adminServices.GetEmployeeModelById((int)adminId);
             return View(admin);
+
         }
 
         [HttpGet]
@@ -40,15 +45,16 @@ namespace DVDRentalStore.Controllers
         public IActionResult AddClient(IFormCollection collection)
         {
             var client = _adminServices.AddClientModel(collection);
-            _adminServices.SaveClientInDatabase(client);
+            _adminServices.AddAndSaveClientInDatabase(client);
             return RedirectToAction("AdminDashboard", "Admin");
         }
 
         [HttpGet]
         public IActionResult EditClient(int id)
         {
-            var client = _adminServices.EditClientModel(id);
-            if (client == null) return NotFound("No such client in database");
+            var client = _adminServices.GetClientModelById(id);
+            if (client == null)
+                return NotFound("No such client in database");
             return View(client);
         }
 
@@ -74,24 +80,24 @@ namespace DVDRentalStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditMovie(int movieId)
+        public IActionResult EditMovie(int id)
         {
-            var movie = _adminServices.EditMovieModel(movieId);
+            var movie = _adminServices.GetMovieById(id);
             if (movie == null) return NotFound("No such movie in database");
             return View(movie);
         }
 
         [HttpPost]
-        public IActionResult EditMovie(int movieId, IFormCollection collection)
+        public IActionResult EditMovie(int id, IFormCollection collection)
         {
-            _adminServices.EditAndSaveMovie(movieId, collection);
+            _adminServices.EditAndSaveMovie(id, collection);
             return RedirectToAction("AdminDashboard", "Admin");
         }
 
         [HttpGet]
         public IActionResult DeleteMovie(int id)
         {
-            var movie = _adminServices.DeleteMovieModel(id);
+            var movie = _adminServices.GetMovieById(id);
             HttpContext.Session.SetInt32("movieId", id);
             return View(movie);
         }
@@ -119,10 +125,10 @@ namespace DVDRentalStore.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteClient(int id)
+        public IActionResult DeleteClient(int clientId)
         {
-            var client = _adminServices.DeleteClientModel(id);
-            HttpContext.Session.SetInt32("clientId", id);
+            var client = _adminServices.GetClientModelById(clientId);
+            HttpContext.Session.SetInt32("clientId", clientId);
             return View(client);
         }
 

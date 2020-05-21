@@ -7,9 +7,6 @@
 
 <h1>List of movies in Rental Store</h1>
 
-<p>
-    <a asp-controller="Admin" asp-action="AddMovie">Add new Movie</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -51,13 +48,13 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditMovie", "EditMovie", new { id = item.MovieId }) |
-                    @Html.ActionLink("Delete", "DeleteMovie", "DeleteMovie", new { id = item.MovieId })
+                    @Html.ActionLink("Edit", "EditMovie", "Admin", new { id = item.MovieId }) |
+                    @Html.ActionLink("Delete", "DeleteMovie", "Admin", new { id = item.MovieId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("To Dashboard", "AdminDashboard", "AdminDashboard")
+    @Html.ActionLink("To Dashboard", "AdminDashboard", "Admin")
 </div>
