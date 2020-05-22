@@ -1,17 +1,17 @@
 ### ASP NET Core Identity using PostgreSql database
 
-1. Connect assemblies 
+- Connect assemblies 
 ```cs
 	Npgsql.EntityFrameworkCore.PostgreSQL
 	Npgsql.EntityFrameworkCore.PostgreSQL.Design
 ```
-1. Update Connection string in appsettings.json to be, for example
+- Update Connection string in appsettings.json to be, for example
 ```cs
 	"ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Port=5432;Database=IdentityTest;User Id=postgres;Password=postgres;"
 ```
-1. Scaffold Identity usging Project -> Add -> New Scaffolding Item -> Identity. Mark the functionlities to be provided and link database context.
-1. In Startup.cs change the db operator, namely use
+- Scaffold Identity usging Project -> Add -> New Scaffolding Item -> Identity. Mark the functionlities to be provided and link database context.
+- In Startup.cs change the db operator, namely use
 ```cs
 	public void ConfigureServices(IServiceCollection services)
         {
@@ -24,9 +24,9 @@
             services.AddRazorPages();
         }
 ```
-1. Delete existing migration since it is created for MSSQL db
-1. Recreate migration using the command `Add-Migration InitialMigration`, it will create postgre-friendly migration
-1. Update database using `Update-Database`
+- Delete existing migration since it is created for MSSQL db
+- Recreate migration using the command `Add-Migration InitialMigration`, it will create postgre-friendly migration
+- Update database using `Update-Database`
 
 
 
