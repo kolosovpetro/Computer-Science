@@ -1,0 +1,48 @@
+﻿@model ClientsModel
+
+@{
+    ViewData["Title"] = "DeleteClient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete Client</h1>
+
+<h3>
+    Are you sure you want to delete client
+    @Html.DisplayFor(item => Model.FirstName)
+    @Html.DisplayFor(item => Model.LastName)?
+</h3>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClientId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClientId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+    </dl>
+
+    <form asp-action="DeleteClient">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="Admin" asp-action="AdminDashboard">Cancel</a>
+    </form>
+</div>

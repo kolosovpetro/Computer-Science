@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ClientsModel>
+
+@{
+    ViewData["Title"] = "Clients of DVD Rental Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Our Clients</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthday)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditClient", "Admin", new { id = item.ClientId }) |
+                    @Html.ActionLink("Delete", "DeleteClient", "Admin", new { id = item.ClientId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("To Dashboard", "AdminDashboard", "Admin")
+</div>
