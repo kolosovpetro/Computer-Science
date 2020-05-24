@@ -1,3 +1,19 @@
+### DVD Rental Store Implementation
+
+#### Functionlity to be implemented:
+
+For the moment, functionalities are not divided by roles, all in one now
+
+- Add movie to db
+- Edit existing movie
+- List of movies and available copies count for each. Modify ViewModel to get copies count.
+- Manage user roles. Follow metanit guide
+- Modify client entity. Add username column. Migrate changes
+- Rent movie. Date of rental = now, Date of return = null
+- List of active rentals of current user with return functionality
+- Retrun Movie. Clientid = this.client.id, Copy id = @Model.CopyId
+ 
+
 ### ASP NET Core Identity using PostgreSql database
 
 - Connect assemblies 

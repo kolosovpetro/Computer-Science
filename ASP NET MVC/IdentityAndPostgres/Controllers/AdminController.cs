@@ -1,4 +1,5 @@
 ﻿using IdentityAndPostgres.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace IdentityAndPostgres.Controllers
         private readonly AdminServices _adminServices = new AdminServices();
 
         [HttpGet]
+        
         public IActionResult AdminSignIn()
         {
             return View();

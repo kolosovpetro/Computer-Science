@@ -1,4 +1,5 @@
 ﻿using IdentityAndPostgres.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace IdentityAndPostgres.Controllers
         private readonly ClientServices _services = new ClientServices();
 
         [HttpGet]
+        [Authorize]
         public IActionResult ClientRegister()
         {
             return View();
@@ -51,6 +53,7 @@ namespace IdentityAndPostgres.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Rent()
         {
             var viewModel = _services.RentMovieViewModel();
@@ -58,6 +61,7 @@ namespace IdentityAndPostgres.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult ClientRentalHistory(int clientId)
         {
             return View(_services.GetHistory(clientId));

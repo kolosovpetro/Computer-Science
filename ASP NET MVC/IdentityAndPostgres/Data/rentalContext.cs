@@ -1,5 +1,7 @@
-﻿using IdentityAndPostgres.Models;
+﻿using System;
+using IdentityAndPostgres.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace IdentityAndPostgres.Data
 {
@@ -24,9 +26,14 @@ namespace IdentityAndPostgres.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Server=localhost;User Id=postgres;Password=postgres;Database=rental_cascade;");
+                optionsBuilder.UseNpgsql(configuration.GetConnectionString("RentalsConnection"));
             }
         }
 
