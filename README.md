@@ -122,6 +122,8 @@ A set of principles recommended to follow in order to maintain business applicat
 
 ## ASP NET MVC Core
 
+- https://github.com/kolosovpetro/Computer-Science/tree/develop/ASP%20NET%20MVC
+
 ## PostgreSQL and Entity Framework Core
 
 - Code First Approach (Migrations)
@@ -137,41 +139,43 @@ A set of principles recommended to follow in order to maintain business applicat
 
 ## Information
 
-- C# Keywords
+- **C# Keywords**
   - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Keywords
-- Mutable and Immutable types
+- **Mutable and Immutable types**
   - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/MutablesAndImmutables
-- Notes
+- **Notes**
   - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Notes
-- Nullable structs
+- **Nullable structs**
   - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Nullables
-- Git pull request guide
-  - 
-- Terminology
+- **Git pull request guide**
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/GitPullRequest
+- **Terminology**
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Terminology
 
 ## Computational Methods
 
-* Numerical Sys. Converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
-* System of Linear Equations Solver
-* Polynomial Interpolation (Vandermonde method)
-* Discrete Integration (Simpson's, Trapezoidal methods)
-* Monte Carlo Method (Estimation on the plan finishing time)
+- Numerical Sys. Converter (Guide now not to write code)
+- System of Linear Equations Solver
+- Polynomial Interpolation (Vandermonde method)
+- Discrete Integration (Simpson's, Trapezoidal methods)
+- Monte Carlo Method (Estimation on the plan finishing time)
 
 ## Algorithms
 
 Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
 
 - **Search Algorithms and their benchmark measurements**
-  - Linear Searches
+  - Linear Search
   - Binary Search
+  
 - **Sort Algorithms and their benchmark measurements**
-  - Bubble sort O(n^2)
-  - Cocktail sort (Buble 2 pass sort) O(n^2)
-  - Counting sort O(n+k), k = non negative terms count
-  - Insertion sort O(n)
-  - Merge sort O(n*log(n))
-  - Quick sort O(log(n))
-  - Selection sort O(n^2)
+  - Bubble sort. Complexity O(n^2)
+  - Cocktail sort. Complexity (Buble 2 pass sort) O(n^2)
+  - Counting sort. Complexity O(n+k), k = non negative terms count
+  - Insertion sort. Complexity O(n)
+  - Merge sort. Complexity O(n*log(n))
+  - Quick sort. Complexity O(log(n))
+  - Selection. Complexity sort O(n^2)
 
 ## Useful Links
 
