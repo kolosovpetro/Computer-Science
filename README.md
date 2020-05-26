@@ -20,28 +20,28 @@
 
 ## Introduction to Computer Programming
 
-- **Assignments 1**. Read input from keyboard, casting variables, elementary loops
+- **Assignments 1**. Read input from keyboard, Casting variables, Elementary loops
   - Lecture: https://kolosovpetro.github.io/cs/itcp/01Introduction.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/01Introduction_Exercises.pdf
-- **Assignments 2**. Proper input verification, conditional statements [if, switch, ternary operator], sorting network
+- **Assignments 2**. Proper input verification, Conditional statements [if, switch, ternary operator], Sorting network
   - Lecture: https://kolosovpetro.github.io/cs/itcp/02Basics.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/02Basics_Exercises.pdf
-- **Assignments 3**. Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random
+- **Assignments 3**. Enums, String to enum parse, Menu using enum, Switch statement, Stringbuilder, Random
   - Lecture: https://kolosovpetro.github.io/cs/itcp/03Basics.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/03Basics_Exercises.pdf
-- **Assignments 4**. Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game
+- **Assignments 4**. Arrays, Bubble sort, Sieve of Eratosthenes, Tic-tac-toe console game
   - Lecture: https://kolosovpetro.github.io/cs/itcp/04Arrays.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/04Arrays_Exercises.pdf
-- **Assignments 5**. Structs, reccursive functions, tic-tac-toc class segragation
+- **Assignments 5**. Structs, Reccursive functions, Tic-tac-toc class segragation
   - Lecture: https://kolosovpetro.github.io/cs/itcp/05Functions.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/05Functions_Exercises.pdf
-- **Assignments 5**. Libraries. Creating of class libraries, make reference to them in entry point project and execute
+- **Assignments 5**. Libraries. Creating of class libraries, making reference to them in entry point project and execute
   - Lecture: https://kolosovpetro.github.io/cs/itcp/05Functions.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/05Functions_Exercises.pdf
-- **Assignments 6**. Writing to files, reading from files, nested loops, date-time, creating folders, value tuples
+- **Assignments 6**. Writing to files, Reading from files, Nested loops, Date-time, Creating folders, Value tuples
   - Lecture: https://kolosovpetro.github.io/cs/itcp/06Streams.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/06Streams_Exercises.pdf
-- **Assignments 7**. NUnit tests [exception test], documentation, custom exceptions
+- **Assignments 7**. NUnit testing framework [exception test], Documentation, Custom exceptions
   - Lecture: https://kolosovpetro.github.io/cs/itcp/07Documentation.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/07Documentation_Exercises.pdf
 
@@ -49,13 +49,13 @@
 
 Refer to https://kolosovpetro.github.io/cs/oop/
 
-- **Object-oriented programming 1**. Encapsulation, getters, setters, access modifiers
+- **Object-oriented programming 1**. Encapsulation, Getters, Setters, Access modifiers
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_01.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task1.pdf
-- **Object-oriented programming 2**. Constructors, constructor flow, this reference
+- **Object-oriented programming 2**. Constructors, Constructor flow, This reference
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_02.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task2.pdf
-- **Object-oriented programming 3**. Inheritance, overriding, base keyword, polymorphism, upcast
+- **Object-oriented programming 3**. Inheritance, Overriding, base keyword, Polymorphism, Upcast
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_03.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task3.pdf
   - Polymorphism types: Ad-Hoc (overload of methods), Parametrical (Generics), Subtype polymorphism (Upcast, downcast)
@@ -73,21 +73,21 @@ Refer to https://kolosovpetro.github.io/cs/oop/
 
 Refer to website: https://refactoring.guru/design-patterns
 
-- Creational
+- **Creational**
   - Factory Method (Extends functionality of program)
   - Abstract Factory
   - Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
   - Prototype (Deepcopy of class)
-- Structural
+- **Structural**
   - Decorator (Combines required functionalities)
   - Bridge
-- Behavioral
+- **Behavioral**
   - Observer (Defines interaction between two or more classes)
   - Strategy (Extends functionality of program)
 
 ## Data Structures
 
-- Implemented data structures are
+- **Implemented data structures**
   - Dictionary
   - Graph
   - Heap
@@ -99,10 +99,10 @@ Refer to website: https://refactoring.guru/design-patterns
   - Binary Search Tree (in progress. See good visualization: http://btv.melezinek.cz/binary-search-tree.html)
   - Generic List (in progress)
 
-- To be implemented in future
+- **To be implemented**
   - Priority Queue
 
-- What's used
+- **What's used**
   - NUnit UnitTest Framework
   - Generics
   - Indexers
@@ -137,6 +137,18 @@ A set of principles recommended to follow in order to maintain business applicat
 
 ## Information
 
+- C# Keywords
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Keywords
+- Mutable and Immutable types
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/MutablesAndImmutables
+- Notes
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Notes
+- Nullable structs
+  - https://github.com/kolosovpetro/Computer-Science/tree/develop/Information/Nullables
+- Git pull request guide
+  - 
+- Terminology
+
 ## Computational Methods
 
 * Numerical Sys. Converter (Pure example how to break all SOLID rules in 1 class, **DO NOT WRITE CODE THIS WAY**)
@@ -149,10 +161,10 @@ A set of principles recommended to follow in order to maintain business applicat
 
 Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
 
-- Search Algorithms (and their benchmark measurement)
+- **Search Algorithms and their benchmark measurements**
   - Linear Searches
   - Binary Search
-- Sort Algorithms
+- **Sort Algorithms and their benchmark measurements**
   - Bubble sort O(n^2)
   - Cocktail sort (Buble 2 pass sort) O(n^2)
   - Counting sort O(n+k), k = non negative terms count
