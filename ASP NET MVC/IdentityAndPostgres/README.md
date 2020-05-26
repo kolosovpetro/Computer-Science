@@ -4,7 +4,7 @@
 
 For the moment, functionalities are not divided by roles, all in one now
 
-- Add movie to db
+- Add movie
 - Edit existing movie
 - List of movies and available copies count for each. Modify ViewModel to get copies count.
 - Manage user roles. Follow metanit guide

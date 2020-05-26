@@ -1,5 +1,8 @@
-﻿using IdentityAndPostgres.Services;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using IdentityAndPostgres.Models;
+using IdentityAndPostgres.Services;
+using IdentityAndPostgres.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +13,7 @@ namespace IdentityAndPostgres.Controllers
         private readonly AdminServices _adminServices = new AdminServices();
 
         [HttpGet]
-        
+
         public IActionResult AdminSignIn()
         {
             return View();
@@ -71,7 +74,14 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult ListOfMovies()
         {
             var movies = _adminServices.ListOfMoviesModel();
-            return View(movies);
+            // configure automapper
+            var config = new MapperConfiguration(cfg => cfg
+                .CreateMap<MoviesModel, MoviesViewModel>());
+            // create automapper instance
+            var mapper = new Mapper(config);
+            // mapping
+            var viewModel = mapper.Map<IEnumerable<MoviesViewModel>>(movies);
+            return View(viewModel);
         }
 
         [HttpGet]

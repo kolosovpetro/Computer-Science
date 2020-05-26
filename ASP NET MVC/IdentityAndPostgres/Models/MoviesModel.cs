@@ -15,7 +15,6 @@ namespace IdentityAndPostgres.Models
         public int? AgeRestriction { get; set; }
         public int MovieId { get; set; }
         public float? Price { get; set; }
-
         public virtual ICollection<CopiesModel> Copies { get; set; }
         public virtual ICollection<StarringModel> Starring { get; set; }
 

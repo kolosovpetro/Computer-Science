@@ -62,9 +62,9 @@ namespace IdentityAndPostgres.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult ClientRentalHistory(int clientId)
+        public IActionResult ClientRentalHistory(int id)
         {
-            return View(_services.GetHistory(clientId));
+            return View(_services.GetHistory(id));
         }
     }
 }

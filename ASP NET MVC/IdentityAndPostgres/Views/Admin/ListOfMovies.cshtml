@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MoviesModel>
+﻿@model IEnumerable<IdentityAndPostgres.ViewModels.MoviesViewModel>
 
 @{
     ViewData["Title"] = "Movies";
@@ -25,6 +25,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CopiesCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvailableCopiesCount)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -48,6 +54,12 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CopiesCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvailableCopiesCount)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "EditMovie", "Admin", new { id = item.MovieId }) |
                     @Html.ActionLink("Delete", "DeleteMovie", "Admin", new { id = item.MovieId })
                 </td>
@@ -56,5 +68,5 @@
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("To Dashboard", "AdminDashboard", "Admin")
+    @Html.ActionLink("To Dashboard", "Index", "Home")
 </div>

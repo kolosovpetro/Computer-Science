@@ -41,6 +41,7 @@
                     @Html.DisplayFor(modelItem => item.Birthday)
                 </td>
                 <td>
+                    @Html.ActionLink("Rental History", "ClientRentalHistory", "Client", new { id = item.ClientId }) |
                     @Html.ActionLink("Edit", "EditClient", "Admin", new { id = item.ClientId }) |
                     @Html.ActionLink("Delete", "DeleteClient", "Admin", new { id = item.ClientId })
                 </td>
