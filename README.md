@@ -6,41 +6,42 @@
 
 - [Introduction to Computer Programming](#introduction-to-computer-programming)
 - [Object Oriented Programming](#object-oriented-programming)
-- [Algorithms](#algorithms)
-- [Data Structures](#data-structures)
 - [Design patterns](#design-patterns)
+- [Data Structures](#data-structures)
 - [SOLID](#solid)
+- [ASP .NET MVC Core](#asp-net-mvc-core)
+- [PostgreSQL and Entity Framework Core](#postgresql-and-entity-framework-core)
 - [ADO .NET](#ado-net)
-- [Git Simple Pull Request](#git-simple-pull-request)
+- [Information](#information)
 - [Computational Methods](#computational-methods)
-- [To Do List](#to-do-list)
+- [Algorithms](#algorithms)
 
 ---
 
 ## Introduction to Computer Programming
 
-- Assignments 1 (Read input from keyboard, casting variables, elementary loops)
+- Assignments 1. Read input from keyboard, casting variables, elementary loops
   - Lecture: https://kolosovpetro.github.io/cs/itcp/01Introduction.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/01Introduction_Exercises.pdf
-- Assignments 2 (Proper input verification, conditional statements [if, switch, ternary operator], sorting network)
+- Assignments 2. Proper input verification, conditional statements [if, switch, ternary operator], sorting network
   - Lecture: https://kolosovpetro.github.io/cs/itcp/02Basics.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/02Basics_Exercises.pdf
-- Assignments 3 (Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random)
+- Assignments 3. Enums, string to enum parse, menu using enum, switch statement, stringbuilder, random
   - Lecture: https://kolosovpetro.github.io/cs/itcp/03Basics.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/03Basics_Exercises.pdf
-- Assignments 4 (Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game)
+- Assignments 4. Arrays, bubble sort, sieve of eratosthenes, tic-tac-toe console game
   - Lecture: https://kolosovpetro.github.io/cs/itcp/04Arrays.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/04Arrays_Exercises.pdf
-- Assignments 5 (Structs, reccursive functions, tic-tac-toc class segragation)
+- Assignments 5. Structs, reccursive functions, tic-tac-toc class segragation
   - Lecture: https://kolosovpetro.github.io/cs/itcp/05Functions.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/05Functions_Exercises.pdf
-- Assignments 5 Library (Creating of class libraries, make reference to them in entry point project and execute)
+- Assignments 5. Libraries. Creating of class libraries, make reference to them in entry point project and execute
   - Lecture: https://kolosovpetro.github.io/cs/itcp/05Functions.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/05Functions_Exercises.pdf
-- Assignments 6 (Writing to files, reading from files, nested loops, date-time, creating folders, value tuples)
+- Assignments 6. Writing to files, reading from files, nested loops, date-time, creating folders, value tuples
   - Lecture: https://kolosovpetro.github.io/cs/itcp/06Streams.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/06Streams_Exercises.pdf
-- Assignments 7 (NUnit tests [exception test], documentation, custom exceptions)
+- Assignments 7. NUnit tests [exception test], documentation, custom exceptions
   - Lecture: https://kolosovpetro.github.io/cs/itcp/07Documentation.pdf
   - Tasks: https://kolosovpetro.github.io/cs/itcp/exercises/07Documentation_Exercises.pdf
 
@@ -48,43 +49,41 @@
 
 Refer to https://kolosovpetro.github.io/cs/oop/
 
-- OOP1 (Encapsulation, getters, setters, access modifiers)
+- Object-oriented programming 1. Encapsulation, getters, setters, access modifiers
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_01.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task1.pdf
-- OOP2 (Constructors, constructor flow, this reference)
+- Object-oriented programming 2. Constructors, constructor flow, this reference
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_02.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task2.pdf
-- OOP3 (Inheritance, overriding, base keyword, polymorphism, upcast)
+- Object-oriented programming 3. Inheritance, overriding, base keyword, polymorphism, upcast
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_03.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task3.pdf
   - Polymorphism types: Ad-Hoc (overload of methods), Parametrical (Generics), Subtype polymorphism (Upcast, downcast)
-- OOP4 (Interfaces, implementations)
+- Object-oriented programming 4. Interfaces, implementations
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_04.pdf
   - Tasks: https://kolosovpetro.github.io/cs/oop/exercises/Task4.pdf
-- Project (Hospital management application, WinForms). Contains all OOP techniques + binary serialization in use
-- Aggregation vs Composition. Definitions and comparisons.
-- Operator overriding
+- Project: Hospital management application, WinForms. Contains all OOP techniques + binary serialization in use
+- Object-oriented programming 5. Operator overriding
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_06.pdf
-- Converters (Downcast)
+- Object-oriented programming 6. Converters
   - Lecture: https://kolosovpetro.github.io/cs/oop/OOP_CS_07-1.pdf
+- Object-oriented programming 7. Aggregation vs Composition. Definitions and comparisons.
 
-## Algorithms
+## Design Patterns
 
-Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
+Refer to website: https://refactoring.guru/design-patterns
 
-* Search Algorithms (and their benchmark measurement)
-  * Linear Searches
-  * Binary Search
-* Sort Algorithms
-  * Bubble sort O(n^2)
-  * Cocktail sort (Buble 2 pass sort) O(n^2)
-  * Counting sort O(n+k), k = non negative terms count
-  * Insertion sort O(n)
-  * Merge sort O(n*log(n))
-  * Quick sort O(log(n))
-  * Selection sort O(n^2)
-* Coin Change Problem (Intro to Dynamic programming)
-* RPN Calculator (postfix calculator based on stack data structure)
+* Creational
+  * Factory Method (Extends functionality of program)
+  * Abstract Factory
+  * Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
+  * Prototype (Deepcopy of class)
+* Structural
+  * Decorator (Combines required functionalities)
+  * Bridge
+* Behavioral
+  * Observer (Defines interaction between two or more classes)
+  * Strategy (Extends functionality of program)
 
 ## Data Structures
 
@@ -108,22 +107,6 @@ Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
   - Generics
   - Indexers
   - IEnumerable interface implementation
-
-## Design Patterns
-
-Refer to website: https://refactoring.guru/design-patterns
-
-* Creational
-  * Factory Method (Extends functionality of program)
-  * Abstract Factory
-  * Builder (Avoiding huge number of parameters withing object's consturctor. Combination of parameters.)
-  * Prototype (Deepcopy of class)
-* Structural
-  * Decorator (Combines required functionalities)
-  * Bridge
-* Behavioral
-  * Observer (Defines interaction between two or more classes)
-  * Strategy (Extends functionality of program)
   
 ## SOLID
 
@@ -136,6 +119,10 @@ A set of principles recommended to follow in order to maintain business applicat
 * **Dependency Inversion Principle**
   * `High-level modules should not depend on low-level modules. Both should depend on abstractions.`
   * `Abstractions should not depend on details. Details should depend on abstractions.`
+
+## ASP NET MVC Core
+
+## PostgreSQL and Entity Framework Core
 
 ## ADO .NET
 
@@ -150,7 +137,7 @@ Refer to https://kolosovpetro.github.io/cs/data_bases_2/01_NpgSQL.pdf
 - SQL injection protect: `Parameters.AddWithValue("param", var);`
 - While using `Parameters` do not use place variable between `''`, eg dont do `'@var'`
 
-## Git Simple Pull Request
+## Information
 
 Example of simple pull request and other related activities.
 
@@ -170,13 +157,21 @@ Visit: https://github.com/kolosovpetro/Computer-Science/tree/develop/Simple%20Pu
 * Discrete Integration (Simpson's, Trapezoidal methods)
 * Monte Carlo Method (Estimation on the plan finishing time)
 
-## To do list
+## Algorithms
 
-- Unite all Data Structures under single library
-- Write documentation and comments for Design Patterns
-- For all design patterns generate class diagrams
-- Write various extensions for IEnumerable, structs, classes
-- Add README files to various projects
+Refer to https://kolosovpetro.github.io/cs/data_structures_and_algorithms/
+
+* Search Algorithms (and their benchmark measurement)
+  * Linear Searches
+  * Binary Search
+* Sort Algorithms
+  * Bubble sort O(n^2)
+  * Cocktail sort (Buble 2 pass sort) O(n^2)
+  * Counting sort O(n+k), k = non negative terms count
+  * Insertion sort O(n)
+  * Merge sort O(n*log(n))
+  * Quick sort O(log(n))
+  * Selection sort O(n^2)
 
 ## Useful Links
 
