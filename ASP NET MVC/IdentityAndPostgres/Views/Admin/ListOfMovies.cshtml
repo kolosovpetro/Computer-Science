@@ -60,8 +60,9 @@
                     @Html.DisplayFor(modelItem => item.AvailableCopiesCount)
                 </td>
                 <td>
+                    @Html.ActionLink("Details", "MovieDetails", "Admin", new { id = item.MovieId }) |
                     @Html.ActionLink("Edit", "EditMovie", "Admin", new { id = item.MovieId }) |
-                    @Html.ActionLink("Delete", "DeleteMovie", "Admin", new { id = item.MovieId })
+                    @Html.ActionLink("Delete", "ConfirmDelete", "Admin", new { id = item.MovieId })
                 </td>
             </tr>
         }

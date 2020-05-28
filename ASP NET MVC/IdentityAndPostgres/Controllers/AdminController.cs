@@ -25,8 +25,7 @@ namespace IdentityAndPostgres.Controllers
             var admin = _adminServices.AdminSignInModel(collection);
             if (admin == null)
                 return NotFound("Wrong login or password");
-            HttpContext.Session.SetInt32("AdminId", admin.EmployeeId);      // set admin id in session
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -51,7 +50,7 @@ namespace IdentityAndPostgres.Controllers
         {
             var client = _adminServices.AddClientModel(collection);
             _adminServices.AddAndSaveClientInDatabase(client);
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -67,7 +66,7 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult EditClient(int id, IFormCollection collection)
         {
             _adminServices.EditAndSaveClient(id, collection);
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -103,23 +102,21 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult EditMovie(int id, IFormCollection collection)
         {
             _adminServices.EditAndSaveMovie(id, collection);
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
-        public IActionResult DeleteMovie(int id)
+        public IActionResult ConfirmDelete(int id)
         {
             var movie = _adminServices.GetMovieById(id);
-            HttpContext.Session.SetInt32("movieId", id);
             return View(movie);
         }
 
         [HttpPost]
-        public IActionResult DeleteMovie()
+        public IActionResult DeleteMovie(int id)
         {
-            var movieId = HttpContext.Session.GetInt32("movieId");
-            _adminServices.DeleteAndSaveMovie(movieId);
-            return RedirectToAction("AdminDashboard", "Admin");
+            _adminServices.DeleteAndSaveMovie(id);
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -133,7 +130,7 @@ namespace IdentityAndPostgres.Controllers
         {
             var movie = _adminServices.AddMovieModel(collection);
             _adminServices.AddAndSaveMovie(movie);
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -149,7 +146,20 @@ namespace IdentityAndPostgres.Controllers
         {
             var clientId = HttpContext.Session.GetInt32("clientId");
             _adminServices.DeleteAndSaveClient(clientId);
-            return RedirectToAction("AdminDashboard", "Admin");
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult MovieDetails(int id)
+        {
+            var model = _adminServices.GetMovieById(id);
+            // configure automapper
+            var config = new MapperConfiguration(cfg => cfg
+                .CreateMap<MoviesModel, MoviesViewModel>());
+            // create automapper instance
+            var mapper = new Mapper(config);
+            // mapping
+            var viewModel = mapper.Map<MoviesViewModel>(model);
+            return View(viewModel);
         }
     }
 }

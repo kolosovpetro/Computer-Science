@@ -42,7 +42,7 @@
         </dd>
     </dl>
 
-    <form asp-action="DeleteMovie">
+    <form asp-action="DeleteMovie" asp-route-id="@Model.MovieId">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-controller="Admin" asp-action="AdminDashboard">Cancel</a>
     </form>

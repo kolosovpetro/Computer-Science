@@ -1,0 +1,56 @@
+﻿@model IdentityAndPostgres.ViewModels.MoviesViewModel
+
+@{
+    ViewData["Title"] = "MovieDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MovieDetails</h1>
+
+<div>
+    <h4>MoviesViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Plot)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Plot)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Poster)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Poster)
+            <img src="@Model.Poster" alt=""/>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AgeRestriction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AgeRestriction)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
