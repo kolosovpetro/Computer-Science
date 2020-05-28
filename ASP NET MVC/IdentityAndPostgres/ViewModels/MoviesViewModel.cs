@@ -29,7 +29,7 @@ namespace IdentityAndPostgres.ViewModels
 
         private string GetMoviePoster()
         {
-            const string apiKey = "XXXX";
+            const string apiKey = "XXXXXXX";
             var url = $"http://www.omdbapi.com/?apikey={apiKey}&t={Title}&plot=full";
             using var httpClient = new HttpClient();
             var task = httpClient.GetAsync(url);
@@ -53,7 +53,7 @@ namespace IdentityAndPostgres.ViewModels
 
         private string GetMoviePlot()
         {
-            const string apiKey = "a96b6133";
+            const string apiKey = "XXXXXX";
             var url = $"http://www.omdbapi.com/?apikey={apiKey}&t={Title}&plot=full";
             using var httpClient = new HttpClient();
             var task = httpClient.GetAsync(url);
