@@ -15,4 +15,4 @@ Do not write 24 different classes for any case.
 
 ### Decorator diagram
 
-![Decorator diagram](/Design%20Patterns/DecoratorLibrary/DecoratorDiagram.JPG?raw=true )
+![Decorator diagram](/DesignPatterns/DecoratorLibrary/DecoratorDiagram.JPG?raw=true )
