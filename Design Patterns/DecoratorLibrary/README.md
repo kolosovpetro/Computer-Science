@@ -9,4 +9,4 @@ Total posible combinations: 4! = 24.
 
 Do not write 24 different classes for any case.
 
-![Decorator diagram](/DecoratorDiagram.jpg?raw=true "Optional Title")
+![Decorator diagram](/Design%20Patterns/DecoratorLibrary/DecoratorDiagram.jpg?raw=true "Optional Title")
