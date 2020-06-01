@@ -60,17 +60,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPublisher.cs" />
-    <Compile Include="ISubscriber.cs" />
+    <Compile Include="Publisher\IPublisher.cs" />
+    <Compile Include="Subscriber\ISubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publisher.cs" />
-    <Compile Include="Subscriber.cs" />
-    <Compile Include="SubscriberNotFoundException.cs" />
+    <Compile Include="Publisher\ConcretePublisher.cs" />
+    <Compile Include="Subscriber\ConcreteSubscriber.cs" />
+    <Compile Include="Subscriber\SubscriberNotFoundException.cs" />
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ObserverDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
