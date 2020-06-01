@@ -1,10 +1,11 @@
 ﻿using DecoratorLibrary.BaseFunctionality;
+using DecoratorLibrary.Decorators;
 using NUnit.Framework;
 
 namespace DecoratorLibrary
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void TestWhite()

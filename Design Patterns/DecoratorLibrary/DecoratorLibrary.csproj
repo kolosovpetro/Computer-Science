@@ -60,11 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseDecorator.cs" />
+    <Compile Include="Decorators\BaseDecorator.cs" />
     <Compile Include="BaseFunctionality\Component.cs" />
-    <Compile Include="DecoratorA.cs" />
-    <Compile Include="DecoratorB.cs" />
-    <Compile Include="DecoratorC.cs" />
+    <Compile Include="Decorators\DecoratorA.cs" />
+    <Compile Include="Decorators\DecoratorB.cs" />
+    <Compile Include="Decorators\DecoratorC.cs" />
     <Compile Include="BaseFunctionality\IComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests.cs" />
@@ -73,5 +73,6 @@
     <None Include="DecoratorDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

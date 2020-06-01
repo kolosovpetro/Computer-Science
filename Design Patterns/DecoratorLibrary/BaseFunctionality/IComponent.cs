@@ -1,9 +1,6 @@
 ﻿namespace DecoratorLibrary.BaseFunctionality
 {
-    /// <summary>
-    /// Interface for base functionality.
-    /// </summary>
-    interface IComponent
+    internal interface IComponent
     {
         string WriteColor();
     }
