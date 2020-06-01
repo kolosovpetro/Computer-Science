@@ -8,3 +8,5 @@ For example:
 Total posible combinations: 4! = 24. 
 
 Do not write 24 different classes for any case.
+
+![Decorator diagram](/DecoratorDiagram.jpg?raw=true "Optional Title")
