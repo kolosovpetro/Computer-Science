@@ -11,6 +11,7 @@ Design patterns are the set of solutions to common problems appering in softwere
   - Abstract Factory
 
 - Structural
+  - Adapter
   - Decorator
 
 - Behavioral
