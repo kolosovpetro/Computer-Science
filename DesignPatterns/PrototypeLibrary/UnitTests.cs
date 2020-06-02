@@ -3,18 +3,18 @@
 namespace PrototypeLibrary
 {
     [TestFixture]
-    class UnitTests
+    internal class UnitTests
     {
         [Test]
         public void CloneTest()
         {
-            IPrototypable p1 = new Prototype("T60", "Terminator228");
-            IPrototypable t = p1.Clone();
-            Assert.That(t.Name, Is.EqualTo("T60"));
-            t.ChangeName("PetroBogMira228");
-            t.ChangeModel("TerminatorRun5000");
-            Assert.That(t.Name, Is.EqualTo("PetroBogMira228"));
-            Assert.That(t.Model, Is.EqualTo("TerminatorRun5000"));
+            var p1 = new ConcretePrototype("T60", "Terminator228");
+            var p2 = p1.Clone();
+            Assert.That(p2.Name, Is.EqualTo("T60"));
+            p2.ChangeName("PetroBogMira228");
+            p2.ChangeModel("TerminatorRun5000");
+            Assert.That(p2.Name, Is.EqualTo("PetroBogMira228"));
+            Assert.That(p2.Model, Is.EqualTo("TerminatorRun5000"));
             Assert.That(p1.Name, Is.EqualTo("T60"));
             Assert.That(p1.Model, Is.EqualTo("Terminator228"));
         }
@@ -22,12 +22,12 @@ namespace PrototypeLibrary
         [Test]
         public void CloneTest2()
         {
-            IPrototypable p1 = new Prototype("T60", "Terminator228");
+            var p1 = new ConcretePrototype("T60", "Terminator228");
             p1.ChangeName("PetroBogMira228");
             p1.ChangeModel("TerminatorRun5000");
-            IPrototypable t = p1.Clone();
-            Assert.That(t.Name, Is.EqualTo("PetroBogMira228"));
-            Assert.That(t.Model, Is.EqualTo("TerminatorRun5000")); 
+            var p2 = p1.Clone();
+            Assert.That(p2.Name, Is.EqualTo("PetroBogMira228"));
+            Assert.That(p2.Model, Is.EqualTo("TerminatorRun5000")); 
         }
     }
 }
