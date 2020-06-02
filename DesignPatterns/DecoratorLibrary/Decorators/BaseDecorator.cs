@@ -4,12 +4,12 @@ namespace DecoratorLibrary.Decorators
 {
     internal class BaseDecorator : IComponent
     {
-        protected IComponent Component;
+        protected IComponent Component { get; }
 
         // aggregation in constructor
         public BaseDecorator(IComponent component)
         {
-            Component = component;                         
+            Component = component;
         }
 
         // virtual method to be overriden in child-decorators

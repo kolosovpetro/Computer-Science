@@ -11,7 +11,7 @@ namespace FluentBuilder
                 .SetLastname("Kolosov")
                 .SetAge(26)
                 .SetCity("Berlin")
-                .SetCounty("GR");
+                .SetCounty("DE");
 
             Console.WriteLine(p1);
         }

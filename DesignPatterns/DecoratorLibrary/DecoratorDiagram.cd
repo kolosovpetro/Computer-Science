@@ -1,50 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DecoratorLibrary.BaseDecorator">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+  <Class Name="DecoratorLibrary.Decorators.BaseDecorator">
+    <Position X="2.75" Y="0.75" Width="1.5" />
+    <AssociationLine Name="Component" Type="DecoratorLibrary.BaseFunctionality.IComponent">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.641" Y="0.091" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
-      <FileName>BaseDecorator.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAABAAAAAAAA=</HashCode>
+      <FileName>Decorators\BaseDecorator.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="comp" />
+      <Property Name="Component" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="DecoratorLibrary.Component">
-    <Position X="6.25" Y="4" Width="1.5" />
+  <Class Name="DecoratorLibrary.Decorators.DecoratorA">
+    <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Component.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="DecoratorLibrary.DecoratorA">
-    <Position X="0.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DecoratorA.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Decorators\DecoratorA.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DecoratorLibrary.DecoratorB">
-    <Position X="2.25" Y="4.75" Width="1.5" />
+  <Class Name="DecoratorLibrary.Decorators.DecoratorB">
+    <Position X="2.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
-      <FileName>DecoratorB.cs</FileName>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Decorators\DecoratorB.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DecoratorLibrary.DecoratorC">
-    <Position X="4" Y="4.75" Width="1.5" />
+  <Class Name="DecoratorLibrary.Decorators.DecoratorC">
+    <Position X="4.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
-      <FileName>DecoratorC.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAACAA=</HashCode>
+      <FileName>Decorators\DecoratorC.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="DecoratorLibrary.IComponent">
-    <Position X="5" Y="2.5" Width="1.5" />
+  <Interface Name="DecoratorLibrary.BaseFunctionality.IComponent">
+    <Position X="6.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IComponent.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseFunctionality\IComponent.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
