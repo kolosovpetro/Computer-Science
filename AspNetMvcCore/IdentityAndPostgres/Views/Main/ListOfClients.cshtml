@@ -41,14 +41,14 @@
                     @Html.DisplayFor(modelItem => item.Birthday)
                 </td>
                 <td>
-                    @Html.ActionLink("Rental History", "ClientRentalHistory", "Client", new { id = item.ClientId }) |
-                    @Html.ActionLink("Edit", "EditClient", "Admin", new { id = item.ClientId }) |
-                    @Html.ActionLink("Delete", "DeleteClient", "Admin", new { id = item.ClientId })
+                    @Html.ActionLink("Rental History", "ClientRentalHistory", "Main", new { id = item.ClientId }) |
+                    @Html.ActionLink("Edit", "EditClient", "Main", new { id = item.ClientId }) |
+                    @Html.ActionLink("Delete", "DeleteClient", "Main", new { id = item.ClientId })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <div>
-    @Html.ActionLink("To Dashboard", "AdminDashboard", "Admin")
+    @Html.ActionLink("To Dashboard", "Index", "Home")
 </div>

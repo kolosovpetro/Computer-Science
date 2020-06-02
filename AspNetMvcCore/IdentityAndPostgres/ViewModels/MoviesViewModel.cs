@@ -54,7 +54,7 @@ namespace IdentityAndPostgres.ViewModels
 
         private HttpResponseMessage MovieData()
         {
-            const string apiKey = "a96b6133";
+            const string apiKey = "XXX";
             var url = $"http://www.omdbapi.com/?apikey={apiKey}&t={Title}&plot=full";
             using var httpClient = new HttpClient();
             var task = httpClient.GetAsync(url);

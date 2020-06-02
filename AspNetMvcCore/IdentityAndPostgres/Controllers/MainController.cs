@@ -3,41 +3,15 @@ using AutoMapper;
 using IdentityAndPostgres.Models;
 using IdentityAndPostgres.Services;
 using IdentityAndPostgres.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityAndPostgres.Controllers
 {
-    public class AdminController : Controller
+    public class MainController : Controller
     {
-        private readonly AdminServices _adminServices = new AdminServices();
-
-        [HttpGet]
-
-        public IActionResult AdminSignIn()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AdminSignIn(IFormCollection collection)
-        {
-            var admin = _adminServices.AdminSignInModel(collection);
-            if (admin == null)
-                return NotFound("Wrong login or password");
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpGet]
-        public IActionResult AdminDashboard()
-        {
-            var adminId = HttpContext.Session.GetInt32("AdminId");
-            if (adminId == null)
-                return NotFound("Wrong login or password");
-            var admin = _adminServices.GetEmployeeModelById((int)adminId);
-            return View(admin);
-
-        }
+        private readonly MainServices _mainServices = new MainServices();
 
         [HttpGet]
         public IActionResult AddClient()
@@ -48,15 +22,15 @@ namespace IdentityAndPostgres.Controllers
         [HttpPost]
         public IActionResult AddClient(IFormCollection collection)
         {
-            var client = _adminServices.AddClientModel(collection);
-            _adminServices.AddAndSaveClientInDatabase(client);
+            var client = _mainServices.AddClientModel(collection);
+            _mainServices.AddAndSaveClientInDatabase(client);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult EditClient(int id)
         {
-            var client = _adminServices.GetClientModelById(id);
+            var client = _mainServices.GetClientModelById(id);
             if (client == null)
                 return NotFound("No such client in database");
             return View(client);
@@ -65,14 +39,14 @@ namespace IdentityAndPostgres.Controllers
         [HttpPost]
         public IActionResult EditClient(int id, IFormCollection collection)
         {
-            _adminServices.EditAndSaveClient(id, collection);
+            _mainServices.EditAndSaveClient(id, collection);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult ListOfMovies()
         {
-            var movies = _adminServices.ListOfMoviesModel();
+            var movies = _mainServices.ListOfMoviesModel();
             // configure automapper
             var config = new MapperConfiguration(cfg => cfg
                 .CreateMap<MoviesModel, MoviesViewModel>());
@@ -86,14 +60,14 @@ namespace IdentityAndPostgres.Controllers
         [HttpGet]
         public IActionResult ListOfClients()
         {
-            var clients = _adminServices.ListOfClientModel();
+            var clients = _mainServices.ListOfClientModel();
             return View(clients);
         }
 
         [HttpGet]
         public IActionResult EditMovie(int id)
         {
-            var movie = _adminServices.GetMovieById(id);
+            var movie = _mainServices.GetMovieById(id);
             if (movie == null) return NotFound("No such movie in database");
             return View(movie);
         }
@@ -101,21 +75,21 @@ namespace IdentityAndPostgres.Controllers
         [HttpPost]
         public IActionResult EditMovie(int id, IFormCollection collection)
         {
-            _adminServices.EditAndSaveMovie(id, collection);
+            _mainServices.EditAndSaveMovie(id, collection);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult ConfirmDelete(int id)
         {
-            var movie = _adminServices.GetMovieById(id);
+            var movie = _mainServices.GetMovieById(id);
             return View(movie);
         }
 
         [HttpPost]
         public IActionResult DeleteMovie(int id)
         {
-            _adminServices.DeleteAndSaveMovie(id);
+            _mainServices.DeleteAndSaveMovie(id);
             return RedirectToAction("Index", "Home");
         }
 
@@ -128,15 +102,15 @@ namespace IdentityAndPostgres.Controllers
         [HttpPost]
         public IActionResult AddMovie(IFormCollection collection)
         {
-            var movie = _adminServices.AddMovieModel(collection);
-            _adminServices.AddAndSaveMovie(movie);
+            var movie = _mainServices.AddMovieModel(collection);
+            _mainServices.AddAndSaveMovie(movie);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public IActionResult DeleteClient(int clientId)
         {
-            var client = _adminServices.GetClientModelById(clientId);
+            var client = _mainServices.GetClientModelById(clientId);
             HttpContext.Session.SetInt32("clientId", clientId);
             return View(client);
         }
@@ -145,13 +119,13 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult DeleteClient()
         {
             var clientId = HttpContext.Session.GetInt32("clientId");
-            _adminServices.DeleteAndSaveClient(clientId);
+            _mainServices.DeleteAndSaveClient(clientId);
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult MovieDetails(int id)
         {
-            var model = _adminServices.GetMovieById(id);
+            var model = _mainServices.GetMovieById(id);
             // configure automapper
             var config = new MapperConfiguration(cfg => cfg
                 .CreateMap<MoviesModel, MoviesViewModel>());
@@ -160,6 +134,13 @@ namespace IdentityAndPostgres.Controllers
             // mapping
             var viewModel = mapper.Map<MoviesViewModel>(model);
             return View(viewModel);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ClientRentalHistory(int id)
+        {
+            return View(_mainServices.GetHistory(id));
         }
     }
 }

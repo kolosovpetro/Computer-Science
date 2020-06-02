@@ -5,42 +5,28 @@ using System.Linq;
 using IdentityAndPostgres.Infrastructure;
 using IdentityAndPostgres.Models;
 using IdentityAndPostgres.Repositories;
+using IdentityAndPostgres.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace IdentityAndPostgres.Services
 {
-    public class AdminServices
+    public class MainServices
     {
         private readonly CopiesRepository _copiesRepository;
         private readonly ClientsRepository _clientsRepository;
         private readonly RentalsRepository _rentalsRepository;
         private readonly MoviesRepository _moviesRepository;
-        private readonly EmployeesRepository _employeesRepository;
 
-        public AdminServices()
+        public MainServices()
         {
             IDbFactory dbFactory = new DbFactory();
             _copiesRepository = new CopiesRepository(dbFactory);
             _clientsRepository = new ClientsRepository(dbFactory);
             _rentalsRepository = new RentalsRepository(dbFactory);
             _moviesRepository = new MoviesRepository(dbFactory);
-            _employeesRepository = new EmployeesRepository(dbFactory);
         }
 
-        // admin sign in view model
-        public EmployeesModel AdminSignInModel(IFormCollection collection)
-        {
-            var username = collection["FirstName"].ToString();
-            var password = collection["LastName"].ToString();
-            return _employeesRepository.Get(x => x.FirstName == username && x.LastName == password);
-        }
-
-        // admin dashboard view model
-        public EmployeesModel GetEmployeeModelById(int adminId)
-        {
-            return _employeesRepository.GetById(adminId);
-        }
-
+        
         // add client auxiliary methods
         public ClientsModel AddClientModel(IFormCollection collection)
         {
@@ -97,7 +83,6 @@ namespace IdentityAndPostgres.Services
         }
 
         // edit movie auxiliaries
-
         public void EditAndSaveMovie(int movieId, IFormCollection collection)
         {
             var movie = _moviesRepository.GetById(movieId);
@@ -162,13 +147,36 @@ namespace IdentityAndPostgres.Services
         }
 
         // delete client auxiliaries
-
         public void DeleteAndSaveClient(int? clientId)
         {
             _rentalsRepository.Delete(x => x.ClientId == clientId);
             _rentalsRepository.Save();
             _clientsRepository.Delete(x => x.ClientId == clientId);
             _clientsRepository.Save();
+        }
+
+        // client history view model
+        public IEnumerable<ClientHistoryViewModel> GetHistory(int clientId)
+        {
+            return (from r in _rentalsRepository.GetAll()
+                    join c in _clientsRepository.GetAll()
+                        on r.ClientId equals c.ClientId
+                    join cop in _copiesRepository.GetAll()
+                        on r.CopyId equals cop.CopyId
+                    join mov in _moviesRepository.GetAll()
+                        on cop.MovieId equals mov.MovieId
+                    select new ClientHistoryViewModel
+                    {
+                        Title = mov.Title,
+                        Year = mov.Year,
+                        AgeRestriction = mov.AgeRestriction,
+                        MovieId = mov.MovieId,
+                        Price = mov.Price,
+                        Client = c
+                    })
+                .Where(x => x.Client.ClientId == clientId)
+                .OrderBy(x => x.MovieId)
+                .Distinct();
         }
     }
 }
