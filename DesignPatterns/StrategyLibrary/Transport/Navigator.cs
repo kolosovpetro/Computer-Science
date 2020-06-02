@@ -1,15 +1,17 @@
-﻿namespace StrategyLibrary.Transport
+﻿using StrategyLibrary.Strategies;
+
+namespace StrategyLibrary.Transport
 {
-    class Navigator
+    internal class Navigator
     {
-        public Point A { get; private set; }
-        public Point B { get; private set; }
+        public Point A { get; }
+        public Point B { get; }
         public IRouteStrategy RouteStrategy { get; private set; }
 
-        public Navigator(Point newA, Point newB)
+        public Navigator(Point a, Point b)
         {
-            A = newA;
-            B = newB;
+            A = a;
+            B = b;
         }
 
         public void SetStrategy(IRouteStrategy strategy)

@@ -60,19 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NumericalSystems\BinaryForm.cs" />
-    <Compile Include="NumericalSystems\Converter.cs" />
-    <Compile Include="NumericalSystems\ConvertTable.cs" />
-    <Compile Include="NumericalSystems\DecimalForm.cs" />
-    <Compile Include="NumericalSystems\HexadecimalForm.cs" />
-    <Compile Include="NumericalSystems\INumericalForm.cs" />
-    <Compile Include="NumericalSystems\OctalForm.cs" />
-    <Compile Include="Transport\Strategies\IRouteStrategy.cs" />
+    <Compile Include="Strategies\IRouteStrategy.cs" />
     <Compile Include="Transport\Navigator.cs" />
     <Compile Include="Transport\Point.cs" />
-    <Compile Include="Transport\Strategies\PublicTransportStrategy.cs" />
-    <Compile Include="Transport\Strategies\RoadStrategy.cs" />
-    <Compile Include="Transport\Strategies\WalkingStrategy.cs" />
+    <Compile Include="Strategies\PublicTransportStrategy.cs" />
+    <Compile Include="Strategies\RoadStrategy.cs" />
+    <Compile Include="Strategies\WalkingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransportStrategyTests.cs" />
   </ItemGroup>
