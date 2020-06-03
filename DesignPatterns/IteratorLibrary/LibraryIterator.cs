@@ -20,11 +20,6 @@
             return _index < _aggregate.Count;
         }
 
-        public bool HasNextEven()
-        {
-            return _index < _aggregate.Count;
-        }
-
         // returns next item of collection
         public Book Next()
         {
