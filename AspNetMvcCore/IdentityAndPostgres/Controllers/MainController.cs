@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
-using IdentityAndPostgres.Models;
-using IdentityAndPostgres.Services;
-using IdentityAndPostgres.ViewModels;
+﻿using IdentityAndPostgres.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +27,7 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult EditClient(int id)
         {
             var client = _mainServices.GetClientModelById(id);
-            if (client == null)
-                return NotFound("No such client in database");
+            if (client == null) return NotFound("No such client in database");
             return View(client);
         }
 
@@ -47,14 +42,8 @@ namespace IdentityAndPostgres.Controllers
         public IActionResult ListOfMovies()
         {
             var movies = _mainServices.ListOfMoviesModel();
-            // configure automapper
-            var config = new MapperConfiguration(cfg => cfg
-                .CreateMap<MoviesModel, MoviesViewModel>());
-            // create automapper instance
-            var mapper = new Mapper(config);
-            // mapping
-            var viewModel = mapper.Map<IEnumerable<MoviesViewModel>>(movies);
-            return View(viewModel);
+            var model = _mainServices.MapMoviesViewModels(movies);
+            return View(model);
         }
 
         [HttpGet]
@@ -125,15 +114,9 @@ namespace IdentityAndPostgres.Controllers
 
         public IActionResult MovieDetails(int id)
         {
-            var model = _mainServices.GetMovieById(id);
-            // configure automapper
-            var config = new MapperConfiguration(cfg => cfg
-                .CreateMap<MoviesModel, MoviesViewModel>());
-            // create automapper instance
-            var mapper = new Mapper(config);
-            // mapping
-            var viewModel = mapper.Map<MoviesViewModel>(model);
-            return View(viewModel);
+            var movie = _mainServices.GetMovieById(id);
+            var model = _mainServices.MapMoviesViewModel(movie);
+            return View(model);
         }
 
         [HttpGet]

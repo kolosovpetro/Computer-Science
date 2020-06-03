@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoMapper;
 using IdentityAndPostgres.Infrastructure;
 using IdentityAndPostgres.Models;
 using IdentityAndPostgres.Repositories;
@@ -26,7 +27,7 @@ namespace IdentityAndPostgres.Services
             _moviesRepository = new MoviesRepository(dbFactory);
         }
 
-        
+
         // add client auxiliary methods
         public ClientsModel AddClientModel(IFormCollection collection)
         {
@@ -177,6 +178,32 @@ namespace IdentityAndPostgres.Services
                 .Where(x => x.Client.ClientId == clientId)
                 .OrderBy(x => x.MovieId)
                 .Distinct();
+        }
+
+        // mappers for movies view model
+
+        public IEnumerable<MoviesViewModel> MapMoviesViewModels(IEnumerable<MoviesModel> movies)
+        {
+            // configure automapper
+            var config = new MapperConfiguration(cfg => cfg
+                .CreateMap<MoviesModel, MoviesViewModel>());
+            // create automapper instance
+            var mapper = new Mapper(config);
+            // mapping
+            var viewModel = mapper.Map<IEnumerable<MoviesViewModel>>(movies);
+            return viewModel;
+        }
+
+        public MoviesViewModel MapMoviesViewModel(MoviesModel model)
+        {
+            // configure automapper
+            var config = new MapperConfiguration(cfg => cfg
+                .CreateMap<MoviesModel, MoviesViewModel>());
+            // create automapper instance
+            var mapper = new Mapper(config);
+            // mapping
+            var viewModel = mapper.Map<MoviesViewModel>(model);
+            return viewModel;
         }
     }
 }
