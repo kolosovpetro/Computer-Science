@@ -12,7 +12,11 @@
             {
                 new Book{Name="Война и мир"},
                 new Book {Name="Отцы и дети"},
-                new Book {Name="Вишневый сад"}
+                new Book {Name="Вишневый сад"},
+                new Book{Name="Война и мир 2"},
+                new Book {Name="Отцы и дети 2"},
+                new Book {Name="Вишневый сад 2"},
+                new Book {Name="Вишневый сад 2"}
             };
         }
 

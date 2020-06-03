@@ -7,11 +7,25 @@ namespace IteratorConsoleUI
     {
         private static void Main()
         {
-            Library library = new Library();
-            Reader reader = new Reader();
-            reader.SeeBooks(library);
+            var library = new Library();
+            var iterator = library.CreateIterator();
+
+            while (iterator.HasNext())
+            {
+                Console.WriteLine(iterator.Next());
+            }
+
+            iterator.Reset();
+
+            Console.WriteLine("Even books");
+
+            while (iterator.HasNext())
+            {
+                Console.WriteLine(iterator.NextEven());
+            }
 
             // otherwise
+            Console.WriteLine("Otherwise");
 
             Book[] books = {
                 new Book{Name="Война и мир"},

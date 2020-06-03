@@ -15,5 +15,17 @@ namespace IteratorLibrary
                 Console.WriteLine(book.Name);
             }
         }
+        
+        public void SeeBooksEven(IBookNumerable library)
+        {
+            // reader gets numerator of library
+            var iterator = library.CreateIterator();
+
+            while(iterator.HasNext())
+            {
+                var book = iterator.NextEven();
+                Console.WriteLine(book.Name);
+            }
+        }
     }
 }
