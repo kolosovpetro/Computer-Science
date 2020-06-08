@@ -13,7 +13,7 @@ namespace PostgreDatabaseFirst.Queries
         // Task 1: Fetch titles of all movies produced in 1998 or 1999
         public List<string> Task1()
         {
-            List<string> titles = _rentalContext.Movies
+            var titles = _rentalContext.Movies
                 .Where(x => x.Year == 1998 || x.Year == 1999)
                 .Select(t => t.Title)
                 .ToList();
@@ -25,7 +25,7 @@ namespace PostgreDatabaseFirst.Queries
         // Order results ascending by price.
         public List<Movies> Task2()
         {
-            List<Movies> movies = _rentalContext.Movies
+            var movies = _rentalContext.Movies
                 .Where(x => x.Price > 9)
                 .Select(t => new Movies
                 {
@@ -35,6 +35,7 @@ namespace PostgreDatabaseFirst.Queries
                     Year = t.Year,
                     AgeRestriction = t.AgeRestriction
                 })
+                .OrderBy(s => s.Price)
                 .ToList();
 
             return movies;
@@ -55,7 +56,7 @@ namespace PostgreDatabaseFirst.Queries
         // at least three characters than first name
         public List<Clients> Task4()
         {
-            List<Clients> clients = _rentalContext.Clients
+            var clients = _rentalContext.Clients
                 .Where(x => x.LastName.Length - x.FirstName.Length > 2)
                 .Select(t => new Clients
                 {
@@ -74,7 +75,7 @@ namespace PostgreDatabaseFirst.Queries
         public List<string> Task5()
         {
             var names = new[] { "Arnold", "Tom", "Jodie" };
-            List<string> actors = _rentalContext.Actors
+            var actors = _rentalContext.Actors
                 .Where(x => names.Contains(x.FirstName))
                 .Select(t => t.LastName)
                 .OrderByDescending(j => j)
@@ -87,7 +88,7 @@ namespace PostgreDatabaseFirst.Queries
         // Eliminate duplicates. Present the results in ascending order
         public List<int?> Task6()
         {
-            List<int?> ids = _rentalContext.Copies
+            var ids = _rentalContext.Copies
                 .Where(x => (bool)x.Available)
                 .Select(t => t.MovieId)
                 .OrderBy(j => j)
@@ -105,7 +106,7 @@ namespace PostgreDatabaseFirst.Queries
             var date1 = Convert.ToDateTime("2005-07-15");
             var date2 = Convert.ToDateTime("2005-07-22");
 
-            List<int> ids = _rentalContext.Rentals
+            var ids = _rentalContext.Rentals
                 .Where(x => x.DateOfRental > date1 && x.DateOfReturn < date2)
                 .Select(t => t.CopyId)
                 .OrderBy(j => j)
@@ -119,7 +120,7 @@ namespace PostgreDatabaseFirst.Queries
         // more than one day
         public List<Rentals> Task8()
         {
-            List<Rentals> rentals = _rentalContext.Rentals
+            var rentals = _rentalContext.Rentals
                 .AsEnumerable()
                 .Where(x => (x.DateOfReturn - x.DateOfRental).Value.TotalDays > 0)
                 .ToList();
@@ -130,7 +131,7 @@ namespace PostgreDatabaseFirst.Queries
         // space, last name
         public List<string> Task9()
         {
-            List<string> actors = _rentalContext.Actors
+            var actors = _rentalContext.Actors
                 .AsEnumerable()
                 .Select(x => $"{x.FirstName[0]}. {x.LastName}")
                 .OrderBy(t => t)
@@ -142,7 +143,7 @@ namespace PostgreDatabaseFirst.Queries
         // Task 10: Display titles of all movies, ordered from shortest to longest title
         public List<string> Task10()
         {
-            List<string> titles = _rentalContext.Movies
+            var titles = _rentalContext.Movies
                 .AsEnumerable()
                 .Select(x => x.Title)
                 .OrderBy(t => t.Length)
@@ -154,7 +155,7 @@ namespace PostgreDatabaseFirst.Queries
         // Task 11: Display title and price of three newest movies
         public List<Movies> Task11()
         {
-            List<Movies> movies = _rentalContext.Movies
+            var movies = _rentalContext.Movies
                 .AsEnumerable()
                 .OrderByDescending(x => x.Year)
                 .Take(3)
@@ -167,7 +168,7 @@ namespace PostgreDatabaseFirst.Queries
         // first name. Columns should have titles as below
         public List<string> Task12()
         {
-            List<string> clients = _rentalContext.Clients
+            var clients = _rentalContext.Clients
                 .AsEnumerable()
                 .Select(x => $"{x.FirstName} {x.FirstName[0]} {x.FirstName[^1]}")
                 .ToList();
@@ -179,7 +180,7 @@ namespace PostgreDatabaseFirst.Queries
         // same. Ignore the case, eliminate duplicates
         public List<string> Task13()
         {
-            List<string> names = _rentalContext.Clients
+            var names = _rentalContext.Clients
                 .AsEnumerable()
                 .Where(x => x.FirstName.ToLower()[0] == x.FirstName.ToLower()[^1])
                 .Select(t => t.FirstName)
@@ -192,7 +193,7 @@ namespace PostgreDatabaseFirst.Queries
         // Task 14: Display movie titles, with second to last letter ’o’
         public List<string> Task14()
         {
-            List<string> titles = _rentalContext.Movies
+            var titles = _rentalContext.Movies
                 .AsEnumerable()
                 .Where(x => x.Title.ToLower()[^2] == 'o')
                 .Select(t => t.Title)
@@ -205,7 +206,7 @@ namespace PostgreDatabaseFirst.Queries
         // way: lowercase first name, dot, lowercase last name, ’@wsb.pl’
         public List<string> Task15()
         {
-            List<string> emails = _rentalContext.Clients
+            var emails = _rentalContext.Clients
                 .AsEnumerable()
                 .Select(x => $"{x.FirstName.ToLower()}.{x.LastName.ToLower()}@wsb.pl")
                 .ToList();

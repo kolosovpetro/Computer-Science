@@ -7,6 +7,8 @@ namespace PostgreDatabaseFirst
     {
         static void Main(string[] args)
         {
+            #region SelectionQueries
+
             var selectionQueries = new SelectionQueries();
 
             // Task 1: Fetch titles of all movies produced in 1998 or 1999
@@ -75,6 +77,8 @@ namespace PostgreDatabaseFirst
             // Task 15: For every client display its email address constructed in the following
             // way: lowercase first name, dot, lowercase last name, ’@wsb.pl’
             selectionQueries.Task15().ForEach(Console.WriteLine);
+
+            #endregion
 
 
             // Task 1: For every copy display it’s ID and title of the movie. Order the results by
