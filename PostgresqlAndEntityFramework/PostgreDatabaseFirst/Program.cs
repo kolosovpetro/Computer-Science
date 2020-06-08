@@ -56,19 +56,25 @@ namespace PostgreDatabaseFirst
             selectionQueries.Task9().ForEach(Console.WriteLine);
 
             // Task 10: Display titles of all movies, ordered from shortest to longest title
+            selectionQueries.Task10().ForEach(Console.WriteLine);
 
             // Task 11: Display title and price of three newest movies
+            selectionQueries.Task11().ForEach(x => Console.WriteLine($"Title: {x.Title}, Price: {x.Price}"));
 
             // Task 12: For all clients display: first name, first letter of first name, last letter of
             // first name. Columns should have titles as below
+            selectionQueries.Task12().ForEach(Console.WriteLine);
 
             // Task 13: Display the names of clients, whose first and last letter of name are the
             // same. Ignore the case, eliminate duplicates
+            selectionQueries.Task13().ForEach(Console.WriteLine);
 
             // Task 14: Display movie titles, with second to last letter ’o’
+            selectionQueries.Task14().ForEach(Console.WriteLine);
 
             // Task 15: For every client display its email address constructed in the following
             // way: lowercase first name, dot, lowercase last name, ’@wsb.pl’
+            selectionQueries.Task15().ForEach(Console.WriteLine);
 
 
             // Task 1: For every copy display it’s ID and title of the movie. Order the results by

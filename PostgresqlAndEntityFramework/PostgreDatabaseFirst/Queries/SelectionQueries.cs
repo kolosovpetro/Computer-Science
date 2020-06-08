@@ -138,5 +138,79 @@ namespace PostgreDatabaseFirst.Queries
 
             return actors;
         }
+
+        // Task 10: Display titles of all movies, ordered from shortest to longest title
+        public List<string> Task10()
+        {
+            List<string> titles = _rentalContext.Movies
+                .AsEnumerable()
+                .Select(x => x.Title)
+                .OrderBy(t => t.Length)
+                .ToList();
+
+            return titles;
+        }
+
+        // Task 11: Display title and price of three newest movies
+        public List<Movies> Task11()
+        {
+            List<Movies> movies = _rentalContext.Movies
+                .AsEnumerable()
+                .OrderByDescending(x => x.Year)
+                .Take(3)
+                .ToList();
+
+            return movies;
+        }
+
+        // Task 12: For all clients display: first name, first letter of first name, last letter of
+        // first name. Columns should have titles as below
+        public List<string> Task12()
+        {
+            List<string> clients = _rentalContext.Clients
+                .AsEnumerable()
+                .Select(x => $"{x.FirstName} {x.FirstName[0]} {x.FirstName[^1]}")
+                .ToList();
+
+            return clients;
+        }
+
+        // Task 13: Display the names of clients, whose first and last letter of name are the
+        // same. Ignore the case, eliminate duplicates
+        public List<string> Task13()
+        {
+            List<string> names = _rentalContext.Clients
+                .AsEnumerable()
+                .Where(x => x.FirstName.ToLower()[0] == x.FirstName.ToLower()[^1])
+                .Select(t => t.FirstName)
+                .Distinct()
+                .ToList();
+
+            return names;
+        }
+
+        // Task 14: Display movie titles, with second to last letter ’o’
+        public List<string> Task14()
+        {
+            List<string> titles = _rentalContext.Movies
+                .AsEnumerable()
+                .Where(x => x.Title.ToLower()[^2] == 'o')
+                .Select(t => t.Title)
+                .ToList();
+
+            return titles;
+        }
+
+        // Task 15: For every client display its email address constructed in the following
+        // way: lowercase first name, dot, lowercase last name, ’@wsb.pl’
+        public List<string> Task15()
+        {
+            List<string> emails = _rentalContext.Clients
+                .AsEnumerable()
+                .Select(x => $"{x.FirstName.ToLower()}.{x.LastName.ToLower()}@wsb.pl")
+                .ToList();
+
+            return emails;
+        }
     }
 }
