@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PostgreDatabaseFirst.DAL;
 
 namespace PostgreDatabaseFirst
 {
@@ -8,7 +9,7 @@ namespace PostgreDatabaseFirst
     {
         static void Main(string[] args)
         {
-            var rentalInstance = new rentalContext();
+            var rentalInstance = new RentalContext();
             var movies = rentalInstance.Movies.ToList();
 
             #region Task set 1

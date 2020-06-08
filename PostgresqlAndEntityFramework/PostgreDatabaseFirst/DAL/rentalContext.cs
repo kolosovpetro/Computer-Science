@@ -1,16 +1,15 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
+using PostgreDatabaseFirst.Models;
 
-namespace PostgreDatabaseFirst
+namespace PostgreDatabaseFirst.DAL
 {
-    public partial class rentalContext : DbContext
+    public partial class RentalContext : DbContext
     {
-        public rentalContext()
+        public RentalContext()
         {
         }
 
-        public rentalContext(DbContextOptions<rentalContext> options)
+        public RentalContext(DbContextOptions<RentalContext> options)
             : base(options)
         {
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PostgreDatabaseFirst
+namespace PostgreDatabaseFirst.Models
 {
     public partial class Actors
     {
