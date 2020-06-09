@@ -1,17 +1,15 @@
-﻿using System;
-using PostgreDatabaseFirst.Facades;
-using PostgreDatabaseFirst.Queries;
+﻿using PostgreDatabaseFirst.Facades;
 
 namespace PostgreDatabaseFirst
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             //var selectionFacade = new SelectionFacade();
             //selectionFacade.ExecuteAll();
 
-            JoinFacade joinFacade = new JoinFacade();
+            var joinFacade = new JoinFacade();
             joinFacade.ExecuteAll();
 
             #region JoinQueries
