@@ -200,5 +200,37 @@ namespace PostgreDatabaseFirst.Queries
 
             return obj;
         }
+
+        // Task 12: Display titles of movies rented between ’2005-07-15’ and ’2005-07-25’.
+        // Eliminate duplicates
+        public List<string> Task12()
+        {
+            var date1 = Convert.ToDateTime("2005-07-15");
+            var date2 = Convert.ToDateTime("2005-07-25");
+            var obj = (from rent in _rentals
+                       join cop in _copies on rent.CopyId equals cop.CopyId
+                       join movie in _movies on cop.MovieId equals movie.MovieId
+                       select new ValueTuple<string, DateTime?>(movie.Title, rent.DateOfRental))
+                .AsEnumerable()
+                .Where(x => x.Item2 >= date1 && x.Item2 <= date2)
+                .Select(t => t.Item1)
+                .Distinct()
+                .ToList();
+
+            return obj;
+        }
+
+        // Task 13: For clients that have the same first name as one of the actors
+        // display: shared first name, last name of actor, last name of client
+        public List<(string, string, string)> Task13()
+        {
+            var obj = (from act in _actors
+                       join client in _clients on act.FirstName equals client.FirstName
+                       select new ValueTuple<string, string, string>(client.FirstName, act.LastName, client.LastName))
+                .AsEnumerable()
+                .ToList();
+
+            return obj;
+        }
     }
 }

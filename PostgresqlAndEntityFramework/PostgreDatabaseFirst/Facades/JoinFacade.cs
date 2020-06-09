@@ -20,6 +20,9 @@ namespace PostgreDatabaseFirst.Facades
             _joinQueries.Task9().ForEach(Console.WriteLine);
             Console.WriteLine(_joinQueries.Task10());
             _joinQueries.Task11().ForEach(Console.WriteLine);
+            _joinQueries.Task12().ForEach(Console.WriteLine);
+            _joinQueries.Task13().ForEach(x =>
+                Console.WriteLine($"Shared firstname: {x.Item1}, Act. lastname: {x.Item2}, Cl. lastname {x.Item3}"));
         }
     }
 }
