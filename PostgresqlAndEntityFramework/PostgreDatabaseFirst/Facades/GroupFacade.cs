@@ -13,6 +13,7 @@ namespace PostgreDatabaseFirst.Facades
                 Console.WriteLine($"First name: {x.Item1}, Lastname: {x.Item2}"));
             Console.WriteLine(_groupQueries.Task2().Count == 0);
             _groupQueries.Task2().ForEach(Console.WriteLine);
+            _groupQueries.Task3().ForEach(Console.WriteLine);
         }
     }
 }

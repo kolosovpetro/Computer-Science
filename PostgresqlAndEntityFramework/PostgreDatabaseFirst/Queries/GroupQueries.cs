@@ -69,5 +69,29 @@ namespace PostgreDatabaseFirst.Queries
         }
 
         // Task 3: Display titles of movies that were rented by both Gary Goodspeed and Brian Griffin
+        public List<string> Task3()
+        {
+            var obj = from rent in _rentals
+                      join copy in _copies on rent.CopyId equals copy.CopyId
+                      join movie in _movies on copy.MovieId equals movie.MovieId
+                      join client in _clients on rent.ClientId equals client.ClientId
+                      select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
+
+            var goodspeed = obj
+                .AsEnumerable()
+                .Where(x => x.Item2 == "Gary" && x.Item3 == "Goodspeed")
+                .Select(t => t.Item1);
+
+            var griffin = obj
+                .AsEnumerable()
+                .Where(x => x.Item2 == "Brian" && x.Item3 == "Griffin")
+                .Select(t => t.Item1);
+
+            var result = goodspeed.Intersect(griffin).ToList();
+
+            return result;
+        }
+
+        // Task 4: Display titles of movies that were rented by Gary Goodspeed and were never rented by Brian Griffin
     }
 }
