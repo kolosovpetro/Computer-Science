@@ -1,10 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using PostgreDatabaseFirst.Queries;
 
 namespace PostgreDatabaseFirst.Facades
 {
-    class GroupFacade
+    internal class GroupFacade
     {
+        private readonly GroupQueries _groupQueries = new GroupQueries();
+
+        public void ExecuteAll()
+        {
+            _groupQueries.Task1().ForEach(x =>
+                Console.WriteLine($"First name: {x.Item1}, Lastname: {x.Item2}"));
+            Console.WriteLine(_groupQueries.Task2().Count == 0);
+            _groupQueries.Task2().ForEach(Console.WriteLine);
+        }
     }
 }

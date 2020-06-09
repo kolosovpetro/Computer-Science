@@ -6,11 +6,14 @@ namespace PostgreDatabaseFirst
     {
         private static void Main()
         {
-            var selectionFacade = new SelectionFacade();
-            selectionFacade.ExecuteAll();
+            //var selectionFacade = new SelectionFacade();
+            //selectionFacade.ExecuteAll();
 
-            var joinFacade = new JoinFacade();
-            joinFacade.ExecuteAll();
+            //var joinFacade = new JoinFacade();
+            //joinFacade.ExecuteAll();
+
+            GroupFacade groupFacade = new GroupFacade();
+            groupFacade.ExecuteAll();
 
         }
     }
