@@ -93,5 +93,85 @@ namespace PostgreDatabaseFirst.Queries
         }
 
         // Task 4: Display titles of movies that were rented by Gary Goodspeed and were never rented by Brian Griffin
+        public List<string> Task4()
+        {
+            var obj = from rent in _rentals
+                      join copy in _copies on rent.CopyId equals copy.CopyId
+                      join movie in _movies on copy.MovieId equals movie.MovieId
+                      join client in _clients on rent.ClientId equals client.ClientId
+                      select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
+
+            var goodspeed = obj
+                .AsEnumerable()
+                .Where(x => x.Item2 == "Gary" && x.Item3 == "Goodspeed")
+                .Select(t => t.Item1);
+
+            var griffin = obj
+                .AsEnumerable()
+                .Where(x => x.Item2 == "Brian" && x.Item3 == "Griffin")
+                .Select(t => t.Item1);
+
+            var result = goodspeed.Except(griffin).ToList();
+
+            return result;
+        }
+
+        // Task 5: Display names of actors that played in 'Terminator' but never played in 'Ghostbusters'
+        public List<(string, string)> Task5()
+        {
+            var obj = from mov in _movies
+                      join star in _starring on mov.MovieId equals star.MovieId
+                      join actor in _actors on star.ActorId equals actor.ActorId
+                      select new ValueTuple<string, string, string>(mov.Title, actor.FirstName, actor.LastName);
+
+            var terminator = obj
+                .AsEnumerable()
+                .Where(x => x.Item1 == "Terminator")
+                .Select(t => new ValueTuple<string, string>(t.Item2, t.Item3));
+
+            var ghostbusters = obj
+                .AsEnumerable()
+                .Where(x => x.Item1 == "Ghostbusters")
+                .Select(t => new ValueTuple<string, string>(t.Item2, t.Item3));
+
+            var result = terminator.Except(ghostbusters).ToList();
+            return result;
+        }
+
+        // Task 6: Display the price of the most expensive movie in the store
+        public float? Task6()
+        {
+            var obj = _movies.Max(x => x.Price);
+            return obj;
+        }
+
+        // Task 7: Display the number of movies produced in 1984
+        public int Task7()
+        {
+            var obj = _movies
+                .Where(j => j.Year == 1984)
+                .GroupBy(x => x.Year)
+                .Select(t => t.Count()).FirstOrDefault();
+
+            return obj;
+        }
+
+        // Task 8: How many time movie ’Taxi Driver’ was rented?
+        public int Task8()
+        {
+            var obj = from rental in _rentals
+                      join copy in _copies on rental.CopyId equals copy.CopyId
+                      join movie in _movies on copy.MovieId equals movie.MovieId
+                      select new ValueTuple<string>(movie.Title);
+
+            var result = obj
+                .AsEnumerable()
+                .Where(x => x.Item1 == "Taxi Driver")
+                .GroupBy(t => t.Item1)
+                .Select(j => j.Count())
+                .FirstOrDefault();
+
+            return result;
+        }
     }
 }

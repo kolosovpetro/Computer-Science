@@ -12,6 +12,7 @@ namespace PostgreDatabaseFirst.DAL
         public RentalContext(DbContextOptions<RentalContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Actors> Actors { get; set; }
@@ -26,7 +27,9 @@ namespace PostgreDatabaseFirst.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=rental;Username=postgres;Password=postgres");
+                optionsBuilder
+                    .UseLazyLoadingProxies()
+                    .UseNpgsql("Host=localhost;Port=5432;Database=rental;Username=postgres;Password=postgres");
             }
         }
 

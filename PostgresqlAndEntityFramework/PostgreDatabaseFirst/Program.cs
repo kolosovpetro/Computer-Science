@@ -1,4 +1,6 @@
-﻿using PostgreDatabaseFirst.Facades;
+﻿using System;
+using System.Linq;
+using PostgreDatabaseFirst.Facades;
 
 namespace PostgreDatabaseFirst
 {
@@ -14,6 +16,12 @@ namespace PostgreDatabaseFirst
 
             GroupFacade groupFacade = new GroupFacade();
             groupFacade.ExecuteAll();
+
+            //FluentSearcher fluentSearcher = new FluentSearcher();
+            //fluentSearcher.SearchName("A").Query.ToList().ForEach(x =>
+            //    Console.WriteLine($"{x.FirstName}, {x.LastName}"));
+            //fluentSearcher.SearchName("Garry").SearchName("Hank").Query.ToList()
+            //    .ForEach(x => Console.WriteLine($"{x.FirstName}, {x.LastName}"));
 
         }
     }
