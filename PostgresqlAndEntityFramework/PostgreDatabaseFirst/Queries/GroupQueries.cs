@@ -46,10 +46,11 @@ namespace PostgreDatabaseFirst.Queries
         // Task 2: Display titles of movies in which both De Niro and Reno played.
         public List<string> Task2()
         {
-            var obj = from mov in _movies
-                      join star in _starring on mov.MovieId equals star.MovieId
-                      join actor in _actors on star.ActorId equals actor.ActorId
-                      select new ValueTuple<string, string>(mov.Title, actor.LastName);
+            var obj =
+                from mov in _movies
+                join star in _starring on mov.MovieId equals star.MovieId
+                join actor in _actors on star.ActorId equals actor.ActorId
+                select new ValueTuple<string, string>(mov.Title, actor.LastName);
 
             var deNiroMovies = obj
                 .AsEnumerable()
@@ -71,11 +72,12 @@ namespace PostgreDatabaseFirst.Queries
         // Task 3: Display titles of movies that were rented by both Gary Goodspeed and Brian Griffin
         public List<string> Task3()
         {
-            var obj = from rent in _rentals
-                      join copy in _copies on rent.CopyId equals copy.CopyId
-                      join movie in _movies on copy.MovieId equals movie.MovieId
-                      join client in _clients on rent.ClientId equals client.ClientId
-                      select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
+            var obj =
+                from rent in _rentals
+                join copy in _copies on rent.CopyId equals copy.CopyId
+                join movie in _movies on copy.MovieId equals movie.MovieId
+                join client in _clients on rent.ClientId equals client.ClientId
+                select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
 
             var goodspeed = obj
                 .AsEnumerable()
@@ -95,11 +97,12 @@ namespace PostgreDatabaseFirst.Queries
         // Task 4: Display titles of movies that were rented by Gary Goodspeed and were never rented by Brian Griffin
         public List<string> Task4()
         {
-            var obj = from rent in _rentals
-                      join copy in _copies on rent.CopyId equals copy.CopyId
-                      join movie in _movies on copy.MovieId equals movie.MovieId
-                      join client in _clients on rent.ClientId equals client.ClientId
-                      select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
+            var obj =
+                from rent in _rentals
+                join copy in _copies on rent.CopyId equals copy.CopyId
+                join movie in _movies on copy.MovieId equals movie.MovieId
+                join client in _clients on rent.ClientId equals client.ClientId
+                select new ValueTuple<string, string, string>(movie.Title, client.FirstName, client.LastName);
 
             var goodspeed = obj
                 .AsEnumerable()
@@ -119,10 +122,11 @@ namespace PostgreDatabaseFirst.Queries
         // Task 5: Display names of actors that played in 'Terminator' but never played in 'Ghostbusters'
         public List<(string, string)> Task5()
         {
-            var obj = from mov in _movies
-                      join star in _starring on mov.MovieId equals star.MovieId
-                      join actor in _actors on star.ActorId equals actor.ActorId
-                      select new ValueTuple<string, string, string>(mov.Title, actor.FirstName, actor.LastName);
+            var obj =
+                from mov in _movies
+                join star in _starring on mov.MovieId equals star.MovieId
+                join actor in _actors on star.ActorId equals actor.ActorId
+                select new ValueTuple<string, string, string>(mov.Title, actor.FirstName, actor.LastName);
 
             var terminator = obj
                 .AsEnumerable()
@@ -156,13 +160,14 @@ namespace PostgreDatabaseFirst.Queries
             return obj;
         }
 
-        // Task 8: How many time movie ’Taxi Driver’ was rented?
+        // Task 8: How many time movie 'Taxi Driver' was rented?
         public int Task8()
         {
-            var obj = from rental in _rentals
-                      join copy in _copies on rental.CopyId equals copy.CopyId
-                      join movie in _movies on copy.MovieId equals movie.MovieId
-                      select new ValueTuple<string>(movie.Title);
+            var obj =
+                from rental in _rentals
+                join copy in _copies on rental.CopyId equals copy.CopyId
+                join movie in _movies on copy.MovieId equals movie.MovieId
+                select new ValueTuple<string>(movie.Title);
 
             var result = obj
                 .AsEnumerable()
@@ -172,6 +177,144 @@ namespace PostgreDatabaseFirst.Queries
                 .FirstOrDefault();
 
             return result;
+        }
+
+        // Task 9: For every year of production, display the average price of the movie.
+        // Order the results by year
+        public List<(int, float?)> Task9()
+        {
+            var obj = _movies
+                .AsEnumerable()
+                .GroupBy(x => x.Year)
+                .Select(t =>
+                    new ValueTuple<int, float?>(t.Key, t.Average(p => p.Price)))
+                .OrderBy(j => j.Item1)
+                .ToList();
+
+            return obj;
+        }
+
+        // Task 10: What was the average rental time of 'Ronin'?
+        public double Task10()
+        {
+            var collection =
+                from rental in _rentals
+                join copy in _copies on rental.CopyId equals copy.CopyId
+                join movie in _movies on copy.MovieId equals movie.MovieId
+                select new ValueTuple<string, DateTime?, DateTime?>(movie.Title, rental.DateOfRental,
+                    rental.DateOfReturn);
+
+            var obj = collection
+                .AsEnumerable()
+                .Where(g => g.Item1 == "Ronin")
+                .GroupBy(x => x.Item1)
+                .Select(t => t.Average(p => (p.Item3 - p.Item2).Value.TotalDays))
+                .FirstOrDefault();
+
+            return obj;
+        }
+
+        // Task 11. For each movie display its title, minimum, maximum and average rental
+        // time, as well as number of times it was rented.
+        // Order the results from most popular movie to least one.
+        public List<(string, double, double, double, int)> Task11()
+        {
+            var collection =
+                from rental in _rentals
+                join copy in _copies on rental.CopyId equals copy.CopyId
+                join movie in _movies on copy.MovieId equals movie.MovieId
+                select new ValueTuple<string, DateTime?, DateTime?>(movie.Title, rental.DateOfRental,
+                    rental.DateOfReturn);
+
+            var obj = collection
+                .AsEnumerable()
+                .GroupBy(x => x.Item1)
+                .Select(t => new ValueTuple<string, double, double, double, int>
+                (t.Key,
+                    t.Min(p => (p.Item3 - p.Item2).Value.TotalDays),
+                    t.Max(p => (p.Item3 - p.Item2).Value.TotalDays),
+                    t.Average(p => (p.Item3 - p.Item2).Value.TotalDays),
+                    t.Count()
+                ))
+                .OrderBy(x => x.Item3)
+                .ToList();
+
+            return obj;
+        }
+
+        // Task 12: For every client display its first, last name and number of rentals.
+        // Order the results by last names
+        public List<(string, string, int)> Task12()
+        {
+            var collection =
+                from rental in _rentals
+                join client in _clients on rental.ClientId equals client.ClientId
+                group client by new
+                {
+                    client.FirstName,
+                    client.LastName
+                }
+                into clientGroup
+                orderby clientGroup.Key.LastName
+                select new ValueTuple<string, string, int>
+                (
+                    clientGroup.Key.FirstName,
+                    clientGroup.Key.LastName,
+                    clientGroup.Count()
+                );
+
+            return collection.ToList();
+        }
+
+        // Task 13: For every actor display the number of movies in which he/she played.
+        // Skip actors, that played in only one movie
+        public List<(string, int)> Task13()
+        {
+            var collection =
+                from movie in _movies
+                join star in _starring on movie.MovieId equals star.MovieId
+                join actor in _actors on star.ActorId equals actor.ActorId
+                group actor by actor.LastName
+                into actorGroup
+                where actorGroup.Count() > 1
+                select new ValueTuple<string, int>
+                (
+                    actorGroup.Key,
+                    actorGroup.Count()
+                );
+
+            return collection.ToList();
+        }
+
+        // Task 14: For every client display the total amount of money he or she spent on renting movies
+        public class ClientMovieGroup
+        {
+            public string LastName { get; }
+            public float? Sum { get; }
+
+            public ClientMovieGroup(string lastName, float? sum)
+            {
+                LastName = lastName;
+                Sum = sum;
+            }
+        }
+
+        public List<ClientMovieGroup> Task14()
+        {
+            var obj =
+                from rental in _rentals
+                join copy in _copies on rental.CopyId equals copy.CopyId
+                join movie in _movies on copy.CopyId equals movie.MovieId
+                join client in _clients on rental.ClientId equals client.ClientId
+                group new { rental, movie } by new
+                {
+                    client.LastName,
+                    movie.Price
+                }
+                into clientMovieGroup
+                select new ClientMovieGroup(clientMovieGroup.Key.LastName, clientMovieGroup.Sum(x => x.movie.Price));
+
+            return obj.ToList();
         }
     }
 }

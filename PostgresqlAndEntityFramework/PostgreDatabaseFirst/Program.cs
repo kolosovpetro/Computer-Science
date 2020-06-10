@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using PostgreDatabaseFirst.Facades;
+﻿using PostgreDatabaseFirst.Facades;
 
 namespace PostgreDatabaseFirst
 {
