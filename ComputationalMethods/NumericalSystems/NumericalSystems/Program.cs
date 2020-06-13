@@ -13,17 +13,15 @@ namespace NumericalSystems
                 var userInput = Console.ReadLine();
 
                 if (userInput == "X")
-                {
                     break;
-                }
 
-                var converter = new NumericalConverter(userInput);
+                var converter = new Processor(userInput);
                 
-                Console.WriteLine(converter.PrintBase);
-                Console.WriteLine(converter.PrintDecimalForm);
-                Console.WriteLine(converter.PrintBinaryForm);
-                Console.WriteLine(converter.PrintOctalForm);
-                Console.WriteLine(converter.PrintHexForm);
+                Console.WriteLine(converter.Base);
+                Console.WriteLine(converter.Decimal);
+                Console.WriteLine(converter.Binary);
+                Console.WriteLine(converter.Octal);
+                Console.WriteLine(converter.Hexagonal);
                 Console.WriteLine("Press Enter to continue with other number");
                 Console.ReadKey();
                 Console.Clear();

@@ -43,12 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NumericalConverter.cs" />
+    <Compile Include="Auxiliaries\BaseGetter.cs" />
+    <Compile Include="Converters\ConvertFromDecimal.cs" />
+    <Compile Include="Converters\ConvertToDecimal.cs" />
+    <Compile Include="Auxiliaries\FormatSymbols.cs" />
+    <Compile Include="Auxiliaries\Misc.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

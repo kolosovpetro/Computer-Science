@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PostgreDatabaseFirst.ViewModels;
 
 namespace PostgreDatabaseFirst.Comparers
 {
-    class ClientNameComparer : IEqualityComparer<ClientViewModel>
+    internal class ClientNameComparer : IEqualityComparer<ClientViewModel>
     {
         public bool Equals(ClientViewModel x, ClientViewModel y)
         {

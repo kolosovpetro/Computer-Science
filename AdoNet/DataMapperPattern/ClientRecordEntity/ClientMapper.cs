@@ -9,7 +9,6 @@ namespace DataMapperPattern.ClientRecordEntity
         IInsertable<IClientRecord>, IIdentityMap<IClientRecord>
     {
         public IDictionary<int, IClientRecord> CacheDictionary { get; }
-
         public static ClientMapper Instance { get; } = new ClientMapper();
 
         static ClientMapper() { }

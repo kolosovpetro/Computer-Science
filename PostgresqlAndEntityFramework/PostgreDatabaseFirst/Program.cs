@@ -9,14 +9,14 @@ namespace PostgreDatabaseFirst
             //var selectionFacade = new SelectionFacade();
             //selectionFacade.ExecuteAll();
 
-            //var joinFacade = new JoinFacade();
-            //joinFacade.ExecuteAll();
+            var joinFacade = new JoinFacade();
+            joinFacade.ExecuteAll();
 
             //GroupFacade groupFacade = new GroupFacade();
             //groupFacade.ExecuteAll();
 
-            SubFacade subFacade = new SubFacade();
-            subFacade.ExecuteAll();
+            //SubFacade subFacade = new SubFacade();
+            //subFacade.ExecuteAll();
 
             //FluentSearcher fluentSearcher = new FluentSearcher();
             //fluentSearcher.SearchName("A").Query.ToList().ForEach(x =>
