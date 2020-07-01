@@ -64,10 +64,10 @@ namespace DijkstraAlgorithm.DijkstraTDD
             return neighbors;
         }
 
-        public void BuildShortPathTable()
+        public void BuildShortPathTable(INode startNode)
         {
             // define start node
-            var currentNode = _graph.Edges.ElementAt(0).First;
+            var currentNode = startNode;
 
             // reset table of shortest patches
             DistancesList = new List<TableModel>();
