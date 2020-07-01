@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DijkstraAlgorithm.Implementations;
 using DijkstraAlgorithm.Interfaces;
 using DijkstraAlgorithm.Models;
-using NUnit.Framework;
 
 namespace DijkstraAlgorithm.DijkstraTDD
 {
@@ -11,10 +9,10 @@ namespace DijkstraAlgorithm.DijkstraTDD
     {
         private readonly IGraph _graph;
 
-        public List<INode> VisitedNodes { get; set; }
-        public List<INode> UnvisitedNodes { get; set; }
+        public List<INode> VisitedNodes { get; private set; }
+        public List<INode> UnvisitedNodes { get; private set; }
 
-        public List<TableModel> DistancesList { get; set; }
+        public List<TableModel> DistancesList { get; private set; }
 
         public DijkstraMethod(IGraph graph)
         {
@@ -120,6 +118,7 @@ namespace DijkstraAlgorithm.DijkstraTDD
                     {
                         var index = DistancesList.IndexOf(model);
                         DistancesList[index].Distance = length + edge.Weight;
+                        DistancesList[index].PreviousNode = currentNode;
                     }
                 }
 
