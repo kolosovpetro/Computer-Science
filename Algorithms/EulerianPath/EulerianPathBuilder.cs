@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GraphLibrary.Interfaces;
 
@@ -42,10 +43,64 @@ namespace EulerianPath
                 return _graph.Edges
                     .FirstOrDefault(x => x.First.Degree % 2 == 1);
             }
-            
+
             throw new Exception("Graph must have 0 or 2 odd vertices");
         }
-        
-        
+
+        public IEnumerable<IEdge> NeighborEdges(INode node)
+        {
+            return _graph.Edges
+                .Where(x => x.First.Equals(node));
+        }
+
+        public bool HasEulerianPath()
+        {
+            // check if graph meets conditions
+            if (!GraphIsValid())
+            {
+                return false;
+            }
+
+            // get first edge
+            var currentEdge = GetStartEdge();
+
+            // go over graph
+            while (true)
+            {
+                // get start neighboring edges
+                var neighbors = NeighborEdges(currentEdge?.First).ToList();
+
+                // check
+                if (!neighbors.Any() && _graph.Edges.Count(x => !x.Visited) > 0)
+                {
+                    return false;
+                }
+
+                // mark current as visited
+                if (currentEdge != null)
+                {
+                    currentEdge.Visited = true;
+
+                    // choose next current edge from neighbors
+                    // avoid bridges
+                    switch (neighbors.All(IsBridge))
+                    {
+                        case true:
+                            currentEdge = neighbors.FirstOrDefault();
+                            break;
+                        default:
+                            currentEdge = neighbors.FirstOrDefault(x => !IsBridge(x));
+                            break;
+                    }
+                }
+
+                if (_graph.Edges.Any(x => !x.Visited))
+                {
+                    break;
+                }
+            }
+
+            return true;
+        }
     }
 }

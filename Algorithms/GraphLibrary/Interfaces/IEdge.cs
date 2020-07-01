@@ -5,5 +5,6 @@
         INode First { get; }
         INode Last { get; }
         int Weight { get; }
+        bool Visited { get; set; }
     }
 }

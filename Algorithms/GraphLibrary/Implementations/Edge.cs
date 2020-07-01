@@ -7,6 +7,7 @@ namespace GraphLibrary.Implementations
         public INode First { get; }
         public INode Last { get; }
         public int Weight { get; }
+        public bool Visited { get; set; }
 
         public Edge(INode first, INode last)
         {

@@ -60,11 +60,12 @@ namespace EulerianPath
             var ab = new Edge(a, b);
             var bc = new Edge(b, c);
             var ca = new Edge(c, a);
-            var ad = new Edge(a, d);
+            //var ad = new Edge(a, d);
             
-            var graph = new Graph(ab, bc, ca, ad);
+            var graph = new Graph(ab, bc, ca);
             var euler = new EulerianPathBuilder(graph);
             euler.GraphIsValid().Should().BeTrue();
+            euler.GetStartEdge().Should().Be(ab);
         }
 
         [Test]
@@ -122,6 +123,46 @@ namespace EulerianPath
             var graph = new Graph(ab, bc, ca, ad);
             var euler = new EulerianPathBuilder(graph);
             euler.GetStartEdge().Should().Be(ab);
+        }
+        
+        [Test]
+        public void NeighborEdgesTest()
+        {
+            var a = new Node("A");
+            var b = new Node("B");
+            var c = new Node("C");
+            var d = new Node("D");
+
+            var ab = new Edge(a, b);
+            var bc = new Edge(b, c);
+            var ca = new Edge(c, a);
+            var ad = new Edge(a, d);
+            
+            var graph = new Graph(ab, bc, ca, ad);
+            var euler = new EulerianPathBuilder(graph);
+            var neighborEdges = euler.NeighborEdges(a).ToList();
+            neighborEdges.Count.Should().Be(2);
+            neighborEdges.ElementAt(0).Should().Be(ab);
+            neighborEdges.ElementAt(1).Should().Be(ad);
+        }
+
+        [Test]
+        public void HasEulerianPathTest()
+        {
+            var a = new Node("A");
+            var b = new Node("B");
+            var c = new Node("C");
+            var d = new Node("D");
+
+            var ab = new Edge(a, b);
+            var bc = new Edge(b, c);
+            var ca = new Edge(c, a);
+            var ad = new Edge(a, d);
+            var dc = new Edge(d, c);
+            
+            var graph = new Graph(ab, bc, ca, ad, dc);
+            var euler = new EulerianPathBuilder(graph);
+            euler.HasEulerianPath().Should().BeTrue();
         }
     }
 }
