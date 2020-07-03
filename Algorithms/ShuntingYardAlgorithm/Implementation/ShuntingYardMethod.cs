@@ -41,8 +41,7 @@ namespace ShuntingYardAlgorithm.Implementation
 
                 // if token is an operator and stack is not empty
                 while (operandStack.Any()
-                       && (Precedence(operandStack.Peek()) > Precedence(token) ||
-                           Precedence(operandStack.Peek()) == Precedence(token))
+                       && Precedence(operandStack.Peek()) >= Precedence(token)
                        && Associativity(token) == "Left")
                 {
                     outputQueue.Enqueue(operandStack.Pop());
