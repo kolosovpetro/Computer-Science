@@ -13,7 +13,7 @@ namespace CaesarСipher.Implementation
         {
             if (shift < 0) throw new InvalidOperationException("Shift must be greater or equal 0");
             
-            var shiftedAlphabet = ShiftAlphabet(shift);
+            var shiftedAlphabet = DecodeAlphabet(shift);
             
             var builder = new StringBuilder(text.Length);
 
@@ -42,7 +42,7 @@ namespace CaesarСipher.Implementation
             return builder.ToString();
         }
 
-        public static char[] ShiftAlphabet(int shift)
+        public static char[] DecodeAlphabet(int shift)
         {
             if (shift < 0)
                 throw new InvalidOperationException("Shift must be greater or equal 0");
