@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDLibrary", "IDLibrary.csproj", "{43E9962F-31F0-4CB9-B67C-56E05824A3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingUI", "..\SortingUI\SortingUI.csproj", "{F8DE43B6-B5B4-4786-859F-DF52E2129C01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43E9962F-31F0-4CB9-B67C-56E05824A3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E9962F-31F0-4CB9-B67C-56E05824A3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E9962F-31F0-4CB9-B67C-56E05824A3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E9962F-31F0-4CB9-B67C-56E05824A3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8DE43B6-B5B4-4786-859F-DF52E2129C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8DE43B6-B5B4-4786-859F-DF52E2129C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8DE43B6-B5B4-4786-859F-DF52E2129C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8DE43B6-B5B4-4786-859F-DF52E2129C01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,7 +1,5 @@
-﻿using System.Linq;
-using BinaryTree.Implementations;
+﻿using BinaryTree.Implementations;
 using BinaryTree.Traversal;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace BinaryTree.TDD
