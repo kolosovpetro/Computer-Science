@@ -20,12 +20,7 @@ namespace SortAlgorithms
                 var a4 = new DescendingArray(size * i);
                 var a5 = new RandomArray(size * i);
                 var a6 = new VShapeArray(size * i);
-                Arrays.Add(a1);
-                Arrays.Add(a2);
-                Arrays.Add(a3);
-                Arrays.Add(a4);
-                Arrays.Add(a5);
-                Arrays.Add(a6);
+                Arrays.AddRange(new AbstractArray[] {a1, a2, a3, a4, a5, a6});
 
                 foreach (var CurrentArray in Arrays)
                 {
@@ -37,13 +32,7 @@ namespace SortAlgorithms
                     var s5 = new SelectionSort(CurrentArray);
                     var s6 = new MergeSort(CurrentArray);
                     var s7 = new QuickSort(CurrentArray);
-                    SortList.Add(s1);
-                    SortList.Add(s2);
-                    SortList.Add(s3);
-                    SortList.Add(s4);
-                    SortList.Add(s5);
-                    SortList.Add(s6);
-                    SortList.Add(s7);
+                    SortList.AddRange(new AbstractSort[] {s1, s2, s3, s4, s5, s6, s7});
 
                     foreach (var SortMethod in SortList)
                     {
