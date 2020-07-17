@@ -9,9 +9,9 @@ namespace SearchAlgorithms.SearchMethods
     {
         protected int SearchValue { get; }
         protected int[] Array { get; }
-        protected string LogFilesPath { get; }
-        public TimeSpan SearchExecTime { get; protected set; }
-        public string Message { get; protected set; }
+        private string LogFilesPath { get; }
+        private TimeSpan SearchExecTime { get; set; }
+        public string Message { get; }
 
         protected AbstractSearch(IEnumerable<int> collection, int searchValue)
         {
@@ -31,15 +31,15 @@ namespace SearchAlgorithms.SearchMethods
         public virtual void GetBenchmark()
         {
             Directory.CreateDirectory(LogFilesPath);
-            string reportPath = LogFilesPath + $"{GetType().Name}Report.txt";
-            string dataPath = LogFilesPath + $"{GetType().Name}Data.txt";
+            var reportPath = LogFilesPath + $"{GetType().Name}Report.txt";
+            var dataPath = LogFilesPath + $"{GetType().Name}Data.txt";
 
-            using (var sw = new StreamWriter(reportPath, append: true))
+            using (var sw = new StreamWriter(reportPath, true))
             {
                 sw.WriteLine(Message);
             }
 
-            using (var sw = new StreamWriter(dataPath, append: true))
+            using (var sw = new StreamWriter(dataPath, true))
             {
                 sw.WriteLine(SearchExecTime);
             }

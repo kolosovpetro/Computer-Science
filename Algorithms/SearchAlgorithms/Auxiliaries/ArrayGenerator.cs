@@ -1,22 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SearchAlgorithms.Auxiliaries
 {
     internal static class ArrayGenerator
     {
-        public static int [] RandomArray(int length)
+        public static int[] RandomArray(int length)
         {
-            Random rand = new Random();
+            var rand = new Random();
 
-            int[] randomArray = new int[length];
+            var randomArray = new int[length];
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
                 randomArray[i] = rand.Next(length);
 
             return randomArray;
         }
 
-        public static int [] SortedAscArray(int length)
+        public static IEnumerable<int> SortedAscArray(int length)
         {
             var temp = RandomArray(length);
             Array.Sort(temp);

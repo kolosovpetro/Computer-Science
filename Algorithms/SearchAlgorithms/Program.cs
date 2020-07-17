@@ -1,34 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using SearchAlgorithms.Auxiliaries;
 using SearchAlgorithms.SearchMethods;
+using static SearchAlgorithms.Auxiliaries.ArrayGenerator;
 
 namespace SearchAlgorithms
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
             const int size = 5000;
 
-            Random rand = new Random();
+            var rand = new Random();
 
-            for (int i = 1; i <= 40; i++)
+            for (var i = 1; i <= 40; i++)
             {
                 var searcher = new Searcher();
-                int searchValue = rand.Next(size * i);
-                int[] randomArray = ArrayGenerator.RandomArray(size * i);
-                int[] sortedArray = ArrayGenerator.SortedAscArray(size * i);
+                var searchValue = rand.Next(size * i);
+                var randomArray = RandomArray(size * i);
+                var sortedArray = SortedAscArray(size * i);
                 var searchMethods = new List<AbstractSearch>();
-                var simpleLinearSearch = new SimpleLinearSearchMethod(randomArray, searchValue);
-                var improvedLinearSearch = new ImprovedLinearSearchMethod(randomArray, searchValue);
-                var binarySearch = new BinarySearchMethod(sortedArray, searchValue);
-                var improvedLinearSearchWithSentinel = new ImprovedLinearSearchWithSentinelMethod(randomArray, searchValue);
+                var s1 = new SimpleLinearSearch(randomArray, searchValue);
+                var s2 = new ImprovedLinearSearch(randomArray, searchValue);
+                var s3 = new BinarySearch(sortedArray, searchValue);
+                var s4 = new ImprovedLinearSearchSentinel(randomArray, searchValue);
 
-                searchMethods.Add(simpleLinearSearch);
-                searchMethods.Add(improvedLinearSearch);
-                searchMethods.Add(binarySearch);
-                searchMethods.Add(improvedLinearSearchWithSentinel);
+                searchMethods.AddRange(new AbstractSearch[] {s1, s2, s3, s4});
 
                 foreach (var search in searchMethods)
                 {
@@ -38,8 +35,6 @@ namespace SearchAlgorithms
                     Console.WriteLine(search.Message);
                 }
             }
-
-
         }
     }
 }

@@ -2,25 +2,26 @@
 
 namespace SearchAlgorithms.SearchMethods
 {
-    internal class BinarySearchMethod : AbstractSearch
+    internal class BinarySearch : AbstractSearch
     {
-        public BinarySearchMethod(IEnumerable<int> collection, int searchValue) : 
+        public BinarySearch(IEnumerable<int> collection, int searchValue) :
             base(collection, searchValue)
-        { }
+        {
+        }
 
         public override bool DoSearch()
         {
-            return BinarySearch(Array, SearchValue);
+            return ExecuteBinarySearch(Array, SearchValue);
         }
 
-        private bool BinarySearch(int[] array, int searchValue)
+        private static bool ExecuteBinarySearch(IReadOnlyList<int> array, int searchValue)
         {
-            int min = 0;
-            int max = array.Length - 1;
+            var min = 0;
+            var max = array.Count - 1;
 
             while (min <= max)
             {
-                int mid = (min + max) / 2;
+                var mid = (min + max) / 2;
 
                 if (searchValue == array[mid]) return true;
 
