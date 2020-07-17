@@ -6,32 +6,32 @@ namespace SortAlgorithms.SortMethods
 {
     internal class CountingSort : AbstractSort
     {
-        public CountingSort(IEnumerable<int> Collection) : base(Collection) { }
-        public CountingSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+        public CountingSort(IEnumerable<int> collection) : base(collection) { }
+        public CountingSort(AbstractArray array) : base(array) { }
 
         public override void GetSortedArray()
         {
             SortedArray = DoCountingSort(InitArray);
         }
 
-        private int[] DoCountingSort(int[] Array)
+        private static int[] DoCountingSort(int[] array)
         {
-            int[] Sort = new int[Array.Length];
+            var Sort = new int[array.Length];
 
-            int Min = Array.Min();
-            int Max = Array.Max();
+            var Min = array.Min();
+            var Max = array.Max();
 
-            int[] Counts = new int[Max - Min + 1];
+            var Counts = new int[Max - Min + 1];
 
-            foreach (var term in Array)
+            foreach (var term in array)
                 Counts[term - Min]++;
 
             Counts[0]--;
-            for (int i = 1; i < Counts.Length; i++)
+            for (var i = 1; i < Counts.Length; i++)
                 Counts[i] += Counts[i - 1];
 
-            for (int i = Array.Length - 1; i >= 0; i--)
-                Sort[Counts[Array[i] - Min]--] = Array[i];
+            for (var i = array.Length - 1; i >= 0; i--)
+                Sort[Counts[array[i] - Min]--] = array[i];
 
             return Sort;
         }

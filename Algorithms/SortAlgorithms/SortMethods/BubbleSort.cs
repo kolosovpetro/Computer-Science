@@ -6,28 +6,28 @@ namespace SortAlgorithms.SortMethods
 {
     internal class BubbleSort : AbstractSort
     {
-        public BubbleSort(IEnumerable<int> Collection) : base(Collection) { }
-        public BubbleSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+        public BubbleSort(IEnumerable<int> collection) : base(collection) { }
+        public BubbleSort(AbstractArray array) : base(array) { }
 
         public override void GetSortedArray()
         {
             SortedArray = DoBubbleSort(InitArray);
         }
 
-        private int[] DoBubbleSort(int[] Array)
+        private static int[] DoBubbleSort(int[] array)
         {
-            for (int i = 1; i < Array.Length; i++)
+            for (var i = 1; i < array.Length; i++)
             {
-                for (int j = Array.Length - 1; j > 1; j--)
+                for (var j = array.Length - 1; j > 1; j--)
                 {
-                    if (Array[j] < Array[j - 1])
+                    if (array[j] < array[j - 1])
                     {
-                        Swap.DoSwap(ref Array[j], ref Array[j - 1]);
+                        Swap.DoSwap(ref array[j], ref array[j - 1]);
                     }
                 }
             }
 
-            return Array;
+            return array;
         }
     }
 }

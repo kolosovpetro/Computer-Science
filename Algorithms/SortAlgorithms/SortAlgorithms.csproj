@@ -63,10 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arrays\AbstractArray.cs" />
-    <Compile Include="Arrays\AscArray.cs" />
+    <Compile Include="Arrays\AscendingArray.cs" />
     <Compile Include="Arrays\AShapeArray.cs" />
     <Compile Include="Arrays\ConstArray.cs" />
-    <Compile Include="Arrays\DscArray.cs" />
+    <Compile Include="Arrays\DescendingArray.cs" />
     <Compile Include="Arrays\RandomArray.cs" />
     <Compile Include="Arrays\VShapeArray.cs" />
     <Compile Include="Auxiliaries\ArrayGenerator.cs" />

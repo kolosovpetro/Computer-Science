@@ -5,57 +5,57 @@ namespace SortAlgorithms.Auxiliaries
 {
     internal static class ArrayGenerator
     {
-        public static int [] RandomArray(int Size)
+        public static int [] RandomArray(int size)
         {
-            Random rand = new Random();
-            int[] RandomArray = new int[Size];
+            var rand = new Random();
+            var RandomArray = new int[size];
 
-            for (int i = 0; i < Size; i++)
-                RandomArray[i] = rand.Next(0, Size);
+            for (var i = 0; i < size; i++)
+                RandomArray[i] = rand.Next(0, size);
 
             return RandomArray;
         }
 
-        public static int [] SortedAscArray(int Size)
+        public static int [] SortedAscArray(int size)
         {
-            var temp = RandomArray(Size);
+            var temp = RandomArray(size);
             Array.Sort(temp);
             return temp;
         }
 
-        public static int[] SortedDscArray(int Size)
+        public static int[] SortedDscArray(int size)
         {
-            var temp = SortedAscArray(Size);
+            var temp = SortedAscArray(size);
             Array.Reverse(temp);
             return temp;
         }
 
-        public static int[] ConstArray(int Size)
+        public static int[] ConstArray(int size)
         {
-            Random rand = new Random();
-            int[] temp = new int[Size];
-            int Value = rand.Next(0, Size);
-            for (int i = 0; i < Size; i++)
+            var rand = new Random();
+            var temp = new int[size];
+            var Value = rand.Next(0, size);
+            for (var i = 0; i < size; i++)
                 temp[i] = Value;
 
             return temp;
         }
 
-        public static int [] AShapeArray(int Size)
+        public static int [] AShapeArray(int size)
         {
-            var temp = SortedAscArray(Size);
-            var part1 = temp.Skip(0).Take(Size / 2).ToArray();
-            var part2 = temp.Skip(Size / 2).Take(Size).ToArray();
+            var temp = SortedAscArray(size);
+            var part1 = temp.Skip(0).Take(size / 2).ToArray();
+            var part2 = temp.Skip(size / 2).Take(size).ToArray();
             Array.Reverse(part2);
             temp = part1.Concat(part2).ToArray();
             return temp;
         }
 
-        public static int[] VShapeArray(int Size)
+        public static int[] VShapeArray(int size)
         {
-            var temp = SortedAscArray(Size);
-            var part1 = temp.Skip(0).Take(Size / 2).ToArray();
-            var part2 = temp.Skip(Size / 2).Take(Size).ToArray();
+            var temp = SortedAscArray(size);
+            var part1 = temp.Skip(0).Take(size / 2).ToArray();
+            var part2 = temp.Skip(size / 2).Take(size).ToArray();
             Array.Reverse(part1);
             temp = part1.Concat(part2).ToArray();
             return temp;

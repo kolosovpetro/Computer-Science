@@ -5,47 +5,47 @@ using SortAlgorithms.Arrays;
 
 namespace SortAlgorithms
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
-            int Size = 200;
+            const int size = 200;
 
-            for (int i = 1; i <= 20; i++)
+            for (var i = 1; i <= 20; i++)
             {
-                List<AbstractArray> AbsArrays = new List<AbstractArray>();
-                AscArray a1 = new AscArray(Size * i);
-                AShapeArray a2 = new AShapeArray(Size * i);
-                ConstArray a3 = new ConstArray(Size * i);
-                DscArray a4 = new DscArray(Size * i);
-                RandomArray a5 = new RandomArray(Size * i);
-                VShapeArray a6 = new VShapeArray(Size * i);
-                AbsArrays.Add(a1);
-                AbsArrays.Add(a2);
-                AbsArrays.Add(a3);
-                AbsArrays.Add(a4);
-                AbsArrays.Add(a5);
-                AbsArrays.Add(a6);
+                var Arrays = new List<AbstractArray>();
+                var a1 = new AscendingArray(size * i);
+                var a2 = new AShapeArray(size * i);
+                var a3 = new ConstArray(size * i);
+                var a4 = new DescendingArray(size * i);
+                var a5 = new RandomArray(size * i);
+                var a6 = new VShapeArray(size * i);
+                Arrays.Add(a1);
+                Arrays.Add(a2);
+                Arrays.Add(a3);
+                Arrays.Add(a4);
+                Arrays.Add(a5);
+                Arrays.Add(a6);
 
-                foreach (var CurrentArray in AbsArrays)
+                foreach (var CurrentArray in Arrays)
                 {
-                    List<AbstractSort> AbsSortList = new List<AbstractSort>();
-                    BubbleSort bs = new BubbleSort(CurrentArray);
-                    CocktailSort cs = new CocktailSort(CurrentArray);
-                    InsertionSort ins = new InsertionSort(CurrentArray);
-                    CountingSort cs1 = new CountingSort(CurrentArray);
-                    SelectionSort ss = new SelectionSort(CurrentArray);
-                    MergeSort ms = new MergeSort(CurrentArray);
-                    QuickSort qs = new QuickSort(CurrentArray);
-                    AbsSortList.Add(bs);
-                    AbsSortList.Add(cs);
-                    AbsSortList.Add(ins);
-                    AbsSortList.Add(cs1);
-                    AbsSortList.Add(ss);
-                    AbsSortList.Add(ms);
-                    AbsSortList.Add(qs);
+                    var SortList = new List<AbstractSort>();
+                    var s1 = new BubbleSort(CurrentArray);
+                    var s2 = new CocktailSort(CurrentArray);
+                    var s3 = new InsertionSort(CurrentArray);
+                    var s4 = new CountingSort(CurrentArray);
+                    var s5 = new SelectionSort(CurrentArray);
+                    var s6 = new MergeSort(CurrentArray);
+                    var s7 = new QuickSort(CurrentArray);
+                    SortList.Add(s1);
+                    SortList.Add(s2);
+                    SortList.Add(s3);
+                    SortList.Add(s4);
+                    SortList.Add(s5);
+                    SortList.Add(s6);
+                    SortList.Add(s7);
 
-                    foreach (AbstractSort SortMethod in AbsSortList)
+                    foreach (var SortMethod in SortList)
                     {
                         SortMethod.GetSortedArray();
                         SortMethod.GetBenchmark();
@@ -53,7 +53,6 @@ namespace SortAlgorithms
                     }
                 }
             }
-
         }
     }
 }

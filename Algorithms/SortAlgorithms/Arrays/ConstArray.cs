@@ -4,7 +4,7 @@ namespace SortAlgorithms.Arrays
 {
     internal class ConstArray : AbstractArray
     {
-        public ConstArray(int newSize) : base(newSize)
+        public ConstArray(int size) : base(size)
         {
             ArrayType = "Constant Array";
         }

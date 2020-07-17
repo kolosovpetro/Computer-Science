@@ -2,9 +2,9 @@
 
 namespace SortAlgorithms.Arrays
 {
-    internal class AscArray : AbstractArray
+    internal class AscendingArray : AbstractArray
     {
-        public AscArray(int newSize) : base(newSize)
+        public AscendingArray(int size) : base(size)
         {
             ArrayType = "Ascending Array";
         }

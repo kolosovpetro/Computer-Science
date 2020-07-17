@@ -2,9 +2,9 @@
 
 namespace SortAlgorithms.Arrays
 {
-    internal class DscArray : AbstractArray
+    internal class DescendingArray : AbstractArray
     {
-        public DscArray(int newSize) : base(newSize)
+        public DescendingArray(int size) : base(size)
         {
             ArrayType = "Descending Array";
         }

@@ -6,29 +6,29 @@ namespace SortAlgorithms.SortMethods
 {
     internal class SelectionSort : AbstractSort
     {
-        public SelectionSort(IEnumerable<int> Collection) : base(Collection) { }
-        public SelectionSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+        public SelectionSort(IEnumerable<int> collection) : base(collection) { }
+        public SelectionSort(AbstractArray array) : base(array) { }
 
         public override void GetSortedArray()
         {
             SortedArray = DoSelectionSort(InitArray);
         }
 
-        private int[] DoSelectionSort(int[] Array)
+        private static int[] DoSelectionSort(int[] array)
         {
-            for (int i = 0; i < Array.Length; i++)
+            for (var i = 0; i < array.Length; i++)
             {
-                int MinIndex = i;
+                var MinIndex = i;
 
-                for (int j = i + 1; j < Array.Length; j++)
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    MinIndex = Array[MinIndex] < Array[j] ? MinIndex : j;
+                    MinIndex = array[MinIndex] < array[j] ? MinIndex : j;
                 }
 
-                Swap.DoSwap(ref Array[i], ref Array[MinIndex]);
+                Swap.DoSwap(ref array[i], ref array[MinIndex]);
             }
 
-            return Array;
+            return array;
         }
     }
 }

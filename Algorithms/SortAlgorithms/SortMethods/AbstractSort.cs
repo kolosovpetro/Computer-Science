@@ -4,35 +4,34 @@ using SortAlgorithms.Interfaces;
 using SortAlgorithms.Auxiliaries;
 using SortAlgorithms.Arrays;
 using System.IO;
+using System.Linq;
 
 namespace SortAlgorithms.SortMethods
 {
     internal abstract class AbstractSort : ISort, IDataLogger
     {
-        public int[] InitArray { get; }
+        protected int[] InitArray { get; }
         public int[] SortedArray { get; protected set; }
-        protected string LogFilesPath { get; }
-        public string Message { get; protected set; }
-        public TimeSpan SortExecTime { get; protected set; }
-        public string ArrayType { get; }
-        public AbstractArray AbsArray { get; }
+        private string LogFilesPath { get; }
+        public string Message { get; }
+        private TimeSpan SortExecTime { get; set; }
+        private string ArrayType { get; }
 
-        protected AbstractSort(IEnumerable<int> Collection)
+        protected AbstractSort(IEnumerable<int> collection)
         {
-            InitArray = (int[])Collection;
+            InitArray = collection.ToArray();
             LogFilesPath = "../../Benchmarks/";
             SetSortExecTime();
             Message = $"{GetType().Name}, Array Size: {InitArray.Length}, Sorted for {SortExecTime}";
         }
 
-        protected AbstractSort(AbstractArray newAbsArray)
+        protected AbstractSort(AbstractArray array)
         {
-            AbsArray = newAbsArray;
-            InitArray = newAbsArray.GetArray();
-            ArrayType = newAbsArray.GetArrayType();
+            InitArray = array.GetArray();
+            ArrayType = array.GetArrayType();
             LogFilesPath = $"../../Benchmarks/{ArrayType}/{GetType().Name}/";
             SetSortExecTime();
-            Message = $"{GetType().Name}, Array Type: {ArrayType}, Array Size: {newAbsArray.Size}, Sorted for {SortExecTime}";
+            Message = $"{GetType().Name}, Array Type: {ArrayType}, Array Size: {array.Size}, Sorted for {SortExecTime}";
         }
 
         public abstract void GetSortedArray();
@@ -46,8 +45,8 @@ namespace SortAlgorithms.SortMethods
         public virtual void GetBenchmark()
         {
             Directory.CreateDirectory(LogFilesPath);
-            string ReportPath = LogFilesPath + "Report.txt";
-            string DataPath = LogFilesPath + "Data.txt";
+            var ReportPath = LogFilesPath + "Report.txt";
+            var DataPath = LogFilesPath + "Data.txt";
 
             using (var sw = new StreamWriter(ReportPath, append: true))
             {

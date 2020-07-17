@@ -6,51 +6,44 @@ namespace SortAlgorithms.SortMethods
 {
     internal class CocktailSort : AbstractSort
     {
-        public CocktailSort(IEnumerable<int> Collection) : base(Collection) { }
-        public CocktailSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+        public CocktailSort(IEnumerable<int> collection) : base(collection) { }
+        public CocktailSort(AbstractArray array) : base(array) { }
 
         public override void GetSortedArray()
         {
             SortedArray = DoCocktailSort(InitArray);
         }
 
-        private int[] DoCocktailSort(int[] Array)
+        private static int[] DoCocktailSort(int[] array)
         {
-            int Start = 0;
-            int End = Array.Length - 1;
+            var start = 0;
+            var end = array.Length - 1;
 
             while (true)
             {
-
                 var Swapped = false;
 
-                for (int i = Start; i < End; i++)
+                for (var i = start; i < end; i++)
                 {
-                    if (Array[i] <= Array[i + 1]) continue;
-                    Swap.DoSwap(ref Array[i], ref Array[i + 1]);
+                    if (array[i] <= array[i + 1]) continue;
+                    Swap.DoSwap(ref array[i], ref array[i + 1]);
                     Swapped = true;
                 }
 
-                if (!Swapped)
+                if (!Swapped) break;
+
+                end--;
+
+                for (var i = end - 1; i >= start; --i)
                 {
-                    break;
+                    if (array[i] <= array[i + 1]) continue;
+                    Swap.DoSwap(ref array[i], ref array[i + 1]);
                 }
 
-                End--;
-
-                for (int i = End - 1; i >= Start; --i)
-                {
-                    if (Array[i] > Array[i + 1])
-                    {
-                        Swap.DoSwap(ref Array[i], ref Array[i + 1]);
-                        Swapped = true;
-                    }
-                }
-
-                Start++;
+                start++;
             }
-
-            return Array;
+            
+            return array;
         }
 
     }

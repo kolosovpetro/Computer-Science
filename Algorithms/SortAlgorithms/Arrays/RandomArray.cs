@@ -2,7 +2,7 @@
 {
     internal class RandomArray : AbstractArray
     {
-        public RandomArray(int newSize) : base(newSize)
+        public RandomArray(int size) : base(size)
         {
             ArrayType = "Random Array";
         }

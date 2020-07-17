@@ -6,27 +6,27 @@ namespace SortAlgorithms.SortMethods
 {
     internal class InsertionSort : AbstractSort
     {
-        public InsertionSort(IEnumerable<int> Collection) : base(Collection) { }
-        public InsertionSort(AbstractArray newAbsArray) : base(newAbsArray) { }
+        public InsertionSort(IEnumerable<int> collection) : base(collection) { }
+        public InsertionSort(AbstractArray array) : base(array) { }
 
         public override void GetSortedArray()
         {
             SortedArray = DoInsertionSort(InitArray);
         }
 
-        private int[] DoInsertionSort(int[] Array)
+        private static int[] DoInsertionSort(int[] array)
         {
-            for (int i = 1; i < Array.Length; i++)
+            for (var i = 1; i < array.Length; i++)
             {
-                int j = i;
-                while (j > 1 && Array[j - 1] > Array[j])
+                var j = i;
+                while (j > 1 && array[j - 1] > array[j])
                 {
-                    Swap.DoSwap(ref Array[j], ref Array[j - 1]);
+                    Swap.DoSwap(ref array[j], ref array[j - 1]);
                     j--;
                 }
             }
 
-            return Array;
+            return array;
         }
     }
 }

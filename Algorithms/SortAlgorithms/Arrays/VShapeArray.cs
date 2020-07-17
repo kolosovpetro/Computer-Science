@@ -4,7 +4,7 @@ namespace SortAlgorithms.Arrays
 {
     internal class VShapeArray : AbstractArray
     {
-        public VShapeArray(int newSize) : base(newSize)
+        public VShapeArray(int size) : base(size)
         {
             ArrayType = "VShape Array";
         }

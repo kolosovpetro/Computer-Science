@@ -5,10 +5,10 @@ namespace SortAlgorithms.SortMethods
 {
     internal class QuickSort : AbstractSort
     {
-        readonly int _left;
-        readonly int _right;
+        private readonly int _left;
+        private readonly int _right;
 
-        public QuickSort(AbstractArray newAbsArray) : base(newAbsArray)
+        public QuickSort(AbstractArray array) : base(array)
         {
             _left = 0;
             _right = InitArray.Length - 1;
@@ -19,40 +19,40 @@ namespace SortAlgorithms.SortMethods
             SortedArray = DoQuickSort(InitArray, _left, _right);
         }
 
-        private int[] DoQuickSort(int[] Array, int Left, int Right)
+        private static int[] DoQuickSort(int[] array, int left, int right)
         {
-            if (Left > Right || Left < 0 || Right < 0)
-                return Array;
+            if (left > right || left < 0 || right < 0)
+                return array;
 
-            int index = Partition(Array, Left, Right);
+            var index = Partition(array, left, right);
 
-            if (index == -1) return Array;
+            if (index == -1) return array;
 
-            DoQuickSort(Array, Left, index - 1);
-            DoQuickSort(Array, index + 1, Right);
-            return Array;
+            DoQuickSort(array, left, index - 1);
+            DoQuickSort(array, index + 1, right);
+            return array;
         }
 
-        private int Partition(int[] Array, int Left, int Right)
+        private static int Partition(int[] array, int left, int right)
         {
-            if (Left > Right) return -1;
+            if (left > right) return -1;
 
-            int End = Left;
+            var end = left;
 
-            int Pivot = Array[Right];
+            var pivot = array[right];
 
-            for (int i = Left; i < Right; i++)
+            for (var i = left; i < right; i++)
             {
-                if (Array[i] >= Pivot) continue;
+                if (array[i] >= pivot) continue;
 
-                Swap.DoSwap(ref Array[i], ref Array[End]);
+                Swap.DoSwap(ref array[i], ref array[end]);
 
-                End++;
+                end++;
             }
 
-            Swap.DoSwap(ref Array[End], ref Array[Right]);
+            Swap.DoSwap(ref array[end], ref array[right]);
 
-            return End;
+            return end;
         }
     }
 }
