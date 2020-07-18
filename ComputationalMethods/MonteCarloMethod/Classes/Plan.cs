@@ -20,17 +20,13 @@ namespace MonteCarloMethod.Classes
         public void AddTask(Task task)
         {
             if (Count > 0 && task.Estimations.Length != Size)
-            {
                 throw new InvalidTaskCaseException("Next task estimations size must be same as in previous task.");
-            }
 
             _newPlan.Add(task);
             Count++;
 
-            if (Count == 1)
-            {
+            if (Count == 1) 
                 Size = task.Estimations.Length;
-            }
 
         }
 

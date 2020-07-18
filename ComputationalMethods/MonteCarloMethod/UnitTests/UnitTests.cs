@@ -11,8 +11,8 @@ namespace MonteCarloMethod.UnitTests
         public void TestLinqNumbersSelection()
         {
             var StringProcess = new Linq<string>();
-            var Input = "10 20 30";
-            var Values = Input.Split(' ');
+            const string input = "10 20 30";
+            var Values = input.Split(' ');
             var NewValues = StringProcess.NumbersFromCollection(Values);
             Assert.That(NewValues.ToArray(), Is.EqualTo(new[] { "10", "20", "30" }));
         }
@@ -20,8 +20,8 @@ namespace MonteCarloMethod.UnitTests
         [Test]
         public void TestTaskInitialization()
         {
-            var Input = "10 20 30";
-            var ConcreteTask = new Task(Input);
+            const string input = "10 20 30";
+            var ConcreteTask = new Task(input);
             Assert.That(ConcreteTask.Estimations[0], Is.EqualTo(10));
             Assert.That(ConcreteTask.Estimations[1], Is.EqualTo(20));
             Assert.That(ConcreteTask.Estimations[2], Is.EqualTo(30));

@@ -16,17 +16,15 @@ namespace MonteCarloMethod.Classes
         public Dictionary<double, double> Probabilities { get; }
         public Dictionary<double, double> AccumulatedProbabilities { get; }
 
-        public Bucket(Plan newTasks, int newSize = 1000)
+        public Bucket(Plan plan, int size = 1000)
         {
             Step = 12;
-            Tasks = newTasks;
-            Size = newSize;
-            Assessments = new double[newSize];
+            Tasks = plan;
+            Size = size;
+            Assessments = new double[size];
 
-            for (var I = 0; I < Assessments.Length; I++)
-            {
+            for (var I = 0; I < Assessments.Length; I++) 
                 Assessments[I] = Tasks.GetRandomEstimations();
-            }
 
             Count = (int)(Max - Min) / Step + 1;
             Probabilities = new Dictionary<double, double>();
@@ -46,20 +44,20 @@ namespace MonteCarloMethod.Classes
 
         private void SetProbabilities()
         {
-            for (int J = 0; J < Count; J++)
+            for (var J = 0; J < Count; J++)
             {
-                double Time = Assessments.Min() + Step * J;
-                int CurrentCount = LesserCount(Time);
-                double CurrentChance = Chance(CurrentCount);
+                var Time = Assessments.Min() + Step * J;
+                var CurrentCount = LesserCount(Time);
+                var CurrentChance = Chance(CurrentCount);
                 AccumulatedProbabilities.Add(Time, CurrentChance);
             }
 
-            for (int I = 0; I < Count; I++)
+            for (var I = 0; I < Count; I++)
             {
-                double Time = Assessments.Min() + Step * I;
-                int Actual = LesserCount(Time);
-                double ActualChance = Chance(Actual);
-                int Previous = LesserCount(Time - Step);
+                var Time = Assessments.Min() + Step * I;
+                var Actual = LesserCount(Time);
+                var ActualChance = Chance(Actual);
+                var Previous = LesserCount(Time - Step);
                 var PreviousChance = Chance(Previous);
                 Probabilities.Add(Time, ActualChance - PreviousChance);
             }
