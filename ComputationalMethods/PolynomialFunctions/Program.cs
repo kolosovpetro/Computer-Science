@@ -11,7 +11,7 @@ namespace PolynomialFunctions
         {
             var vm = new VandermondeMatrix();
             Console.WriteLine("To finish adding of points type END.");
-            Console.WriteLine($"Enter the coordinates of the point, separated by space: ");
+            Console.WriteLine("Enter the coordinates of the point, separated by space: ");
             int step = default;
 
             while (true)

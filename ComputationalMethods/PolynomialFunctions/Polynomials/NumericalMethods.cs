@@ -1,90 +1,90 @@
-﻿namespace PolynomialFunctions.Polynomials
+﻿using System;
+using System.Collections.Generic;
+
+namespace PolynomialFunctions.Polynomials
 {
     internal static class NumericalMethods
     {
         public static double[] SolveLinearEquations(double[][] rows)
         {
-            int length = rows[0].Length;
+            var length = rows[0].Length;
 
-            for (int i = 0; i < rows.Length - 1; i++)
+            for (var i = 0; i < rows.Length - 1; i++)
             {
-                if (rows[i][i] == 0 && !Pivot(rows, i, i)) return null;
+                if (Math.Abs(rows[i][i]) < 0.001d && !Pivot(rows, i, i))
+                    return null;
 
                 // Forward Elimination
-                for (int j = i; j < rows.Length; j++)
+                for (var j = i; j < rows.Length; j++)
                 {
-                    double[] d = new double[length];
+                    var arr1 = new double[length];
 
-                    for (int x = 0; x < length; x++)
+                    for (var x = 0; x < length; x++)
                     {
-                        d[x] = rows[j][x];
-                        if (rows[j][i] != 0)
-                            d[x] = d[x] / rows[j][i];
+                        arr1[x] = rows[j][x];
+                        if (Math.Abs(rows[j][i]) > 0.000001d)
+                            arr1[x] = arr1[x] / rows[j][i];
                     }
 
-                    rows[j] = d;
+                    rows[j] = arr1;
                 }
 
 
-                for (int y = i + 1; y < rows.Length; y++)
+                for (var y = i + 1; y < rows.Length; y++)
                 {
-                    double[] f = new double[length];
-                    for (int g = 0; g < length; g++)
+                    var arr2 = new double[length];
+                    for (var g = 0; g < length; g++)
                     {
-                        f[g] = rows[y][g];
-                        if (rows[y][i] != 0)
-                        {
-                            f[g] = f[g] - rows[i][g];
-                        }
-
+                        arr2[g] = rows[y][g];
+                        if (Math.Abs(rows[y][i]) > 0.0000001d)
+                            arr2[g] = arr2[g] - rows[i][g];
                     }
-                    rows[y] = f;
+
+                    rows[y] = arr2;
                 }
             }
 
             return BackwardSubstitution(rows);
         }
 
-        public static bool Pivot(double[][] rows, int row, int column)
+        private static bool Pivot(IList<double[]> rows, int row, int column)
         {
-            bool swapped = false;
-            for (int z = rows.Length - 1; z > row; z--)
+            var swapped = false;
+            for (var z = rows.Count - 1; z > row; z--)
             {
-                if (rows[z][row] != 0)
-                {
-                    double[] temp = new double[rows[0].Length];
-                    temp = rows[z];
-                    rows[z] = rows[column];
-                    rows[column] = temp;
-                    swapped = true;
-                }
+                if (Math.Abs(rows[z][row]) < 0.00001d)
+                    continue;
+
+                var temp = rows[z];
+                rows[z] = rows[column];
+                rows[column] = temp;
+                swapped = true;
             }
 
             return swapped;
         }
 
-        public static double[] BackwardSubstitution(double[][] rows)
+        private static double[] BackwardSubstitution(double[][] rows)
         {
-            int length = rows[0].Length;
-            double[] result = new double[rows.Length];
-            for (int i = rows.Length - 1; i >= 0; i--)
+            var length = rows[0].Length;
+            var result = new double[rows.Length];
+            for (var i = rows.Length - 1; i >= 0; i--)
             {
                 var val = rows[i][length - 1];
-                for (int x = length - 2; x > i - 1; x--)
-                {
+
+                for (var x = length - 2; x > i - 1; x--)
                     val -= rows[i][x] * result[x];
-                }
+
                 result[i] = val / rows[i][i];
 
                 if (!IsValidResult(result[i]))
-                {
                     return null;
-                }
             }
+
             return result;
         }
 
-        public static bool IsValidResult(double result)
+        private static bool IsValidResult(double result)
         {
             return !(double.IsNaN(result) || double.IsInfinity(result));
         }

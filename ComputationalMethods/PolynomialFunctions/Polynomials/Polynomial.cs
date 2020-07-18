@@ -96,9 +96,9 @@ namespace PolynomialFunctions.Polynomials
 
             for (var i = 0; i < 150; i++)
             {
-                double newX = initialGuess;
+                var newX = initialGuess;
                 initialGuess = initialGuess - ValueInPoint(initialGuess) / DerivativeValue(initialGuess);
-                double approxError = (initialGuess - newX) / initialGuess * 100;
+                var approxError = (initialGuess - newX) / initialGuess * 100;
 
                 if (Math.Abs(approxError) < 0.1)
                     return newX;

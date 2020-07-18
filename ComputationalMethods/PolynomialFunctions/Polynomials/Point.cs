@@ -4,10 +4,10 @@
     {
         public int X { get; }
         public int Y { get; }
-        public Point(int newX, int newY)
+        public Point(int x, int y)
         {
-            X = newX;
-            Y = newY;
+            X = x;
+            Y = y;
         }
     }
 }
