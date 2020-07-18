@@ -13,9 +13,7 @@ namespace NumericalIntegration.RPN
             foreach (var item in infix.Split(' '))
             {
                 if (double.TryParse(item, out _))
-                {
                     output += item + " ";
-                }
 
                 else
                     switch (item)
@@ -25,10 +23,8 @@ namespace NumericalIntegration.RPN
                             break;
                         case ")":
                             {
-                                while (operators.Peek() != "(")
-                                {
+                                while (operators.Peek() != "(") 
                                     output += operators.Pop() + " ";
-                                }
 
                                 // This is to remove opening bracket from the stack
 
@@ -71,14 +67,10 @@ namespace NumericalIntegration.RPN
             foreach (var item in infix.Split(' '))
             {
                 if (double.TryParse(item, out _))
-                {
                     output += item + " ";
-                }
 
                 else if (item.ToLower() == "x")
-                {
                     output += variable + " ";
-                }
 
                 else
                     switch (item)

@@ -8,21 +8,21 @@ namespace NumericalIntegration
         private double Max { get; }
         private Function Function { get; }
 
-        public Integrator(double newMin, double newMax, Function newFunction)
+        public Integrator(double min, double max, Function function)
         {
-            if (newMin > newMax)
+            if (min > max)
                 throw new WrongIntegralBoundsException("Upper bound cannot be lesser than lower.");
-            Min = newMin;
-            Max = newMax;
-            Function = newFunction;
+            Min = min;
+            Max = max;
+            Function = function;
         }
 
-        public Integrator(double newMin, double newMax)
+        public Integrator(double min, double max)
         {
-            if (newMin > newMax)
+            if (min > max)
                 throw new WrongIntegralBoundsException("Upper bound cannot be lesser than lower.");
-            Min = newMin;
-            Max = newMax;
+            Min = min;
+            Max = max;
             Function = new Function();
         }
 
@@ -33,7 +33,7 @@ namespace NumericalIntegration
 
             double sum = default;
 
-            for (int i = 1; i < precision - 1; i++)
+            for (var i = 1; i < precision - 1; i++)
                 sum += Function.ValueInPoint(X(i, h)) * h;
 
             integral += sum;
@@ -43,7 +43,8 @@ namespace NumericalIntegration
         public double TrapezoidalMethod(string infix, int precision)
         {
             var h = (Max - Min) / precision;
-            var integral = h / 2 * Function.ValueInPoint(infix, Min) + h / 2 * Function.ValueInPoint(infix, Max);
+            var integral = h / 2 * Function.ValueInPoint(infix, Min)
+                           + h / 2 * Function.ValueInPoint(infix, Max);
 
             double sum = default;
 
@@ -77,7 +78,7 @@ namespace NumericalIntegration
 
             var integral = h / 3 * (Function.ValueInPoint(infix, Min) + Function.ValueInPoint(infix, Max));
 
-            for (int i = 1; i < precision; i++)
+            for (var i = 1; i < precision; i++)
             {
                 if (i % 2 != 0)
                     integral += h / 3 * 4 * Function.ValueInPoint(infix, X(i, h));
