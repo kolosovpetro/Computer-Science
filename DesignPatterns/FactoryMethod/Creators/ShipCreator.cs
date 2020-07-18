@@ -1,15 +1,15 @@
-﻿using System;
+﻿using FactoryMethod.Transport;
 
-namespace FactoryMethod
+namespace FactoryMethod.Creators
 {
-    class ShipCreator : ICreator
+    internal class ShipCreator : ICreator
     {
-        public ITransport transport { get; private set; }
+        public ITransport Transport { get; private set; }
 
         public ITransport CreateTransport()
         {
-            transport = new Ship();
-            return transport;
+            Transport = new Ship();
+            return Transport;
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace FactoryMethod
+﻿namespace FactoryMethod.Transport
 {
     /// <summary>
     /// Common interface for all transport instances.
     /// </summary>
-    interface ITransport
+    internal interface ITransport
     {
         /// <summary>
         /// Common functionality of all transport. To be implemented differently for each class.

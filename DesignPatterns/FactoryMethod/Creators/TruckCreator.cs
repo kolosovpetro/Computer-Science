@@ -1,13 +1,15 @@
-﻿namespace FactoryMethod
+﻿using FactoryMethod.Transport;
+
+namespace FactoryMethod.Creators
 {
-    class TruckCreator : ICreator
+    internal class TruckCreator : ICreator
     {
-        public ITransport transport { get; private set; }
+        public ITransport Transport { get; private set; }
 
         public ITransport CreateTransport()
         {
-            transport = new Truck();
-            return transport;
+            Transport = new Truck();
+            return Transport;
         }
     }
 }

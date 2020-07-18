@@ -1,11 +1,13 @@
-﻿namespace FactoryMethod
+﻿using FactoryMethod.Transport;
+
+namespace FactoryMethod.Creators
 {
     /// <summary>
-    /// Common interface for Transpor creator classes.
+    /// Common interface for Transport creator classes.
     /// </summary>
-    interface ICreator
+    internal interface ICreator
     {
-        ITransport transport { get; }
+        ITransport Transport { get; }
         /// <summary>
         /// Returns instance implementing interface ITransport
         /// </summary>

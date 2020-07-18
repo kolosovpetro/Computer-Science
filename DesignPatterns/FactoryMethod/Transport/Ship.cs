@@ -1,6 +1,6 @@
-﻿namespace FactoryMethod
+﻿namespace FactoryMethod.Transport
 {
-    class Ship : ITransport
+    internal class Ship : ITransport
     {
         public string Ride()
         {
