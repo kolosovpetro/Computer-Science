@@ -1,13 +1,9 @@
-﻿using AbstractFactory.Abstract_Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Factory_Method.Abstract_Products;
 
-namespace AbstractFactory.Concrete_Products
+namespace Factory_Method.Concrete_Products
 {
-    class ProductB2 : IProductB
+    internal class ProductB2 : IProductB
     {
         public void DoSomething()
         {

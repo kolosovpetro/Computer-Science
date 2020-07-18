@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AbstractFactory.Abstract_Products
+﻿namespace Factory_Method.Abstract_Products
 {
-    interface IProductC
+    internal interface IProductC
     {
         void DoSomething();
     }

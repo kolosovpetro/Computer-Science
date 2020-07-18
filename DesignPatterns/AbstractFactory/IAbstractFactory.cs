@@ -1,13 +1,8 @@
-﻿using AbstractFactory.Abstract_Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Factory_Method.Abstract_Products;
 
-namespace AbstractFactory
+namespace Factory_Method
 {
-    interface IAbstractFactory
+    internal interface IAbstractFactory
     {
         IProductA CreateProductA();
         IProductB CreateProductB();

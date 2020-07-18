@@ -54,7 +54,6 @@
     <Compile Include="Concrete Products\ProductC2.cs" />
     <Compile Include="Factory1.cs" />
     <Compile Include="Factory2.cs" />
-    <Compile Include="Factory3.cs" />
     <Compile Include="IAbstractFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
