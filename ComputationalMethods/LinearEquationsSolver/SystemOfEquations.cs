@@ -1,30 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using static System.Console;
+using static LinearEquationsSolver.Auxiliary;
+using static LinearEquationsSolver.NumericalMethods;
 
 namespace LinearEquationsSolver
 {
     internal class SystemOfEquations
     {
         private readonly List<Equation> _systemOfEquations = new List<Equation>();
-        private readonly NumericalMethods _nm = new NumericalMethods();
+        private readonly NumericalMethods _numericalMethods = new NumericalMethods();
         private double[][] _augmentedMatrix;
         private double[] _solutions;
         private double[][] _eliminatedMatrix;
 
         private double[][] AugMatrix()
         {
-            int arraySize = _systemOfEquations.Count;
-            double[][] array = new double[arraySize][];
+            var size = _systemOfEquations.Count;
+            var array = new double[size][];
 
-            for (int i = 0; i < array.Length; i++)
+            for (var i = 0; i < array.Length; i++)
             {
-                string[] listTerm = _systemOfEquations[i].GetAugMatrixRow;
-                double[] arrayTerm = new double[listTerm.Length];
+                var listTerm = _systemOfEquations[i].GetAugMatrixRow;
+                var arrayTerm = new double[listTerm.Length];
 
-                for (int t = 0; t < arrayTerm.Length; t++)
-                {
+                for (var t = 0; t < arrayTerm.Length; t++)
                     arrayTerm[t] = double.Parse(listTerm[t]);
-                }
 
                 array[i] = arrayTerm;
             }
@@ -35,7 +35,7 @@ namespace LinearEquationsSolver
         private void SetSolutions()
         {
             SetAugMatrix();
-            _solutions = _nm.SolveLinearEquations(this._augmentedMatrix);
+            _solutions = _numericalMethods.SolveLinearEquations(this._augmentedMatrix);
         }
 
         private void SetAugMatrix()
@@ -70,7 +70,7 @@ namespace LinearEquationsSolver
         {
             foreach (var item in _systemOfEquations)
             {
-                Console.WriteLine(item.GetEquationForm);
+                WriteLine(item.GetEquationForm);
             }
         }
 
@@ -79,8 +79,8 @@ namespace LinearEquationsSolver
             SetAugMatrix();
             foreach (var item in _augmentedMatrix)
             {
-                Auxiliary.PrintArray(item);
-                Console.WriteLine();
+                PrintArray(item);
+                WriteLine();
             }
         }
 
@@ -88,16 +88,16 @@ namespace LinearEquationsSolver
         {
             SetSolutions();
 
-            for (int i = 0; i < _solutions.Length; i++)
+            for (var i = 0; i < _solutions.Length; i++)
             {
-                Console.WriteLine($"x{i + 1} = {_solutions[i]}");
+                WriteLine($"x{i + 1} = {_solutions[i]}");
             }
         }
 
         private void SetEliminatedMatrix()
         {
             SetAugMatrix();
-            _eliminatedMatrix = _nm.ForwardElimination(_augmentedMatrix);
+            _eliminatedMatrix = ForwardElimination(_augmentedMatrix);
         }
 
         public void PrintEliminatedMatrix()
@@ -105,8 +105,8 @@ namespace LinearEquationsSolver
             SetEliminatedMatrix();
             foreach (var item in _eliminatedMatrix)
             {
-                Auxiliary.PrintArray(item);
-                Console.WriteLine();
+                PrintArray(item);
+                WriteLine();
             }
         }
     }

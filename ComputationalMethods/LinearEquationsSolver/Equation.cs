@@ -24,12 +24,12 @@ namespace LinearEquationsSolver
 
             var arrayWithNulls = input.Split(' ');
 
-            for (int i = 0; i < arrayWithNulls.Length; i++)
+            for (var i = 0; i < arrayWithNulls.Length; i++)
             {
                 arrayWithNulls[i] = arrayWithNulls[i].Replace(' '.ToString(), null);
             }
 
-            int size = arrayWithNulls.Count(s => s != " ");
+            var size = arrayWithNulls.Count(s => s != " ");
 
             var arrayNoNulls = new string[size];
 
@@ -43,10 +43,10 @@ namespace LinearEquationsSolver
 
         private static string SetEquationForm(string[] entry)
         {
-            int index = 1;
-            string equation = null;
+            var index = 1;
+            string equation = default;
 
-            for (int i = 0; i < entry.Length; i++)
+            for (var i = 0; i < entry.Length; i++)
             {
                 if (i == 0)
                 {
