@@ -4,9 +4,9 @@ namespace StrategyLibrary.Transport
 {
     internal class Navigator
     {
-        public Point A { get; }
-        public Point B { get; }
-        public IRouteStrategy RouteStrategy { get; private set; }
+        private Point A { get; }
+        private Point B { get; }
+        private IRouteStrategy RouteStrategy { get; set; }
 
         public Navigator(Point a, Point b)
         {

@@ -3,7 +3,7 @@ using StrategyLibrary.Transport;
 
 namespace StrategyLibrary.Strategies
 {
-    class WalkingStrategy : IRouteStrategy
+    internal class WalkingStrategy : IRouteStrategy
     {
         public string Message(Point a, Point b)
         {
