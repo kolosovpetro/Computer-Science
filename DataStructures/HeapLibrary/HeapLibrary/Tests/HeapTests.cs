@@ -12,7 +12,7 @@ namespace HeapLibrary.Tests
         [Test]
         public void HeapPushTest()
         {
-            IBinaryHeap heap = new BinaryHeap();
+            IBinaryHeap heap = new MaxBinaryHeap();
             heap.PushRange(1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17);
             heap.HeapBase.ToArray().SequenceEqual(new[] {17, 15, 10, 8, 13, 3, 6, 1, 5, 4, 9})
                 .Should().BeTrue();

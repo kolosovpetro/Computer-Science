@@ -10,12 +10,22 @@ namespace HeapLibrary.Interfaces
         /// <summary>
         /// Base of the heap
         /// </summary>
-        List<int> HeapBase { get; }
+        List<int> HeapBase { get; set; }
 
         /// <summary>
         /// Returns the size of the heap
         /// </summary>
         int Length { get; }
+
+        /// <summary>
+        /// Checks whenever heap is empty
+        /// </summary>
+        bool IsEmpty { get; }
+        
+        /// <summary>
+        /// Return root of the heap
+        /// </summary>
+        int Root { get; }
         
         /// <summary>
         /// Removes root element and restores heap property
