@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using FluentAssertions;
+using NUnit.Framework;
 
 namespace SieveOfEratosthenes
 {
@@ -19,7 +21,7 @@ namespace SieveOfEratosthenes
         {
             var sieve = new SimpleSieve(20);
             var testArray = sieve.AllTrueSieve();
-            sieve.ExcludeDivisible(3, testArray);
+            SimpleSieve.ExcludeDivisible(3, testArray);
             var case1 = testArray[6] == false;
             var case2 = testArray[9] == false;
             var case3 = testArray[12] == false;
@@ -39,6 +41,14 @@ namespace SieveOfEratosthenes
             var primes = sieve.GenerateSieve();
             Assert.That(primes,
                 Is.EqualTo(new[] {false, false, true, true, false, true, false, true, false, false, false, true}));
+        }
+
+        [Test]
+        public void PrimeListTest()
+        {
+            var sieve = new SimpleSieve(12);
+            var primes = sieve.PrimeList().ToArray();
+            primes.SequenceEqual(new[] {2, 3, 5, 7, 11}).Should().BeTrue();
         }
     }
 }

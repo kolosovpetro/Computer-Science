@@ -1,4 +1,6 @@
-﻿namespace SieveOfEratosthenes
+﻿using System.Collections.Generic;
+
+namespace SieveOfEratosthenes
 {
     public class SimpleSieve
     {
@@ -8,6 +10,22 @@
         public SimpleSieve(int count)
         {
             Count = count;
+        }
+
+        public IEnumerable<int> PrimeList()
+        {
+            var list = new List<int>();
+            var sieve = GenerateSieve();
+            
+            for (int i = 0; i < Count; i++)
+            {
+                if (sieve[i])
+                {
+                    list.Add(i);
+                }
+            }
+
+            return list;
         }
 
         public bool[] GenerateSieve()
@@ -23,7 +41,7 @@
             return sieve;
         }
 
-        public void ExcludeDivisible(int iterator, bool[] sieve)
+        public static void ExcludeDivisible(int iterator, bool[] sieve)
         {
             for (int i = 2 * iterator; i < sieve.Length; i += iterator)
             {

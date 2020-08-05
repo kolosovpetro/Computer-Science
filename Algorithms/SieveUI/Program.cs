@@ -10,7 +10,7 @@ namespace SieveUI
         {
             var sieve = new SimpleSieve(10);
             var allTrueSieve = sieve.AllTrueSieve();
-            sieve.ExcludeDivisible(3, allTrueSieve);
+            SimpleSieve.ExcludeDivisible(3, allTrueSieve);
             var getSieve = sieve.GenerateSieve();
             foreach (var prime in getSieve)
             {
