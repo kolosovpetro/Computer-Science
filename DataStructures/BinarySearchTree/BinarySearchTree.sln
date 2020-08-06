@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearchTree", "BinarySearchTree.csproj", "{A39934A7-DCEB-4FFF-A176-856B097C1240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSTConsoleUI", "..\BSTConsoleUI\BSTConsoleUI.csproj", "{DC94C6B0-0C2B-414D-802A-AAE1AC10CCC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A39934A7-DCEB-4FFF-A176-856B097C1240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39934A7-DCEB-4FFF-A176-856B097C1240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39934A7-DCEB-4FFF-A176-856B097C1240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39934A7-DCEB-4FFF-A176-856B097C1240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC94C6B0-0C2B-414D-802A-AAE1AC10CCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC94C6B0-0C2B-414D-802A-AAE1AC10CCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC94C6B0-0C2B-414D-802A-AAE1AC10CCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC94C6B0-0C2B-414D-802A-AAE1AC10CCC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
