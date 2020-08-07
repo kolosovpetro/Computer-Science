@@ -50,5 +50,19 @@ namespace HeapLibrary.Interfaces
         /// </summary>
         /// <param name="values">Array of integers to be pushed</param>
         void PushRange(params int[] values);
+        
+        /// <summary>
+        /// Increases value at index and restores heap property
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
+        void IncreaseKey(int index, int value);
+        
+        /// <summary>
+        /// Decreases value at index and restores heap property
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="value"></param>
+        void DecreaseKey(int index, int value);
     }
 }

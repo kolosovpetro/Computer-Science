@@ -30,6 +30,27 @@ namespace HeapLibrary.Implementations
                 Push(value);
         }
 
+        public void IncreaseKey(int index, int value)
+        {
+            if (value < HeapBase[index])
+            {
+                throw new InvalidOperationException("New key cannot be lesser than actual.");
+            }
+
+            HeapBase[index] = value;
+
+            while (index > 1 && HeapBase[GetParentIndex(index)] < HeapBase[index])
+            {
+                Swap(index, GetParentIndex(index));
+                index = GetParentIndex(index);
+            }
+        }
+
+        public void DecreaseKey(int index, int value)
+        {
+            throw new NotImplementedException();
+        }
+
         private void SiftUp(int elementIndex)
         {
             if (elementIndex == 0) return;
