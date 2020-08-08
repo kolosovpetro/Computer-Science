@@ -1,5 +1,5 @@
 ﻿using System;
-using DijkstraAlgorithm.DijkstraTDD;
+using DijkstraAlgorithm.Dijkstra;
 using DijkstraAlgorithm.Implementations;
 
 namespace DijkstraUI
@@ -37,7 +37,7 @@ namespace DijkstraUI
 
             var graph = new Graph(ab, ba, ad, da, db, bd, ed, de, eb, be, ec, ce, cb, bc);
             var dijkstra = new DijkstraMethod(graph);
-            dijkstra.BuildShortPathTable(d);
+            dijkstra.BuildShortPathTable(a);
             var patches = dijkstra.DistancesList;
 
             foreach (var path in patches)

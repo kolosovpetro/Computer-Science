@@ -3,7 +3,7 @@ using System.Linq;
 using DijkstraAlgorithm.Interfaces;
 using DijkstraAlgorithm.Models;
 
-namespace DijkstraAlgorithm.DijkstraTDD
+namespace DijkstraAlgorithm.Dijkstra
 {
     public class DijkstraMethod
     {
@@ -11,7 +11,6 @@ namespace DijkstraAlgorithm.DijkstraTDD
 
         public List<INode> VisitedNodes { get; private set; }
         public List<INode> UnvisitedNodes { get; private set; }
-
         public List<TableModel> DistancesList { get; private set; }
 
         public DijkstraMethod(IGraph graph)
@@ -25,14 +24,14 @@ namespace DijkstraAlgorithm.DijkstraTDD
 
             foreach (var edge in _graph.Edges)
             {
-                if (!edge.First.IsVisited && !UnvisitedNodes.Contains(edge.First))
+                if (!edge.StartVertex.IsVisited && !UnvisitedNodes.Contains(edge.StartVertex))
                 {
-                    UnvisitedNodes.Add(edge.First);
+                    UnvisitedNodes.Add(edge.StartVertex);
                 }
 
-                if (!edge.Last.IsVisited && !UnvisitedNodes.Contains(edge.Last))
+                if (!edge.EndVertex.IsVisited && !UnvisitedNodes.Contains(edge.EndVertex))
                 {
-                    UnvisitedNodes.Add(edge.Last);
+                    UnvisitedNodes.Add(edge.EndVertex);
                 }
             }
         }
@@ -43,27 +42,35 @@ namespace DijkstraAlgorithm.DijkstraTDD
 
             foreach (var edge in _graph.Edges)
             {
-                if (edge.First.IsVisited && !VisitedNodes.Contains(edge.First))
+                if (edge.StartVertex.IsVisited && !VisitedNodes.Contains(edge.StartVertex))
                 {
-                    VisitedNodes.Add(edge.First);
+                    VisitedNodes.Add(edge.StartVertex);
                 }
 
-                if (edge.Last.IsVisited && !VisitedNodes.Contains(edge.Last))
+                if (edge.EndVertex.IsVisited && !VisitedNodes.Contains(edge.EndVertex))
                 {
-                    VisitedNodes.Add(edge.Last);
+                    VisitedNodes.Add(edge.EndVertex);
                 }
             }
         }
 
+        /// <summary>
+        /// Returns enumerable of all edges that starts from current node and unvisited
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public IEnumerable<IEdge> NeighborEdges(INode node)
         {
-            // get neighbors of node such that all not visited
             var neighbors = _graph.Edges
-                .Where(x => x.First.Equals(node) && !x.Last.IsVisited);
+                .Where(x => x.StartVertex.Equals(node) && !x.EndVertex.IsVisited);
 
             return neighbors;
         }
-
+        
+        /// <summary>
+        /// Implementation of Dijkstra algorithm. Builds shortest path to each of the nodes from start node.
+        /// </summary>
+        /// <param name="startNode">INode, start node</param>
         public void BuildShortPathTable(INode startNode)
         {
             // define start node
@@ -99,13 +106,13 @@ namespace DijkstraAlgorithm.DijkstraTDD
                 {
                     // if not present any T such that T.current == edge.Last - ADD
                     var model = DistancesList
-                        .FirstOrDefault(x => x.CurrentNode.Equals(edge.Last));
+                        .FirstOrDefault(x => x.CurrentNode.Equals(edge.EndVertex));
 
                     if (model == null)
                     {
-                        DistancesList.Add(new TableModel()
+                        DistancesList.Add(new TableModel
                         {
-                            CurrentNode = edge.Last,
+                            CurrentNode = edge.EndVertex,
                             Distance = length + edge.Weight,
                             PreviousNode = currentNode
                         });
@@ -127,7 +134,7 @@ namespace DijkstraAlgorithm.DijkstraTDD
                 var minEdge = neighborEdges.FirstOrDefault(x => x.Weight == min);
 
                 // assign new current node
-                currentNode = minEdge?.Last;
+                currentNode = minEdge?.EndVertex;
 
                 // update length
                 if (minEdge != null)

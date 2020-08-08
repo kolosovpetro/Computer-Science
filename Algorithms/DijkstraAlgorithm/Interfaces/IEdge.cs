@@ -2,8 +2,8 @@
 {
     public interface IEdge
     {
-        INode First { get; }
-        INode Last { get; }
+        INode StartVertex { get; }
+        INode EndVertex { get; }
         int Weight { get; }
     }
 }

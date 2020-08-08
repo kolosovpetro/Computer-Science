@@ -3,7 +3,7 @@ using DijkstraAlgorithm.Implementations;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DijkstraAlgorithm.DijkstraTDD
+namespace DijkstraAlgorithm.Dijkstra
 {
     [TestFixture]
     public class DijkstraTests
@@ -37,7 +37,7 @@ namespace DijkstraAlgorithm.DijkstraTDD
             unvisited[5].Should().Be(n6);
             dijkstra.UnvisitedNodes.Count().Should().Be(6);
             dijkstra.VisitedNodes.Count().Should().Be(0);
-            graph.Edges.ElementAt(0).First.Visit();
+            graph.Edges.ElementAt(0).StartVertex.Visit();
             dijkstra.UpdateUnvisitedNodes();
             dijkstra.UpdateVisitedNodes();
             dijkstra.UnvisitedNodes.Count.Should().Be(5);
@@ -66,7 +66,7 @@ namespace DijkstraAlgorithm.DijkstraTDD
             n2.Visit();
             var neighbors = dijkstra.NeighborEdges(n1).ToList();
             neighbors.Count.Should().Be(1);
-            neighbors.ElementAt(0).Last.Should().Be(n4);
+            neighbors.ElementAt(0).EndVertex.Should().Be(n4);
         }
 
         [Test]

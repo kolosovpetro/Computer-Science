@@ -7,6 +7,5 @@ namespace DijkstraAlgorithm.Interfaces
         string Value { get; }
         bool IsVisited { get; }
         void Visit();
-        void Reset();
     }
 }

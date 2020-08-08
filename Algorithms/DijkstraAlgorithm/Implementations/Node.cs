@@ -20,11 +20,6 @@ namespace DijkstraAlgorithm.Implementations
             IsVisited = true;
         }
 
-        public void Reset()
-        {
-            IsVisited = false;
-        }
-
         public override string ToString()
         {
             return $"Node {Value}";
