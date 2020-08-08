@@ -8,17 +8,15 @@ namespace DijkstraAlgorithm.Dijkstra
     public class DijkstraMethod
     {
         private readonly IGraph _graph;
-
-        public List<INode> VisitedNodes { get; private set; }
-        public List<INode> UnvisitedNodes { get; private set; }
-        public List<TableModel> DistancesList { get; private set; }
+        private List<INode> VisitedNodes { get; set; }
+        private List<INode> UnvisitedNodes { get; set; }
 
         public DijkstraMethod(IGraph graph)
         {
             _graph = graph;
         }
 
-        public void UpdateUnvisitedNodes()
+        private void UpdateUnvisitedNodes()
         {
             UnvisitedNodes = new List<INode>();
 
@@ -36,7 +34,7 @@ namespace DijkstraAlgorithm.Dijkstra
             }
         }
 
-        public void UpdateVisitedNodes()
+        private void UpdateVisitedNodes()
         {
             VisitedNodes = new List<INode>();
 
@@ -71,13 +69,13 @@ namespace DijkstraAlgorithm.Dijkstra
         /// Implementation of Dijkstra algorithm. Builds shortest path to each of the nodes from start node.
         /// </summary>
         /// <param name="startNode">INode, start node</param>
-        public void BuildShortPathTable(INode startNode)
+        public List<TableModel> BuildShortPathTable(INode startNode)
         {
             // define start node
             var currentNode = startNode;
 
             // reset table of shortest patches
-            DistancesList = new List<TableModel>();
+            var distancesList = new List<TableModel>();
 
             // reset visited nodes
             UpdateVisitedNodes();
@@ -105,12 +103,12 @@ namespace DijkstraAlgorithm.Dijkstra
                 foreach (var edge in neighborEdges)
                 {
                     // if not present any T such that T.current == edge.Last - ADD
-                    var model = DistancesList
+                    var model = distancesList
                         .FirstOrDefault(x => x.CurrentNode.Equals(edge.EndVertex));
 
                     if (model == null)
                     {
-                        DistancesList.Add(new TableModel
+                        distancesList.Add(new TableModel
                         {
                             CurrentNode = edge.EndVertex,
                             Distance = length + edge.Weight,
@@ -123,9 +121,9 @@ namespace DijkstraAlgorithm.Dijkstra
                     // if present BUT T.Distance > length + edge.Distance - UPDATE
                     if (model.Distance > length + edge.Weight)
                     {
-                        var index = DistancesList.IndexOf(model);
-                        DistancesList[index].Distance = length + edge.Weight;
-                        DistancesList[index].PreviousNode = currentNode;
+                        var index = distancesList.IndexOf(model);
+                        distancesList[index].Distance = length + edge.Weight;
+                        distancesList[index].PreviousNode = currentNode;
                     }
                 }
 
@@ -146,6 +144,8 @@ namespace DijkstraAlgorithm.Dijkstra
                 // update unvisited nodes
                 UpdateUnvisitedNodes();
             }
+
+            return distancesList;
         }
     }
 }
