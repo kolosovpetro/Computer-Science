@@ -90,17 +90,27 @@ namespace GraphLibrary.Implementations
                 .ToList();
             connectedEdges.ForEach(RemoveEdge);
             Vertices.Remove(vertex);
-            
+
             if (vertex == null)
                 throw new NullReferenceException("There is no any vertex with such data.");
-            
+
             vertex.CurrentGraph = null;
             vertex.Degree = 0;
         }
 
         public void RemoveVertex(IVertex<T> vertex)
         {
-            throw new NotImplementedException();
+            if (vertex.CurrentGraph != this)
+                throw new InvalidOperationException("Vertex does not belong to the graph.");
+
+            var connectedEdges = Edges
+                .Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
+                .ToList();
+            
+            connectedEdges.ForEach(RemoveEdge);
+            Vertices.Remove(vertex);
+            vertex.CurrentGraph = null;
+            vertex.Degree = 0;
         }
 
         public void RemoveEdge(IVertex<T> startVertex, IVertex<T> endVertex)

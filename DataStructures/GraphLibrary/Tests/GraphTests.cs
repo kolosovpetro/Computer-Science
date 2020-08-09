@@ -244,5 +244,31 @@ namespace GraphLibrary.Tests
             act.Should().Throw<InvalidOperationException>()
                 .WithMessage("There is no any vertex with such data.");
         }
+
+        [Test]
+        public void RemoveVertexByReference()
+        {
+            IGraph<char> graph = new Graph<char>();
+            var a = graph.AddVertex('A');
+            var b = graph.AddVertex('B');
+            var c = graph.AddVertex('C');
+            var d = graph.AddVertex('D');
+            var e = graph.AddVertex('E');
+
+            var e1 = graph.AddEdge(a, b, 5);
+            var e2 = graph.AddEdge(e, d, 7);
+            var e3 = graph.AddEdge(d, a, 8);
+            var e4 = graph.AddEdge(c, e, 9);
+            
+            graph.RemoveVertex(a);
+            graph.Count.Should().Be(4);
+            graph.Edges.Count.Should().Be(2);
+            a.CurrentGraph.Should().BeNull();
+            a.Degree.Should().Be(0);
+
+            Action act = () => graph.RemoveVertex(a);
+            act.Should().Throw<InvalidOperationException>()
+                .WithMessage("Vertex does not belong to the graph.");
+        }
     }
 }
