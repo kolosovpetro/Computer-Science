@@ -32,20 +32,14 @@ namespace GraphLibrary.Implementations
             if (!ContainsVertex(vertexOne) || !ContainsVertex(vertexTwo))
                 throw new InvalidOperationException("One or more vertex does not belong to the graph.");
 
-            if (ContainsEdge(vertexOne.Data, vertexTwo.Data))
-                return true;
-
-            if (ContainsEdge(vertexTwo.Data, vertexOne.Data))
-                return true;
-
-            return false;
+            return ContainsEdge(vertexOne.Data, vertexTwo.Data) || ContainsEdge(vertexTwo.Data, vertexOne.Data);
         }
 
         public IVertex<T> AddVertex(T data)
         {
             if (ContainsVertex(data))
                 throw new InvalidOperationException("Vertex with same data is already in graph.");
-            
+
             var vertex = new Vertex<T>(data, this);
             Vertices.Add(vertex);
             return vertex;
@@ -86,15 +80,13 @@ namespace GraphLibrary.Implementations
             if (!ContainsVertex(data))
                 throw new InvalidOperationException("There is no any vertex with such data.");
 
-            var vertex = Vertices.FirstOrDefault(x => x.Data.Equals(data));
-            var connectedEdges = Edges.Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
+            var vertex = Vertices.First(x => x.Data.Equals(data));
+            var connectedEdges = Edges
+                .Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
                 .ToList();
+
             connectedEdges.ForEach(RemoveEdge);
             Vertices.Remove(vertex);
-
-            if (vertex == null)
-                throw new NullReferenceException("There is no any vertex with such data.");
-
             vertex.CurrentGraph = null;
             vertex.Degree = 0;
         }
@@ -122,12 +114,9 @@ namespace GraphLibrary.Implementations
             if (!ContainsEdge(startVertex.Data, endVertex.Data))
                 throw new InvalidOperationException("There is no such vertex in the graph.");
 
-            var edge = Edges.FirstOrDefault(x => x.StartVertex.Equals(startVertex)
-                                                 && x.EndVertex.Equals(endVertex));
+            var edge = Edges.First(x => x.StartVertex.Equals(startVertex)
+                                        && x.EndVertex.Equals(endVertex));
             Edges.Remove(edge);
-
-            if (edge == null)
-                throw new NullReferenceException("There is no such vertex in the graph.");
 
             edge.CurrentGraph = null;
             edge.StartVertex.DecrementDegree();
@@ -165,8 +154,8 @@ namespace GraphLibrary.Implementations
 
         public bool ContainsEdge(T startData, T endData)
         {
-            return Edges.Any(x => x.StartVertex.Data.Equals(startData)
-                                  && x.EndVertex.Data.Equals(endData));
+            return Edges
+                .Any(x => x.StartVertex.Data.Equals(startData) && x.EndVertex.Data.Equals(endData));
         }
     }
 }
