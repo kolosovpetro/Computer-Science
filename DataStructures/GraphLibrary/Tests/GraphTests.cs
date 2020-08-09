@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using FluentAssertions;
 using GraphLibrary.Implementations;
 using GraphLibrary.Interfaces;
@@ -29,7 +28,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphAddVertexExceptionTest()
+        public void AddVertexExceptionTest()
         {
             IGraph<char> graph = new Graph<char>();
             graph.AddVertex('A');
@@ -41,7 +40,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphAddUnweightedEdgeTest()
+        public void AddNotWeightedEdgeTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -92,7 +91,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphAddWeightedEdgeTest()
+        public void AddWeightedEdgeTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -122,7 +121,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphGetVertexNeighborsTest()
+        public void GetVertexNeighborsTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -152,22 +151,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphRemoveVertexByDataTest()
-        {
-            IGraph<char> graph = new Graph<char>();
-            var a = graph.AddVertex('A');
-            var b = graph.AddVertex('B');
-            var c = graph.AddVertex('C');
-            var d = graph.AddVertex('D');
-            var e = graph.AddVertex('E');
-
-            graph.RemoveVertex('A');
-            a.CurrentGraph.Should().BeNull();
-            graph.Vertices.Any(x => x.Data.Equals('A')).Should().BeFalse();
-        }
-
-        [Test]
-        public void GraphRemoveEdgeByReference()
+        public void RemoveEdgeByEdgeReferenceTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -221,7 +205,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphRemoveEdgeByTwoVerticesTest()
+        public void RemoveEdgeByVerticesReferencesTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -260,7 +244,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void GraphRemoveVertexByData()
+        public void RemoveVertexByDataTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
@@ -288,7 +272,7 @@ namespace GraphLibrary.Tests
         }
 
         [Test]
-        public void RemoveVertexByReference()
+        public void RemoveVertexByReferenceTest()
         {
             IGraph<char> graph = new Graph<char>();
             var a = graph.AddVertex('A');
