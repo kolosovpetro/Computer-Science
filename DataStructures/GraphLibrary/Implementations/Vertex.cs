@@ -63,5 +63,10 @@ namespace GraphLibrary.Implementations
         {
             return HashCode.Combine(Data, IsVisited, Degree);
         }
+
+        public override string ToString()
+        {
+            return Data.ToString();
+        }
     }
 }
