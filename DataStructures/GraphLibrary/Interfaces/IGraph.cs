@@ -30,7 +30,7 @@ namespace GraphLibrary.Interfaces
         bool AreAdjacent(IVertex<T> vertexOne, IVertex<T> vertexTwo);
         
         /// <summary>
-        /// Adds new vertex to the graph and gives pointer to it
+        /// Adds new vertex with specified data to the graph and gives pointer to it
         /// </summary>
         IVertex<T> AddVertex(T data);
 
@@ -64,5 +64,28 @@ namespace GraphLibrary.Interfaces
         /// </summary>
         /// <param name="edge"></param>
         void RemoveEdge(IEdge<T> edge);
+        
+        /// <summary>
+        /// Checks whenever graph contains vertex with specified data 
+        /// </summary>
+        bool ContainsVertex(T data);
+
+        /// <summary>
+        /// Checks whenever graph contains specified vertex
+        /// </summary>
+        bool ContainsVertex(IVertex<T> vertex);
+        
+        /// <summary>
+        /// Checks whenever graph contains specified edge
+        /// </summary>
+        bool ContainsEdge(IEdge<T> edge);
+        
+        /// <summary>
+        /// Checks whenever graph contains an edge with specified start data and end data
+        /// </summary>
+        /// <param name="startData"></param>
+        /// <param name="endData"></param>
+        /// <returns></returns>
+        bool ContainsEdge(T startData, T endData);
     }
 }

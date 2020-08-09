@@ -59,9 +59,13 @@ namespace GraphLibrary.Tests
             act1.Should().Throw<InvalidOperationException>()
                 .WithMessage("Graph already contains such edge.");
 
-            var vertex = new Vertex<char>('F');
-            Action act2 = () => graph.AddEdge(vertex, c);
+            Action act2 = () => graph.AddEdge(a, b, 20);
             act2.Should().Throw<InvalidOperationException>()
+                .WithMessage("Graph already contains such edge.");
+
+            var vertex = new Vertex<char>('F');
+            Action act3 = () => graph.AddEdge(vertex, c);
+            act3.Should().Throw<InvalidOperationException>()
                 .WithMessage("One or more vertices does not belong to graph.");
         }
 
@@ -103,10 +107,18 @@ namespace GraphLibrary.Tests
             graph.AreAdjacent(b, a).Should().BeTrue();
             graph.AreAdjacent(b, c).Should().BeFalse();
             var vertex = new Vertex<char>('F');
-            Action act = () => graph.AreAdjacent(vertex, d);
 
-            act.Should().Throw<InvalidOperationException>()
+            Action act1 = () => graph.AreAdjacent(vertex, d);
+            act1.Should().Throw<InvalidOperationException>()
                 .WithMessage("One or more vertex does not belong to the graph.");
+
+            Action act2 = () => graph.AddEdge(a, b);
+            act2.Should().Throw<InvalidOperationException>()
+                .WithMessage("Graph already contains such edge.");
+
+            Action act3 = () => graph.AddEdge(a, b, 20);
+            act3.Should().Throw<InvalidOperationException>()
+                .WithMessage("Graph already contains such edge.");
         }
 
         [Test]
@@ -212,7 +224,7 @@ namespace GraphLibrary.Tests
             Action act1 = () => graph.RemoveEdge(a, b);
             act1.Should().Throw<InvalidOperationException>()
                 .WithMessage("There is no such vertex in the graph.");
-            
+
             var vertex = new Vertex<char>('F');
             Action act2 = () => graph.RemoveEdge(vertex, d);
             act2.Should().Throw<InvalidOperationException>()
@@ -233,7 +245,7 @@ namespace GraphLibrary.Tests
             var e2 = graph.AddEdge(e, d, 7);
             var e3 = graph.AddEdge(d, a, 8);
             var e4 = graph.AddEdge(c, e, 9);
-            
+
             graph.RemoveVertex('A');
             graph.Count.Should().Be(4);
             graph.Edges.Count.Should().Be(2);
@@ -259,7 +271,7 @@ namespace GraphLibrary.Tests
             var e2 = graph.AddEdge(e, d, 7);
             var e3 = graph.AddEdge(d, a, 8);
             var e4 = graph.AddEdge(c, e, 9);
-            
+
             graph.RemoveVertex(a);
             graph.Count.Should().Be(4);
             graph.Edges.Count.Should().Be(2);
@@ -269,6 +281,45 @@ namespace GraphLibrary.Tests
             Action act = () => graph.RemoveVertex(a);
             act.Should().Throw<InvalidOperationException>()
                 .WithMessage("Vertex does not belong to the graph.");
+        }
+
+        [Test]
+        public void GraphContainsVertexTest()
+        {
+            IGraph<char> graph = new Graph<char>();
+            var a = graph.AddVertex('A');
+            var b = graph.AddVertex('B');
+            var c = graph.AddVertex('C');
+            var d = graph.AddVertex('D');
+            var e = graph.AddVertex('E');
+
+            graph.ContainsVertex(a).Should().BeTrue();
+            graph.ContainsVertex('A').Should().BeTrue();
+            graph.ContainsVertex('F').Should().BeFalse();
+            var vertex = new Vertex<char>('T');
+            graph.ContainsVertex(vertex).Should().BeFalse();
+        }
+
+        [Test]
+        public void GraphContainsEdgeTest()
+        {
+            IGraph<char> graph = new Graph<char>();
+            var a = graph.AddVertex('A');
+            var b = graph.AddVertex('B');
+            var c = graph.AddVertex('C');
+            var d = graph.AddVertex('D');
+            var e = graph.AddVertex('E');
+
+            var e1 = graph.AddEdge(a, b, 5);
+            var e2 = graph.AddEdge(e, d, 7);
+            var e3 = graph.AddEdge(d, a, 8);
+            var e4 = graph.AddEdge(c, e, 9);
+
+            graph.ContainsEdge(e1).Should().BeTrue();
+            graph.ContainsEdge('A', 'B').Should().BeTrue();
+            graph.ContainsEdge('B', 'A').Should().BeFalse();
+            var edge = new Edge<char>(b, a);
+            graph.ContainsEdge(edge).Should().BeFalse();
         }
     }
 }

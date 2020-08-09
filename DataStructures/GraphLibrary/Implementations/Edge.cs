@@ -24,5 +24,11 @@ namespace GraphLibrary.Implementations
             EndVertex = endVertex;
             CurrentGraph = currentGraph;
         }
+
+        public Edge(IVertex<T> startVertex, IVertex<T> endVertex)
+        {
+            StartVertex = startVertex;
+            EndVertex = endVertex;
+        }
     }
 }
