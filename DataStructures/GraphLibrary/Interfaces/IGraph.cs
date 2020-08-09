@@ -30,9 +30,15 @@ namespace GraphLibrary.Interfaces
         List<IEdge<T>> EdgesStartWithVertex(IVertex<T> vertex);
         
         /// <summary>
-        /// Checks whenever vertices are adjacent (connected)
+        /// Returns list of all edges that contain particular vertex
         /// </summary>
-        bool AreAdjacent(IVertex<T> vertexOne, IVertex<T> vertexTwo);
+        List<IEdge<T>> EdgesContainVertex(IVertex<T> vertex);
+        
+        /// <summary>
+        /// Checks whenever there is a path between two vertices.
+        /// Returns true if graph contains and edge such that start vertex and end vertex are parameters
+        /// </summary>
+        bool AreAdjacent(IVertex<T> startVertex, IVertex<T> endVertex);
         
         /// <summary>
         /// Adds new vertex with specified data to the graph and gives pointer to it
@@ -67,7 +73,6 @@ namespace GraphLibrary.Interfaces
         /// <summary>
         /// Removes an edge from graph, if such edge belongs to graph
         /// </summary>
-        /// <param name="edge"></param>
         void RemoveEdge(IEdge<T> edge);
         
         /// <summary>
@@ -88,9 +93,6 @@ namespace GraphLibrary.Interfaces
         /// <summary>
         /// Checks whenever graph contains an edge with specified start data and end data
         /// </summary>
-        /// <param name="startData"></param>
-        /// <param name="endData"></param>
-        /// <returns></returns>
         bool ContainsEdge(T startData, T endData);
     }
 }

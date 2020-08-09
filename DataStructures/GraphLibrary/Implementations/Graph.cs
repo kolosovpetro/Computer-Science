@@ -22,25 +22,31 @@ namespace GraphLibrary.Implementations
             if (!ContainsVertex(vertex))
                 throw new InvalidOperationException("Vertex does not belong to the graph.");
 
-            return Edges.Where(x => x.StartVertex.Equals(vertex))
-                .Select(t => t.EndVertex)
-                .ToList();
+            return EdgesStartWithVertex(vertex).Select(t => t.EndVertex).ToList();
         }
 
         public List<IEdge<T>> EdgesStartWithVertex(IVertex<T> vertex)
         {
             if (!ContainsVertex(vertex))
                 throw new InvalidOperationException("Vertex does not belong to the graph.");
-            
+
             return Edges.Where(x => x.StartVertex.Equals(vertex)).ToList();
         }
 
-        public bool AreAdjacent(IVertex<T> vertexOne, IVertex<T> vertexTwo)
+        public List<IEdge<T>> EdgesContainVertex(IVertex<T> vertex)
         {
-            if (!ContainsVertex(vertexOne) || !ContainsVertex(vertexTwo))
+            if (!ContainsVertex(vertex))
+                throw new InvalidOperationException("Vertex does not belong to the graph.");
+
+            return Edges.Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex)).ToList();
+        }
+
+        public bool AreAdjacent(IVertex<T> startVertex, IVertex<T> endVertex)
+        {
+            if (!ContainsVertex(startVertex) || !ContainsVertex(endVertex))
                 throw new InvalidOperationException("One or more vertex does not belong to the graph.");
 
-            return ContainsEdge(vertexOne.Data, vertexTwo.Data) || ContainsEdge(vertexTwo.Data, vertexOne.Data);
+            return ContainsEdge(startVertex.Data, endVertex.Data);
         }
 
         public IVertex<T> AddVertex(T data)
@@ -89,9 +95,7 @@ namespace GraphLibrary.Implementations
                 throw new InvalidOperationException("There is no any vertex with such data.");
 
             var vertex = Vertices.First(x => x.Data.Equals(data));
-            var connectedEdges = Edges
-                .Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
-                .ToList();
+            var connectedEdges = EdgesContainVertex(vertex);
 
             connectedEdges.ForEach(RemoveEdge);
             Vertices.Remove(vertex);
@@ -104,9 +108,7 @@ namespace GraphLibrary.Implementations
             if (!ContainsVertex(vertex))
                 throw new InvalidOperationException("Vertex does not belong to the graph.");
 
-            var connectedEdges = Edges
-                .Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
-                .ToList();
+            var connectedEdges = EdgesContainVertex(vertex);
 
             connectedEdges.ForEach(RemoveEdge);
             Vertices.Remove(vertex);

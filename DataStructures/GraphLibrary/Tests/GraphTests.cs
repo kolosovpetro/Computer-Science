@@ -79,9 +79,8 @@ namespace GraphLibrary.Tests
             var e = graph.AddVertex('E');
 
             var e1 = graph.AddEdge(a, b);
-            var e2 = graph.AddEdge(b, a);
             graph.AreAdjacent(a, b).Should().BeTrue();
-            graph.AreAdjacent(b, a).Should().BeTrue();
+            graph.AreAdjacent(b, a).Should().BeFalse();
             graph.AreAdjacent(b, c).Should().BeFalse();
             var vertex = new Vertex<char>('F');
             Action act = () => graph.AreAdjacent(vertex, d);
@@ -186,7 +185,7 @@ namespace GraphLibrary.Tests
 
             var vertex1 = new Vertex<char>('F');
             var vertex2 = new Vertex<char>('G');
-            
+
             var edge1 = new Edge<char>(vertex1, e);
             var edge2 = new Edge<char>(d, vertex1);
             var edge3 = new Edge<char>(vertex1, vertex2);
@@ -360,9 +359,36 @@ namespace GraphLibrary.Tests
 
             edgesStartsWith = graph.EdgesStartWithVertex(b);
             edgesStartsWith.Should().BeEmpty();
-            
+
             var vertex = new Vertex<char>('F');
             Action act = () => graph.EdgesStartWithVertex(vertex);
+            act.Should().Throw<InvalidOperationException>()
+                .WithMessage("Vertex does not belong to the graph.");
+        }
+
+        [Test]
+        public void EdgesContainVertexTest()
+        {
+            IGraph<char> graph = new Graph<char>();
+            var a = graph.AddVertex('A');
+            var b = graph.AddVertex('B');
+            var c = graph.AddVertex('C');
+            var d = graph.AddVertex('D');
+            var e = graph.AddVertex('E');
+
+            var e1 = graph.AddEdge(a, b, 5);
+            var e2 = graph.AddEdge(a, d, 7);
+            var e3 = graph.AddEdge(d, b, 8);
+            var e4 = graph.AddEdge(c, a, 9);
+
+            var containVertex = graph.EdgesContainVertex(a);
+            containVertex.Count.Should().Be(3);
+            containVertex[0].Should().Be(e1);
+            containVertex[1].Should().Be(e2);
+            containVertex[2].Should().Be(e4);
+
+            var vertex = new Vertex<char>('F');
+            Action act = () => graph.EdgesContainVertex(vertex);
             act.Should().Throw<InvalidOperationException>()
                 .WithMessage("Vertex does not belong to the graph.");
         }
