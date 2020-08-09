@@ -20,6 +20,6 @@
         /// <summary>
         /// Gives a pointer to the graph edge belongs to
         /// </summary>
-        IGraph<T> CurrentGraph { get; }
+        IGraph<T> CurrentGraph { get; set; }
     }
 }

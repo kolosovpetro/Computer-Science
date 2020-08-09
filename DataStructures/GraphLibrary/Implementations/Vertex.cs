@@ -8,8 +8,8 @@ namespace GraphLibrary.Implementations
     {
         public T Data { get; }
         public bool IsVisited { get; private set; }
-        public IGraph<T> CurrentGraph { get; }
-        public int Degree { get; private set; }
+        public IGraph<T> CurrentGraph { get; set; }
+        public int Degree { get; set; }
 
         public Vertex(T data)
         {

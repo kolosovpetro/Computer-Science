@@ -17,12 +17,12 @@ namespace GraphLibrary.Interfaces
         /// <summary>
         /// Gives a pointer to the graph vertex belongs to
         /// </summary>
-        IGraph<T> CurrentGraph { get; }
+        IGraph<T> CurrentGraph { get; set; }
 
         /// <summary>
         /// Degree of a vertex
         /// </summary>
-        int Degree { get; }
+        int Degree { get; set; }
 
         /// <summary>
         /// Marks vertex as visited

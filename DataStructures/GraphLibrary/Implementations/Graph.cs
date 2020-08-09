@@ -82,7 +82,20 @@ namespace GraphLibrary.Implementations
 
         public void RemoveVertex(T data)
         {
-            throw new System.NotImplementedException();
+            if (!Vertices.Any(x => x.Data.Equals(data)))
+                throw new InvalidOperationException("There is no any vertex with such data.");
+
+            var vertex = Vertices.FirstOrDefault(x => x.Data.Equals(data));
+            var connectedEdges = Edges.Where(x => x.StartVertex.Equals(vertex) || x.EndVertex.Equals(vertex))
+                .ToList();
+            connectedEdges.ForEach(RemoveEdge);
+            Vertices.Remove(vertex);
+            
+            if (vertex == null)
+                throw new NullReferenceException("There is no any vertex with such data.");
+            
+            vertex.CurrentGraph = null;
+            vertex.Degree = 0;
         }
 
         public void RemoveVertex(IVertex<T> vertex)
@@ -92,12 +105,32 @@ namespace GraphLibrary.Implementations
 
         public void RemoveEdge(IVertex<T> startVertex, IVertex<T> endVertex)
         {
-            throw new System.NotImplementedException();
+            if (startVertex.CurrentGraph != this || endVertex.CurrentGraph != this)
+                throw new InvalidOperationException("One or more vertex does not belong to graph.");
+
+            if (!Edges.Any(x => x.StartVertex.Equals(startVertex) && x.EndVertex.Equals(endVertex)))
+                throw new InvalidOperationException("There is no such vertex in the graph.");
+
+            var edge = Edges.FirstOrDefault(x => x.StartVertex.Equals(startVertex) && x.EndVertex.Equals(endVertex));
+            Edges.Remove(edge);
+
+            if (edge == null)
+                throw new NullReferenceException("There is no such vertex in the graph.");
+
+            edge.CurrentGraph = null;
+            edge.StartVertex.DecrementDegree();
+            edge.EndVertex.DecrementDegree();
         }
 
         public void RemoveEdge(IEdge<T> edge)
         {
-            throw new NotImplementedException();
+            if (edge.CurrentGraph != this)
+                throw new InvalidOperationException("Edge does not belong to the graph.");
+
+            edge.CurrentGraph = null;
+            edge.StartVertex.DecrementDegree();
+            edge.EndVertex.DecrementDegree();
+            Edges.Remove(edge);
         }
     }
 }

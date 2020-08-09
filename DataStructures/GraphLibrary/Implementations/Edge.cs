@@ -8,7 +8,7 @@ namespace GraphLibrary.Implementations
         public IVertex<T> EndVertex { get; }
         public int Weight { get; }
         
-        public IGraph<T> CurrentGraph { get; }
+        public IGraph<T> CurrentGraph { get; set; }
 
         public Edge(IVertex<T> startVertex, IVertex<T> endVertex, int weight)
         {
