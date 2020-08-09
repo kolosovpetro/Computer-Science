@@ -2,33 +2,40 @@
 
 namespace GraphLibrary.Implementations
 {
-    public class Edge : IEdge
+    public class Edge<T> : IEdge<T>
     {
-        public INode First { get; }
-        public INode Last { get; }
+        public IVertex<T> StartVertex { get; }
+        public IVertex<T> EndVertex { get; }
         public int Weight { get; }
-        public bool Visited { get; set; }
+        
+        public IGraph<T> CurrentGraph { get; }
 
-        public Edge(INode first, INode last)
+        public Edge(IVertex<T> startVertex, IVertex<T> endVertex, int weight)
         {
-            First = first;
-            first.Degree++;
-            Last = last;
-            last.Degree++;
-        }
-
-        public Edge(INode first, INode last, int weight)
-        {
-            First = first;
-            first.Degree++;
-            Last = last;
-            last.Degree++;
+            StartVertex = startVertex;
+            EndVertex = endVertex;
             Weight = weight;
         }
 
-        public override string ToString()
+        public Edge(IVertex<T> startVertex, IVertex<T> endVertex, int weight, IGraph<T> currentGraph)
         {
-            return $"{First} ---- {Weight} ---- {Last}";
+            StartVertex = startVertex;
+            EndVertex = endVertex;
+            Weight = weight;
+            CurrentGraph = currentGraph;
+        }
+
+        public Edge(IVertex<T> startVertex, IVertex<T> endVertex)
+        {
+            StartVertex = startVertex;
+            EndVertex = endVertex;
+        }
+
+        public Edge(IVertex<T> startVertex, IVertex<T> endVertex, IGraph<T> currentGraph)
+        {
+            StartVertex = startVertex;
+            EndVertex = endVertex;
+            CurrentGraph = currentGraph;
         }
     }
 }

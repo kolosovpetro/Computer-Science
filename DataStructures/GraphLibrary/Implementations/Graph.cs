@@ -1,52 +1,103 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GraphLibrary.Interfaces;
 
 namespace GraphLibrary.Implementations
 {
-    public class Graph : IGraph
+    public class Graph<T> : IGraph<T>
     {
-        public IEnumerable<IEdge> Edges { get; }
-        public IEnumerable<INode> Vertices { get; private set; }
+        public List<IEdge<T>> Edges { get; }
+        public List<IVertex<T>> Vertices { get; }
+        public int Count => Vertices.Count;
 
-        public Graph(params IEdge[] edges)
+        public Graph()
         {
-            Edges = edges;
-            SetVertices();
+            Edges = new List<IEdge<T>>();
+            Vertices = new List<IVertex<T>>();
         }
 
-        public bool IsTraversed()
+        public List<IVertex<T>> GetNeighbors(IVertex<T> vertex)
         {
-            return Edges.All(edge => edge.First.IsVisited && edge.Last.IsVisited);
+            if (vertex.CurrentGraph != this)
+                throw new InvalidOperationException("Vertex does not belong to the graph.");
+
+            return Edges.Where(x => x.StartVertex.Equals(vertex))
+                .Select(t => t.EndVertex)
+                .ToList();
         }
 
-        public void Reset()
+        public bool AreAdjacent(IVertex<T> vertexOne, IVertex<T> vertexTwo)
         {
-            foreach (var edge in Edges)
-            {
-                edge.First.Reset();
-                edge.Last.Reset();
-            }
+            if (vertexOne.CurrentGraph != this || vertexTwo.CurrentGraph != this)
+                throw new InvalidOperationException("One or more vertex does not belong to the graph.");
+
+            if (Edges.Any(x => x.StartVertex.Equals(vertexOne) && x.EndVertex.Equals(vertexTwo)))
+                return true;
+
+            if (Edges.Any(x => x.StartVertex.Equals(vertexTwo) && x.EndVertex.Equals(vertexOne)))
+                return true;
+
+            return false;
         }
 
-        public void SetVertices()
+        public IVertex<T> AddVertex(T data)
         {
-            var vertices = new List<INode>();
+            if (Vertices.Any(x => x.Data.Equals(data)))
+                throw new InvalidOperationException("Vertex with same data is already in graph.");
+            var vertex = new Vertex<T>(data, this);
+            Vertices.Add(vertex);
+            return vertex;
+        }
 
-            foreach (var edge in Edges)
-            {
-                if (!vertices.Contains(edge.First))
-                {
-                    vertices.Add(edge.First);
-                }
+        public IEdge<T> AddEdge(IVertex<T> startVertex, IVertex<T> endVertex)
+        {
+            if (startVertex.CurrentGraph != this || endVertex.CurrentGraph != this)
+                throw new InvalidOperationException("One or more vertices does not belong to graph.");
 
-                if (!vertices.Contains(edge.Last))
-                {
-                    vertices.Add(edge.Last);
-                }
-            }
+            if (Edges.Any(x => x.StartVertex.Equals(startVertex) && x.EndVertex.Equals(endVertex)))
+                throw new InvalidOperationException("Graph already contains such edge.");
 
-            Vertices = vertices;
+            var edge = new Edge<T>(startVertex, endVertex, this);
+            Edges.Add(edge);
+            startVertex.IncrementDegree();
+            endVertex.IncrementDegree();
+            return edge;
+        }
+
+        public IEdge<T> AddEdge(IVertex<T> startVertex, IVertex<T> endVertex, int weight)
+        {
+            if (startVertex.CurrentGraph != this || endVertex.CurrentGraph != this)
+                throw new InvalidOperationException("One or more vertices does not belong to graph.");
+
+            if (Edges.Any(x => x.StartVertex.Equals(startVertex) && x.EndVertex.Equals(endVertex)))
+                throw new InvalidOperationException("Graph already contains such edge.");
+
+            var edge = new Edge<T>(startVertex, endVertex, weight, this);
+            Edges.Add(edge);
+            startVertex.IncrementDegree();
+            endVertex.IncrementDegree();
+            return edge;
+        }
+
+        public void RemoveVertex(T data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveVertex(IVertex<T> vertex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveEdge(IVertex<T> startVertex, IVertex<T> endVertex)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void RemoveEdge(IEdge<T> edge)
+        {
+            throw new NotImplementedException();
         }
     }
 }
