@@ -6,7 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DijkstraAlgorithm\DijkstraAlgorithm.csproj" />
+      <ProjectReference Include="..\..\..\..\Computer-Science\DataStructures\GraphLibrary\GraphLibrary.csproj" />
+      <ProjectReference Include="..\GraphAlgorithms\GraphAlgorithms.csproj" />
     </ItemGroup>
 
 </Project>

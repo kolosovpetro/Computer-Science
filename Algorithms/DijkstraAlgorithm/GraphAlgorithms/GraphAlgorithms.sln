@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphAlgorithms", "GraphAlgorithms.csproj", "{65E19583-7F3D-4C53-9063-0D00B4661102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLibrary", "..\..\..\..\Computer-Science\DataStructures\GraphLibrary\GraphLibrary.csproj", "{896BF9F4-9D41-46A9-B70E-0BB15914AADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphAlgorithmsUI", "..\GraphAlgorithmsUI\GraphAlgorithmsUI.csproj", "{A5BF7E38-B95F-4C37-9FD5-0A993F9D7830}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65E19583-7F3D-4C53-9063-0D00B4661102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E19583-7F3D-4C53-9063-0D00B4661102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E19583-7F3D-4C53-9063-0D00B4661102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E19583-7F3D-4C53-9063-0D00B4661102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{896BF9F4-9D41-46A9-B70E-0BB15914AADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896BF9F4-9D41-46A9-B70E-0BB15914AADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896BF9F4-9D41-46A9-B70E-0BB15914AADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896BF9F4-9D41-46A9-B70E-0BB15914AADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BF7E38-B95F-4C37-9FD5-0A993F9D7830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BF7E38-B95F-4C37-9FD5-0A993F9D7830}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BF7E38-B95F-4C37-9FD5-0A993F9D7830}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BF7E38-B95F-4C37-9FD5-0A993F9D7830}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
