@@ -17,7 +17,7 @@ namespace GraphLibrary.Implementations
             Vertices = new List<IVertex<T>>();
         }
 
-        public List<IVertex<T>> GetNeighbors(IVertex<T> vertex)
+        public List<IVertex<T>> NeighborVertices(IVertex<T> vertex)
         {
             if (!ContainsVertex(vertex))
                 throw new InvalidOperationException("Vertex does not belong to the graph.");
@@ -25,6 +25,14 @@ namespace GraphLibrary.Implementations
             return Edges.Where(x => x.StartVertex.Equals(vertex))
                 .Select(t => t.EndVertex)
                 .ToList();
+        }
+
+        public List<IEdge<T>> EdgesStartWithVertex(IVertex<T> vertex)
+        {
+            if (!ContainsVertex(vertex))
+                throw new InvalidOperationException("Vertex does not belong to the graph.");
+            
+            return Edges.Where(x => x.StartVertex.Equals(vertex)).ToList();
         }
 
         public bool AreAdjacent(IVertex<T> vertexOne, IVertex<T> vertexTwo)
@@ -154,8 +162,8 @@ namespace GraphLibrary.Implementations
 
         public bool ContainsEdge(T startData, T endData)
         {
-            return Edges
-                .Any(x => x.StartVertex.Data.Equals(startData) && x.EndVertex.Data.Equals(endData));
+            return Edges.Any(x => x.StartVertex.Data.Equals(startData)
+                                  && x.EndVertex.Data.Equals(endData));
         }
     }
 }

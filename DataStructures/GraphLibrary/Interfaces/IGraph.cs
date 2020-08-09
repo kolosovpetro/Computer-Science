@@ -20,9 +20,14 @@ namespace GraphLibrary.Interfaces
         int Count { get; }
 
         /// <summary>
-        /// Returns list of all neighbors of specified vertex
+        /// Returns list of all neighbor vertices of specified vertex
         /// </summary>
-        List<IVertex<T>> GetNeighbors(IVertex<T> vertex);
+        List<IVertex<T>> NeighborVertices(IVertex<T> vertex);
+        
+        /// <summary>
+        /// Returns a list of all edges in the graph, such that start vertex is given by parameter
+        /// </summary>
+        List<IEdge<T>> EdgesStartWithVertex(IVertex<T> vertex);
         
         /// <summary>
         /// Checks whenever vertices are adjacent (connected)
@@ -50,7 +55,7 @@ namespace GraphLibrary.Interfaces
         void RemoveVertex(T data);
 
         /// <summary>
-        /// Removes vertex from the graph
+        /// Removes vertex from the graph by reference
         /// </summary>
         void RemoveVertex(IVertex<T> vertex);
         
@@ -60,7 +65,7 @@ namespace GraphLibrary.Interfaces
         void RemoveEdge(IVertex<T> startVertex, IVertex<T> endVertex);
         
         /// <summary>
-        /// Removes an edge from graph, if such edge exists
+        /// Removes an edge from graph, if such edge belongs to graph
         /// </summary>
         /// <param name="edge"></param>
         void RemoveEdge(IEdge<T> edge);

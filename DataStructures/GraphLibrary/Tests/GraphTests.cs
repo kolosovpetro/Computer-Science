@@ -136,7 +136,7 @@ namespace GraphLibrary.Tests
             var e3 = graph.AddEdge(a, d, 8);
             var e4 = graph.AddEdge(a, e, 9);
 
-            var adjacentVertices = graph.GetNeighbors(a);
+            var adjacentVertices = graph.NeighborVertices(a);
             a.Degree.Should().Be(4);
             adjacentVertices.Count.Should().Be(4);
             adjacentVertices[0].Should().Be(b);
@@ -146,7 +146,7 @@ namespace GraphLibrary.Tests
 
             var vertex = new Vertex<char>('F');
 
-            Action act = () => graph.GetNeighbors(vertex);
+            Action act = () => graph.NeighborVertices(vertex);
             act.Should().Throw<InvalidOperationException>()
                 .WithMessage("Vertex does not belong to the graph.");
         }
@@ -352,6 +352,35 @@ namespace GraphLibrary.Tests
             graph.ContainsEdge('B', 'A').Should().BeFalse();
             var edge = new Edge<char>(b, a);
             graph.ContainsEdge(edge).Should().BeFalse();
+        }
+
+        [Test]
+        public void GetEdgesStartsWithVertexTest()
+        {
+            IGraph<char> graph = new Graph<char>();
+            var a = graph.AddVertex('A');
+            var b = graph.AddVertex('B');
+            var c = graph.AddVertex('C');
+            var d = graph.AddVertex('D');
+            var e = graph.AddVertex('E');
+
+            var e1 = graph.AddEdge(a, b, 5);
+            var e2 = graph.AddEdge(a, d, 7);
+            var e3 = graph.AddEdge(d, a, 8);
+            var e4 = graph.AddEdge(c, e, 9);
+
+            var edgesStartsWith = graph.EdgesStartWithVertex(a);
+            edgesStartsWith.Count.Should().Be(2);
+            edgesStartsWith[0].Should().Be(e1);
+            edgesStartsWith[1].Should().Be(e2);
+
+            edgesStartsWith = graph.EdgesStartWithVertex(b);
+            edgesStartsWith.Should().BeEmpty();
+            
+            var vertex = new Vertex<char>('F');
+            Action act = () => graph.EdgesStartWithVertex(vertex);
+            act.Should().Throw<InvalidOperationException>()
+                .WithMessage("Vertex does not belong to the graph.");
         }
     }
 }
