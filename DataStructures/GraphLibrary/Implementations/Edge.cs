@@ -10,25 +10,12 @@ namespace GraphLibrary.Implementations
         
         public IGraph<T> CurrentGraph { get; set; }
 
-        public Edge(IVertex<T> startVertex, IVertex<T> endVertex, int weight)
-        {
-            StartVertex = startVertex;
-            EndVertex = endVertex;
-            Weight = weight;
-        }
-
         public Edge(IVertex<T> startVertex, IVertex<T> endVertex, int weight, IGraph<T> currentGraph)
         {
             StartVertex = startVertex;
             EndVertex = endVertex;
             Weight = weight;
             CurrentGraph = currentGraph;
-        }
-
-        public Edge(IVertex<T> startVertex, IVertex<T> endVertex)
-        {
-            StartVertex = startVertex;
-            EndVertex = endVertex;
         }
 
         public Edge(IVertex<T> startVertex, IVertex<T> endVertex, IGraph<T> currentGraph)
