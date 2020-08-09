@@ -32,10 +32,10 @@ namespace GraphLibrary.Implementations
             if (!ContainsVertex(vertexOne) || !ContainsVertex(vertexTwo))
                 throw new InvalidOperationException("One or more vertex does not belong to the graph.");
 
-            if (Edges.Any(x => x.StartVertex.Equals(vertexOne) && x.EndVertex.Equals(vertexTwo)))
+            if (ContainsEdge(vertexOne.Data, vertexTwo.Data))
                 return true;
 
-            if (Edges.Any(x => x.StartVertex.Equals(vertexTwo) && x.EndVertex.Equals(vertexOne)))
+            if (ContainsEdge(vertexTwo.Data, vertexOne.Data))
                 return true;
 
             return false;
@@ -45,6 +45,7 @@ namespace GraphLibrary.Implementations
         {
             if (ContainsVertex(data))
                 throw new InvalidOperationException("Vertex with same data is already in graph.");
+            
             var vertex = new Vertex<T>(data, this);
             Vertices.Add(vertex);
             return vertex;
@@ -135,6 +136,9 @@ namespace GraphLibrary.Implementations
 
         public void RemoveEdge(IEdge<T> edge)
         {
+            if (!ContainsVertex(edge.StartVertex) || !ContainsVertex(edge.EndVertex))
+                throw new InvalidOperationException("One or more vertices of edge does not belong to graph");
+
             if (!ContainsEdge(edge))
                 throw new InvalidOperationException("Edge does not belong to the graph.");
 

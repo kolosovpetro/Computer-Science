@@ -183,17 +183,41 @@ namespace GraphLibrary.Tests
 
             a.Degree.Should().Be(4);
             graph.RemoveEdge(e1);
+            graph.ContainsEdge(e1).Should().BeFalse();
+            graph.ContainsEdge('A', 'B').Should().BeFalse();
             a.Degree.Should().Be(3);
             e1.CurrentGraph.Should().BeNull();
             graph.AreAdjacent(a, b).Should().BeFalse();
+
             graph.RemoveEdge(e2);
+            graph.ContainsEdge(e2).Should().BeFalse();
+            graph.ContainsEdge('A', 'C').Should().BeFalse();
             a.Degree.Should().Be(2);
             e2.CurrentGraph.Should().BeNull();
             graph.AreAdjacent(a, c).Should().BeFalse();
 
-            Action act = () => graph.RemoveEdge(e1);
-            act.Should().Throw<InvalidOperationException>()
+            Action act1 = () => graph.RemoveEdge(e1);
+            act1.Should().Throw<InvalidOperationException>()
                 .WithMessage("Edge does not belong to the graph.");
+
+            var vertex1 = new Vertex<char>('F');
+            var vertex2 = new Vertex<char>('G');
+            
+            var edge1 = new Edge<char>(vertex1, e);
+            var edge2 = new Edge<char>(d, vertex1);
+            var edge3 = new Edge<char>(vertex1, vertex2);
+
+            Action act2 = () => graph.RemoveEdge(edge1);
+            act2.Should().Throw<InvalidOperationException>()
+                .WithMessage("One or more vertices of edge does not belong to graph");
+
+            Action act3 = () => graph.RemoveEdge(edge2);
+            act3.Should().Throw<InvalidOperationException>()
+                .WithMessage("One or more vertices of edge does not belong to graph");
+
+            Action act4 = () => graph.RemoveEdge(edge3);
+            act4.Should().Throw<InvalidOperationException>()
+                .WithMessage("One or more vertices of edge does not belong to graph");
         }
 
         [Test]
@@ -212,11 +236,15 @@ namespace GraphLibrary.Tests
             var e4 = graph.AddEdge(a, e, 9);
 
             graph.RemoveEdge(a, b);
+            graph.ContainsEdge(e1).Should().BeFalse();
+            graph.ContainsEdge('A', 'B').Should().BeFalse();
             a.Degree.Should().Be(3);
             e1.CurrentGraph.Should().BeNull();
             graph.AreAdjacent(a, b).Should().BeFalse();
 
             graph.RemoveEdge(a, c);
+            graph.ContainsEdge(e2).Should().BeFalse();
+            graph.ContainsEdge('A', 'C').Should().BeFalse();
             a.Degree.Should().Be(2);
             e2.CurrentGraph.Should().BeNull();
             graph.AreAdjacent(a, c).Should().BeFalse();
@@ -249,6 +277,8 @@ namespace GraphLibrary.Tests
             graph.RemoveVertex('A');
             graph.Count.Should().Be(4);
             graph.Edges.Count.Should().Be(2);
+            graph.ContainsVertex(a).Should().BeFalse();
+            graph.ContainsVertex('A').Should().BeFalse();
             a.CurrentGraph.Should().BeNull();
             a.Degree.Should().Be(0);
 
@@ -275,6 +305,8 @@ namespace GraphLibrary.Tests
             graph.RemoveVertex(a);
             graph.Count.Should().Be(4);
             graph.Edges.Count.Should().Be(2);
+            graph.ContainsVertex(a).Should().BeFalse();
+            graph.ContainsVertex('A').Should().BeFalse();
             a.CurrentGraph.Should().BeNull();
             a.Degree.Should().Be(0);
 
