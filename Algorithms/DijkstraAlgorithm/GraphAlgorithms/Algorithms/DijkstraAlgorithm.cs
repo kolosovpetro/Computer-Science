@@ -28,7 +28,7 @@ namespace GraphAlgorithms.Algorithms
             // iterator should be incremented by the value of edge we visit
             var iterator = 0;
 
-            while (unvisitedVertices.Any())
+            while (true)
             {
                 // visit current vertex
                 currentVertex.Visit();
