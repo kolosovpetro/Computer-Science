@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GraphLibrary.Interfaces
 {
@@ -30,6 +31,11 @@ namespace GraphLibrary.Interfaces
         void Visit();
         
         /// <summary>
+        /// Resets vertex to be unvisited
+        /// </summary>
+        void Reset();
+        
+        /// <summary>
         /// Increments vertex degree
         /// </summary>
         void IncrementDegree();
@@ -38,5 +44,20 @@ namespace GraphLibrary.Interfaces
         /// Decrements vertex degree
         /// </summary>
         void DecrementDegree();
+        
+        /// <summary>
+        /// Returns the list of edges which start from current vertex
+        /// </summary>
+        List<IEdge<T>> AdjacentEdges();
+        
+        /// <summary>
+        /// Returns list of adjacent vertices to current vertex
+        /// </summary>
+        List<IVertex<T>> AdjacentVertices();
+        
+        /// <summary>
+        /// Returns list of all adjacent and unvisited vertices
+        /// </summary>
+        List<IVertex<T>> AdjacentUnvisitedVertices();
     }
 }

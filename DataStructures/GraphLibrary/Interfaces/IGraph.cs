@@ -5,19 +5,24 @@ namespace GraphLibrary.Interfaces
     public interface IGraph<T>
     {
         /// <summary>
-        /// Returns all the edges of the graph
+        /// Returns the list of all edges belong to current graph
         /// </summary>
         List<IEdge<T>> Edges { get; }
         
         /// <summary>
-        /// Returns the vertices of the graph
+        /// Returns the list of all vertices belong to current graph
         /// </summary>
         List<IVertex<T>> Vertices { get; }
         
         /// <summary>
-        /// Returns total number of vertices in graph
+        /// Returns the total number of the vertices in graph
         /// </summary>
         int Count { get; }
+        
+        /// <summary>
+        /// Checks whenever all vertices of graph are visited
+        /// </summary>
+        bool IsTraversed { get; }
 
         /// <summary>
         /// Returns list of all neighbor vertices of specified vertex
@@ -25,7 +30,7 @@ namespace GraphLibrary.Interfaces
         List<IVertex<T>> NeighborVertices(IVertex<T> vertex);
         
         /// <summary>
-        /// Returns a list of all edges in the graph, such that start vertex is given by parameter
+        /// Returns a list of all edges in the graph, such that start from particular vertex
         /// </summary>
         List<IEdge<T>> EdgesStartWithVertex(IVertex<T> vertex);
         
@@ -46,12 +51,12 @@ namespace GraphLibrary.Interfaces
         IVertex<T> AddVertex(T data);
 
         /// <summary>
-        /// Creates a new unweighted edge between two vertices
+        /// Creates a new unweighted edge between two vertices, if it does not exist
         /// </summary>
         IEdge<T> AddEdge(IVertex<T> startVertex, IVertex<T> endVertex);
 
         /// <summary>
-        /// Creates a new weighted edge between two vertices of graph
+        /// Creates a new weighted edge between two vertices of graph, if is does not exist
         /// </summary>
         IEdge<T> AddEdge(IVertex<T> startVertex, IVertex<T> endVertex, int weight);
         
@@ -94,5 +99,10 @@ namespace GraphLibrary.Interfaces
         /// Checks whenever graph contains an edge with specified start data and end data
         /// </summary>
         bool ContainsEdge(T startData, T endData);
+        
+        /// <summary>
+        /// Resets all vertices of a graph to be unvisited
+        /// </summary>
+        void Reset();
     }
 }
