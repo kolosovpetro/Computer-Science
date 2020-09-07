@@ -6,8 +6,10 @@ namespace HeapLibrary.Implementations
 {
     public class BinaryHeap : IBinaryHeap
     {
-        public List<int> HeapBase { get; } = new List<int>();
+        public List<int> HeapBase { get; set; } = new List<int>();
         public int Length => HeapBase.Count;
+        public bool IsEmpty { get; }
+        public int Root { get; }
         private static int GetParentIndex(int childIndex) => (childIndex - 1) / 2;
         private static int GetLeftChildIndex(int parentIndex) => 2 * parentIndex + 1;
         private static int GetRightChildIndex(int parentIndex) => 2 * parentIndex + 2;
@@ -26,6 +28,16 @@ namespace HeapLibrary.Implementations
         {
             foreach (var value in values)
                 Push(value);
+        }
+
+        public void IncreaseKey(int index, int value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DecreaseKey(int index, int value)
+        {
+            throw new NotImplementedException();
         }
 
         private void SiftUp(int elementIndex)

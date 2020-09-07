@@ -99,7 +99,17 @@ namespace GraphLibrary.Interfaces
         /// Checks whenever graph contains an edge with specified start data and end data
         /// </summary>
         bool ContainsEdge(T startData, T endData);
+
+        /// <summary>
+        /// Indicates whenever current graph has Eulerian path.
+        /// </summary>
+        bool HasEulerianPath();
         
+        /// <summary>
+        /// Indicates whenever current graph has Eulerian circuit.
+        /// </summary>
+        bool HasEulerianCircuit();
+
         /// <summary>
         /// Resets all vertices of a graph to be unvisited
         /// </summary>

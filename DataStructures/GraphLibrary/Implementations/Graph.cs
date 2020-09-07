@@ -222,6 +222,22 @@ namespace GraphLibrary.Implementations
         }
 
         /// <summary>
+        /// Indicates whenever current graph has Eulerian path.
+        /// </summary>
+        public bool HasEulerianPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Indicates whenever current graph has Eulerian circuit.
+        /// </summary>
+        public bool HasEulerianCircuit()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Resets all vertices of a graph to be unvisited
         /// </summary>
         public void Reset()
